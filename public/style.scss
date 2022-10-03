@@ -1,0 +1,16 @@
+* {
+   box-sizing: border-box;
+   margin: 0;
+   padding: 0;
+}
+
+@import '../src/pages/Error/Error';
+@import '../src/pages/Login/Login';
+
+@import '../src/scss/align';
+@import '../src/scss/button';
+@import '../src/scss/colors';
+@import '../src/scss/global';
+@import '../src/scss/spacing';
+@import '../src/scss/tipography';
+

@@ -1,0 +1,66 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Space+Grotesk:wght@700&display=swap');
+
+.display {
+   font-weight: bold;
+   font-size: 70px;
+   line-height: 78px;
+   font-family: 'Space Grotesk';
+}
+
+h1 {
+   font-size: 38px;
+   line-height: 46px;
+   font-family: 'Space Grotesk', 'sans-serif';
+}
+
+h2 {
+   font-size: 34px;
+   line-height: 44px;
+   font-family: 'Space Grotesk', 'sans-serif';
+}
+
+h3 {
+   font-size: 30px;
+   line-height: 36px;
+   font-family: 'Space Grotesk', 'sans-serif';
+}
+
+h4 {
+   font-size: 24px;
+   line-height: 28px; 
+   font-family: 'Space Grotesk', 'sans-serif';
+}
+
+.pg1 {
+   font-size: 20px;
+   line-height: 30px;
+   font-family: 'Inter', 'sans-serif';
+}
+
+.pg2 {
+   font-size: 18px;
+   line-height: 26px;
+   font-family: 'Inter', 'sans-serif';
+   font-weight: 500;
+}
+
+.pg3 {
+   font-size: 16px;
+   line-height: 24px;
+   font-family: 'Inter', 'sans-serif';
+}
+
+.pg4 {
+   font-size: 14px;
+   line-height: 18px;
+   font-family: 'Inter', 'sans-serif';
+}
+
+.pg5 {
+   font-size: 12px;
+   line-height: 16px;
+   font-family: 'Inter', 'sans-serif';
+}
+
+.f-light { color: var(--light); }
+.f-dark { color: var(--dark); }
