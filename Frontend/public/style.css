@@ -293,6 +293,7 @@
 }
 
 :root {
+  /* Bootstrap Colors */
   --bs-primary:#0D6EFD;
   --bs-secondary:#6C757D;
   --bs-success:#198754;
@@ -301,6 +302,23 @@
   --bs-danger:#DC3545;
   --bs-light:#F8F9FA;
   --bs-dark:#212529;
+  /* Background Colors */
+  --bg-dark: #202225;
+  --bg-normal: #5C5E5F;
+  --bg-light: #979999;
+  /* Text Colors */
+  --text: #C1C7E0;
+  --text2: #9A9FB3;
+  --text3: #7D8192;
+  /* Facebook Dark Theme Colors */
+  --fb1: #18191A;
+  --fb2: #242526;
+  --fb3: #3A3A3C;
+  --fb4: #4E4F50;
+  --fb5: #E6DCD6;
+  --fb6: #B8BBBF;
+  --fb7: #E7E9EC;
+  /* Random Colors */
   --blue: #0095F6;
   --black: #262626;
   --border-color: #DBDBDB;
@@ -310,8 +328,6 @@
   --btnDisable: #B2DFFC;
   --fb: #3A4E83;
   --gray: #8E8E8E;
-  --bg-dark: #202225;
-  --text-color: #C1C7E0;
 }
 
 .text-primary {
