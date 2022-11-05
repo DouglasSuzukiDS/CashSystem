@@ -1,0 +1,16 @@
+.forms {
+   width: 380px;
+   height: 420px;
+   padding: 32px;
+   border: 2px solid var(--fb1);
+   border-radius: 8px;
+   
+   h3 {
+      color: var(--bs-info);
+
+      
+      &:hover {
+         color: #31D2F2;
+      }
+   }
+}
