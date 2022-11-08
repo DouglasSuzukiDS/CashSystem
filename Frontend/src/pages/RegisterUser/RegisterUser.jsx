@@ -1,10 +1,12 @@
 import { useState } from "react"
+import { Link } from "react-router-dom"
 import Square from "../../assets/Icons/Square"
 import SquareX from "../../assets/Icons/SquareXMark"
 import UserPen from "../../assets/Icons/UserPen"
 import UserPlus from "../../assets/Icons/UserPlus"
+import ArrowLeftLong from "../../assets/Icons/ArrowLeftLong"
 
-export default function Form(props) {
+export default function RegisterUser(props) {
 
    let [admin, setAdmin] = useState(false)
 
@@ -14,13 +16,13 @@ export default function Form(props) {
       let newUserPassword = document.querySelector('#newUserPassword').value
       let newUserAdmin = admin
 
-      if(newUserFullName && newUserLogin && newUserPassword !== '') {
+      if (newUserFullName && newUserLogin && newUserPassword !== '') {
          alert(
             `
-            Nome Completo: ${newUserFullName}
-            Login: ${newUserLogin}
-            Senha: ${newUserPassword}
-            Admin: ${newUserAdmin ? 'Sim' : 'Não'}
+               Nome Completo: ${newUserFullName}
+               Login: ${newUserLogin}
+               Senha: ${newUserPassword}
+               Admin: ${newUserAdmin ? 'Sim' : 'Não'}
             `
          )
       } else {
@@ -41,15 +43,23 @@ export default function Form(props) {
                   </h4>
 
                   <div className="inputForm">
-                     <input type="text" name="newUserName" id="newUserName" required placeholder="Nome Completo" />
+                     <input type="text" name="newUserName" id="newUserName"
+                        placeholder="Nome Completo"
+                        required
+                        onInvalid={e => e.target.setCustomValidity('Digite o nome do novo colaborador')}
+                        onInput={e => e.target.setCustomValidity('')} />
                   </div>
 
                   <div className="inputForm">
-                     <input type="text" name="newUserLogin" id="newUserLogin" required placeholder="Login" />
+                     <input type="text" name="newUserLogin" id="newUserLogin" required placeholder="Login"
+                        onInvalid={e => e.target.setCustomValidity('Digite o login do novo colaborador')}
+                        onInput={e => e.target.setCustomValidity('')} />
                   </div>
 
                   <div className="inputForm">
-                     <input type="password" name="newUserPassword" id="newUserPassword" required placeholder="Senha" />
+                     <input type="password" name="newUserPassword" id="newUserPassword" required placeholder="Senha"
+                        onInvalid={e => e.target.setCustomValidity('Digite uma senha para o novo colaborador')}
+                        onInput={e => e.target.setCustomValidity('')} />
                   </div>
 
                   <div className="isAdminDiv flex" >
@@ -66,11 +76,15 @@ export default function Form(props) {
                   <button type="submit"
                      id="submitNewUser"
                      className="submitNewUser btn btn-info"
-                     onClick={newUserData}
-                  >
+                     onClick={newUserData} >
                      Registrar Funcionário
                      <UserPen w='24' h='24' fill='var(--bs-dark)' className='ml-2' />
                   </button>
+
+                  <Link to='/' className="btn btn-warning" >
+                     Voltar
+                     <ArrowLeftLong w='24' h='24' fill='var(--bs-dark)' className='ml-1' />
+                  </Link>
                </form>
             </div>
          </main>
