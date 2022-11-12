@@ -28,6 +28,16 @@ a {
   text-decoration: none;
 }
 
+.inputTF {
+  font-size: 16px;
+  font-weight: bold;
+  color: var(--bs-secondary);
+}
+
+.bb-info {
+  border-bottom: 2px solid var(--bs-info);
+}
+
 .border {
   border: 1px solid #C1C7E0;
   border-radius: 0.25rem;
@@ -313,6 +323,12 @@ h4 {
   --btnDisable: #B2DFFC;
   --fb: #3A4E83;
   --gray: #8E8E8E;
+  --pix: #2EBDAF;
+  --blue-mp: #13ADDF;
+  --yellow-ml: #F9D001;
+  --violet-nk: #331659;
+  --orange-in: #FF7A01;
+  --dark-blue: #081C65;
 }
 
 .text-primary {
@@ -347,10 +363,6 @@ h4 {
   color: var(--bs-dark);
 }
 
-.text-color {
-  color: var(--text-color);
-}
-
 .primary-hover:hover {
   color: #0B5ED7;
 }
@@ -381,6 +393,22 @@ h4 {
 
 .dark-hover:hover {
   color: #212529;
+}
+
+.text-color {
+  color: var(--text-color);
+}
+
+.text-pix {
+  color: var(--pix);
+}
+
+.text-blue-mp {
+  color: var(--blue-mp);
+}
+
+.text-yellow-ml {
+  color: var(--yellow-ml);
 }
 
 .s-0 {
@@ -1030,6 +1058,33 @@ h4 {
 
 .t-50 {
   top: 50%;
+}
+
+.borderForm {
+  border: 2px solid var(--fb1);
+  border-radius: 8px;
+}
+
+.invoicingOfTheDayForm > div.inputForm {
+  height: 48px;
+}
+
+.valueOfTheDay {
+  padding: 4px 12px;
+}
+
+.calcCardText {
+  font-size: 12px;
+}
+
+.text-blue-mp {
+  color: var(--blue-mp);
+  font-weight: bold;
+}
+
+.text-yellow-ml {
+  color: var(--yellow-ml);
+  font-weight: bold;
 }
 
 .forms {

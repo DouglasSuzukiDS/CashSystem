@@ -47,7 +47,12 @@
    --btnDisable: #B2DFFC;
    --fb: #3A4E83; 
    --gray: #8E8E8E;
-
+   --pix: #2EBDAF;
+   --blue-mp: #13ADDF;
+   --yellow-ml: #F9D001;
+   --violet-nk: #331659;
+   --orange-in: #FF7A01;
+   --dark-blue: #081C65;
 }
 
 .text-primary {
@@ -81,8 +86,6 @@
 .text-dark {
    color: var(--bs-dark);
 }
-
-.text-color { color: var(--text-color); }
 
 .primary-hover {
    &:hover {
@@ -131,3 +134,8 @@
       color: #212529;
    }
 }
+
+.text-color { color: var(--text-color); }
+.text-pix { color: var(--pix); }
+.text-blue-mp { color: var(--blue-mp); }
+.text-yellow-ml { color: var(--yellow-ml); }
