@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Closing from "../Components/Closing/Closing";
 import Invoicing from "../Components/Invoicing/Invoice";
 
 import Error from "../pages/Error/Error";
@@ -11,7 +12,8 @@ export default function RoutesApp() {
       <>
          <BrowserRouter>
             <Routes>
-               <Route path='/' element={ <Invoicing /> }/>
+               <Route path='/' element={ <Closing /> } />
+               <Route path='/invoicing' element={ <Invoicing /> }/>
                <Route path='/login' element={ <Login /> }/>
                <Route path='/registerNewUser' element={ <RegisterUser /> } />
                <Route path='/registerNewProduct' element={ <RegisterProduct/> }/>

@@ -31,7 +31,7 @@ console.log(`Din + Pix: ${moneyPix}`)
 let amountCards = (debitCardFinal + creditCardFinal) //  46,48
 console.log(`Valor Total em Cartões: ${amountCards}`)
 
-let amount = (moneyPix + amountCards).toFixed(2) // 331,48
+let amount = (moneyPix + amountCards) // 331,48
 console.log(`Total: ${amount}`)
 
 export default function Invoicing() {
@@ -51,7 +51,7 @@ export default function Invoicing() {
                   <MoneyBillWave w='24' h='24' fill='var(--bs-success)' className='mr-1' />
                   <p className='inputTF text-success'>
                      {/* 0,00 */}
-                     { money }
+                     { money.toFixed(2) }
                   </p>
                </div>
             </div>
@@ -63,7 +63,7 @@ export default function Invoicing() {
                   <Pix w='24' h='24' fill='var(--pix)' className='mr-1' />
                   <p className='inputTF text-pix'>
                      {/* 0,00 */}
-                     { pix }
+                     { pix.toFixed(2) }
                   </p>
                </div>
             </div>
@@ -81,7 +81,7 @@ export default function Invoicing() {
                   <CreditCard w='24' h='24' fill='var(--blue-mp)' className='mr-1' />
                   <p className='inputTF text-blue-mp'>
                      {/* 0,00 */}
-                     { debitCardFinal }
+                     { debitCardFinal.toFixed(2) }
                   </p>
                </div>
             </div>
@@ -100,7 +100,7 @@ export default function Invoicing() {
                   <CreditCard w='24' h='24' fill='var(--yellow-ml)' className='mr-1' />
                   <p className='inputTF text-yellow-ml'>
                      {/* 0,00 */}
-                     { creditCardFinal }
+                     { creditCardFinal.toFixed(2) }
                   </p>
                </div>
             </div>
@@ -116,7 +116,7 @@ export default function Invoicing() {
                   </span>
                   <p className='inputTF text-success'>
                      {/* 0,00 */}
-                     { moneyPix }
+                     { moneyPix.toFixed(2) }
                   </p>
                </div>
             </div>
@@ -152,7 +152,7 @@ export default function Invoicing() {
                   </span>
                   <p className='inputTF text-success'>
                      {/* 0,00 */}
-                     { amount }
+                     { amount.toFixed(2) }
                   </p>
                </div>
             </div>

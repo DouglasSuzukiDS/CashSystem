@@ -411,6 +411,18 @@ h4 {
   color: var(--yellow-ml);
 }
 
+.text-violet-nk {
+  color: var(--violet-nk);
+}
+
+.text-orange-in {
+  color: var(--orange-in);
+}
+
+.text-dark-blue {
+  color: var(--dark-blue);
+}
+
 .s-0 {
   margin: 0;
   padding: 0;
@@ -1070,6 +1082,33 @@ h4 {
 }
 
 .valueOfTheDay {
+  padding: 4px 12px;
+}
+
+.calcCardText {
+  font-size: 12px;
+}
+
+.text-blue-mp {
+  color: var(--blue-mp);
+  font-weight: bold;
+}
+
+.text-yellow-ml {
+  color: var(--yellow-ml);
+  font-weight: bold;
+}
+
+.borderForm {
+  border: 2px solid var(--fb1);
+  border-radius: 8px;
+}
+
+.closingDayForm > div.inputForm {
+  height: 48px;
+}
+
+.inputValue {
   padding: 4px 12px;
 }
 
