@@ -9,8 +9,10 @@ CREATE TABLE users (
     userAdmin BOOLEAN DEFAULT false
 );
 
-/*ALTER TABLE users AUTO_INCREMENT = 1; /* Reset AutoIncrement */
+/*ALTER TABLE users AUTO_INCREMENT = 3; /* Reset AutoIncrement */
 /*RENAME TABLE oldName TO newName; /* Rename Table */
 /*INSERT INTO users VALUES (01, 'Admin', 'Admin', 'Admin', true);*/
+/* DELETE FROM users WHERE id = 2; */
+/* DELETE FROM users WHERE userLogin = ''; */
 /* SELECT * FROM users */
-/* SELECT * FROM users WHERE id = '01' */
+/* SELECT * FROM users WHERE id = '02' */

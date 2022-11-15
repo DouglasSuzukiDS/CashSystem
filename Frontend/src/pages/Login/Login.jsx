@@ -7,10 +7,10 @@ function login() {
    const userPassword = document.querySelector('#userPassword').value
 
    if(userLogin && userPassword !== '') {
-      alert(`
-         Login: ${userLogin}
-         Senha: ${userPassword}
-      `)
+      // alert(`
+      //    Login: ${userLogin}
+      //    Senha: ${userPassword}
+      // `)
    } else {
       alert('Colaborador, por obséquio logue com vossa matricula e senha. Caso contrário, sujeito a pancada. 🤜😵🤛')
    }
@@ -51,13 +51,13 @@ export default function Login() {
                   </Link>
                </div>
 
-               <button type='submit'
+               <Link to='/'
                   id="LogonUser"
                   className="LogonUser btn btn-info"
                   onClick={ login } >
                   Logar no Sistema 
                   <ArrowRightToBracket w='23' h='23' fill='var(--bs-dark)' className='ml-1' />
-               </button> 
+               </Link> 
             </form>
          </div>
       </main>

@@ -1,3 +1,4 @@
+// import JWT from 'jsonwebtoken'
 const express = require('express')
 const cors = require('cors')
 const mysql = require('mysql2')
@@ -13,18 +14,29 @@ const db = mysql.createPool({
    database: process.env.DB_DATABASE
 })
 
-
-
 app.use(express.json())
 app.use(cors())
 
-app.get('/', (req, res) => {
+app.post('/login', async(req, res) => {
    // res.send('Connected')
-   // const SQL = "INSERT INTO users (id, userName, userLogin, userPassword, userAdmin) VALUES (?, ?, ?, ?, ?), [DATAS]"
+   const { newUserFullName } = req.body
+   const { newUserLogin } = req.body
+   const { newUserPassword } = req.body
+   const { newUserAdmin } = req.body
+
+   console.log(newUserFullName, newUserLogin, newUserPassword, newUserAdmin)
+
+   let SQL = `INSERT INTO users (userName, userLogin, userPassword, userAdmin) VALUES (?, ?, ?, ?)`
+   // ${newUserFullName}, ${newUserLogin}, ${newUserPassword}, ${newUserAdmin}
    
-   // db.query(SQL, (err, result) => {
-   //    console.log(err)
-   // })
+   db.query(SQL, [newUserFullName, newUserLogin, newUserPassword, newUserAdmin], async(err, result) => {
+      if(err) {
+         console.log({ msg: 'Erro ao cadastrar usuário' })
+         console.log(err)
+      } else {
+         res.send({ msg: 'Usuário cadastrado com Sucesso', result })
+      }
+   })
 })
 
 app.listen(3001, console.log('Backend Running in Port 3001'))

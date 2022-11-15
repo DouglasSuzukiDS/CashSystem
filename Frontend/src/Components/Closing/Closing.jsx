@@ -6,8 +6,11 @@ import Pix from '../../assets/Icons/Pix'
 import PiggyBank from '../../assets/Icons/PiggyBank'
 import CreditCard from '../../assets/Icons/CreditCard'
 import DollarSign from '../../assets/Icons/DollarSign'
+import ArrowLeftLong from '../../assets/Icons/ArrowLeftLong'
 import CircleCheck from '../../assets/Icons/CircleCheck'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import { useEffect } from 'react'
+
 
 // Values Brute
 let opening = 37.80
@@ -20,13 +23,13 @@ let creditCard = 13.30
 // Tax Card
 let taxDebit = ((debitCard * 1.99) / 100).toFixed(2)
 let taxCredit = ((creditCard * 4.74) / 100).toFixed(2)
-console.log(`Taxa Débito: ${taxDebit}`)
-console.log(`Taxa Crédito: ${taxCredit}`)
+// console.log(`Taxa Débito: ${taxDebit}`)
+// console.log(`Taxa Crédito: ${taxCredit}`)
 
 let debitCardFinal = debitCard - taxDebit // 33,81
 let creditCardFinal = creditCard - taxCredit // 12,67
-console.log(`Débito sem a Taxa: ${debitCardFinal}`)
-console.log(`Crédito sem a Taxa: ${creditCardFinal}`)
+// console.log(`Débito sem a Taxa: ${debitCardFinal}`)
+// console.log(`Crédito sem a Taxa: ${creditCardFinal}`)
 
 // Values Final
 
@@ -34,17 +37,51 @@ let openingPix = opening + pix // 285
 console.log(`Din + Pix: ${openingPix}`)
 
 let amountCards = (debitCardFinal + creditCardFinal) //  46,48
-console.log(`Valor Total em Cartões: ${amountCards}`)
+// console.log(`Valor Total em Cartões: ${amountCards}`)
 
 let amount = (openingPix + amountCards).toFixed(2) // 331,48
-console.log(`Total: ${amount}`)
+// console.log(`Total: ${amount}`)
 
 // Values Money
 let amountMoney = money - opening
 let amountBank = pix + amountCards
 let amountValue = amountMoney + amountBank
+ 
+/*  Blocked Keys
+   F1 => Help
+   F3 => Find Word
+   F5 => Regarrega
+   F6 => Fecha e Abre o navegador
+   F7 => Fullscreen
+*/
+
+/* Utils Keys
+   F2 = 113
+   F4 = 115
+   F7 = 118
+   F8 = 119
+   F9 = 120
+   F10 = 121
+   F12 = 123
+*/
+
+// window.addEventListener('keydown', (event) => {
+//    console.log(event.keyCode)
+// })
 
 export default function Closing() {
+   const navigate = useNavigate()
+
+   useEffect(() => {
+      window.addEventListener('keydown', (event) => {
+         if(event.keyCode === 118) { // F7
+            navigate('/invoicing')
+         } else if(event.keyCode === 119) { // F8
+            navigate('/')
+         }
+      })
+   }, [])
+
    return(
       <main className="container flex">
          <div className="forms">
@@ -150,23 +187,30 @@ export default function Closing() {
 
                <div className="valueOfTheDay borderForm flex">
                   <span className='inputTF flex'>
-                     <DollarSign w='24' h='24' fill='var(--dark-blue)' className='' />
+                     <DollarSign w='24' h='24' fill='var(--dark-green)' className='' />
                      <span className="mr-1">=</span>
                      <MoneyCheckDollar w='28' h='28' fill='var(--violet-nk)' className='mr-1' />
                      <span className="mr-1">+</span>
                      <PiggyBank w='24' h='24' fill='var(--orange-in)' className='mr-1' /> 
                   </span>
-                  <p className='inputTF text-dark-blue'>
+                  <p className='inputTF text-dark-green'>
                      {/* 0,00 */}
                      { amountValue.toFixed(2) }
                   </p>
                </div>
             </div>
 
-            <Link to='/' className="btn btn-success mt-1" >
-               Fechar Caixa
-               <CircleCheck w='24' h='24' fill='var(--text)' className='ml-1' />
-            </Link>
+            <span className="flex sbt mt-1">
+               <Link to='/invoicing' className="btn btn-warning mr-1 w-50" >
+                  Voltar(F7)
+                  <ArrowLeftLong w='24' h='24' fill='var(--bs-dark)' className='ml-1' />
+               </Link>
+
+               <Link to='/' className="btn btn-success ml-1  w-50" >
+                  Fechar(F8)
+                  <CircleCheck w='24' h='24' fill='var(--text)' className='ml-1' />
+               </Link>
+            </span>
          </form>
          </div>
       </main>

@@ -1,5 +1,7 @@
 import { useState } from "react"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
+import axios from 'axios'
+
 import Square from "../../assets/Icons/Square"
 import SquareX from "../../assets/Icons/SquareXMark"
 import UserPen from "../../assets/Icons/UserPen"
@@ -7,24 +9,39 @@ import UserPlus from "../../assets/Icons/UserPlus"
 import ArrowLeftLong from "../../assets/Icons/ArrowLeftLong"
 
 export default function RegisterUser(props) {
+   const db = 'http://localhost:3001'
+   const navigate = useNavigate('/')
 
    let [admin, setAdmin] = useState(false)
 
-   function newUserData() {
-      let newUserFullName = document.querySelector('#newUserName').value
-      let newUserLogin = document.querySelector('#newUserLogin').value
-      let newUserPassword = document.querySelector('#newUserPassword').value
+   async function newUserRegister() {
+      let newUserFullName = document.querySelector('#newUserName')
+      let newUserLogin = document.querySelector('#newUserLogin')
+      let newUserPassword = document.querySelector('#newUserPassword')
       let newUserAdmin = admin
 
-      if (newUserFullName && newUserLogin && newUserPassword !== '') {
-         alert(
-            `
-               Nome Completo: ${newUserFullName}
-               Login: ${newUserLogin}
-               Senha: ${newUserPassword}
-               Admin: ${newUserAdmin ? 'Sim' : 'Não'}
-            `
-         )
+      if ((newUserFullName.value !== '') && (newUserLogin.value !== '') && (newUserPassword.value !== '')) {
+         // alert(
+         //    `
+         //       Nome Completo: ${newUserFullName}
+         //       Login: ${newUserLogin}
+         //       Senha: ${newUserPassword}
+         //       Admin: ${newUserAdmin ? 'Sim' : 'Não'}
+         //    `
+         // )
+         await axios.post(`${db}/login`, {
+            newUserFullName: newUserFullName.value,
+            newUserLogin: newUserLogin.value,
+            newUserPassword: newUserPassword.value,
+            newUserAdmin: newUserAdmin
+         })
+            .then(response => {
+               console.log(response.data.msg)
+            })
+            .then(alert('Usuario cadastrado no sistema com sucesso'))
+            .catch(err => console.log(err))
+
+            navigate('/')
       } else {
          alert('Preencha os campos')
       }
@@ -76,7 +93,7 @@ export default function RegisterUser(props) {
                   <button type="submit"
                      id="submitNewUser"
                      className="submitNewUser btn btn-info"
-                     onClick={newUserData} >
+                     onClick={newUserRegister} >
                      Registrar Funcionário
                      <UserPen w='24' h='24' fill='var(--bs-dark)' className='ml-2' />
                   </button>

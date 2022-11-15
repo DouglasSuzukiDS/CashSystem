@@ -5,7 +5,8 @@ import CreditCard from '../../assets/Icons/CreditCard'
 
 import ScrewdriverWrench from '../../assets/Icons/ScrewdriverWrench'
 import CircleCheck from '../../assets/Icons/CircleCheck'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import { useEffect } from 'react'
 
 // Values Brute
 let money = 258
@@ -35,6 +36,16 @@ let amount = (moneyPix + amountCards) // 331,48
 console.log(`Total: ${amount}`)
 
 export default function Invoicing() {
+   const navigate = useNavigate()
+
+   useEffect(() => {
+      window.addEventListener('keydown', event => {
+         if(event.keyDown === 119) {
+            navigate('/')
+         }
+      })
+   }, [])
+
    return(
       <main className="container flex">
          <div className="forms">
@@ -158,7 +169,7 @@ export default function Invoicing() {
             </div>
 
             <Link to='/' className="btn btn-success mt-1" >
-               Confirmar Valores
+               Confirmar Valores (F8)
                <CircleCheck w='24' h='24' fill='var(--text)' className='ml-1' />
             </Link>
          </form>
