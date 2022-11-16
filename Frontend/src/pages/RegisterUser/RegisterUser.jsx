@@ -29,23 +29,23 @@ export default function RegisterUser(props) {
          //       Admin: ${newUserAdmin ? 'Sim' : 'Não'}
          //    `
          // )
-         await axios.post(`${db}/login`, {
+
+         await axios.post(`${db}/registerUser`, {
             newUserFullName: newUserFullName.value,
             newUserLogin: newUserLogin.value,
             newUserPassword: newUserPassword.value,
             newUserAdmin: newUserAdmin
          })
             .then(response => {
-               console.log(response.data.msg)
+               alert(response.data.msg)
             })
-            .then(alert('Usuario cadastrado no sistema com sucesso'))
+            //.then( alert('Usuario cadastrado no sistema com sucesso') )
             .catch(err => console.log(err))
-
-            navigate('/')
       } else {
          alert('Preencha os campos')
       }
 
+      
    }
 
    return (
@@ -53,7 +53,7 @@ export default function RegisterUser(props) {
          <main className="container flex">
             <div className="forms">
 
-               <form action="/" className="registerNewUser w-100 h-100  f column sbt">
+               <section className="registerNewUser w-100 h-100  f column sbt">
                   <h4 className="flex">
                      Registro de Usuário
                      <UserPlus w='24' h='24' fill='#0DCAF0' className='ml-1' />
@@ -90,7 +90,7 @@ export default function RegisterUser(props) {
                      <p>Usuário Administrador</p>
                   </div>
 
-                  <button type="submit"
+                  <button
                      id="submitNewUser"
                      className="submitNewUser btn btn-info"
                      onClick={newUserRegister} >
@@ -102,7 +102,7 @@ export default function RegisterUser(props) {
                      Voltar
                      <ArrowLeftLong w='24' h='24' fill='var(--bs-dark)' className='ml-1' />
                   </Link>
-               </form>
+               </section>
             </div>
          </main>
       </>
