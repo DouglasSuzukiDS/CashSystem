@@ -1,16 +1,30 @@
+import axios from 'axios'
+import dotenv from 'dotenv'
+import JWT from 'jsonwebtoken'
 import { Link } from 'react-router-dom'
 import ArrowRightToBracket from "../../assets/Icons/ArrowRightToBracket";
 import IdCard from "../../assets/Icons/IdCard";
 
-function login() {
-   const userLogin = document.querySelector('#userLogin').value
-   const userPassword = document.querySelector('#userPassword').value
+dotenv.config()
 
-   if(userLogin && userPassword !== '') {
+function login() {
+   const db = 'localhost:3001'
+   const userLogin = document.querySelector('#userLogin')
+   const userPassword = document.querySelector('#userPassword')
+
+   if(userLogin.value && userPassword.value !== '') {
       // alert(`
       //    Login: ${userLogin}
       //    Senha: ${userPassword}
       // `)
+
+      const login = userLogin.value
+      const password = userPassword.value
+
+      axios.get(`${db}/login`, {
+         userLogin,
+         userPassword
+      })
    } else {
       alert('Colaborador, por obséquio logue com vossa matricula e senha. Caso contrário, sujeito a pancada. 🤜😵🤛')
    }

@@ -1,4 +1,5 @@
-// import JWT from 'jsonwebtoken'
+const JWT = require('jsonwebtoken')
+
 const express = require('express')
 const cors = require('cors')
 const mysql = require('mysql2')
@@ -17,12 +18,25 @@ const db = mysql.createPool({
 app.use(express.json())
 app.use(cors())
 
-app.get('/user/:userLogin', async(req, res) => {
-   const { newUserLogin } = req.body
-   let SQL = `SELECT * FROM users WHERE userLogin = (?)`
+app.post('/login', async(req, res) => {
+   const { userLogin, userPassword } = req.body
+   let SQL = `SELECT * FROM users WHERE (userLogin, userPassword) = (?, ?)`
+   console.log(SQL)
+   db.query(SQL, [userLogin, userPassword], async(err, result) => {
+      if(result.length > 0) {
+         res.status(200).send({ msg: `Logado como ${userLogin}` })
 
-   db.query(SQL, [newUserLogin], async(err, result) => {
-      res.send(result)
+         const token = JWT.sign(
+            { userLogin: userLogin, userPassword: userPassword}, // Identificação
+            process.env.TOKEN,
+            { expiresIn: '2h' } // Tempo de expiração
+         )
+
+         res.json({ status: true, token });
+      } else {
+         res.status(404).send({ msg: 'Erro ao logar' })
+         console.log({ msg: 'Ocoreeu um erro' })
+      }
    })
 })
 
