@@ -19,25 +19,37 @@ app.use(express.json())
 app.use(cors())
 
 app.post('/login', async(req, res) => {
+
    const { userLogin, userPassword } = req.body
-   let SQL = `SELECT * FROM users WHERE (userLogin, userPassword) = (?, ?)`
-   console.log(SQL)
-   db.query(SQL, [userLogin, userPassword], async(err, result) => {
-      if(result.length > 0) {
-         res.status(200).send({ msg: `Logado como ${userLogin}` })
+   console.log(`User => ${userLogin}, Senha => ${userPassword}`)
+   // console.log(`Usuário: ${userLogin}, Senha: ${userPassword}`)
+   
+   let findUser = `SELECT * FROM users WHERE (userLogin, userPassword) = (?, ?)`
+   // console.log(findUser)
 
-         const token = JWT.sign(
-            { userLogin: userLogin, userPassword: userPassword}, // Identificação
-            process.env.TOKEN,
-            { expiresIn: '2h' } // Tempo de expiração
-         )
+   if(findUser) {
+      let SQL = `SELECT * FROM users WHERE (userLogin, userPasswors) = (?, ?) `
 
-         res.json({ status: true, token });
-      } else {
-         res.status(404).send({ msg: 'Erro ao logar' })
-         console.log({ msg: 'Ocoreeu um erro' })
-      }
-   })
+      db.query(findUser, [userLogin, userPassword], async(err, result) => {
+         console.log(result)
+         if(result.length > 0) {
+            // db.query(SQL, )
+            const token = JWT.sign(
+               { userLogin: userLogin, userPassword: userPassword}, // Identificação
+               process.env.TOKEN,
+               { expiresIn: '2h' } // Tempo de expiração
+            )
+            console.log(token)
+            res.status(200).json({ msg: `Logado como ${userLogin}`, token})
+   
+            // res.json({ status: true, token });
+         } else {
+            res.status(400).json({ msg: 'Erro ao logar' })
+            console.log({ msg: 'Ocorreu um erro' })
+         }
+      })
+   }
+
 })
 
 app.post('/registerUser', async (req, res) => {

@@ -10,7 +10,7 @@ import ArrowLeftLong from "../../assets/Icons/ArrowLeftLong"
 
 export default function RegisterUser(props) {
    const db = 'http://localhost:3001'
-   const navigate = useNavigate('/')
+   const navigate = useNavigate()
 
    let [admin, setAdmin] = useState(false)
 

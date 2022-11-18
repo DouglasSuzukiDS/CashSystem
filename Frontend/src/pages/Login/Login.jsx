@@ -1,41 +1,53 @@
 import axios from 'axios'
-import dotenv from 'dotenv'
-import JWT from 'jsonwebtoken'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import ArrowRightToBracket from "../../assets/Icons/ArrowRightToBracket";
 import IdCard from "../../assets/Icons/IdCard";
 
-dotenv.config()
-
-function login() {
-   const db = 'localhost:3001'
-   const userLogin = document.querySelector('#userLogin')
-   const userPassword = document.querySelector('#userPassword')
-
-   if(userLogin.value && userPassword.value !== '') {
-      // alert(`
-      //    Login: ${userLogin}
-      //    Senha: ${userPassword}
-      // `)
-
-      const login = userLogin.value
-      const password = userPassword.value
-
-      axios.get(`${db}/login`, {
-         userLogin,
-         userPassword
-      })
-   } else {
-      alert('Colaborador, por obséquio logue com vossa matricula e senha. Caso contrário, sujeito a pancada. 🤜😵🤛')
-   }
-}
-
 export default function Login() {
+
+   async function loginUser() {
+      const db = 'http://localhost:3001'
+      // const navigate = useNavigate()
+      
+      let userLogin = document.querySelector('#userLogin')
+      let userPassword = document.querySelector('#userPassword')
+   
+      if(userLogin.value && userPassword.value !== '') {
+         // alert(`
+         //    Login: ${userLogin}
+         //    Senha: ${userPassword}
+         // `)
+         // const Navigation = useNavigate()
+
+         const login = userLogin.value
+         const password = userPassword.value
+         
+         const response = await axios.post(`${db}/login`, {
+            userLogin: userLogin.value,
+            userPassword: userPassword.value
+         })
+            .then(alert(`User: ${userLogin.value}, ${userPassword.value}`))
+            // .then(response => {
+            //    alert(response.data.msg)
+            // })
+         
+         if(response.status === 200) {
+            alert(`Login no Front`)
+         } else {
+            alert(`Erro ao logar`)
+            // alert(`Logado como ${login}`)
+         }
+         
+      } else {
+         alert('Colaborador, por obséquio logue com vossa matricula e senha. Caso contrário, sujeito a pancada. 🤜😵🤛')
+      }
+   }
+
    return (
       <main className="container flex">
          <div className="forms">
 
-            <form action='/' className="loginUser w-100 h-100  f column sbt">
+            <section className="loginUser w-100 h-100  f column sbt">
                <h4 className="flex">
                   Identifique-se 
                   <IdCard w='25' h='25' fill='var(--bs-info)' className='ml-1' />
@@ -50,7 +62,9 @@ export default function Login() {
                </div>
 
                <div className="inputForm">
-                  <input type="password" name="userPassword" id="userPassword" required placeholder="Senha"
+                  <input type="password" name="userPassword" id="userPassword" 
+                     required 
+                     placeholder="Senha"
                      onInvalid={e => e.target.setCustomValidity('Digite a sua senha')}
                      onInput={e => e.target.setCustomValidity('')} />
                </div>
@@ -65,14 +79,14 @@ export default function Login() {
                   </Link>
                </div>
 
-               <Link to='/'
+               <button
                   id="LogonUser"
                   className="LogonUser btn btn-info"
-                  onClick={ login } >
+                  onClick={ loginUser } >
                   Logar no Sistema 
                   <ArrowRightToBracket w='23' h='23' fill='var(--bs-dark)' className='ml-1' />
-               </Link> 
-            </form>
+               </button> 
+            </section>
          </div>
       </main>
    )

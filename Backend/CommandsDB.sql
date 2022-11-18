@@ -18,6 +18,9 @@ CREATE TABLE users (
 	DELETE FROM users WHERE id = 5; 
     ALTER TABLE users AUTO_INCREMENT = 3;
     SELECT * FROM users;
+    SELECT * FROM users 
+		WHERE userLogin = 'chico.palha' 
+        WHERE userPassord = 1234;
 */
 /* DELETE FROM users WHERE userLogin = ''; */
 /* SELECT * FROM users */
