@@ -39,6 +39,7 @@ export default function RegisterUser(props) {
             .then(response => {
                alert(response.data.msg)
             })
+            .then(setTimeout(() => { navigate('/') }, 5000))
             //.then( alert('Usuario cadastrado no sistema com sucesso') )
             .catch(err => console.log(err))
       } else {

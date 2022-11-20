@@ -1,36 +1,58 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import axios from 'axios'
 
 import MoneyCheckPen from "../../assets/Icons/MoneyCheckPen";
 import ArrowLeftLong from "../../assets/Icons/ArrowLeftLong";
 import Registered from "../../assets/Icons/Registered";
 
-function registerNewProduct() {
-   let newProductName = document.querySelector('#newProductName').value
-   let newProductPrice = document.querySelector('#newProductPrice').value
-   let newProductType = document.querySelector('#newProductType').value
-   let newProductQty = document.querySelector('#newProductQty').value
-
-   if(
-      ( (newProductName && newProductPrice && newProductType && newProductQty)  !== '') &&
-      ( (newProductName && newProductPrice && newProductType && newProductQty)  !== '0') &&
-      ( (newProductName && newProductPrice && newProductType && newProductQty)  !== 0) ) {
-      alert(`
-         Nome do produto: ${newProductName}
-         Preço do Produto: ${newProductPrice}
-         Tipo do Produto: ${newProductType}
-         Quatidade do Produto: ${newProductQty}
-      `)
-   } else {
-      alert('Por obséquio, preencha todos os campos corretamente')
-   }
-}
-
 export default function RegisterProduct() {
+   
+   const db = 'http://localhost:3001'
+   const navigate = useNavigate()
+
+   async function registerNewProduct() {
+
+      let newProductName = document.querySelector('#newProductName')
+      let newProductPrice = document.querySelector('#newProductPrice')
+      let newProductType = document.querySelector('#newProductType')
+      let newProductQty = document.querySelector('#newProductQty')
+   
+      if(
+         ( (newProductName.value && newProductPrice.value && newProductType.value && newProductQty.value)  !== '') &&
+         ( (newProductName.value && newProductPrice.value && newProductType.value && newProductQty.value)  !== '0') &&
+         ( (newProductName.value && newProductPrice.value && newProductType.value && newProductQty.value)  !== 0) ) {
+      
+         
+         const newRegister = await axios.post(`${db}/registerNewProduct`, {
+            // pdt_name, pdt_price, pdt_type, pdt_qty
+            pdt_name: newProductName.value,
+            pdt_price: newProductPrice.value,
+            pdt_type: newProductType.value,
+            pdt_qty: newProductQty.value
+         })
+         
+         if(newRegister.status === 200) {
+            alert(`
+               Produto Cadastrado com Sucesso! 😎
+               Nome do produto: ${newProductName.value}
+               Preço do Produto: ${newProductPrice.value}
+               Tipo do Produto: ${newProductType.value}
+               Quatidade do Produto: ${newProductQty.value}
+            `)
+         } else {
+            alert('Erro ao cadastrar')
+         }
+      } else {
+         alert('Por obséquio, preencha todos os campos corretamente')
+      }
+   }
+
+
    return(
       <main className="container flex">
       <div className="forms border">
 
-         <form action='/' className="registerNewProducForm w-100 h-100 f column sbt">
+         <section action='/' className="registerNewProducForm w-100 h-100 f column sbt">
             <h4 className="flex">
                Registro de Produto 
                <MoneyCheckPen w='25' h='25' fill='var(--bs-info)' className='ml-1' />
@@ -71,7 +93,7 @@ export default function RegisterProduct() {
                   onInput={e => e.target.setCustomValidity('')} />
             </div>
 
-            <button type='submit'
+            <button 
                id="btnRegisterNewProduct"
                className="btnRegisterNewProduct btn btn-info"
                onClick={ registerNewProduct } 
@@ -84,7 +106,7 @@ export default function RegisterProduct() {
                Voltar
                <ArrowLeftLong w='24' h='24' fill='var(--bs-dark)' className='ml-1' />
             </Link>
-         </form>
+         </section>
 
       </div>
    </main>

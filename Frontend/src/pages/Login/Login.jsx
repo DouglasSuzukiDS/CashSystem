@@ -5,14 +5,14 @@ import IdCard from "../../assets/Icons/IdCard";
 
 export default function Login() {
 
-   async function loginUser() {
+   async function loginUsers() {
       const db = 'http://localhost:3001'
       // const navigate = useNavigate()
-      
+
       let userLogin = document.querySelector('#userLogin')
       let userPassword = document.querySelector('#userPassword')
-   
-      if(userLogin.value && userPassword.value !== '') {
+
+      if (userLogin.value && userPassword.value !== '') {
          // alert(`
          //    Login: ${userLogin}
          //    Senha: ${userPassword}
@@ -21,25 +21,54 @@ export default function Login() {
 
          const login = userLogin.value
          const password = userPassword.value
-         
+
          const response = await axios.post(`${db}/login`, {
             userLogin: userLogin.value,
             userPassword: userPassword.value
          })
-            .then(alert(`User: ${userLogin.value}, ${userPassword.value}`))
-            // .then(response => {
-            //    alert(response.data.msg)
-            // })
-         
-         if(response.status === 200) {
-            alert(`Login no Front`)
+         //.then(alert(`User: ${userLogin.value}, ${userPassword.value}`))
+         // .then(response => {
+         //    alert(response.data.msg)
+         // })
+
+         if (response.status !== 200) {
+            alert(`Colaborador não encontrado`)
          } else {
-            alert(`Erro ao logar`)
+            alert(`Login no Front`)
             // alert(`Logado como ${login}`)
          }
-         
+
       } else {
          alert('Colaborador, por obséquio logue com vossa matricula e senha. Caso contrário, sujeito a pancada. 🤜😵🤛')
+      }
+   }
+
+   async function loginUser() {
+      const db = "http://localhost:3001";
+
+      let userLogin = document.querySelector("#userLogin");
+      let userPassword = document.querySelector("#userPassword");
+
+      if (userLogin.value && userPassword.value !== "") {
+         const login = userLogin.value;
+         const password = userPassword.value;
+
+         const response = await axios.post(`${db}/login`, {
+            userLogin: login,
+            userPassword: password,
+         });
+
+         alert(`User: ${userLogin.value}, ${userPassword.value}`);
+
+         if (response.status !== 200) {
+            alert(`Colaborador não encontrado`);
+         } else {
+            alert(`Login no Front`);
+         }
+      } else {
+         alert(
+            "Colaborador, por obséquio logue com vossa matricula e senha. Caso contrário, sujeito a pancada. 🤜😵🤛"
+         );
       }
    }
 
@@ -49,7 +78,7 @@ export default function Login() {
 
             <section className="loginUser w-100 h-100  f column sbt">
                <h4 className="flex">
-                  Identifique-se 
+                  Identifique-se
                   <IdCard w='25' h='25' fill='var(--bs-info)' className='ml-1' />
                </h4>
 
@@ -62,8 +91,8 @@ export default function Login() {
                </div>
 
                <div className="inputForm">
-                  <input type="password" name="userPassword" id="userPassword" 
-                     required 
+                  <input type="password" name="userPassword" id="userPassword"
+                     required
                      placeholder="Senha"
                      onInvalid={e => e.target.setCustomValidity('Digite a sua senha')}
                      onInput={e => e.target.setCustomValidity('')} />
@@ -82,10 +111,10 @@ export default function Login() {
                <button
                   id="LogonUser"
                   className="LogonUser btn btn-info"
-                  onClick={ loginUser } >
-                  Logar no Sistema 
+                  onClick={loginUser} >
+                  Logar no Sistema
                   <ArrowRightToBracket w='23' h='23' fill='var(--bs-dark)' className='ml-1' />
-               </button> 
+               </button>
             </section>
          </div>
       </main>

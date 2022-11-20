@@ -21,34 +21,28 @@ app.use(cors())
 app.post('/login', async(req, res) => {
 
    const { userLogin, userPassword } = req.body
-   console.log(`User => ${userLogin}, Senha => ${userPassword}`)
-   // console.log(`Usuário: ${userLogin}, Senha: ${userPassword}`)
-   
+   // console.log(`User => ${userLogin}, Senha => ${userPassword}`)
+
    let findUser = `SELECT * FROM users WHERE (userLogin, userPassword) = (?, ?)`
-   // console.log(findUser)
 
-   if(findUser) {
-      let SQL = `SELECT * FROM users WHERE (userLogin, userPasswors) = (?, ?) `
+   db.query(findUser, [userLogin, userPassword], async(err, result) => {
+      console.log(result) // Return User
 
-      db.query(findUser, [userLogin, userPassword], async(err, result) => {
-         console.log(result)
-         if(result.length > 0) {
-            // db.query(SQL, )
-            const token = JWT.sign(
-               { userLogin: userLogin, userPassword: userPassword}, // Identificação
-               process.env.TOKEN,
-               { expiresIn: '2h' } // Tempo de expiração
-            )
-            console.log(token)
-            res.status(200).json({ msg: `Logado como ${userLogin}`, token})
-   
-            // res.json({ status: true, token });
-         } else {
-            res.status(400).json({ msg: 'Erro ao logar' })
-            console.log({ msg: 'Ocorreu um erro' })
-         }
-      })
-   }
+      if(result.length > 0) {
+         const token = JWT.sign(
+            { userLogin: userLogin, userPassword: userPassword}, // Identificação
+            process.env.TOKEN,
+            { expiresIn: '2h' } // Tempo de expiração
+         )
+         console.log(token)
+         res.status(200).json({ msg: `Logado como ${userLogin}`})
+
+         // res.json({ status: true, token });
+      } else {
+         console.log({ msg: 'Ocorreu um erro' })
+         res.status(400).json({ msg: 'Erro ao logar' })
+      }
+   })
 
 })
 
@@ -84,18 +78,22 @@ app.post('/registerUser', async (req, res) => {
 
 })
 
-// console.log(newUserFullName, newUserLogin, newUserPassword, newUserAdmin)
+app.post('/registerNewProduct', async(req, res) => {
+   const { pdt_name, pdt_price, pdt_type, pdt_qty } = req.body
+   console.log(pdt_name, pdt_price, pdt_type, pdt_qty)
 
-/*let SQL = `INSERT INTO users (userName, userLogin, userPassword, userAdmin) VALUES (?, ?, ?, ?)`
-// ${newUserFullName}, ${newUserLogin}, ${newUserPassword}, ${newUserAdmin}
- 
-db.query(SQL, [newUserFullName, newUserLogin, newUserPassword, newUserAdmin], async(err, result) => {
-   if(err) {
-      console.log({ msg: 'Erro ao cadastrar usuário' })
-      console.log(err)
-   } else {
-      res.send({ msg: 'Usuário cadastrado com Sucesso', result })
-   }
-})*/
+   let SQL = `INSERT INTO products (pdt_name, pdt_price, pdt_type, pdt_qty) VALUES (?, ?, ?, ?)`
+
+   db.query(SQL, [pdt_name, pdt_price, pdt_type, pdt_qty], async(err, result) => {
+      if(err) {
+         console.log({ msg: 'Erro ao cadastrar o produto' })
+         res.status(400).json({msg: 'Erro ao cadastrar'})
+         console.log(err)
+      } else {
+         res.status(200).send(result)
+      }
+   })
+})
+
 
 app.listen(3001, console.log('Backend Running in Port 3001'))

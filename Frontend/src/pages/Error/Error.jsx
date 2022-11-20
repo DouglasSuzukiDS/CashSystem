@@ -5,7 +5,7 @@ import RightToBracket from "../../assets/Icons/RightToBracket";
 export default function Error() {
    return(
       <>
-         <main className="container errorPage flex column border3">
+         <main className="container errorPage flex column">
             <section className="border flex column p-2">
 
                <div className="flex"> {/* Warning */}

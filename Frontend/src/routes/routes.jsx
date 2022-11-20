@@ -12,7 +12,7 @@ export default function RoutesApp() {
       <>
          <BrowserRouter>
             <Routes>
-               <Route path='/' element={ <Login /> } />
+               <Route path='/' element={ <RegisterProduct /> } />
                <Route path='/closing' element={ <Closing /> } />
                <Route path='/invoicing' element={ <Invoicing /> }/>
                <Route path='/login' element={ <Login /> }/>
