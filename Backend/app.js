@@ -18,6 +18,7 @@ const db = mysql.createPool({
 app.use(express.json())
 app.use(cors())
 
+// Users
 app.post('/login', async(req, res) => {
 
    const { userLogin, userPassword } = req.body
@@ -78,6 +79,20 @@ app.post('/registerUser', async (req, res) => {
 
 })
 
+app.get('/users', async(req, res) => {
+   let SQL = `SELECT * FROM users`
+
+   db.query(SQL, (err, result) => {
+      if(err) {
+         console.log({ msg: 'Erro ao listar todos os colaboradores' })
+      } else {
+         res.status(200).send({ msg: 'Colaboradores encontrados', result })
+      }
+   })
+})
+
+
+// Products
 app.post('/registerNewProduct', async(req, res) => {
    const { pdt_name, pdt_price, pdt_type, pdt_qty } = req.body
    console.log(pdt_name, pdt_price, pdt_type, pdt_qty)
@@ -95,5 +110,15 @@ app.post('/registerNewProduct', async(req, res) => {
    })
 })
 
+app.get('/products', async(req, res) => {
+   let SQL = `SELECT * FROM products`
 
+   db.query(SQL, (err, result) => {
+      if(err) {
+         console.log({ msg: 'Erro ao listar todos os produtos' })
+      } else {
+         res.status(200).send({ msg: 'Produtos cadastrados', result })
+      }
+   })
+})
 app.listen(3001, console.log('Backend Running in Port 3001'))
