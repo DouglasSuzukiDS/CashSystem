@@ -42,6 +42,7 @@ export default function RegisterProduct() {
          } else {
             alert('Erro ao cadastrar')
          }
+
       } else {
          alert('Por obséquio, preencha todos os campos corretamente')
       }

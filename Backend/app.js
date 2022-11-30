@@ -95,17 +95,17 @@ app.get('/users', async(req, res) => {
 // Products
 app.post('/registerNewProduct', async(req, res) => {
    const { pdt_name, pdt_price, pdt_type, pdt_qty } = req.body
-   console.log(pdt_name, pdt_price, pdt_type, pdt_qty)
+   // console.log(pdt_name, pdt_price, pdt_type, pdt_qty)
 
    let SQL = `INSERT INTO products (pdt_name, pdt_price, pdt_type, pdt_qty) VALUES (?, ?, ?, ?)`
 
    db.query(SQL, [pdt_name, pdt_price, pdt_type, pdt_qty], async(err, result) => {
       if(err) {
          console.log({ msg: 'Erro ao cadastrar o produto' })
-         res.status(400).json({msg: 'Erro ao cadastrar'})
+         res.status(400).send({msg: 'Erro ao cadastrar'})
          console.log(err)
       } else {
-         res.status(200).send(result)
+         res.status(200).send({ msg: 'Produto Cadastrado no Sistema!', result })
       }
    })
 })
@@ -117,8 +117,9 @@ app.get('/products', async(req, res) => {
       if(err) {
          console.log({ msg: 'Erro ao listar todos os produtos' })
       } else {
-         res.status(200).send({ msg: 'Produtos cadastrados', result })
+         res.status(200).send({ msg: 'Os Produtos cadastrados são:', result })
       }
    })
 })
+
 app.listen(3001, console.log('Backend Running in Port 3001'))
