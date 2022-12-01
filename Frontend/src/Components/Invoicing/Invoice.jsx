@@ -7,6 +7,7 @@ import ScrewdriverWrench from '../../assets/Icons/ScrewdriverWrench'
 import CircleCheck from '../../assets/Icons/CircleCheck'
 import { Link, useNavigate } from 'react-router-dom'
 import { useEffect } from 'react'
+import XMark from '../../assets/Icons/XMark'
 
 // Values Brute
 let money = 258
@@ -35,6 +36,8 @@ console.log(`Valor Total em Cartões: ${amountCards}`)
 let amount = (moneyPix + amountCards) // 331,48
 console.log(`Total: ${amount}`)
 
+console.log(document.querySelector('#closeInvoicing'))
+
 export default function Invoicing() {
    const navigate = useNavigate()
 
@@ -46,133 +49,150 @@ export default function Invoicing() {
       })
    }, [])
 
+   const closeIncoiving = () => {
+      const close = document.querySelector('#closeInvoicing')
+      // console.log(close)
+      close.style.display = 'none'
+   }
+
    return(
-      <main className="container flex">
-         <div className="forms">
-         <form action='/' className="invoicingOfTheDayForm w-100 h-100 f column sbt">
-            <h4 className="flex sar">
-               Faturamento do Dia
-               <SackDollar w='24' h='24' fill='var(--bs-info)' className='' />
-            </h4>
+      <main className="container flex" id='closeInvoicing'>
+         <div className="forms flex column">
+            <form action='/' className="invoicingOfTheDayForm w-100 h-100 f column sbt">
+               <h4 className="f sbt">
+                  <div className='flex'>
+                     Faturamento do Dia
+                     <SackDollar w='24' h='24' fill='var(--bs-info)' className='ml-1' />
+                  </div>
 
-            <div className="inputForm f aic sbt bb-info"> {/* Dinheiro */}
-               <p className='inputTF'>Dinheiro</p>
+                  <div id='closeElement'>
+                     <XMark w='24' h='24' 
+                        // fill='var(--bs-danger)' 
+                        className=''
+                        onClick={ closeIncoiving }
+                     />
+                  </div>
 
-               <div className="valueOfTheDay borderForm flex">
-                  <MoneyBillWave w='24' h='24' fill='var(--bs-success)' className='mr-1' />
-                  <p className='inputTF text-success'>
-                     {/* 0,00 */}
-                     { money.toFixed(2) }
-                  </p>
-               </div>
-            </div>
+               </h4>
 
-            <div className="inputForm f aic sbt bb-info">  {/* Pix */}
-               <p className='inputTF'>Pix</p>
+               <div className="inputForm f aic sbt bb-info"> {/* Dinheiro */}
+                  <p className='inputTF'>Dinheiro</p>
 
-               <div className="valueOfTheDay borderForm flex">
-                  <Pix w='24' h='24' fill='var(--pix)' className='mr-1' />
-                  <p className='inputTF text-pix'>
-                     {/* 0,00 */}
-                     { pix.toFixed(2) }
-                  </p>
-               </div>
-            </div>
-
-            <div className="inputForm f aic sbt bb-info">  {/* Débito */}
-               <p className='inputTF'>Débito</p>
-               <span className="calcCard flex column">
-                  <ScrewdriverWrench w='12' h='12' fill='var(--blue-mp)' className='mr-1' />
-                  <span className='calcCardText text-blue-mp'>
-                     (0,00 - 1,99%)
-                  </span>
-               </span>
-
-               <div className="valueOfTheDay borderForm flex">
-                  <CreditCard w='24' h='24' fill='var(--blue-mp)' className='mr-1' />
-                  <p className='inputTF text-blue-mp'>
-                     {/* 0,00 */}
-                     { debitCardFinal.toFixed(2) }
-                  </p>
-               </div>
-            </div>
-
-            <div className="inputForm f aic sbt bb-info">  {/* Crédito */}
-               <p className='inputTF'>Crédito</p>
-
-               <span className="calcCard flex column">
-                  <ScrewdriverWrench w='12' h='12' fill='var(--yellow-ml)' className='mr-1' />
-                  <span className='calcCardText text-yellow-ml'>
-                     (0,00 - 4,74%)
-                  </span>
-               </span>
-
-               <div className="valueOfTheDay borderForm flex">
-                  <CreditCard w='24' h='24' fill='var(--yellow-ml)' className='mr-1' />
-                  <p className='inputTF text-yellow-ml'>
-                     {/* 0,00 */}
-                     { creditCardFinal.toFixed(2) }
-                  </p>
-               </div>
-            </div>
-
-            <div className="inputForm f aic sbt bb-info">  {/* Dinheiro & Pix - moneyPix */}
-               <p className='inputTF'>Dinheiro & Pix</p>
-
-               <div className="valueOfTheDay borderForm flex">
-                  <span className='inputTF flex'>
-                     <MoneyBillWave w='24' h='24' fill='var(--bs-success)' className='mr-1' /> 
-                     <span className="mr-1">+</span>
-                     <Pix w='24' h='24' fill='var(--pix)' className='mr-1' />
-                  </span>
-                  <p className='inputTF text-success'>
-                     {/* 0,00 */}
-                     { moneyPix.toFixed(2) }
-                  </p>
-               </div>
-            </div>
-
-            <div className="inputForm f aic sbt bb-info">  {/* Cartões - amountCards */}
-               <p className='inputTF'>Cartões</p>
-
-               <div className="valueOfTheDay borderForm flex">
-                  <span className='inputTF flex'>
-                     <CreditCard w='24' h='24' fill='var(--blue-mp)' className='mr-1' /> 
-                     <span className="mr-1">+</span>
-                     <CreditCard w='24' h='24' fill='var(--yellow-ml)' className='mr-1' />
-                  </span>
-                  <p className='inputTF text-blue-mp'>
-                     {/* 0,00 */}
-                     { amountCards.toFixed(2) }
-                  </p>
-               </div>
-            </div>
-
-            <div className="inputForm f aic sbt bb-info">  {/* Tudo - amount */}
-               <p className='inputTF'>Total</p>
-
-               <div className="valueOfTheDay borderForm flex">
-                  <span className='inputTF flex'>
+                  <div className="valueOfTheDay borderForm flex">
                      <MoneyBillWave w='24' h='24' fill='var(--bs-success)' className='mr-1' />
-                     <span className="mr-1">+</span>
-                     <Pix w='24' h='24' fill='var(--pix)' className='mr-1' />
-                     <span className="mr-1">+</span>
-                     <CreditCard w='24' h='24' fill='var(--blue-mp)' className='mr-1' /> 
-                     <span className="mr-1">+</span>
-                     <CreditCard w='24' h='24' fill='var(--yellow-ml)' className='mr-1' />
-                  </span>
-                  <p className='inputTF text-success'>
-                     {/* 0,00 */}
-                     { amount.toFixed(2) }
-                  </p>
+                     <p className='inputTF text-success'>
+                        {/* 0,00 */}
+                        { money.toFixed(2) }
+                     </p>
+                  </div>
                </div>
-            </div>
 
-            <Link to='/' className="btn btn-success mt-1" >
-               Confirmar Valores (F8)
-               <CircleCheck w='24' h='24' fill='var(--text)' className='ml-1' />
-            </Link>
-         </form>
+               <div className="inputForm f aic sbt bb-info">  {/* Pix */}
+                  <p className='inputTF'>Pix</p>
+
+                  <div className="valueOfTheDay borderForm flex">
+                     <Pix w='24' h='24' fill='var(--pix)' className='mr-1' />
+                     <p className='inputTF text-pix'>
+                        {/* 0,00 */}
+                        { pix.toFixed(2) }
+                     </p>
+                  </div>
+               </div>
+
+               <div className="inputForm f aic sbt bb-info">  {/* Débito */}
+                  <p className='inputTF'>Débito</p>
+                  <span className="calcCard flex column">
+                     <ScrewdriverWrench w='12' h='12' fill='var(--blue-mp)' className='mr-1' />
+                     <span className='calcCardText text-blue-mp'>
+                        (0,00 - 1,99%)
+                     </span>
+                  </span>
+
+                  <div className="valueOfTheDay borderForm flex">
+                     <CreditCard w='24' h='24' fill='var(--blue-mp)' className='mr-1' />
+                     <p className='inputTF text-blue-mp'>
+                        {/* 0,00 */}
+                        { debitCardFinal.toFixed(2) }
+                     </p>
+                  </div>
+               </div>
+
+               <div className="inputForm f aic sbt bb-info">  {/* Crédito */}
+                  <p className='inputTF'>Crédito</p>
+
+                  <span className="calcCard flex column">
+                     <ScrewdriverWrench w='12' h='12' fill='var(--yellow-ml)' className='mr-1' />
+                     <span className='calcCardText text-yellow-ml'>
+                        (0,00 - 4,74%)
+                     </span>
+                  </span>
+
+                  <div className="valueOfTheDay borderForm flex">
+                     <CreditCard w='24' h='24' fill='var(--yellow-ml)' className='mr-1' />
+                     <p className='inputTF text-yellow-ml'>
+                        {/* 0,00 */}
+                        { creditCardFinal.toFixed(2) }
+                     </p>
+                  </div>
+               </div>
+
+               <div className="inputForm f aic sbt bb-info">  {/* Dinheiro & Pix - moneyPix */}
+                  <p className='inputTF'>Dinheiro & Pix</p>
+
+                  <div className="valueOfTheDay borderForm flex">
+                     <span className='inputTF flex'>
+                        <MoneyBillWave w='24' h='24' fill='var(--bs-success)' className='mr-1' /> 
+                        <span className="mr-1">+</span>
+                        <Pix w='24' h='24' fill='var(--pix)' className='mr-1' />
+                     </span>
+                     <p className='inputTF text-success'>
+                        {/* 0,00 */}
+                        { moneyPix.toFixed(2) }
+                     </p>
+                  </div>
+               </div>
+
+               <div className="inputForm f aic sbt bb-info">  {/* Cartões - amountCards */}
+                  <p className='inputTF'>Cartões</p>
+
+                  <div className="valueOfTheDay borderForm flex">
+                     <span className='inputTF flex'>
+                        <CreditCard w='24' h='24' fill='var(--blue-mp)' className='mr-1' /> 
+                        <span className="mr-1">+</span>
+                        <CreditCard w='24' h='24' fill='var(--yellow-ml)' className='mr-1' />
+                     </span>
+                     <p className='inputTF text-blue-mp'>
+                        {/* 0,00 */}
+                        { amountCards.toFixed(2) }
+                     </p>
+                  </div>
+               </div>
+
+               <div className="inputForm f aic sbt bb-info">  {/* Tudo - amount */}
+                  <p className='inputTF'>Total</p>
+
+                  <div className="valueOfTheDay borderForm flex">
+                     <span className='inputTF flex'>
+                        <MoneyBillWave w='24' h='24' fill='var(--bs-success)' className='mr-1' />
+                        <span className="mr-1">+</span>
+                        <Pix w='24' h='24' fill='var(--pix)' className='mr-1' />
+                        <span className="mr-1">+</span>
+                        <CreditCard w='24' h='24' fill='var(--blue-mp)' className='mr-1' /> 
+                        <span className="mr-1">+</span>
+                        <CreditCard w='24' h='24' fill='var(--yellow-ml)' className='mr-1' />
+                     </span>
+                     <p className='inputTF text-success'>
+                        {/* 0,00 */}
+                        { amount.toFixed(2) }
+                     </p>
+                  </div>
+               </div>
+
+               <Link to='/' className="btn btn-success mt-1" >
+                  Confirmar Valores (F8)
+                  <CircleCheck w='24' h='24' fill='var(--text)' className='ml-1' />
+               </Link>
+            </form>
          </div>
       </main>
    )

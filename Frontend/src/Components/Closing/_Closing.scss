@@ -3,6 +3,11 @@
    border-radius: 8px;
 }
 
+#closingFormDay h4 > #closeElementFormDay:hover {
+   cursor: pointer;
+   opacity: 0.5;
+}
+
 .closingDayForm > div.inputForm {
    height: 48px; 
 }

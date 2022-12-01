@@ -113,7 +113,7 @@ export default function Login() {
                   className="LogonUser btn btn-info"
                   onClick={loginUser} >
                   Logar no Sistema
-                  <ArrowRightToBracket w='23' h='23' fill='var(--bs-dark)' className='ml-1' />
+                  <ArrowRightToBracket w='23' h='23' fill='var(--text-color)' className='ml-1' />
                </button>
             </section>
          </div>

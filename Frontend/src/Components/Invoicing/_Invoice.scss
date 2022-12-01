@@ -3,6 +3,11 @@
    border-radius: 8px;
 }
 
+.invoicingOfTheDayForm > h4 > #closeElement:hover {
+   cursor: pointer;
+   opacity: 0.5;
+}
+
 .invoicingOfTheDayForm > div.inputForm {
    height: 48px; 
 }
