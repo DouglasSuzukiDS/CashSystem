@@ -9,18 +9,30 @@ import Signature from "../../assets/Icons/Signature";
 import TrashCan from "../../assets/Icons/TrashCan";
 import Closing from "../../Components/Closing/Closing";
 import Invoicing from "../../Components/Invoicing/Invoice";
+import OpenCash from "../../Components/OpenCash/OpenCash";
 
 
 // let employeerName = document.querySelector('#employeerName')
+
+
+
+const startJob = () => {
+   // alert(`Valor do localstorage: ${openCashValue}`)
+   const contentSystemStart = document.querySelector('#contentSystemStart')
+   contentSystemStart.classList.toggle('flex')
+   let openCashValue = localStorage.getItem('openCashValue')
+}
 
 const closingCash = () => {
    let infosSystemClose = document.querySelector('.infosSystemClose')
 
    infosSystemClose.classList === 'flex' ? 
       infosSystemClose.classList.toggle('none') : infosSystemClose.classList.toggle('flex')
+
+   localStorage.getItem('openCashValue')
 }
 
-export default function OpenSystem() {
+export default function OpenSystem(props) {
    useEffect(() => {
       window.addEventListener('keydown', (event) => {
          if (event.keyCode === 123) { // F12
@@ -30,14 +42,18 @@ export default function OpenSystem() {
       })
    }, [])
 
+   useEffect(() => {
+      localStorage.getItem('openCashValue')
+   }, [])
+
    return (
-      <main className="containerSystem flex p-3 border">
+      <main className="containerSystem flex p-3">
          <div className="infosSystemClose none">
-            <Closing />
+            <Closing close={ closingCash } openCashValue={ localStorage.getItem('openCashValue') }/>
          </div>
 
-         <div className="infosSystemInvoicinf none">
-            <Invoicing />
+         <div className="infosSystemInvoicing none">
+            <Invoicing close={ closingCash } />
          </div>
 
          <section className="sectionSystem">
@@ -54,15 +70,17 @@ export default function OpenSystem() {
                <div className="openSystem flex">
                   <Gears w='24' h='24' fill='var(--bs-secondary)' className='notAllowed' />
 
-                  <button className="btn btn-primary ml-2 border">
+                  <button className="btn btn-primary ml-2 border" onClick={ startJob }>
                      Abrir Caixa
                      <CashRegister w='24' h='24' fill='var(--text)' className='ml-1 text-color' />
                   </button>
                </div>
             </header>
 
-            <div className="contentSystem">
-               {/* ContentSystem */}
+            <div className="contentSystem flex" id="contentSystem">
+               <div className="none" id="contentSystemStart">
+                  <OpenCash close={ startJob }  />
+               </div>
             </div>
 
             <footer className="footerSystem flex sbt">

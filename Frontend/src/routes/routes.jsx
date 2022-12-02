@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Closing from "../Components/Closing/Closing";
 import Invoicing from "../Components/Invoicing/Invoice";
+import OpenCash from "../Components/OpenCash/OpenCash";
 
 import Error from "../pages/Error/Error";
 import Login from "../pages/Login/Login";
@@ -14,6 +15,7 @@ export default function RoutesApp() {
          <BrowserRouter>
             <Routes>
                <Route path='/' element={ <OpenSystem /> } />
+               <Route path='/opencash' element={ <OpenCash /> } />
                <Route path='/closing' element={ <Closing /> } />
                <Route path='/invoicing' element={ <Invoicing /> }/>
                <Route path='/login' element={ <Login /> }/>

@@ -23,11 +23,16 @@
       }
    
       .contentSystem {
-         background-color: var(--dark-blue);
-         opacity: .4;
+         background-color: rgba(8, 28, 101, .4);
+         // opacity: .4;
          width: 100%;
          height: 400px;
          padding: 24px;
+
+         #contentSystemStart {
+            width: 100%;
+            height: 100%;
+         }
       }
    
       .footerSystem {

@@ -13,40 +13,7 @@ import { useEffect } from 'react'
 import XMark from '../../assets/Icons/XMark'
 
 
-// Values Brute
-let opening = 37.80
-let money = 258
-let pix = 27
 
-let debitCard = 34.50
-let creditCard = 13.30
-
-// Tax Card
-let taxDebit = ((debitCard * 1.99) / 100).toFixed(2)
-let taxCredit = ((creditCard * 4.74) / 100).toFixed(2)
-// console.log(`Taxa Débito: ${taxDebit}`)
-// console.log(`Taxa Crédito: ${taxCredit}`)
-
-let debitCardFinal = debitCard - taxDebit // 33,81
-let creditCardFinal = creditCard - taxCredit // 12,67
-// console.log(`Débito sem a Taxa: ${debitCardFinal}`)
-// console.log(`Crédito sem a Taxa: ${creditCardFinal}`)
-
-// Values Final
-
-let openingPix = opening + pix // 285
-console.log(`Din + Pix: ${openingPix}`)
-
-let amountCards = (debitCardFinal + creditCardFinal) //  46,48
-// console.log(`Valor Total em Cartões: ${amountCards}`)
-
-let amount = (openingPix + amountCards).toFixed(2) // 331,48
-// console.log(`Total: ${amount}`)
-
-// Values Money
-let amountMoney = money - opening
-let amountBank = pix + amountCards
-let amountValue = amountMoney + amountBank
 
 /*  Blocked Keys
    F1 => Help
@@ -79,8 +46,43 @@ const closeFormDay = () => {
    close.style.display = 'flex' ? close.style.display = 'none' : close.style.display = 'flex'
 }
 
-export default function Closing() {
+export default function Closing(props) {
    const navigate = useNavigate()
+
+   // Values Brute
+let opening = 37.80
+let money = 258
+let pix = 27
+
+let debitCard = 34.50
+let creditCard = 13.30
+
+// Tax Card
+let taxDebit = ((debitCard * 1.99) / 100).toFixed(2)
+let taxCredit = ((creditCard * 4.74) / 100).toFixed(2)
+// console.log(`Taxa Débito: ${taxDebit}`)
+// console.log(`Taxa Crédito: ${taxCredit}`)
+
+let debitCardFinal = debitCard - taxDebit // 33,81
+let creditCardFinal = creditCard - taxCredit // 12,67
+// console.log(`Débito sem a Taxa: ${debitCardFinal}`)
+// console.log(`Crédito sem a Taxa: ${creditCardFinal}`)
+
+// Values Final
+
+let openingPix = opening + pix // 285
+// console.log(`Din + Pix: ${openingPix}`)
+
+let amountCards = (debitCardFinal + creditCardFinal) //  46,48
+// console.log(`Valor Total em Cartões: ${amountCards}`)
+
+let amount = (openingPix + amountCards).toFixed(2) // 331,48
+// console.log(`Total: ${amount}`)
+
+// Values Money
+let amountMoney = money - opening
+let amountBank = pix + amountCards
+let amountValue = amountMoney + amountBank
 
    useEffect(() => {
       window.addEventListener('keydown', (event) => {
@@ -107,7 +109,7 @@ export default function Closing() {
                   <div id='closeElementFormDay'>
                      <XMark w='24' h='24'
                         className=''
-                        onClick={closeFormDay}
+                        onClick={props.close}
                      />
                   </div>
                </h4>
@@ -119,7 +121,8 @@ export default function Closing() {
                      <CashRegister w='24' h='24' fill='var(--bs-primary)' className='mr-1' />
                      <p className='inputTF text-primary'>
                         {/* 0,00 */}
-                        {opening.toFixed(2)}
+                        {/* {opening.toFixed(2)} */}
+                        { props.openCashValue }
                      </p>
                   </div>
                </div>
