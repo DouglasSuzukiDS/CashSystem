@@ -1191,6 +1191,45 @@ h4 {
   color: var(--bs-primary);
 }
 
+#formsFindProducts h4 > #closeFindProducts:hover {
+  cursor: pointer;
+  opacity: 0.5;
+}
+
+.inputFindProduct::-moz-placeholder {
+  text-align: center;
+}
+
+.inputFindProduct:-ms-input-placeholder {
+  text-align: center;
+}
+
+.inputFindProduct::placeholder {
+  text-align: center;
+}
+
+#tableFindProduct {
+  border-collapse: collapse;
+}
+#tableFindProduct table, #tableFindProduct thead, #tableFindProduct tbody, #tableFindProduct tr, #tableFindProduct td {
+  border: 1px solid var(--bg-dark);
+}
+#tableFindProduct tbody tr:nth-child(odd) {
+  background-color: var(--bg-light);
+}
+#tableFindProduct tbody tr:nth-child(odd):hover {
+  background-color: #797C7C;
+}
+#tableFindProduct tbody tr:nth-child(even) {
+  background-color: var(--bg-normal);
+}
+#tableFindProduct tbody tr:nth-child(even):hover {
+  background-color: #3E4042;
+}
+#tableFindProduct td {
+  padding: 4px;
+}
+
 .forms {
   width: 380px;
   height: 420px;

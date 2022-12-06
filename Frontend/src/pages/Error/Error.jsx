@@ -30,7 +30,7 @@ export default function Error() {
                   Por favor se identifique fazendo o Login
                </h3>
 
-               <Link to='/' className="btn btn-primary">
+               <Link to='/login' className="btn btn-primary">
                   Fazer Login
                   <RightToBracket w='20' h='20' 
                      iconColor='#C1C7E0'  

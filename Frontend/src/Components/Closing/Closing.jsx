@@ -12,9 +12,6 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useEffect } from 'react'
 import XMark from '../../assets/Icons/XMark'
 
-
-
-
 /*  Blocked Keys
    F1 => Help
    F3 => Find Word

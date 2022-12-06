@@ -3,74 +3,29 @@ import { Link, useNavigate } from 'react-router-dom'
 import ArrowRightToBracket from "../../assets/Icons/ArrowRightToBracket";
 import IdCard from "../../assets/Icons/IdCard";
 
-export default function Login() {
+export default function EditLogin() {
+   const db = "http://localhost:3001";
 
-   async function loginUsers() {
-      const db = 'http://localhost:3001'
-      // const navigate = useNavigate()
+   let userLogin = document.querySelector("#userLogin");
+   let userPassword = document.querySelector("#userPassword");
 
-      let userLogin = document.querySelector('#userLogin')
-      let userPassword = document.querySelector('#userPassword')
+   if (userLogin.value && userPassword.value !== "") {
+      const login = userLogin.value;
+      const password = userPassword.value;
 
-      if (userLogin.value && userPassword.value !== '') {
-         // alert(`
-         //    Login: ${userLogin}
-         //    Senha: ${userPassword}
-         // `)
-         // const Navigation = useNavigate()
+      alert(`User: ${userLogin.value}, ${userPassword.value}`);
 
-         const login = userLogin.value
-         const password = userPassword.value
-
-         const response = await axios.post(`${db}/login`, {
-            userLogin: userLogin.value,
-            userPassword: userPassword.value
-         })
-         //.then(alert(`User: ${userLogin.value}, ${userPassword.value}`))
-         // .then(response => {
-         //    alert(response.data.msg)
-         // })
-
-         if (response.status !== 200) {
-            alert(`Colaborador não encontrado`)
-         } else {
-            alert(`Login no Front`)
-            // alert(`Logado como ${login}`)
-         }
-
+      if (response.status !== 200) {
+         alert(`Colaborador não encontrado`);
       } else {
-         alert('Colaborador, por obséquio logue com vossa matricula e senha. Caso contrário, sujeito a pancada. 🤜😵🤛')
+         alert(`Dados do colaborador atualizado com sucesso`);
       }
+   } else {
+      alert(
+         "Por obséquio preencha os dados exigidos, sujeito a pancada. 🤜😵🤛"
+      );
    }
 
-   async function loginUser() {
-      const db = "http://localhost:3001";
-
-      let userLogin = document.querySelector("#userLogin");
-      let userPassword = document.querySelector("#userPassword");
-
-      if (userLogin.value && userPassword.value !== "") {
-         const login = userLogin.value;
-         const password = userPassword.value;
-
-         const response = await axios.post(`${db}/login`, {
-            userLogin: login,
-            userPassword: password,
-         });
-
-         alert(`User: ${userLogin.value}, ${userPassword.value}`);
-
-         if (response.status !== 200) {
-            alert(`Colaborador não encontrado`);
-         } else {
-            alert(`Login no Front`);
-         }
-      } else {
-         alert(
-            "Colaborador, por obséquio logue com vossa matricula e senha. Caso contrário, sujeito a pancada. 🤜😵🤛"
-         );
-      }
-   }
 
    return (
       <main className="container flex">
