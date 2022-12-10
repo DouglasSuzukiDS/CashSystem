@@ -1,4 +1,5 @@
 /* eslint-disable no-unused-expressions */
+import { useState } from "react";
 import { redirect, useNavigate } from "react-router-dom";
 import CashRegister from "../../assets/Icons/CashRegister";
 import CircleCheck from "../../assets/Icons/CircleCheck";
@@ -8,6 +9,7 @@ import XMark from "../../assets/Icons/XMark";
 export default function OpenCash(props) {
    // localStorage.removeItem('openCashValue')
 
+
    const navigate = useNavigate()
    
    const openCashValue = () => {
@@ -16,14 +18,37 @@ export default function OpenCash(props) {
       //const alertMsgCash = alert('Insira o valor correto')
 
       function lc(){
+         // Create value on Local Storage
          // localStorage.removeItem('openCashValue')
          localStorage.removeItem('openCashValue')
          localStorage.setItem('openCashValue', openingCash)
+
          navigate('/')
+
+         // Modal OpenCash
          let modal = document.querySelector('#openCashModal')
          modal.classList.remove('flex')
          modal.classList.add('none')
          console.log(modal)
+
+         // Status Cash System
+         let statusSystemH4 = document.querySelector('#statusSystemH4')
+         statusSystemH4.classList.remove('text-danger')
+         statusSystemH4.classList.add('text-success')
+         statusSystemH4.innerHTML = 'Caixa Aberto'
+
+        // Button Status Cash
+        let btn_openCash = document.querySelector('#btn_openCash')
+        let btn_closeCash = document.querySelector('#btn_closeCash')
+
+      //   btn_openCash.classList.add('none')
+      //   btn_closeCash.classList.remove('none')
+        btn_openCash.style.display = 'none'
+        btn_closeCash.style.display = 'flex'
+        
+        let notAllowedClass =[...document.querySelectorAll('.notAllowed')]
+        notAllowedClass[0].classList.remove('notAllowed')
+        notAllowedClass[0].style.cursos = 'pointer'
       }
 
       //eslint-disable-next-line no-restricted-globals

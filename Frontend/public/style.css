@@ -1191,6 +1191,46 @@ h4 {
   color: var(--bs-primary);
 }
 
+::-webkit-scrollbar {
+  width: 5px;
+  background-color: var(--bg-dark);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--bg-normal);
+  border-radius: 8px;
+  scroll-behavior: smooth;
+}
+
+.tableFormList {
+  max-height: 330px;
+  border: 1px solid green;
+  overflow: auto;
+}
+.tableFormList #tableFindProduct {
+  border-collapse: collapse;
+  width: 100%;
+  height: 100%;
+}
+.tableFormList #tableFindProduct table, .tableFormList #tableFindProduct thead, .tableFormList #tableFindProduct tbody, .tableFormList #tableFindProduct tr, .tableFormList #tableFindProduct td {
+  border: 1px solid var(--bg-dark);
+}
+.tableFormList #tableFindProduct tbody tr:nth-child(odd) {
+  background-color: var(--bg-light);
+}
+.tableFormList #tableFindProduct tbody tr:nth-child(odd):hover {
+  background-color: #797C7C;
+}
+.tableFormList #tableFindProduct tbody tr:nth-child(even) {
+  background-color: var(--bg-normal);
+}
+.tableFormList #tableFindProduct tbody tr:nth-child(even):hover {
+  background-color: #3E4042;
+}
+.tableFormList #tableFindProduct td {
+  padding: 4px;
+}
+
 #formsFindProducts h4 > #closeFindProducts:hover {
   cursor: pointer;
   opacity: 0.5;
@@ -1206,28 +1246,6 @@ h4 {
 
 .inputFindProduct::placeholder {
   text-align: center;
-}
-
-#tableFindProduct {
-  border-collapse: collapse;
-}
-#tableFindProduct table, #tableFindProduct thead, #tableFindProduct tbody, #tableFindProduct tr, #tableFindProduct td {
-  border: 1px solid var(--bg-dark);
-}
-#tableFindProduct tbody tr:nth-child(odd) {
-  background-color: var(--bg-light);
-}
-#tableFindProduct tbody tr:nth-child(odd):hover {
-  background-color: #797C7C;
-}
-#tableFindProduct tbody tr:nth-child(even) {
-  background-color: var(--bg-normal);
-}
-#tableFindProduct tbody tr:nth-child(even):hover {
-  background-color: #3E4042;
-}
-#tableFindProduct td {
-  padding: 4px;
 }
 
 .forms {

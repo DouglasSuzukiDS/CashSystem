@@ -3,7 +3,6 @@ const JWT = require('jsonwebtoken')
 const express = require('express')
 const cors = require('cors')
 const mysql = require('mysql2')
-const { reset } = require('nodemon')
 const app = express()
 
 require('dotenv').config()
@@ -20,6 +19,36 @@ app.use(express.json())
 app.use(cors())
 
 // Users
+app.get('/users', async(req, res) => {
+   let SQL = `SELECT * FROM users`
+
+   db.query(SQL, (err, result) => {
+      if(err) {
+         console.log({ msg: 'Erro ao listar todos os colaboradores' })
+      } else {
+         res.status(200).send({ msg: 'Colaboradores encontrados', result })
+      }
+   })
+})
+
+app.get('/user/:id', async(req, res) => {
+   const { id } = req.params
+
+   let SQL = 'SELECT * FROM users WHERE id = ?'
+
+   db.query(SQL, [id], (err, result) => {
+      if(err) {
+         console.log('Erro ao tentar localizar o colaborador')
+         res.send('Erro ao tentar localizar o colaborar')
+      } else if(result.length > 0) {
+         res.send(result)
+      } else {
+         console.log('Colaborador não localizado')
+         res.status(200).send('Colaborador não localizado')
+      }
+   })
+})
+
 app.post('/login', async(req, res) => {
 
    const { userLogin, userPassword } = req.body
@@ -48,7 +77,7 @@ app.post('/login', async(req, res) => {
 
 })
 
-app.post('/registerUser', async (req, res) => {
+app.post('/registerNewUser', async (req, res) => {
    // res.send('Connected')
    const { newUserFullName, newUserLogin, newUserPassword, newUserAdmin } = req.body
 
@@ -75,41 +104,6 @@ app.post('/registerUser', async (req, res) => {
                res.status(200).send({ msg: 'Usuário cadastrado com Sucesso', result })
             }
          })
-      }
-   })
-})
-
-app.get('/users', async(req, res) => {
-   let SQL = `SELECT * FROM users`
-
-   let allUser = db.query(SQL, (err, result) => {
-      if(err) {
-         console.log({ msg: 'Erro ao listar todos os colaboradores' })
-      } else {
-         res.status(200).send({ msg: 'Colaboradores encontrados', result })
-         all(allUser)
-      }
-   })
-
-   function all(allUser) {
-      console.log('aaaaa' + allUser)
-   }
-})
-
-app.get('/user/:id', async(req, res) => {
-   const { id } = req.params
-
-   let SQL = 'SELECT * FROM users WHERE id = ?'
-
-   db.query(SQL, [id], (err, result) => {
-      if(err) {
-         console.log('Erro ao tentar localizar o colaborador')
-         res.send('Erro ao tentar localizar o colaborar')
-      } else if(result.length > 0) {
-         res.send(result)
-      } else {
-         console.log('Colaborador não localizado')
-         res.status(200).send('Colaborador não localizado')
       }
    })
 })
@@ -146,23 +140,6 @@ app.delete('/delete/user/:id', async(req, res) => {
 })
 
 // Products
-app.post('/registerNewProduct', async(req, res) => {
-   const { pdt_name, pdt_price, pdt_type, pdt_qty } = req.body
-   console.log(pdt_name, pdt_price, pdt_type, pdt_qty)
-
-   let SQL = `INSERT INTO products (pdt_name, pdt_price, pdt_type, pdt_qty) VALUES (?, ?, ?, ?)`
-
-   db.query(SQL, [pdt_name, pdt_price, pdt_type, pdt_qty], async(err, result) => {
-      if(err) {
-         console.log({ msg: 'Erro ao cadastrar o produto' })
-         res.status(400).json({msg: 'Erro ao cadastrar'})
-         console.log(err)
-      } else {
-         res.status(200).send(result)
-      }
-   })
-})
-
 app.get('/products', async(req, res) => {
    let SQL = `SELECT * FROM products`
 
@@ -193,14 +170,48 @@ app.get('/product/:id', async(req, res) => {
    })
 })
 
+app.get('/products/type/', async(req, res) => {
+   const { pdt_type } = req.body
+
+   let SQLType = 'SELECT * FROM products WHERE pdt_type = ?'
+   let SQLName = 'SELECT * FROM products WHERE pdt_name = ?'
+
+   db.query(SQLType, [ pdt_type ], (err, result) => {
+      if(err) {
+         console.log('Erro ao localizar o produto')
+      } else if(result.length > 0) {
+         res.status(200).send({ msg: 'Produtos localizados com a busca', result })
+      }
+   })
+})
+
+app.post('/registerNewProduct', async(req, res) => {
+   const { pdt_name, pdt_price, pdt_type, pdt_qty } = req.body
+   console.log(pdt_name, pdt_price, pdt_type, pdt_qty)
+
+   let SQL = `INSERT INTO products (pdt_name, pdt_price, pdt_type, pdt_qty) VALUES (?, ?, ?, ?)`
+
+   db.query(SQL, [pdt_name, pdt_price, pdt_type, pdt_qty], async(err, result) => {
+      if(err) {
+         console.log({ msg: 'Erro ao cadastrar o produto' })
+         res.status(400).json({msg: 'Erro ao cadastrar'})
+         console.log(err)
+      } else {
+         res.status(200).send(result)
+      }
+   })
+})
+
 app.put('/edit/product/:id', async(req, res) => {
-   const { id, pdt_name, pdt_price, pdt_type, pdt_qty } = req.body
+   const { pdt_name, pdt_price, pdt_type, pdt_qty } = req.body
+   const { id } = req.params
     
    let SQL = "UPDATE products SET pdt_name = ?, pdt_price = ?, pdt_type = ?, pdt_qty = ? WHERE id = ?"
 
    db.query(SQL, [pdt_name, pdt_price, pdt_type, pdt_qty, id], async(err, result) => {
       if(err) {
          console.log({msg: 'Erro ao Editar o produto'})
+         res.status(400).send({msg: 'Erro ao editar o produto'})
          console.log(err)
       } else {
          res.status(200).send({msg: 'Produto Atualizado com Sucesso', result})

@@ -11,38 +11,41 @@ import TrashCan from "../../assets/Icons/TrashCan";
 import Closing from "../../Components/Closing/Closing";
 import Invoicing from "../../Components/Invoicing/Invoice";
 import OpenCash from "../../Components/OpenCash/OpenCash";
-import FindProducts from "../../Components/EditProduct/EditProduct";
-
-const backend = 'http://localhost:3001'
-
-const startJob = () => {
-   // alert(`Valor do localstorage: ${openCashValue}`)
-   const contentSystemStart = document.querySelector('#contentSystemStart')
-   contentSystemStart.classList.toggle('flex')
-   let openCashValue = localStorage.getItem('openCashValue')
-}
-
-let infosSystemFindProducts = document.querySelector('.infosSystemFindProducts')
-let infosSystemClose = document.querySelector('.infosSystemClose')
-
-const closeFindProductModal = () => {
-   infosSystemFindProducts.classList === 'none' ?
-      infosSystemFindProducts.classList.toggle('flex') : infosSystemFindProducts.classList.toggle('none')
-
-      infosSystemClose.classList.add('none')
-}
-
-const closingCash = () => {
-   infosSystemClose.classList === 'none' ?
-   infosSystemClose.classList.toggle('flex') : infosSystemClose.classList.toggle('none')
-   
-   localStorage.getItem('openCashValue')
-
-   infosSystemFindProducts.classList.add('none')
-
-}
+import FindProducts from "../../Components/FindProducts/FindProducts";
 
 export default function OpenSystem(props) {
+   const backend = 'http://localhost:3001'
+
+   const startJob = () => {
+      // alert(`Valor do localstorage: ${openCashValue}`)
+      const contentSystemStart = document.querySelector('#contentSystemStart')
+      contentSystemStart.classList.toggle('flex')
+      let openCashValue = localStorage.getItem('openCashValue')
+   }
+
+   let infosSystemFindProducts = document.querySelector('#infosSystemFindProducts')
+   let infosSystemClose = document.querySelector('#infosSystemClose')
+
+   const closeFindProductModal = () => {
+
+      infosSystemFindProducts.classList === 'flex' ?
+         infosSystemFindProducts.classList.toggle('none') : infosSystemFindProducts.classList.toggle('flex')
+
+      infosSystemClose.classList.add('none')
+   }
+   console.log(infosSystemFindProducts)
+
+   const closingCash = () => {
+
+      infosSystemClose.classList === 'none' ?
+         infosSystemClose.classList.toggle('flex') : infosSystemClose.classList.toggle('none')
+
+      localStorage.getItem('openCashValue')
+
+      infosSystemFindProducts.classList.add('none')
+
+   }
+
    // Get All Users
    const [users, setUsers] = useState([])
 
@@ -83,9 +86,11 @@ export default function OpenSystem(props) {
       localStorage.getItem('openCashValue')
    }, [])
 
+   let status = false
+
    return (
       <main className="containerSystem flex p-3">
-         <div className="infosSystemClose none">
+         <div className="infosSystemClose none" id="infosSystemClose">
             <Closing close={closingCash} openCashValue={localStorage.getItem('openCashValue')} />
          </div>
 
@@ -94,7 +99,7 @@ export default function OpenSystem(props) {
          </div>
 
          <div className="infosSystemFindProducts none" id="infosSystemFindProducts">
-            <FindProducts close={ closeFindProductModal }/>
+            <FindProducts close={closeFindProductModal} />
          </div>
 
          <section className="sectionSystem">
@@ -103,18 +108,25 @@ export default function OpenSystem(props) {
                   CashSystem
                </div>
 
-               <div className="statusSystem flex column">
+               <div className="statusSystem flex column" id="statusSystem">
                   <p className="text-secondary bold">Caixa 01</p>
-                  <h4 className="text-danger mt-1">Caixa Fechado</h4>
+                  <h4 className="text-danger mt-1" id="statusSystemH4">Caixa Fechado</h4>
                </div>
 
                <div className="openSystem flex">
                   <Gears w='24' h='24' fill='var(--bs-secondary)' className='notAllowed' />
 
-                  <button className="btn btn-primary ml-2 border" onClick={startJob}>
+                  <button className="btn btn-primary ml-2 border" id="btn_openCash" onClick={startJob}>
                      Abrir Caixa
                      <CashRegister w='24' h='24' fill='var(--text)' className='ml-1 text-color' />
                   </button>
+
+                  <button className="btn btn-danger ml-2 border" id="btn_closeCash" style={{display: 'none'}} onClick={closingCash}>
+                     Fechar Caixa
+                     <CashRegister w='24' h='24' fill='var(--text)' className='ml-1 text-color' />
+                  </button>
+
+
                </div>
             </header>
 
@@ -147,7 +159,7 @@ export default function OpenSystem(props) {
                      <SackDollar w='20' h='20' fill='var(--text)' className='ml-1' />
                   </button>
 
-                  <button className="btn btn-warning ml-1" onClick={ closeFindProductModal }>
+                  <button className="btn btn-warning ml-1" onClick={closeFindProductModal}>
                      F9 Pesquisar
                      <MagnifyingGlass w='20' h='20' fill='var(--text-dark)' className='ml-1' />
                   </button>
@@ -157,7 +169,7 @@ export default function OpenSystem(props) {
                      <TrashCan w='20' h='20' fill='var(--text)' className='ml-1' />
                   </button>
 
-                  <button className="btn btn-primary ml-1" onClick={closingCash}>
+                  <button className="btn btn-primary ml-1">
                      F12 Pagamento
                      <HandHoldingDollar w='20' h='20' fill='var(--text)' className='ml-1' />
                   </button>

@@ -30,7 +30,7 @@ export default function RegisterUser(props) {
          //    `
          // )
 
-         await axios.post(`${db}/registerUser`, {
+         await axios.post(`${db}/registerNewUser`, {
             newUserFullName: newUserFullName.value,
             newUserLogin: newUserLogin.value,
             newUserPassword: newUserPassword.value,

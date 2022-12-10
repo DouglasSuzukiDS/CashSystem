@@ -10,32 +10,3 @@
       text-align: center;
    }
 }
-
-
-#tableFindProduct {
-   border-collapse: collapse;
-
-   table, thead, tbody, tr, td {
-      border: 1px solid var(--bg-dark);
-   }
-
-   tbody tr:nth-child(odd) { // Impar
-      background-color: var(--bg-light);
-   
-      &:hover {
-         background-color: #797C7C;
-      }
-   }
-   
-   tbody tr:nth-child(even) { // Par
-      background-color: var(--bg-normal);
-   
-      &:hover {
-         background-color: #3E4042;
-      }
-   }
-
-   td {
-      padding: 4px;
-   }
-}

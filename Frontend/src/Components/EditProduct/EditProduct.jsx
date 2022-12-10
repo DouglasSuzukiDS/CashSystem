@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
 import MoneyCheckPen from "../../assets/Icons/MoneyCheckPen";
 import ArrowLeftLong from "../../assets/Icons/ArrowLeftLong";
@@ -9,15 +9,26 @@ import TrashCanXMark from "../../assets/Icons/TrashCanXMark";
 
 export default function EditProduct() {
    const backend = 'http://localhost:3001'
+
+   const { id } = useParams()
+
    const navigate = useNavigate()
 
    const [product, setProduct] = useState([])
+
    let findProductInput = document.querySelector('#findProduct')
 
    useEffect(() => {
       axios.get(`${backend}/products`)
          .then(response => setProduct(response.data.result))
    }, [])
+
+   useEffect(() => {
+      getProduct()
+   })
+
+   //console.log(product)
+   console.log(id)
 
    let newProductName = document.querySelector('#newProductName')
    let newProductPrice = document.querySelector('#newProductPrice')
@@ -30,7 +41,7 @@ export default function EditProduct() {
             let pdt_name = response.data[0].pdt_name
             let pdt_price = response.data[0].pdt_price
             let pdt_type = response.data[0].pdt_type
-            let pdt_qty = response.data[0].pdt_qtd
+            let pdt_qty = response.data[0].pdt_qty
 
             newProductName.value = pdt_name
             newProductPrice.value = pdt_price
@@ -40,39 +51,56 @@ export default function EditProduct() {
          .catch(err => console.log(err))
    }
 
-   async function updateProduc(id) {
-      await axios.put(`${backend}/product/${id}`)
-   }
+   async function updateProduct(id) {
+      // await axios.get(`${backend}/product/${id}`)
+      //    .then(response => {
+      //       let pdt_name = response.data[0].pdt_name
+      //       let pdt_price = response.data[0].pdt_price
+      //       let pdt_type = response.data[0].pdt_type
+      //       let pdt_qty = response.data[0].pdt_qty
 
-   /*if (
-      ((newProductName.value && newProductPrice.value && newProductType.value && newProductQty.value) !== '') &&
-      ((newProductName.value && newProductPrice.value && newProductType.value && newProductQty.value) !== '0') &&
-      ((newProductName.value && newProductPrice.value && newProductType.value && newProductQty.value) !== 0)) {
-
-
-      const newRegister = axios.post(`${db}/registerNewProduct`, {
+      //       newProductName.value = pdt_name
+      //       newProductPrice.value = pdt_price
+      //       newProductType.value = pdt_type
+      //       newProductQty.value = pdt_qty
+      //    })
+      //    .catch(err => console.log(err))
+      
+      const update = await axios.put(`${backend}/edit/product/${id}`, {
          // pdt_name, pdt_price, pdt_type, pdt_qty
          pdt_name: newProductName.value,
          pdt_price: newProductPrice.value,
          pdt_type: newProductType.value,
          pdt_qty: newProductQty.value
       })
+         // .then(alert('Produto Atulizado com Sucesso'))
+         // .then(console.log(newProductQty.value))
+         // .catch(err => console.log(err))
 
-      if (newRegister.status === 200) {
-         alert(`
-               Produto Cadastrado com Sucesso! 😎
-               Nome do produto: ${newProductName.value}
-               Preço do Produto: ${newProductPrice.value}
-               Tipo do Produto: ${newProductType.value}
-               Quatidade do Produto: ${newProductQty.value}
-            `)
+      if (
+         ((newProductName.value && newProductPrice.value && newProductType.value && newProductQty.value) !== '') &&
+         ((newProductName.value && newProductPrice.value && newProductType.value && newProductQty.value) !== '0') &&
+         ((newProductName.value && newProductPrice.value && newProductType.value && newProductQty.value) !== 0)) {
+   
+         if (update.status === 200) {
+            alert(`
+                  Produto Atualizado com Sucesso! 😎
+                  Nome do produto: ${newProductName.value}
+                  Preço do Produto: ${newProductPrice.value}
+                  Tipo do Produto: ${newProductType.value}
+                  Quatidade do Produto: ${newProductQty.value}
+               `)
+         } else if(update.status === 400) {
+            alert('Erro ao cadastrar')
+         }
+   
       } else {
-         alert('Erro ao cadastrar')
+         alert('Por obséquio, preencha todos os campos corretamente')
       }
+   }
 
-   } else {
-      alert('Por obséquio, preencha todos os campos corretamente')
-   }*/
+   
+
 
    return (
       <>
@@ -81,7 +109,7 @@ export default function EditProduct() {
 
                <section action='/' className="registerNewProducForm w-100 h-100 f column sbt">
                   <h4 className="flex">
-                     Registro de Produto
+                     Atualizar Produto
                      <MoneyCheckPen w='25' h='25' fill='var(--bs-info)' className='ml-1' />
                   </h4>
 
@@ -123,9 +151,9 @@ export default function EditProduct() {
                   <button
                      id="btnRegisterNewProduct"
                      className="btnRegisterNewProduct btn btn-info"
-                     // onClick={registerNewProduct}
+                     onClick={ () => updateProduct(id) }
                   >
-                     Salvar Produto
+                     Atualizar Produto
                      <Registered w='24' h='24' fill='var(--bs-dark)' className='ml-1' />
                   </button>
 
