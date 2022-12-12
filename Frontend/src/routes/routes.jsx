@@ -10,13 +10,15 @@ import Login from "../pages/Login/Login";
 import OpenSystem from "../pages/OpenSystem/OpenSystem";
 import RegisterProduct from "../pages/RegisterProduct/RegisterProduct";
 import RegisterUser from "../pages/RegisterUser/RegisterUser";
+import EditUser from "../Components/EditUser/EditUser";
 
 export default function RoutesApp() {
    return(
       <>
          <BrowserRouter>
             <Routes>
-               <Route path='/' element={ <OpenSystem /> } />
+               <Route path='/:id' element={ <EditUser /> } />
+               <Route path='/openSystem' element={ <OpenSystem /> } />
                <Route path='/findProducts' element={ <FindProducts /> } />
                <Route path='/edit/product/:id' element={ <EditProduct /> } />
                <Route path='/opencash' element={ <OpenCash /> } />

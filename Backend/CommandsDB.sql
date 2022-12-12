@@ -10,7 +10,7 @@ CREATE TABLE users (
     userAdmin BOOLEAN DEFAULT false
 );
 
-/* ALTER TABLE users AUTO_INCREMENT = 3; /* Reset AutoIncrement */
+/* ALTER TABLE users AUTO_INCREMENT = 4; /* Reset AutoIncrement */
 /* RENAME TABLE oldName TO newName; /* Rename Table */
 /* INSERT INTO users VALUES (01, 'Admin', 'Admin', 'Admin', true); */
 /* 
@@ -23,9 +23,12 @@ CREATE TABLE users (
 		WHERE userLogin = 'chico.palha' 
         AND userPassword = 123;
 */
+
 /* DELETE FROM users WHERE userLogin = ''; */
 /* SELECT * FROM users */
-/* SELECT * FROM users WHERE userLogin = 'Chico.Palha' */
+/* SELECT * FROM users WHERE userLogin = 'persio.valente2' */
+/* UPDATE users SET userName = 'Chico Palha' WHERE id = 3; */
+/* DELETE FROM users WHERE id = 4 */
 
 /* DROP TABLE products; */
 CREATE TABLE products (
@@ -35,6 +38,7 @@ CREATE TABLE products (
     pdt_type VARCHAR(50) NOT NULL,
     pdt_qty INT NOT NULL
 );
+
 /* ALTER TABLE products MODIFY COLUMN pdt_price DECIMAL; */
 /* ALTER TABLE users AUTO_INCREMENT = 3; /* Reset AutoIncrement */
 /* RENAME TABLE oldName TO newName; /* Rename Table */

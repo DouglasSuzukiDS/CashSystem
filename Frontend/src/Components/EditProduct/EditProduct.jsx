@@ -99,9 +99,6 @@ export default function EditProduct() {
       }
    }
 
-   
-
-
    return (
       <>
          <main className="container flex">

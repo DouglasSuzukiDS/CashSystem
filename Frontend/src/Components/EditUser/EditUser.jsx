@@ -7,48 +7,77 @@ import SquareX from "../../assets/Icons/SquareXMark"
 import UserPen from "../../assets/Icons/UserPen"
 import UserPlus from "../../assets/Icons/UserPlus"
 import ArrowLeftLong from "../../assets/Icons/ArrowLeftLong"
+import { useEffect } from "react"
 
-export default function RegisterUser(props) {
+export default function EditUser(props) {
    const backend = 'http://localhost:3001'
+
+   const { id } = useParams()
+   console.log('ID do Usuário: ' + id)
 
    const navigate = useNavigate()
 
    let [admin, setAdmin] = useState(false)
 
-   async function newUserRegister() {
-      let newUserFullName = document.querySelector('#newUserName')
-      let newUserLogin = document.querySelector('#newUserLogin')
-      let newUserPassword = document.querySelector('#newUserPassword')
-      let newUserAdmin = admin
+   let newUserName = document.querySelector('#newUserName')
+   let newUserLogin = document.querySelector('#newUserLogin')
+   let newUserPassword = document.querySelector('#newUserPassword')
+   let newUserAdmin = document.querySelector('#isAdmin')
 
-      if ((newUserFullName.value !== '') && (newUserLogin.value !== '') && (newUserPassword.value !== '')) {
+   useEffect(() => {
+      getUser()
+   })
+   
+   async function getUser() {
+      await axios.get(`${backend}/user/${id}`)
+         .then(response => {
+            let userName = response.data[0].userName
+            let userLogin = response.data[0].userLogin
+            let userPassword = response.data[0].userPassword
+            let userAdmin = response.data[0].userAdmin
+
+            newUserName.value = userName
+            newUserLogin.value = userLogin
+            newUserPassword.value = userPassword
+            newUserAdmin = admin
+
+            console.log('Valor do admin é: ' + newUserAdmin)
+            console.log('bc ' + userAdmin)
+         })
+   }
+
+   //getUser()
+
+   const updateUser = async(id) => {
+
+      if ((newUserName.value !== '') && (newUserLogin.value !== '') && (newUserPassword.value !== '')) {
          // alert(
          //    `
-         //       Nome Completo: ${newUserFullName}
-         //       Login: ${newUserLogin}
-         //       Senha: ${newUserPassword}
+         //       Nome Completo: ${newUserName.value}
+         //       Login: ${newUserLogin.value}
+         //       Senha: ${newUserPassword.value}
          //       Admin: ${newUserAdmin ? 'Sim' : 'Não'}
          //    `
          // )
+         console.log(`${backend}/edit/user/${id}`)
 
-         await axios.post(`${backend}/registerNewUser`, {
-            newUserFullName: newUserFullName.value,
+         await axios.put(`${backend}/edit/user/${id}`, {
+            newUserName: newUserName.value,
             newUserLogin: newUserLogin.value,
             newUserPassword: newUserPassword.value,
-            newUserAdmin: newUserAdmin
+            newUserAdmin: admin
          })
             .then(response => {
                alert(response.data.msg)
             })
-            .then(setTimeout(() => { navigate('/') }, 5000))
+            //.then(setTimeout(() => { navigate('/') }, 5000))
             //.then( alert('Usuario cadastrado no sistema com sucesso') )
             .catch(err => console.log(err))
       } else {
          alert('Preencha os campos')
       }
-
-      
    }
+
 
    return (
       <>
@@ -95,8 +124,8 @@ export default function RegisterUser(props) {
                   <button
                      id="submitNewUser"
                      className="submitNewUser btn btn-info"
-                     onClick={newUserRegister} >
-                     Registrar Funcionário
+                     onClick={ () => updateUser(id) } >
+                     Atualizar dados
                      <UserPen w='24' h='24' fill='var(--bs-dark)' className='ml-2' />
                   </button>
 

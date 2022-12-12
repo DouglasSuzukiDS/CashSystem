@@ -1,6 +1,6 @@
 # Controle de Caixa
 
-Projeto de Controle de Caixa inspirado em um Sistema de Caixa real no qual tive contato, no qual deverá estar logado no sistema para utiliza-lo. 
+Projeto de Controle de Caixa inspirado em um Sistema de Caixa real no qual tive contato, onde deverá estar logado no sistema para utiliza-lo. 
 
 O objetivo do projeto é fazer um sistema de login, criação de usuários para o sistema, cadastros de produtos, podendo fazer a edição dos mesmos, pesquisar sobre determinado produto podendo adiciona-lo na lista de compras. Contará com abertura e fechamento de caixa, informando os valores das vendas no dia.
 
@@ -14,7 +14,7 @@ Qualificação | Expecificação
 **Planejar o Sistema** | *Desenvolver a prototipação do sistema, seguindo conceitos de designer e web designer.*
 **Codar o Sistema** | *Desenvolver o sistema com uma linguagem de programação que atenda as necessidades do cliente. Escolha: Javascript.*
 **Escolha da Stack** | *Javascript: Linguagem de alta velocidade e versátil. Com o uso de frameworks e/ou bibliotecas, possíbilita o desenvolvimento da aplicação Web com React, o Mobile com React Native, o Desktop com Electron. Mesma linguagem base (JS) com algumas modificações na estrutura para atender o dispositivo que ira 'rodar o sistema'.*
-**Banco de Dados** | *Utilizando Javascript podemos unir o Frontend da plaicação com o Backend utilizando Node e escolhi usar a linguagem SQL para trabalhar em conjunto do Node.*
+**Banco de Dados** | *Utilizando Javascript podemos unir o Frontend da aplicação com o Backend utilizando Node. Escolhi usar a linguagem SQL para trabalhar em conjunto do Node.*
 **Documentação do Sistema** | *Desenvolver o manual para utilização do sistema de forma correta.*
 
 **Atualizações do Projeto:** *Login (gerando um token de acesso), cadastro, listagens de usuários e produtos, edição de produtos, já estão funcionando junto do backend. A abertura de caixa funciona porém será modificada.* 
@@ -49,7 +49,7 @@ Em um dos Terminais, entre na pasta ***Frontend*** *(Em desenvolvimento)*
     cd Frontend
 ```
 
-No outro Terminal, entre na pasta ***Backend*** 
+No outro Terminal, entre na pasta ***Backend*** *(Em desenvolvimento)*
 ```bash
     cd Backend
 ```
@@ -62,10 +62,10 @@ Instale as dependências nas pastas do projeto, pasta ***Frontend*** e pasta ***
 ## Criando o Banco de Dados *(utilizei o MySQL)*
 *Seguindo a forma que eu fiz no MySQL Workbench*
 
-```bash
-    CREATE DATABASE cashSystem; => Criação do Banco de Dados no Sistema.
+```sql
+    CREATE DATABASE cashSystem; /* => Criação do Banco de Dados no Sistema. */
 
-    USE cashSystem; => Selecionar o BD para usar.
+    USE cashSystem; /* => Selecionar o BD para usar. */
 ```
 
 ## Criando a Tabela de Usuários
@@ -108,19 +108,21 @@ Na pasta ***Backend***:
 *Lembrando que a ideialização das rotas até o momento é para facilitar minha visualização no desenvolvimento. Futuramente irei buscar bloquear acesso direto a elas pela URL, sendo permitido apenas acesso por ações na aplicação principal, obviamente logo após autenticação.*
 Rota | Função
 -----|-------
+**/login** | *Página Inicial para o colaborar se identificar, para poder ter acesso ao sistema.*
 **/**   | *Aplicação principal após de logado e autenticado.*
+**/opencash** | *Modal de Abertura de caixa. O caixa deve ser aberto somento após informar o valor/saldo($$) inicial para o dia. Em outras palavras, informar o valor que tem para ser usado como 'troco'.*
+**/registerNewUser** | *Página/Modal (não decidi ainda) para cadastro de novos colaboradores.*
+**/findUsers** | *Modal para verificar usuários do sistema.* *(Falta a implementação)*
+**/edit/user/:id** | *Faz a busca do usuário pelo ID. Será usado para fazer a edição dos dados do colaborador.* *(Falta a implementação)*
+**/registerNewProduct** | *Página/Modal (não decidi ainda) para cadastro de novos produtos.*
 **/findProducts** | *Modal para procurar e/ou adicionar produto a lista de compras.*
 **/edit/product/:id** | *Faz a busca do produto pelo ID. Será usado para fazer a edição do produto.*
-**/opencash** | *Modal de Abertura de caixa. O caixa deve ser aberto somento após informar o valor/salto($$) inicial para o dia. Em outras palavras, informar o valor que tem para ser usado como 'troco'.*
-**/closing** | *Modal informativo com o valor das vendas do dia, em dinheiro e o valor que foi para a conta bancário.*
 **/invoicing** | *Modal informativo com o valor das vendas por meio de pagamento, entre dinheiro, cartões e pix.*
-**/login** | *Página Inicial para o colaborar se identificar, para poder ter acesso ao sistema.*
-**/registerNewUser** | *Página/Modal (não decidi ainda) para cadastro de novos colaboradores.*
-**/registerNewProduct** | *Página/Modal (não decidi ainda) para cadastro de novos produtos.*
+**/closing** | *Modal informativo com o valor das vendas do dia, em dinheiro e o valor que foi para a conta bancário.*
 **/*** | *Qualquer outra rota diferente dessas informadas, será mostrado o componente de Erro.*
 
 ## Rotas no Backend
-*Lembrando que as rotas até o momento estão dessa maneira e possivelmente podem ser modificadas e/ou acrescentadas novas rotas conforme a necessidade do projeto*
+*Lembrando que as rotas até o momento estão dessa maneira e possivelmente podem ser modificadas e/ou acrescentadas novas rotas conforme a necessidade do projeto.*
 
 #### Rotas utilizadas para ações das funcionalidades dos usuários
 

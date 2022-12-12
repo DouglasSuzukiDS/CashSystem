@@ -109,16 +109,19 @@ app.post('/registerNewUser', async (req, res) => {
 })
 
 app.put('/edit/user/:id', (req, res) => {
-   const { id, userName, userLogin, userPassword, userAdmin } = req.body
+   const { newUserName, newUserLogin, newUserPassword, newUserAdmin } = req.body
+   const { id } = req.params
+
+   console.log(newUserName, newUserLogin, newUserPassword, newUserAdmin)
 
    let SQL = 'UPDATE users SET userName = ?, userLogin = ?, userPassword = ?, userAdmin = ? WHERE id = ?'
 
-   db.query(SQL, [ userName, userLogin, userPassword, userAdmin, id ], async(err, result) => {
+   db.query(SQL, [ newUserName, newUserLogin, newUserPassword, newUserAdmin, id ], async(err, result) => {
       if(err) {
          console.log('Erro ao editar as informações do colaborador')
          console.log(err)
       } else {
-         res.status(200).send({msg: 'Cadastro do colaborador tualizado com Sucesso', result})
+         res.status(200).send({msg: 'Cadastro do colaborador atualizado com Sucesso', result})
       }
 
    })
