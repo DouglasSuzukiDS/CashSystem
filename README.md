@@ -145,3 +145,52 @@ Metodo | Rota | Função
 **POST** | **/registerNewProduct** | *Faz o registro de um novo produto.*
 **PUT** | **/edit/product/:id** | *Busca o produto pelo ID para fazer a edição dos dados.*
 **DELETE** | **/delete/product/:id** | *Deleta o produto pelo seu ID.*
+
+
+
+## Tipografia, Estilizações, Cores & Botões 
+Para agilizar meu processo de estilizações em meus projetos, eu opto sempre em inserir neles algumas formações padrões atraves de classes e/ou vaviáveis, seguindo a ideia do Bootstrap. 
+
+### Tipografia
+Tenho uma preferência em particular pela fonte ***JetBrains Mono***. Para esse projeto também optei por utiliza-la por ser um fonte opensource, monospace, sans-serif. 
+
+A fonte pode ser baixada pelo site oficial: 
+- [***JetBrains Mono - Site Oficial***](https://www.jetbrains.com/pt-br/lp/mono/)
+
+Ou também baixada / importada do Google Fonts
+- [***JetBrains Mono - Google Fonts***](https://fonts.google.com/specimen/JetBrains+Mono?query=Jet)
+
+### Estilizações
+Na pasta Frontend do projeto, existe uma pasta chamada ***scss***, onde eu coloco as estilizações que poderam ser utilizadas em qualquer parte do projeto, sendo *'global'*. Dentro dessa pasta, existe os seguintes arquivos:
+align button colors global spacing tipography
+- **_Align.scss** => Arquivo responsável pelas classes de alinhamentos.
+- **_button.scss** => Arquivo responsável pelas classes de formações de botões. As formações são semelhantes/iguis as formações do [***Bootstrap***](https://getbootstrap.com/docs/5.2/components/buttons/#examples).
+- **_colors.scss** => Arquivo responsável pelas classes/variáveis de utilização de cores, seja em elementos ou em textos.
+- **_global.scss** => Arquivo responsável pelas classes de intuíto global, como bor exemplo o reset de *margin* e *padding*, classes de bordas para auxiliar em localizar elementos.
+- **_spacing.scss** => Arquivo responsável pelas classes de espaçamentos, *margin* e *paggind* nas quatro direções ou só, no top, right, bottom ou left. 
+- **_tipography.scss** => Arquivo responsável pelas classes de configurações de fonte.
+
+### Cores
+Como mencionado acima nas estilizações, o arquivo **_colors.scss** conta com cores/variáveis que serão utilizadas no projeto. Mas não só isso, já deixo outras cores/variáveis configuradas para que se necessários já possa ser utilizada.
+
+### Botões
+Gosto da agilidade do [***Bootstrap***](https://getbootstrap.com/docs/5.2/components/buttons/#examples) então em todos os meus projetos, caso seja necessário inserir botões, eu opito por utiliza as formações por já serem projetadas para ser agradável ao usuário. 
+
+**Botão** | **Hexadecimal** | **Decimal (RGB)** | **Cor do Texto**
+----- | ----------- | ------- | ------------ 
+![Primary](https://i.imgur.com/JiugMIO.png) | **#0D6EFD** | **(13, 110, 253)** | **#C1C7E0**
+![Primary Hover](https://i.imgur.com/77HQIpu.png) | **#0B5ED7** | **(11, 94, 215)** | **#C1C7E0**
+![Secondary](https://i.imgur.com/IVSBPK8.png) | **#6C757D** | **(108, 117, 125)** | **#C1C7E0**
+![Secondary Hover](https://i.imgur.com/7zpeAvI.png) | **#5C636A** | **(92, 99, 106**) | **#C1C7E0**
+![Success](https://i.imgur.com/oB1S3lB.png) | **#198754** | **(25, 135, 84)** | **#C1C7E0**
+![Success Hover](https://i.imgur.com/jtc6UC6.png) | **#157347** | **(21, 115, 71)** | **#C1C7E0**
+![Danger](https://i.imgur.com/ktjTm2y.png) | **#DC3545** | **(220, 53, 69)** | **#C1C7E0**
+![Danger Hover](https://i.imgur.com/Wpzb1aI.png) | **#BB2D3B** | **(197, 45, 59)** | **#C1C7E0**
+![Warning](https://i.imgur.com/iTH8rkr.png) | **#FFC107** | **(255, 193, 7)** | **#202225**
+![Warning Hover](https://i.imgur.com/4mvhARC.png) | **#FFCA2C** | **(255, 202, 44)** | **#202225**
+![Info](https://i.imgur.com/KTn6fSZ.png) | **#0DCAF0** | **(13, 202, 240)** | **#202225**
+![Info Hover](https://i.imgur.com/M8oF61s.png) | **#32D2F2** | **(50, 210, 242)** | **#202225**
+![Light](https://i.imgur.com/dUJo6AX.png) | **#F8F9FA** | **(248, 249, 250)** | **#202225**
+![Light Hover](https://i.imgur.com/gntrcoj.png) | **#F9FAFB** | **(249, 250, 251)** | **#202225**
+![Dark](https://i.imgur.com/PJJHllf.png) | **#212529** | **(33, 37, 41)** | **#C1C7E0**
+![Dark Hover](https://i.imgur.com/IdLHKyH.png) | **#1C1F23** | **(28, 31, 35)** | **#C1C7E0**
