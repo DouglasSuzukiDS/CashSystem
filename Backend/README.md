@@ -58,6 +58,19 @@ Instale as dependências nas pastas do projeto, pasta ***Backend***.
     );
 ```
 
+## Variáveis de Ambiente
+Como normas em qualquer lugar onde se contem senhas, a proteção deles devem ser ***protegidas*** pelo menos minimamente. Para isso no projeto usamos variáveis de ambiente. Onde as senhas devem ser mantidas em um arquivo ***.env***. As váriaveis são as seguintes:
+
+```env
+    DB_HOST = 'Onde a aplicação está rodando' (por hora em 'localhost').
+
+    DB_USER = 'USUÁRIO' (usuário para acesso ao Banco de Dados, no meu caso 'root').
+
+    DB_PASSWORD = 'Sua senha do Bando de Dados'
+
+    DB_DATABASE = 'CashSystem' (nome do banco que você criaou).
+```
+
 ## Iniciando o Projeto
 
 Depois de instalados as dependências nas pasta ***Backend*** inicie o servidor na respectiva pasta.

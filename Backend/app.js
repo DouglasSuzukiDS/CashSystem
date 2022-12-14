@@ -1,5 +1,7 @@
 const JWT = require('jsonwebtoken')
 
+const fs = require('fs')
+
 const express = require('express')
 const cors = require('cors')
 const mysql = require('mysql2')
@@ -19,6 +21,46 @@ app.use(express.json())
 app.use(cors())
 
 // Users
+app.get('/backupUsers', async(req, res) => {
+   let SQL = `SELECT * FROM users`
+
+   const day = new Date().getDay()
+   const mouth = new Date().getMonth()
+   const year = new Date().getFullYear()
+
+   const hour = new Date().getHours()
+   const minutes = new Date().getMinutes()
+   const seconds = new Date().getSeconds()
+
+   const today = `${day}-${mouth + 1}-${year}`
+   const hours = `${hour}-${minutes}-${seconds}-`
+   const dateNow = `${today}-${hours}`
+
+   db.query(SQL, (err, result) => {
+      if(err) {
+         console.log({ msg: 'Erro ao listar todos os usuários' })
+         console.log(err)
+      } else {
+         // Escreve o arquivo
+         // writeFile('PATH', CONTEUDO, CALLBACK)
+         fs.writeFile(`backup/backupUsers/${dateNow}users.json`, JSON.stringify(result), (err) => {
+            if(err) {
+               console.log(err)
+            } else {
+               console.log('Backup de usuários salvo com Sucesso!')
+
+               // readFile('PATH', CONTEUDO, CALLBACK) => Faz a leitura do arquivo
+               fs.readFile(`backup/backupUsers/${dateNow}users.json`, (err, data) => {
+                  err ? console.log(err) : console.log('Usuários: ' + data)
+               })
+            }
+         })
+
+         res.status(200).send({ msg: 'Backup Realizado', result })
+      }
+   })
+})
+
 app.get('/users', async(req, res) => {
    let SQL = `SELECT * FROM users`
 
@@ -143,8 +185,49 @@ app.delete('/delete/user/:id', async(req, res) => {
 })
 
 // Products
+app.get('/backupProducts', async(req, res) => {
+   let SQL = `SELECT * FROM products`
+
+   const day = new Date().getDay()
+   const mouth = new Date().getMonth()
+   const year = new Date().getFullYear()
+
+   const hour = new Date().getHours()
+   const minutes = new Date().getMinutes()
+   const seconds = new Date().getSeconds()
+
+   const today = `${day}-${mouth + 1}-${year}`
+   const hours = `${hour}-${minutes}-${seconds}-`
+   const dateNow = `${today}-${hours}`
+
+   db.query(SQL, (err, result) => {
+      if(err) {
+         console.log({ msg: 'Erro ao listar todos os produtos' })
+         console.log(err)
+      } else {
+
+         // writeFile('PATH', CONTEUDO, CALLBACK) => 
+         fs.writeFile(`backup/backupProducts/${dateNow}products.json`, JSON.stringify(result), (err) => {
+            if(err) {
+               console.log(err)
+            } else {
+               console.log('Backup de produtos salvo com Sucesso!')
+
+
+               fs.readFile(`backup/backupProducts/${dateNow}products.json`, (err, data) => {
+                  err ? console.log(err) : console.log('Produtos: ' + data)
+               })
+            }
+         })
+
+         res.status(200).send({ msg: 'Backup Realizado', result })
+      }
+   })
+})
+
 app.get('/products', async(req, res) => {
    let SQL = `SELECT * FROM products`
+
 
    db.query(SQL, (err, result) => {
       if(err) {

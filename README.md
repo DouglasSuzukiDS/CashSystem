@@ -17,7 +17,7 @@ Qualificação | Expecificação
 **Banco de Dados** | *Utilizando Javascript podemos unir o Frontend da aplicação com o Backend utilizando Node. Escolhi usar a linguagem SQL para trabalhar em conjunto do Node.*
 **Documentação do Sistema** | *Desenvolver o manual para utilização do sistema de forma correta.*
 
-**Atualizações do Projeto:** *Login (gerando um token de acesso), cadastro, listagens de usuários e produtos, edição dos usuários e produtos, já estão funcionando junto do backend. A abertura de caixa funciona porém será modificada.* 
+**Atualizações do Projeto:** *Login (gerando um token de acesso), cadastro, listagens de usuários e produtos, edição dos usuários e produtos, já estão funcionando junto do backend. A abertura de caixa funciona porém será modificada. Rotas de Backup definidas e funcionando, já se pode fazer o Backup dos dados.* 
 
 ## Stacks que serão utilizadas no Projeto
 
@@ -90,6 +90,19 @@ Instale as dependências nas pastas do projeto, pasta ***Frontend*** e pasta ***
     );
 ```
 
+## Variáveis de Ambiente
+Como normas em qualquer lugar onde se contem senhas, a proteção deles devem ser ***protegidas*** pelo menos minimamente. Para isso no projeto usamos variáveis de ambiente. Onde as senhas devem ser mantidas em um arquivo ***.env***. As váriaveis são as seguintes:
+
+```env
+    DB_HOST = 'Onde a aplicação está rodando' (por hora em 'localhost').
+
+    DB_USER = 'USUÁRIO' (usuário para acesso ao Banco de Dados, no meu caso 'root').
+
+    DB_PASSWORD = 'Sua senha do Bando de Dados'
+
+    DB_DATABASE = 'CashSystem' (nome do banco que você criaou).
+```
+
 ## Iniciando o Projeto
 
 Depois de instalados as dependências nas pastas ***Frontend*** e ***Backend*** inicie os servidores nas suas respectivas pastas.
@@ -145,7 +158,6 @@ Metodo | Rota | Função
 **POST** | **/registerNewProduct** | *Faz o registro de um novo produto.*
 **PUT** | **/edit/product/:id** | *Busca o produto pelo ID para fazer a edição dos dados.*
 **DELETE** | **/delete/product/:id** | *Deleta o produto pelo seu ID.*
-
 
 
 ## Tipografia, Estilizações, Cores & Botões 
@@ -243,9 +255,9 @@ Gosto da agilidade do [***Bootstrap***](https://getbootstrap.com/docs/5.2/compon
 ![Danger Hover](https://i.imgur.com/Wpzb1aI.png) | **#BB2D3B** | **(187, 45, 59)** | **#C1C7E0**
 ![Warning](https://i.imgur.com/iTH8rkr.png) | **#FFC107** | **(255, 193, 7)** | **#202225**
 ![Warning Hover](https://i.imgur.com/4mvhARC.png) | **#FFCA2C** | **(255, 202, 44)** | **#202225**
-![Info](https://i.imgur.com/KTn6fSZ.png) | **#0DCAF0** | **(13, 202, 240)** | **#202225**
-![Info Hover](https://i.imgur.com/M8oF61s.png) | **#32D2F2** | **(50, 210, 242)** | **#202225**
-![Light](https://i.imgur.com/dUJo6AX.png) | **#F8F9FA** | **(248, 249, 250)** | **#202225**
-![Light Hover](https://i.imgur.com/gntrcoj.png) | **#F9FAFB** | **(249, 250, 251)** | **#202225**
+![Info](https://i.imgur.com/23SCHsM.png) | **#0DCAF0** | **(13, 202, 240)** | **#202225**
+![Info Hover](https://i.imgur.com/PKOMBPO.png) | **#32D2F2** | **(50, 210, 242)** | **#202225**
+![Light](https://i.imgur.com/Qi2u9EB.png) | **#F8F9FA** | **(248, 249, 250)** | **#202225**
+![Light Hover](https://i.imgur.com/IstB9e5.png) | **#F9FAFB** | **(249, 250, 251)** | **#202225**
 ![Dark](https://i.imgur.com/PJJHllf.png) | **#212529** | **(33, 37, 41)** | **#C1C7E0**
 ![Dark Hover](https://i.imgur.com/IdLHKyH.png) | **#1C1F23** | **(28, 31, 35)** | **#C1C7E0**

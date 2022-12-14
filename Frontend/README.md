@@ -154,9 +154,9 @@ Gosto da agilidade do [***Bootstrap***](https://getbootstrap.com/docs/5.2/compon
 ![Danger Hover](https://i.imgur.com/Wpzb1aI.png) | **#BB2D3B** | **(187, 45, 59)** | **#C1C7E0**
 ![Warning](https://i.imgur.com/iTH8rkr.png) | **#FFC107** | **(255, 193, 7)** | **#202225**
 ![Warning Hover](https://i.imgur.com/4mvhARC.png) | **#FFCA2C** | **(255, 202, 44)** | **#202225**
-![Info](https://i.imgur.com/KTn6fSZ.png) | **#0DCAF0** | **(13, 202, 240)** | **#202225**
-![Info Hover](https://i.imgur.com/M8oF61s.png) | **#32D2F2** | **(50, 210, 242)** | **#202225**
-![Light](https://i.imgur.com/dUJo6AX.png) | **#F8F9FA** | **(248, 249, 250)** | **#202225**
-![Light Hover](https://i.imgur.com/gntrcoj.png) | **#F9FAFB** | **(249, 250, 251)** | **#202225**
+![Info](https://i.imgur.com/23SCHsM.png) | **#0DCAF0** | **(13, 202, 240)** | **#202225**
+![Info Hover](https://i.imgur.com/PKOMBPO.png) | **#32D2F2** | **(50, 210, 242)** | **#202225**
+![Light](https://i.imgur.com/Qi2u9EB.png) | **#F8F9FA** | **(248, 249, 250)** | **#202225**
+![Light Hover](https://i.imgur.com/IstB9e5.png) | **#F9FAFB** | **(249, 250, 251)** | **#202225**
 ![Dark](https://i.imgur.com/PJJHllf.png) | **#212529** | **(33, 37, 41)** | **#C1C7E0**
 ![Dark Hover](https://i.imgur.com/IdLHKyH.png) | **#1C1F23** | **(28, 31, 35)** | **#C1C7E0**
