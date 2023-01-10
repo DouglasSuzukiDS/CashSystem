@@ -1,0 +1,30 @@
+[
+   {
+      "id": 1,
+      "userName": "Persio Valente",
+      "userLogin": "persio.valente",
+      "userPassword": "123",
+      "userAdmin": 1
+   },
+   {
+      "id": 2,
+      "userName": "Tonhao Motomoto",
+      "userLogin": "tonhao.motomoto",
+      "userPassword": "123",
+      "userAdmin": 1
+   },
+   {
+      "id": 3,
+      "userName": "Chico Palha",
+      "userLogin": "chico.palha",
+      "userPassword": "123",
+      "userAdmin": 0
+   },
+   {
+      "id": 4,
+      "userName": "Admin",
+      "userLogin": "admin",
+      "userPassword": "admin",
+      "userAdmin": 1
+   }
+]

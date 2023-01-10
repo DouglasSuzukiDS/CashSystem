@@ -25,11 +25,11 @@ DROP TABLE IF EXISTS `products`;
 CREATE TABLE `products` (
   `id` int NOT NULL AUTO_INCREMENT,
   `pdt_name` varchar(50) NOT NULL,
-  `pdt_price` int NOT NULL,
+  `pdt_price` decimal(10,0) DEFAULT NULL,
   `pdt_type` varchar(50) NOT NULL,
   `pdt_qty` int NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -38,7 +38,7 @@ CREATE TABLE `products` (
 
 LOCK TABLES `products` WRITE;
 /*!40000 ALTER TABLE `products` DISABLE KEYS */;
-INSERT INTO `products` VALUES (1,'Skol',5,'Bebidas',24),(2,'Brahma Duplo Malte',5,'Bebidas',24);
+INSERT INTO `products` VALUES (1,'Skol',5,'Bebidas',24),(2,'Brahma Duplo Malte',5,'Bebidas',19),(3,'Brizadeiro',5,'Comidas',10),(4,'Brownieconha',5,'Comidas',10),(5,'Kit Noia',10,'Diversos',10),(6,'Chanceller c/ Gelo e Vibe',12,'Bebidas',30),(7,'Seda Solta',1,'Diversos',30),(8,'Seda Pacote',5,'Diversos',24),(9,'Coca 200ML',3,'Bebidas',32),(10,'Coca 350ML',5,'Bebidas',24);
 /*!40000 ALTER TABLE `products` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -51,4 +51,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-11-20 19:36:28
+-- Dump completed on 2023-01-10 17:59:57
