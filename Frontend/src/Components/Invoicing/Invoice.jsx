@@ -18,25 +18,25 @@ let creditCard = 13.30
 // Tax Card
 let taxDebit = ((debitCard * 1.99) / 100).toFixed(2)
 let taxCredit = ((creditCard * 4.74) / 100).toFixed(2)
-console.log(`Taxa Débito: ${taxDebit}`)
-console.log(`Taxa Crédito: ${taxCredit}`)
+// console.log(`Taxa Débito: ${taxDebit}`)
+// console.log(`Taxa Crédito: ${taxCredit}`)
 
 let debitCardFinal = debitCard - taxDebit // 33,81
 let creditCardFinal = creditCard - taxCredit // 12,67
-console.log(`Débito sem a Taxa: ${debitCardFinal}`)
-console.log(`Crédito sem a Taxa: ${creditCardFinal}`)
+// console.log(`Débito sem a Taxa: ${debitCardFinal}`)
+// console.log(`Crédito sem a Taxa: ${creditCardFinal}`)
 
 // Values Final
 let moneyPix = money + pix // 285
-console.log(`Din + Pix: ${moneyPix}`)
+// console.log(`Din + Pix: ${moneyPix}`)
 
 let amountCards = (debitCardFinal + creditCardFinal) //  46,48
-console.log(`Valor Total em Cartões: ${amountCards}`)
+// console.log(`Valor Total em Cartões: ${amountCards}`)
 
 let amount = (moneyPix + amountCards) // 331,48
-console.log(`Total: ${amount}`)
+// console.log(`Total: ${amount}`)
 
-console.log(document.querySelector('#closeInvoicing'))
+// console.log(document.querySelector('#closeInvoicing'))
 
 export default function Invoicing() {
    const navigate = useNavigate()

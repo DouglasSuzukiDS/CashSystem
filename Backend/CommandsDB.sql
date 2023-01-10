@@ -17,8 +17,10 @@ CREATE TABLE users (
 	DELETE FROM users WHERE id = 3; 
 	DELETE FROM users WHERE id = 4; 
 	DELETE FROM users WHERE id = 5; 
-    ALTER TABLE users AUTO_INCREMENT = 3;
+    ALTER TABLE users AUTO_INCREMENT = 5;
+    ALTER TABLE products AUTO_INCREMENT = 11;
     SELECT * FROM users;
+    SELECT * FROM products;
     SELECT * FROM users 
 		WHERE userLogin = 'chico.palha' 
         AND userPassword = 123;

@@ -16,11 +16,36 @@ import FindProducts from "../../Components/FindProducts/FindProducts";
 export default function OpenSystem(props) {
    const backend = 'http://localhost:3001'
 
+  /* useEffect(() => {
+      if(localStorage.getItem('openCashValue').valueOf() !== '') {
+         let statusSystemH4 = document.querySelector('#statusSystemH4')
+         statusSystemH4.classList.remove('text-danger')
+         statusSystemH4.classList.add('text-success')
+         statusSystemH4.innerHTML = 'Caixa Aberto'
+   
+         // Button Status Cash
+        let btn_openCash = document.querySelector('#btn_openCash')
+        let btn_closeCash = document.querySelector('#btn_closeCash')
+   
+   
+        btn_openCash.style.display = 'none'
+        btn_closeCash.style.display = 'flex'
+        
+      //   let notAllowedClass =[...document.querySelectorAll('.notAllowed')]
+      //   notAllowedClass[0].classList.remove('notAllowed')
+      //   notAllowedClass[0].style.cursos = 'pointer'
+   
+        //cashSystem()
+      } 
+   }, [])*/
+
+
    const startJob = () => {
-      // alert(`Valor do localstorage: ${openCashValue}`)
+      //alert(`Valor do localstorage: ${openCashValue}`)
       const contentSystemStart = document.querySelector('#contentSystemStart')
       contentSystemStart.classList.toggle('flex')
-      let openCashValue = localStorage.getItem('openCashValue')
+      localStorage.getItem('openCashValue')
+      // let openCashValue = localStorage.getItem('openCashValue')
    }
 
    let infosSystemFindProducts = document.querySelector('#infosSystemFindProducts')
@@ -33,7 +58,7 @@ export default function OpenSystem(props) {
 
       infosSystemClose.classList.add('none')
    }
-   console.log(infosSystemFindProducts)
+   // console.log(infosSystemFindProducts)
 
    const closingCash = () => {
 
@@ -83,10 +108,9 @@ export default function OpenSystem(props) {
    }, [])
 
    useEffect(() => {
-      localStorage.getItem('openCashValue')
+      // localStorage.getItem('openCashValue')
+      //cashStatus()
    }, [])
-
-   let status = false
 
    return (
       <main className="containerSystem flex p-3">
@@ -133,7 +157,7 @@ export default function OpenSystem(props) {
             <div className="contentSystem flex" id="contentSystem">
                <div className="none" id="contentSystemStart">
                   <OpenCash close={startJob} />
-                  <p>Teste</p>
+                  {/* <p>Teste</p> */}
                </div>
             </div>
 

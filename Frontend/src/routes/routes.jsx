@@ -17,8 +17,9 @@ export default function RoutesApp() {
       <>
          <BrowserRouter>
             <Routes>
-               <Route path='/:id' element={ <EditUser /> } />
-               <Route path='/openSystem' element={ <OpenSystem /> } />
+               {/* <Route path='/:id' element={ <EditUser /> } /> */}
+               <Route path='/' element={ <OpenSystem /> } />
+               {/* <Route path='/openSystem' element={ <OpenSystem /> } /> */}
                <Route path='/findProducts' element={ <FindProducts /> } />
                <Route path='/edit/product/:id' element={ <EditProduct /> } />
                <Route path='/opencash' element={ <OpenCash /> } />

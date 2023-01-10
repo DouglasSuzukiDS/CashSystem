@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-expressions */
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { redirect, useNavigate } from "react-router-dom";
 import CashRegister from "../../assets/Icons/CashRegister";
 import CircleCheck from "../../assets/Icons/CircleCheck";
@@ -7,8 +7,53 @@ import SackDollar from "../../assets/Icons/SackDollar";
 import XMark from "../../assets/Icons/XMark";
 
 export default function OpenCash(props) {
-   // localStorage.removeItem('openCashValue')
+   useEffect(() => {
+      //localStorage.removeItem('openCashValue')
+      //localStorage.getItem('openCashValue')
+      //localStorage
+   }, [])
 
+   const cashStatus = () => {
+      // Status Cash System
+      let statusSystemH4 = document.querySelector('#statusSystemH4')
+      statusSystemH4.classList.remove('text-danger')
+      statusSystemH4.classList.add('text-success')
+      statusSystemH4.innerHTML = 'Caixa Aberto'
+
+      // Button Status Cash
+      let btn_openCash = document.querySelector('#btn_openCash')
+      let btn_closeCash = document.querySelector('#btn_closeCash')
+
+      btn_openCash.style.display = 'none'
+      btn_closeCash.style.display = 'flex'
+      
+      // let notAllowedClass =[...document.querySelectorAll('.notAllowed')]
+      // notAllowedClass[0].classList.remove('notAllowed')
+      // notAllowedClass[0].style.cursos = 'pointer'
+   }
+
+   /*if(localStorage.getItem('openCashValue') !== '') {
+   //    let statusSystemH4 = document.querySelector('#statusSystemH4')
+   //    statusSystemH4.classList.remove('text-danger')
+   //    statusSystemH4.classList.add('text-success')
+   //    statusSystemH4.innerHTML = 'Caixa Aberto'
+
+   //    // Button Status Cash
+   //   let btn_openCash = document.querySelector('#btn_openCash')
+   //   let btn_closeCash = document.querySelector('#btn_closeCash')
+
+
+   //   btn_openCash.style.display = 'none'
+   //   btn_closeCash.style.display = 'flex'
+     
+   //   let notAllowedClass =[...document.querySelectorAll('.notAllowed')]
+   //   notAllowedClass[0].classList.remove('notAllowed')
+   //   notAllowedClass[0].style.cursos = 'pointer'
+
+     cashStatus()
+   } else {
+
+   }*/
 
    const navigate = useNavigate()
    
@@ -23,13 +68,15 @@ export default function OpenCash(props) {
          localStorage.removeItem('openCashValue')
          localStorage.setItem('openCashValue', openingCash)
 
-         navigate('/')
+         //navigate('/')
+
+         //cashStatus()
 
          // Modal OpenCash
          let modal = document.querySelector('#openCashModal')
          modal.classList.remove('flex')
          modal.classList.add('none')
-         console.log(modal)
+         // console.log(modal)
 
          // Status Cash System
          let statusSystemH4 = document.querySelector('#statusSystemH4')
