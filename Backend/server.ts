@@ -102,11 +102,12 @@ server.post('/login', async(req, res) => { // Error
    let findUser: string = `SELECT * FROM users WHERE (userLogin, userPassword) = (?, ?)`
 
    db.query(findUser, [userLogin, userPassword], async(err, result) => {
-      console.log(result) // Return User
+      // console.log(result) // Return User
 
       if(err) {
          console.log({ msg: 'Ocorreu um erro' })
          res.status(404).json({ msg: 'Erro ao logar' })
+
       } else if( JSON.parse(JSON.stringify(result)).length > 0 ) {
          const token = JTW.sign(
             { userLogin: userLogin, userPassword: userPassword}, // Identificação
@@ -114,12 +115,12 @@ server.post('/login', async(req, res) => { // Error
             { expiresIn: '2h' } // Tempo de expiração
          )
          //console.log(token)
-         res.status(200).json({ msg: `Logado como ${userLogin}`, token: `${token}`})
+         res.status(200).json({ msg: `Logado como: ${userLogin}`, token: `\nToken: ${token}`})
 
          // res.json({ status: true, token });
       } else {
          //console.log({ msg: 'Dados incorretos ou não localizados' })
-         res.status(400).json({ msg: 'Dados incorretos ou não localizados' })
+         res.status(404).send({ msg: 'Dados incorretos ou não localizados.' })
       }
    })
 
@@ -165,28 +166,37 @@ server.put('/edit/user/:id', (req, res) => {
 
    console.log(newUserName, newUserLogin, newUserPassword, newUserAdmin)
 
-   let checkIfUserExist: string = `SELECT * from users WHERE id = (?)`
+   let checkIfUserExist: string = `SELECT * FROM users WHERE id = (?)`
+   let checkIfProductExistWithThisUserLogin: string = `SELECT * FROM users WHERE userLogin = (?)`
 
    db.query(checkIfUserExist, [id], async(err, result) => {
       if(err) {
          console.log(err)
-         res.status(404).send({ msg: 'Erro ao tentar fazer a edição dos dados do produto, por obséquio tente mais tarde.'})
+         res.status(404).send({ msg: 'Erro ao tentar fazer a edição dos dados do colaborador, por obséquio tente mais tarde.' })
 
-      } else if( JSON.parse( JSON.stringify(result) ).length < 1 ) { // Verifica se existe um usuário com esse ID
+      } else if( JSON.parse( JSON.stringify(result) ).length < 1 ) { // Verifica se não existe um usuário com esse ID
          res.status(400).send({ msg: 'Não foi possível atualizar os dados do colaborador' })
 
       } else {
-         let SQL: string = 'UPDATE users SET userName = ?, userLogin = ?, userPassword = ?, userAdmin = ? WHERE id = ?'
-      
-         db.query(SQL, [ newUserName, newUserLogin, newUserPassword, newUserAdmin, id ], async(err, result) => {
-            if(err) {
-               console.log(err)
-               res.status(404).send({ msg: 'Erro ao atualizar as informações do colaborador' })
+         db.query(checkIfProductExistWithThisUserLogin, [newUserLogin], (err, result) => {
+            if( JSON.parse( JSON.stringify(result) ).length > 1 ) {
+               res.status(400).send({ msg: 'Esse login escolhido está indisponível no momento' })
+
             } else {
-               res.status(200).send({msg: 'Cadastro do colaborador atualizado com Sucesso.'})
+               let SQL: string = 'UPDATE users SET userName = ?, userLogin = ?, userPassword = ?, userAdmin = ? WHERE id = ?'
+            
+               db.query(SQL, [ newUserName, newUserLogin, newUserPassword, newUserAdmin, id ], async(err, result) => {
+                  if(err) {
+                     console.log(err)
+                     res.status(404).send({ msg: 'Erro ao editar os dados do colaborador. O login de colaborador pode já existir no sistema.' })
+                  } else {
+                     res.status(200).send({msg: 'Cadastro do colaborador atualizado com Sucesso.'})
+                  }
+            
+               })
             }
-      
          })
+
       }
    })
 
@@ -346,25 +356,32 @@ server.put('/edit/product/:id', async(req, res) => {
    const { id } = req.params
 
    let checkIfProductExist: string = `SELECT * FROM products WHERE id = (?)`
+   let checkIfProductExistWithThisName: string = `SELECT * FROM products WHERE pdt_name = (?)`
 
    db.query(checkIfProductExist, [id], async(err, result) => {
       if(err) {
          console.log(err)
          res.status(404).send({ msg: 'Erro ao tentar fazer a edição dos dados do produto, por obséquio tente mais tarde.' })
 
-      } else if( JSON.parse( JSON.stringify(result) ).length < 1 ) { // Verifica se o produto existe com esse ID
+      } else if( JSON.parse( JSON.stringify(result) ).length < 1 ) { // Verifica se o produto não existe com esse ID
          res.status(400).send({ msg: 'Não foi possível atualizar os dados do produto' })
 
       } else {
+         db.query(checkIfProductExistWithThisName, [pdt_name], (err, result) => { // Verifica se existe outro produto com o mesmo nome. 
+            if( JSON.parse( JSON.stringify(result) ).length > 1 ) { // Se tiver 1 se informa que já existe um produto com ese nome 
+               res.status(400).send({ msg: 'Esse produto já existe no sistema.' })
 
-         let SQL: string = "UPDATE products SET pdt_name = ?, pdt_price = ?, pdt_type = ?, pdt_qty = ? WHERE id = ?"
-      
-         db.query(SQL, [pdt_name, pdt_price, pdt_type, pdt_qty, id], async(err, result) => {
-            if(err) {
-               console.log(err)
-               res.status(404).send({msg: 'Erro ao editar o produto'})
             } else {
-               res.status(200).send({msg: `Produto atualizado com Sucesso. Nome: ${pdt_name}, Preço: ${pdt_price}, Tipo: ${pdt_type}, Quantidade: ${pdt_qty}`})
+               let SQL: string = "UPDATE products SET pdt_name = ?, pdt_price = ?, pdt_type = ?, pdt_qty = ? WHERE id = ?"
+            
+               db.query(SQL, [pdt_name, pdt_price, pdt_type, pdt_qty, id], async(err, result) => {
+                  if(err) {
+                     console.log(err)
+                     res.status(404).send({msg: 'Erro ao editar o produto. O nome do produto pode já existir no sistema'})
+                  } else {
+                     res.status(200).send({msg: `Produto atualizado com Sucesso. Nome: ${pdt_name}, Preço: ${pdt_price}, Tipo: ${pdt_type}, Quantidade: ${pdt_qty}`})
+                  }
+               })
             }
          })
 

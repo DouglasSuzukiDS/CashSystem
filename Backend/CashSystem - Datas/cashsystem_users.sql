@@ -28,8 +28,9 @@ CREATE TABLE `users` (
   `userLogin` varchar(50) NOT NULL,
   `userPassword` varchar(50) NOT NULL,
   `userAdmin` tinyint(1) DEFAULT '0',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `userLogin` (`userLogin`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -38,7 +39,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'Persio Valente','persio.valente','123',1),(2,'Tonhao Motomoto','tonhao.motomoto','123',1),(3,'Chico Palha','chico.palha','123',0),(4,'Admin','admin','admin',1);
+INSERT INTO `users` VALUES (1,'Percio Valente','percio.valente','123',1),(2,'Tonhao Motomoto','tonhao.motomoto','123',0),(3,'Chico Palha','chico.palha','123',0),(4,'Admin','admin','123',1),(5,'Test','test','123',1);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -51,4 +52,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-01-10 17:59:58
+-- Dump completed on 2023-01-11 16:48:24

@@ -1106,14 +1106,316 @@ h4 {
   color: var(--bs-info);
 }
 
-/*@import '../src/Components/Invoicing/Invoice';
-@import '../src/Components/Closing/Closing';
-@import '../src/Components/OpenCash/OpenCash';
-@import '../src/Components/FindProducts/FindProducts';
-@import '../src/Components/EditProduct/EditProduct';
-@import '../src/Components/EditUser/EditUser';
+.borderForm {
+  border: 2px solid var(--fb1);
+  border-radius: 8px;
+}
 
-@import '../src/pages/RegisterUser/RegisterUser';
-@import '../src/pages/Login/Login';
-@import '../src/pages/RegisterProduct/RegisterProduct';
-@import '../src/pages/OpenSystem/OpenSystem';*//*# sourceMappingURL=style.css.map */
+.invoicingOfTheDayForm > h4 > #closeElement:hover {
+  cursor: pointer;
+  opacity: 0.5;
+}
+
+.invoicingOfTheDayForm > div.inputForm {
+  height: 48px;
+}
+
+.valueOfTheDay {
+  padding: 4px 12px;
+}
+
+.calcCardText {
+  font-size: 12px;
+}
+
+.text-blue-mp {
+  color: var(--blue-mp);
+  font-weight: bold;
+}
+
+.text-yellow-ml {
+  color: var(--yellow-ml);
+  font-weight: bold;
+}
+
+.borderForm {
+  border: 2px solid var(--fb1);
+  border-radius: 8px;
+}
+
+#closingFormDay h4 > #closeElementFormDay:hover {
+  cursor: pointer;
+  opacity: 0.5;
+}
+
+.closingDayForm > div.inputForm {
+  height: 48px;
+}
+
+.inputValue {
+  padding: 4px 12px;
+}
+
+.calcCardText {
+  font-size: 12px;
+}
+
+.text-blue-mp {
+  color: var(--blue-mp);
+  font-weight: bold;
+}
+
+.text-yellow-ml {
+  color: var(--yellow-ml);
+  font-weight: bold;
+}
+
+#openCashModal .formsOpen {
+  width: 380px;
+  padding: 24px;
+  border: 2px solid var(--fb1);
+  border-radius: 8px;
+  background-color: var(--bs-dark);
+}
+#openCashModal .formsOpen h4 {
+  color: var(--bs-info);
+}
+#openCashModal .formsOpen h4:hover {
+  color: #31D2F2;
+}
+#openCashModal .formsOpen #closeOpenCash:hover {
+  cursor: pointer;
+  opacity: 0.5;
+}
+#openCashModal #openingCash {
+  background-color: transparent;
+  outline: none;
+  border: 0;
+  max-width: 90px;
+}
+#openCashModal #openingCash::-moz-placeholder {
+  color: var(--bs-primary);
+}
+#openCashModal #openingCash:-ms-input-placeholder {
+  color: var(--bs-primary);
+}
+#openCashModal #openingCash::placeholder {
+  color: var(--bs-primary);
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+  background-color: var(--bg-dark);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--bg-normal);
+  border-radius: 8px;
+  scroll-behavior: smooth;
+}
+
+.tableFormList {
+  max-height: 330px;
+  border: 1px solid green;
+  overflow: auto;
+}
+.tableFormList #tableFindProduct {
+  border-collapse: collapse;
+  width: 100%;
+  height: 100%;
+}
+.tableFormList #tableFindProduct table, .tableFormList #tableFindProduct thead, .tableFormList #tableFindProduct tbody, .tableFormList #tableFindProduct tr, .tableFormList #tableFindProduct td {
+  border: 1px solid var(--bg-dark);
+}
+.tableFormList #tableFindProduct tbody tr:nth-child(odd) {
+  background-color: var(--bg-light);
+}
+.tableFormList #tableFindProduct tbody tr:nth-child(odd):hover {
+  background-color: #797C7C;
+}
+.tableFormList #tableFindProduct tbody tr:nth-child(even) {
+  background-color: var(--bg-normal);
+}
+.tableFormList #tableFindProduct tbody tr:nth-child(even):hover {
+  background-color: #3E4042;
+}
+.tableFormList #tableFindProduct td {
+  padding: 4px;
+}
+
+#formsFindProducts h4 > #closeFindProducts:hover {
+  cursor: pointer;
+  opacity: 0.5;
+}
+
+.inputFindProduct::-moz-placeholder {
+  text-align: center;
+}
+
+.inputFindProduct:-ms-input-placeholder {
+  text-align: center;
+}
+
+.inputFindProduct::placeholder {
+  text-align: center;
+}
+
+.forms {
+  width: 380px;
+  height: 420px;
+  padding: 24px;
+  border: 2px solid var(--fb1);
+  border-radius: 8px;
+  background-color: var(--bs-dark);
+}
+.forms h4 {
+  color: var(--bs-info);
+}
+.forms h4:hover {
+  color: #31D2F2;
+}
+.forms .inputForm {
+  width: 100%;
+  height: 40px;
+}
+.forms .inputForm input::-moz-placeholder {
+  text-align: left;
+}
+.forms .inputForm input:-ms-input-placeholder {
+  text-align: left;
+}
+.forms .inputForm input::placeholder {
+  text-align: left;
+}
+.forms .inputForm input {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-weight: bold;
+  font-size: 16px;
+  color: var(--text);
+  padding: 0 10px;
+  background-color: transparent;
+  outline: none;
+  border: none;
+  border-bottom: 2px solid var(--bs-info);
+}
+.forms .registerNewUser .isAdminDiv {
+  width: 100%;
+  height: 40px;
+  padding: 8px 0;
+  color: var(--bs-info);
+  font-size: 14px;
+  font-weight: bold;
+  font-style: italic;
+}
+.forms .registerNewUser .submitNewUser {
+  width: 100%;
+  height: 40px;
+  padding: 0 10px;
+}
+
+.ForgotPassword {
+  font-size: 13px;
+  font-weight: bold;
+  color: var(--bs-secondary);
+}
+
+.RegisterUserNow {
+  font-size: 13px;
+  font-weight: bold;
+  color: var(--bs-info);
+}
+
+/* Chrome e outros */
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+select {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  font-size: 16px;
+  color: #75726F;
+  padding: 0 10px;
+  background-color: transparent;
+  outline: none;
+  border: none;
+  border-bottom: 2px solid var(--bs-info);
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+}
+select select option {
+  font-weight: bold;
+}
+select:hover {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+}
+
+.withoutBg {
+  background-color: var(--bs-dark);
+  opacity: 0.5;
+}
+
+.containerSystem {
+  width: 100%;
+  height: 100vh;
+}
+.containerSystem .sectionSystem {
+  border: 2px solid var(--fb1);
+  border-radius: 8px;
+  background-color: var(--bs-dark);
+}
+.containerSystem .sectionSystem .headerSystem, .containerSystem .sectionSystem .footerSystem {
+  background-color: var(--bs-info);
+  padding: 24px;
+  width: 100%;
+  height: 80px;
+}
+.containerSystem .sectionSystem .headerSystem {
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+.containerSystem .sectionSystem .contentSystem {
+  background-color: rgba(8, 28, 101, 0.4);
+  width: 100%;
+  height: 400px;
+  padding: 24px;
+}
+.containerSystem .sectionSystem .contentSystem #contentSystemStart {
+  width: 100%;
+  height: 100%;
+}
+.containerSystem .sectionSystem .footerSystem {
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  padding: 0;
+  height: 80px;
+}
+.containerSystem .sectionSystem .footerSystem .employeerFooterSystem {
+  background-color: var(--bs-secondary);
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+  border-bottom-left-radius: 8px;
+  height: 100%;
+}
+.containerSystem .sectionSystem .footerSystem .actionsFooterSystem button.btn {
+  font-size: 12px;
+}/*# sourceMappingURL=style.css.map */

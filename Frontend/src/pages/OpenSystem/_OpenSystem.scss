@@ -1,0 +1,57 @@
+.containerSystem {
+   width: 100%;
+   height: 100vh;
+
+   .sectionSystem {
+      border: 2px solid var(--fb1);
+      border-radius: 8px;
+      background-color: var(--bs-dark);
+   
+      // height: 100%;
+      // max-width: 1080px;
+   
+      .headerSystem, .footerSystem {
+         background-color: var(--bs-info);
+         padding: 24px;
+         width: 100%;
+         height: 80px;
+      }
+   
+      .headerSystem {
+         border-top-left-radius: 8px;
+         border-top-right-radius: 8px;
+      }
+   
+      .contentSystem {
+         background-color: rgba(8, 28, 101, .4);
+         // opacity: .4;
+         width: 100%;
+         height: 400px;
+         padding: 24px;
+
+         #contentSystemStart {
+            width: 100%;
+            height: 100%;
+         }
+      }
+   
+      .footerSystem {
+         border-bottom-left-radius: 8px;
+         border-bottom-right-radius: 8px;
+         padding: 0;
+         height: 80px;
+   
+         .employeerFooterSystem {
+            background-color: var(--bs-secondary);
+            border-top-right-radius: 8px;
+            border-bottom-right-radius: 8px;
+            border-bottom-left-radius: 8px;
+            height: 100%;
+         }
+
+         .actionsFooterSystem button.btn {
+            font-size: 12px;
+         }
+      }
+   }
+}

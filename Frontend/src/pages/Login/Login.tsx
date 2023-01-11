@@ -4,13 +4,33 @@ import ArrowRightToBracket from "../../assets/Icons/ArrowRightToBracket";
 import IdCard from "../../assets/Icons/IdCard";
 
 export default function Login() {
-   const db = "http://localhost:3001";
+   const backend: string = "http://localhost:3001"
 
-   const loginUser = () => {
+   const navigate = useNavigate()
+
+   const loginUser = async() => {
       
-      alert('Hello')
-   }
+      let userLogin = document.querySelector("#userLogin") as HTMLInputElement;
+      let userPassword = document.querySelector("#userPassword") as HTMLInputElement;
 
+      if (userLogin.value && userPassword.value !== "") {
+         const login = userLogin.value;
+         const password = userPassword.value;
+
+         await axios.post(`${backend}/login`, {
+            userLogin: login,
+            userPassword: password
+         })
+         .then((response) => {
+            if (response.status === 200) {
+               alert(`Logado como ${login} no front`);
+               console.log(response.data.msg, response.data.token)
+               setTimeout(() => navigate('/'), 2000)
+            }
+         })
+         .catch(err => alert(err.response.data.msg))
+      }
+   }
 
 
    return (
