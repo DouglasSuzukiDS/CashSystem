@@ -43,7 +43,7 @@ import PiggyBank from './assets/Icons/PiggyBank';
 
 export default function AllIcons() {
 
-   return (
+   /*return (
       <>
          <ArrowLeftLong h='24' w='24' fill='var(--pix)' className='border' onClick={() => alert('Oi')} />
          <ArrowRightFromBracket h='24' w='24' fill='var(--pix)' className='border' onClick={() => alert('Oi')} />
@@ -87,6 +87,20 @@ export default function AllIcons() {
          <UserPlus h='24' w='24' fill='var(--pix)' className='border' onClick={() => alert('Oi')} />
          <UserXMark h='24' w='24' fill='var(--pix)' className='border' onClick={() => alert('Oi')} />
          <XMark h='24' w='24' fill='var(--pix)' className='border' onClick={() => alert('Oi')} />
+      </>
+   )*/
+   
+   return(
+      <>
+         <div className="forms">
+            <div className="inputForm">
+               <input type="text" className='' />
+            </div>
+
+            <div className='result'>
+
+            </div>
+         </div>
       </>
    )
 }

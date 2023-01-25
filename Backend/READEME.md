@@ -41,7 +41,7 @@ Instale as dependências nas pastas do projeto, pasta ***Backend***.
     CREATE TABLE users (
         id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
         userName VARCHAR(50) NOT NULL,
-        userLogin VARCHAR(50) NOT NULL,
+        userLogin VARCHAR(50) UNIQUE NOT NULL,
         userPassword VARCHAR(50) NOT NULL,
         userAdmin BOOLEAN DEFAULT false
     );
@@ -51,8 +51,8 @@ Instale as dependências nas pastas do projeto, pasta ***Backend***.
 ```sql
     CREATE TABLE products (
         id INT PRIMARY KEY AUTO_INCREMENT,
-        pdt_name VARCHAR(50) NOT NULL,
-        pdt_price DECIMAL NOT NULL,
+        pdt_name VARCHAR(50) UNIQUE NOT NULL ,
+        pdt_price DECIMAL(10, 2) NOT NULL,
         pdt_type VARCHAR(50) NOT NULL,
         pdt_qty INT NOT NULL
     );
@@ -77,7 +77,7 @@ Depois de instalados as dependências nas pasta ***Backend*** inicie o servidor 
 
 Na pasta ***Backend***: 
 ```bash
-    yarn run db | npm run db
+    yarn run server | npm run server
 ```
 
 ## Rotas no Backend

@@ -2,6 +2,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import AllIcons from "../AllIcons";
 import EditProduct from "../components/EditProduct/EditProduct";
 import EditUser from "../components/EditUser/EditUser";
+import FindProducts from "../components/FindProducts/FindProducts";
 import Error from "../pages/Error/Error";
 import Login from "../pages/Login/Login";
 import RegisterProduct from "../pages/RegisterProduct/RegisterProduct";
@@ -13,7 +14,8 @@ export default function RoutesApp() {
    return(
       <BrowserRouter>
          <Routes>
-            <Route path='/' element={ <AllIcons /> } /> 
+            {/* <Route path='/' element={ <AllIcons /> } />  */}
+            <Route path='/' element={ <FindProducts /> } /> 
             {/* <Route path='/login' element={ <Login /> } />  */}
             <Route path='/login' element={ <Login /> } />
             <Route path="/registerNewUser" element={ <RegisterUser /> } />

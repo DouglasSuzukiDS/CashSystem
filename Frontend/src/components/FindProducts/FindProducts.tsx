@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { ChangeEvent, useEffect, useState } from "react"
 import axios from "axios"
 
 import CircleCheck from "../../assets/Icons/CircleCheck"
@@ -7,50 +7,83 @@ import XMark from "../../assets/Icons/XMark"
 import PenToSquare from "../../assets/Icons/PenToSquare"
 import TrashCanXMark from "../../assets/Icons/TrashCanXMark"
 import { Link } from "react-router-dom"
+import { Products } from "../../types/ProductsType"
 
-export default function FindProducts(props) {
-   const backend = 'http://localhost:3001'
+export default function FindProducts() {
+   const server = 'http://localhost:3001'
 
    // Get All Users
    const [users, setUsers] = useState([])
-   const [find, setFind] = useState([])
-
+   
    useEffect(() => {
-      axios.get(`${backend}/users`)
-         .then(response => setUsers(response.data.result))
+      axios.get(`${server}/users`)
+      .then(response => setUsers(response.data.result))
+      .catch(err => console.log(err))
    }, [])
    //console.log(users)
-
+   
    // Get All Products
-   const [products, setProducts] = useState([])
+   const [products, setProducts] = useState<Products[]>([]) // First Search on List
+   const [find, setFind] = useState<Products[]>([]) // List before Search
+   const [items, setItems] = useState<Products[]>([]) // List if Search is empty
 
    useEffect(() => {
-      axios.get(`${backend}/products`)
-         .then(response => setProducts(response.data.result))
+      axios.get(`${server}/products`)
+         .then(response => {
+            setProducts(response.data.result)
+            setFind(response.data.result)
+            setItems(response.data.result)
+         })
+         .catch(err => console.log(err))
    }, [])
 
-    useEffect(() => {
+   const findItem = async(search: string) => {
       // let findProductInput = document.querySelector('#findProduct')
-      axios.get(`${backend}/products/type`)
-         .then(response => setFind(response.data.result))
+      await axios.get(`${server}/products/type`)
+         // .then(response => setFind(response.data.result))
+         .then(response => response.data.msg)
+         .catch(err => console.log(err))
+
          // console.log(findProductInput.value + ' no console')
          // console.log(find)
-   }, [])
+   }
 
    // Delete Product
-   const deleteProduct = (id) => {
-      axios.delete(`${backend}/delete/product/${id}`)
-         .then(alert('Produto deletado com Sucesso'))
-         .then(console.log(`ID Excluido: ${id}`))
+   const handleDeleteProduct = (id: string) => {
+      axios.delete(`${server}/delete/product/${id}`)
+         .then(response => {
+            if (response.status === 200) {
+               alert(response.data.msg)
+            } else if (response.status !== 200) {
+               console.log(response.data.status, response.data.msg)
+            }
+         })
+         .catch(err => alert(err.response.data.msg))
 
       return setProducts(products.filter(prod => prod.id !== id))
    }
 
-   const returnProduct = async(e) => {
-      let findProduct = document.querySelector('#findProduct').value
-      // console.log(findProduct.value)
-      
-      
+   const returnProduct = async (e: ChangeEvent<HTMLInputElement>) => {
+      let term = e.target.value
+
+      if(term === '') {
+         // console.log('O term é: ' + term)
+         setProducts(items)
+      } else {
+         let search = term.replace(term[0], term[0].toLocaleUpperCase())
+         // setProducts(find.filter(prod => prod.pdt_name.includes(search)))
+         // setProducts(find.filter(prod => prod.pdt_type.includes(search)))
+
+         let findByName = find.filter(prod => prod.pdt_name.includes(search))
+
+         let findByType = find.filter(prod => prod.pdt_type.includes(search))
+
+         if(findByName.length !== 0) {
+            setProducts(findByName)
+         } else {
+            setProducts(findByType)
+         }
+      }
    }
 
    return (
@@ -67,7 +100,8 @@ export default function FindProducts(props) {
                         <MagnifyingGlass w='24' h='24' fill='var(--bs-info)' className='ml-1' />
                      </div>
 
-                     <div id='closeFindProducts' onClick={props.close}>
+                     {/* <div id='closeFindProducts' onClick={props.close}> */}
+                     <div id='closeFindProducts'>
                         <XMark w='24' h='24'
                            className=''
                         />
@@ -78,7 +112,7 @@ export default function FindProducts(props) {
                      <div className="flex inputValue w-100">
 
                         <p className='text-primary'>
-                           <input type="text" onChange={ returnProduct } 
+                           <input type="text" onChange={returnProduct}
                               className='text-primary border pg3 text-center inputFindProduct'
                               id="findProduct" placeholder="Faça uma busca" />
                         </p>
@@ -107,12 +141,12 @@ export default function FindProducts(props) {
                                        <td>{prod.pdt_type}</td>
                                        <td>{prod.pdt_qty}</td>
                                        <td>
-                                          <div className="flex text-center">
-                                             <Link to={ `/edit/product/${prod.id}` } >
+                                          <div className="flex jsc aic">
+                                             <Link to={`/edit/product/${prod.id}`} >
                                                 <PenToSquare w='16' h='16' fill='var(--bs-warning)' className='warning-hover' />
                                              </Link>
 
-                                             <Link to='/findproducts' onClick={ () =>  deleteProduct(prod.id) }>
+                                             <Link to='/findproducts' onClick={() => handleDeleteProduct(prod.id)}>
                                                 <TrashCanXMark w='16' h='16' fill='var(--bs-danger)' className='danger-hover' />
                                              </Link>
                                           </div>
@@ -125,7 +159,8 @@ export default function FindProducts(props) {
                      </table>
                   </div>
 
-                  <div className="flex btn btn-success mt-3" onClick={ props.close }>
+                  {/* <div className="flex btn btn-success mt-3" onClick={props.close}> */}
+                  <div className="flex btn btn-success mt-3">
                      Confirmar
                      <CircleCheck w='24' h='24' fill='var(--text)' className='ml-1' />
                   </div>
