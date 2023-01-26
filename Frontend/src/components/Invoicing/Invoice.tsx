@@ -6,8 +6,9 @@ import CreditCard from '../../assets/Icons/CreditCard'
 import ScrewdriverWrench from '../../assets/Icons/ScrewdriverWrench'
 import CircleCheck from '../../assets/Icons/CircleCheck'
 import { Link, useNavigate } from 'react-router-dom'
-import { useEffect } from 'react'
+import { ChangeEvent, useEffect } from 'react'
 import XMark from '../../assets/Icons/XMark'
+import { CloseType } from '../../types/CloseType'
 
 // Values Brute
 let money = 258
@@ -16,13 +17,13 @@ let debitCard = 34.50
 let creditCard = 13.30 
 
 // Tax Card
-let taxDebit = ((debitCard * 1.99) / 100).toFixed(2)
+let taxDebit = ((debitCard * 1.99) / 100).toFixed(2) 
 let taxCredit = ((creditCard * 4.74) / 100).toFixed(2)
 // console.log(`Taxa Débito: ${taxDebit}`)
 // console.log(`Taxa Crédito: ${taxCredit}`)
 
-let debitCardFinal = debitCard - taxDebit // 33,81
-let creditCardFinal = creditCard - taxCredit // 12,67
+let debitCardFinal = debitCard - parseFloat(taxDebit) // 33,81
+let creditCardFinal = creditCard - parseFloat(taxCredit) // 12,67
 // console.log(`Débito sem a Taxa: ${debitCardFinal}`)
 // console.log(`Crédito sem a Taxa: ${creditCardFinal}`)
 
@@ -38,19 +39,19 @@ let amount = (moneyPix + amountCards) // 331,48
 
 // console.log(document.querySelector('#closeInvoicing'))
 
-export default function Invoicing() {
+export default function Invoicing({ close }: CloseType) {
    const navigate = useNavigate()
 
    useEffect(() => {
-      window.addEventListener('keydown', event => {
-         if(event.keyDown === 119) {
+      window.addEventListener('keydown', (event: KeyboardEvent) => {
+         if(event.keyCode === 119) {
             navigate('/')
          }
       })
    }, [])
 
    const closeIncoiving = () => {
-      const close = document.querySelector('#closeInvoicing')
+      const close = document.querySelector('#closeInvoicing') as HTMLElement
       // console.log(close)
       close.style.display = 'none'
    }

@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom'
 import ArrowRightToBracket from "../../assets/Icons/ArrowRightToBracket";
 import IdCard from "../../assets/Icons/IdCard";
@@ -7,6 +8,8 @@ export default function Login() {
    const backend: string = "http://localhost:3001"
 
    const navigate = useNavigate()
+
+   const [logon, setLogon] = useState(false)
 
    const loginUser = async() => {
       
@@ -25,13 +28,20 @@ export default function Login() {
             if (response.status === 200) {
                alert(`Logado como ${login} no front`);
                console.log(response.data.msg, response.data.token)
-               setTimeout(() => navigate('/'), 2000)
+
+               //setTimeout(() => navigate('/'), 2000)
+
+               setLogon(true)
+
+               setTimeout(() => navigate('/OpenSystem'), 1000)
             }
          })
-         .catch(err => alert(err.response.data.msg))
+         .catch(err => {
+            alert(err.response.data.msg)
+            setLogon(false)
+         })
       }
    }
-
 
    return (
       <main className="container flex">

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, HTMLAttributes } from "react";
 import axios from 'axios'
 import CashRegister from "../../assets/Icons/CashRegister";
 import Gears from "../../assets/Icons/Gears";
@@ -10,10 +10,12 @@ import Signature from "../../assets/Icons/Signature";
 import TrashCan from "../../assets/Icons/TrashCan";
 import Closing from "../../Components/Closing/Closing";
 import Invoicing from "../../Components/Invoicing/Invoice";
-import OpenCash from "../../Components/OpenCash/OpenCash";
 import FindProducts from "../../Components/FindProducts/FindProducts";
+import OpenCash from "../../Components/OpenCash/OpenCash";
+import { CloseType } from "../../types/CloseType";
 
-export default function OpenSystem(props) {
+
+export default function OpenSystem({ close }: CloseType) {
    const backend = 'http://localhost:3001'
 
   /* useEffect(() => {
@@ -42,18 +44,18 @@ export default function OpenSystem(props) {
 
    const startJob = () => {
       //alert(`Valor do localstorage: ${openCashValue}`)
-      const contentSystemStart = document.querySelector('#contentSystemStart')
+      const contentSystemStart = document.querySelector('#contentSystemStart') as HTMLDivElement
       contentSystemStart.classList.toggle('flex')
       localStorage.getItem('openCashValue')
       // let openCashValue = localStorage.getItem('openCashValue')
    }
 
-   let infosSystemFindProducts = document.querySelector('#infosSystemFindProducts')
-   let infosSystemClose = document.querySelector('#infosSystemClose')
+   let infosSystemFindProducts = document.querySelector('#infosSystemFindProducts') as HTMLDivElement
+   let infosSystemClose = document.querySelector('#infosSystemClose') as HTMLDivElement
 
    const closeFindProductModal = () => {
 
-      infosSystemFindProducts.classList === 'flex' ?
+      infosSystemFindProducts.classList.contains('flex') ?
          infosSystemFindProducts.classList.toggle('none') : infosSystemFindProducts.classList.toggle('flex')
 
       infosSystemClose.classList.add('none')
@@ -62,7 +64,7 @@ export default function OpenSystem(props) {
 
    const closingCash = () => {
 
-      infosSystemClose.classList === 'none' ?
+      infosSystemClose.classList.contains('none') ?
          infosSystemClose.classList.toggle('flex') : infosSystemClose.classList.toggle('none')
 
       localStorage.getItem('openCashValue')

@@ -1260,6 +1260,16 @@ h4 {
   text-align: center;
 }
 
+.inUser {
+  font-size: 100px;
+  color: pink;
+}
+
+.testUser {
+  color: red;
+  font-size: 50px;
+}
+
 .forms {
   width: 380px;
   height: 420px;

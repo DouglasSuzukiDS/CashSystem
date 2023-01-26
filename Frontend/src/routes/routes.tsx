@@ -1,29 +1,42 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import AllIcons from "../AllIcons";
-import EditProduct from "../components/EditProduct/EditProduct";
-import EditUser from "../components/EditUser/EditUser";
-import FindProducts from "../components/FindProducts/FindProducts";
-import Error from "../pages/Error/Error";
-import Login from "../pages/Login/Login";
-import RegisterProduct from "../pages/RegisterProduct/RegisterProduct";
-import RegisterUser from "../pages/RegisterUser/RegisterUser";
-// import Login from "../pages/Login/Login";
+import EditProduct from "../Components/EditProduct/EditProduct";
+import EditUser from "../Components/EditUser/EditUser";
+
+import FindProducts from "../Components/FindProducts/FindProducts";
+import OpenCash from "../Components/OpenCash/OpenCash";
+import TestUser from "../Components/testUser/TestUser";
+import Error from "../Pages/Error/Error";
+import Login from "../Pages/Login/Login";
+import OpenSystem from "../Pages/OpenSystem/OpenSystem";
+import RegisterProduct from "../Pages/RegisterProduct/RegisterProduct";
+import RegisterUser from "../Pages/RegisterUser/RegisterUser";
+// import Login from "../Pages/Login/Login";
 
 
 export default function RoutesApp() {
    return(
       <BrowserRouter>
          <Routes>
+            {/*  */}
             {/* <Route path='/' element={ <AllIcons /> } />  */}
-            <Route path='/' element={ <FindProducts /> } /> 
-            {/* <Route path='/login' element={ <Login /> } />  */}
-            <Route path='/login' element={ <Login /> } />
-            <Route path="/registerNewUser" element={ <RegisterUser /> } />
-            <Route path="/edit/user/:id" element={ <EditUser /> } />
+            <Route path='/findProducts' element={ <FindProducts /> } /> 
 
-            <Route path="/registerNewProduct" element={ <RegisterProduct /> } />
+            <Route path='/' element={ <Login /> } /> 
+            <Route path='/login' element={ <Login /> } /> {/* OK */}
+            <Route path="/registerNewUser" element={ <RegisterUser /> } /> {/* OK */}
+         
+            <Route path="/edit/user/:id" element={ < Login /> } />
+            <Route path="/user" element={ < TestUser /> } />
+            <Route path="/user/user" element={ < TestUser /> } />
+
+            <Route path='/OpenCash' element={ <OpenCash /> } /> {/* OK */}
+            <Route path='/OpenSystem' element={ <OpenSystem /> } />
+
+            <Route path="/registerNewProduct" element={ <RegisterProduct /> } /> {/* OK */}
             <Route path="/edit/product/:id" element={ <EditProduct /> } />
-            <Route path='*' element={ <Error /> } /> 
+
+            <Route path='*' element={ <Error /> } /> {/* OK  */}
          </Routes>
       </BrowserRouter>
    )

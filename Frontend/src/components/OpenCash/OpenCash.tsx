@@ -1,12 +1,13 @@
 /* eslint-disable no-unused-expressions */
-import { useEffect, useState } from "react";
+import { HTMLAttributes, useEffect, useState } from "react";
 import { redirect, useNavigate } from "react-router-dom";
 import CashRegister from "../../assets/Icons/CashRegister";
 import CircleCheck from "../../assets/Icons/CircleCheck";
 import SackDollar from "../../assets/Icons/SackDollar";
 import XMark from "../../assets/Icons/XMark";
+import { CloseType } from "../../types/CloseType";
 
-export default function OpenCash(props) {
+export default function OpenCash({ close }: CloseType) {
    useEffect(() => {
       //localStorage.removeItem('openCashValue')
       //localStorage.getItem('openCashValue')
@@ -15,14 +16,14 @@ export default function OpenCash(props) {
 
    const cashStatus = () => {
       // Status Cash System
-      let statusSystemH4 = document.querySelector('#statusSystemH4')
+      let statusSystemH4 = document.querySelector('#statusSystemH4') as HTMLHeadingElement
       statusSystemH4.classList.remove('text-danger')
       statusSystemH4.classList.add('text-success')
       statusSystemH4.innerHTML = 'Caixa Aberto'
 
       // Button Status Cash
-      let btn_openCash = document.querySelector('#btn_openCash')
-      let btn_closeCash = document.querySelector('#btn_closeCash')
+      let btn_openCash = document.querySelector('#btn_openCash') as HTMLButtonElement
+      let btn_closeCash = document.querySelector('#btn_closeCash') as HTMLButtonElement
 
       btn_openCash.style.display = 'none'
       btn_closeCash.style.display = 'flex'
@@ -58,7 +59,9 @@ export default function OpenCash(props) {
    const navigate = useNavigate()
    
    const openCashValue = () => {
-      let openingCash = parseFloat(document.querySelector('#openingCash').value).toFixed(2)
+      // let openingCash = parseFloat(document.querySelector('#openingCash').value).toFixed(2)
+      let openingCashInput = document.querySelector('#openingCash') as HTMLInputElement
+      let openingCash = parseFloat(openingCashInput.value).toFixed(2)
 
       //const alertMsgCash = alert('Insira o valor correto')
 
@@ -73,29 +76,30 @@ export default function OpenCash(props) {
          //cashStatus()
 
          // Modal OpenCash
-         let modal = document.querySelector('#openCashModal')
+         let modal = document.querySelector('#openCashModal') as HTMLElement
          modal.classList.remove('flex')
          modal.classList.add('none')
          // console.log(modal)
 
          // Status Cash System
-         let statusSystemH4 = document.querySelector('#statusSystemH4')
+         let statusSystemH4 = document.querySelector('#statusSystemH4') as HTMLHeadingElement
          statusSystemH4.classList.remove('text-danger')
          statusSystemH4.classList.add('text-success')
          statusSystemH4.innerHTML = 'Caixa Aberto'
 
         // Button Status Cash
-        let btn_openCash = document.querySelector('#btn_openCash')
-        let btn_closeCash = document.querySelector('#btn_closeCash')
+        let btn_openCash = document.querySelector('#btn_openCash') as HTMLButtonElement
+        let btn_closeCash = document.querySelector('#btn_closeCash') as HTMLButtonElement
 
       //   btn_openCash.classList.add('none')
       //   btn_closeCash.classList.remove('none')
         btn_openCash.style.display = 'none'
         btn_closeCash.style.display = 'flex'
         
-        let notAllowedClass =[...document.querySelectorAll('.notAllowed')]
-        notAllowedClass[0].classList.remove('notAllowed')
-        notAllowedClass[0].style.cursos = 'pointer'
+      //   let notAllowedClass = [...document.querySelectorAll('.notAllowed')] as HTMLAttributes
+        let notAllowedClass = document.querySelectorAll<HTMLElement>('.notAllowed')
+        notAllowedClass[0].classList.remove('notAllowed') 
+        notAllowedClass[0].style.cursor = 'pointer'
       }
 
       //eslint-disable-next-line no-restricted-globals
@@ -115,7 +119,8 @@ export default function OpenCash(props) {
                      <SackDollar w='24' h='24' fill='var(--bs-info)' className='ml-1' />
                   </div>
 
-                  <div id='closeOpenCash' onClick={props.close}>
+                  {/* <div id='closeOpenCash' onClick={props.close}> */}
+                  <div id='closeOpenCash'>
                      <XMark w='24' h='24'
                         className=''
                      />

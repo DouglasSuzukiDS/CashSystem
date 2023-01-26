@@ -8,8 +8,9 @@ import PenToSquare from "../../assets/Icons/PenToSquare"
 import TrashCanXMark from "../../assets/Icons/TrashCanXMark"
 import { Link } from "react-router-dom"
 import { Products } from "../../types/ProductsType"
+import { CloseType } from "../../types/CloseType"
 
-export default function FindProducts() {
+export default function FindProducts({ close }: CloseType) {
    const server = 'http://localhost:3001'
 
    // Get All Users
