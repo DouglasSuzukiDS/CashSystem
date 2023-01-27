@@ -5,7 +5,6 @@ import EditUser from "../Components/EditUser/EditUser";
 
 import FindProducts from "../Components/FindProducts/FindProducts";
 import OpenCash from "../Components/OpenCash/OpenCash";
-import TestUser from "../Components/testUser/TestUser";
 import Error from "../Pages/Error/Error";
 import Login from "../Pages/Login/Login";
 import OpenSystem from "../Pages/OpenSystem/OpenSystem";
@@ -24,17 +23,15 @@ export default function RoutesApp() {
 
             <Route path='/' element={ <Login /> } /> 
             <Route path='/login' element={ <Login /> } /> {/* OK */}
+
             <Route path="/registerNewUser" element={ <RegisterUser /> } /> {/* OK */}
-         
-            <Route path="/edit/user/:id" element={ < Login /> } />
-            <Route path="/user" element={ < TestUser /> } />
-            <Route path="/user/user" element={ < TestUser /> } />
+            <Route path="/edit/user/:id" element={ < EditUser /> } /> {/* OK */}
 
             <Route path='/OpenCash' element={ <OpenCash /> } /> {/* OK */}
             <Route path='/OpenSystem' element={ <OpenSystem /> } />
 
             <Route path="/registerNewProduct" element={ <RegisterProduct /> } /> {/* OK */}
-            <Route path="/edit/product/:id" element={ <EditProduct /> } />
+            <Route path="/edit/product/:id" element={ <EditProduct /> } /> {/* OK */}
 
             <Route path='*' element={ <Error /> } /> {/* OK  */}
          </Routes>

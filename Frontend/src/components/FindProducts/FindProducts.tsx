@@ -89,7 +89,7 @@ export default function FindProducts({ close }: CloseType) {
 
    return (
       <>
-         <main className="flex" id='FindProductModal'>
+         <article className="container flex pr-3" id='FindProductModal'>
 
             <div className="forms">
 
@@ -168,9 +168,7 @@ export default function FindProducts({ close }: CloseType) {
 
                </form>
             </div>
-         </main>
-
-
+         </article>
       </>
 
 

@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-expressions */
-import { HTMLAttributes, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { redirect, useNavigate } from "react-router-dom";
 import CashRegister from "../../assets/Icons/CashRegister";
 import CircleCheck from "../../assets/Icons/CircleCheck";

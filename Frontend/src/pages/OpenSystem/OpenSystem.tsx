@@ -18,92 +18,70 @@ import { CloseType } from "../../types/CloseType";
 export default function OpenSystem({ close }: CloseType) {
    const backend = 'http://localhost:3001'
 
-  /* useEffect(() => {
-      if(localStorage.getItem('openCashValue').valueOf() !== '') {
-         let statusSystemH4 = document.querySelector('#statusSystemH4')
-         statusSystemH4.classList.remove('text-danger')
-         statusSystemH4.classList.add('text-success')
-         statusSystemH4.innerHTML = 'Caixa Aberto'
-   
-         // Button Status Cash
-        let btn_openCash = document.querySelector('#btn_openCash')
-        let btn_closeCash = document.querySelector('#btn_closeCash')
-   
-   
-        btn_openCash.style.display = 'none'
-        btn_closeCash.style.display = 'flex'
-        
-      //   let notAllowedClass =[...document.querySelectorAll('.notAllowed')]
-      //   notAllowedClass[0].classList.remove('notAllowed')
-      //   notAllowedClass[0].style.cursos = 'pointer'
-   
-        //cashSystem()
-      } 
-   }, [])*/
-
-
-   const startJob = () => {
-      //alert(`Valor do localstorage: ${openCashValue}`)
-      const contentSystemStart = document.querySelector('#contentSystemStart') as HTMLDivElement
-      contentSystemStart.classList.toggle('flex')
-      localStorage.getItem('openCashValue')
-      // let openCashValue = localStorage.getItem('openCashValue')
-   }
-
-   let infosSystemFindProducts = document.querySelector('#infosSystemFindProducts') as HTMLDivElement
-   let infosSystemClose = document.querySelector('#infosSystemClose') as HTMLDivElement
-
-   const closeFindProductModal = () => {
-
-      infosSystemFindProducts.classList.contains('flex') ?
-         infosSystemFindProducts.classList.toggle('none') : infosSystemFindProducts.classList.toggle('flex')
-
-      infosSystemClose.classList.add('none')
-   }
-   // console.log(infosSystemFindProducts)
-
-   const closingCash = () => {
-
-      infosSystemClose.classList.contains('none') ?
-         infosSystemClose.classList.toggle('flex') : infosSystemClose.classList.toggle('none')
-
-      localStorage.getItem('openCashValue')
-
-      infosSystemFindProducts.classList.add('none')
-
-   }
+   /* useEffect(() => {
+       if(localStorage.getItem('openCashValue').valueOf() !== '') {
+          let statusSystemH4 = document.querySelector('#statusSystemH4')
+          statusSystemH4.classList.remove('text-danger')
+          statusSystemH4.classList.add('text-success')
+          statusSystemH4.innerHTML = 'Caixa Aberto'
+    
+          // Button Status Cash
+         let btn_openCash = document.querySelector('#btn_openCash')
+         let btn_closeCash = document.querySelector('#btn_closeCash')
+    
+    
+         btn_openCash.style.display = 'none'
+         btn_closeCash.style.display = 'flex'
+         
+       //   let notAllowedClass =[...document.querySelectorAll('.notAllowed')]
+       //   notAllowedClass[0].classList.remove('notAllowed')
+       //   notAllowedClass[0].style.cursos = 'pointer'
+    
+         //cashSystem()
+       } 
+    }, [])*/
 
    // Get All Users
    const [users, setUsers] = useState([])
 
+   // Get All Products
+   const [products, setProducts] = useState([])
+
+   // Open System
+   const [open, setOpen] = useState(false)
+
+   // Modals
+   const [invoicingModal, setInvoicingModal] = useState(false)
+
+   const [findProductsModal, setFindProductsModal] = useState(false)
+
+   // Get All Users
    useEffect(() => {
       axios.get(`${backend}/users`)
          .then(response => setUsers(response.data.result))
    }, [])
-   //console.log(users)
 
    // Get All Products
-   const [products, setProducts] = useState([])
-
    useEffect(() => {
       axios.get(`${backend}/products`)
          .then(response => setProducts(response.data.result))
    }, [])
    //console.log(products)
 
+   // KeyPress Event
    useEffect(() => {
       window.addEventListener('keydown', (event) => {
          if (event.keyCode === 120) { // F9
-            closeFindProductModal()
+            //   handleFindProductModal()
             // console.log('useEffect')
          }
       })
-   }, [])
+   }, [findProductsModal])
 
-   useEffect(() => {
+   /*useEffect(() => {
       window.addEventListener('keydown', (event) => {
          if (event.keyCode === 123) { // F12
-            closingCash()
+            // handleCloseCash()
             // console.log('useEffect')
          }
       })
@@ -112,20 +90,99 @@ export default function OpenSystem({ close }: CloseType) {
    useEffect(() => {
       // localStorage.getItem('openCashValue')
       //cashStatus()
-   }, [])
+   }, []) */
+
+   const startJob = () => {
+      //alert(`Valor do localstorage: ${openCashValue}`)
+      const contentSystemStart = document.querySelector('#contentSystemStart') as HTMLDivElement
+      contentSystemStart.classList.toggle('flex')
+
+      localStorage.getItem('openCashValue')
+
+      setOpen(true)
+      // let openCashValue = localStorage.getItem('openCashValue')
+   }
+
+   const showModal = () => {
+      const modalsDiv = document.querySelector('#modals') as HTMLDivElement
+
+      if (invoicingModal) {
+         <Invoicing close={handleCloseCash} />
+         setFindProductsModal(false)
+      }
+
+      if (findProductsModal) {
+         <FindProducts close={handleFindProductModal} />
+         setInvoicingModal(false)
+      }
+   }
+
+   const handleFindProductModal = () => {
+      if (open === false) {
+         alert('Por obséquio abra o caixa')
+      } else {
+         if (invoicingModal) {
+            setInvoicingModal(false)
+         }
+
+         setFindProductsModal(!findProductsModal)
+      }
+   }
+
+   const handleCloseCash = () => {
+      localStorage.getItem('openCashValue')
+
+      if (findProductsModal) {
+         setFindProductsModal(false)
+      }
+      setInvoicingModal(!invoicingModal)
+   }
+
+   const handleKeyDown = () => {
+      /*  Blocked Keys
+         F1 => Help
+         F3 => Find Word
+         F5 => Regarrega
+         F6 => Fecha e Abre o navegador
+         F7 => Fullscreen
+      */
+
+      /* Utils Keys
+         F2 = 113
+         F4 = 115
+         F7 = 118
+         F8 = 119
+         F9 = 120
+         F10 = 121
+         F12 = 123
+      */
+
+      window.addEventListener('keydown', (event) => { 
+         if (event.keyCode === 113) { // F2 Historico
+            alert('F2')
+         } else if (event.keyCode === 115) { // F4 Finalizar
+            alert('F4')
+         } else if (event.keyCode === 120) { // F9 Pesquisar
+            // alert('F9')
+            handleFindProductModal()
+         } else if (event.keyCode === 121) { // F10 Cancelar
+            alert('F10')
+         }else if (event.keyCode === 123) { // F12 Pagamento
+            alert('F12')
+         }
+      })
+   }
 
    return (
       <main className="containerSystem flex p-3">
          <div className="infosSystemClose none" id="infosSystemClose">
-            <Closing close={closingCash} openCashValue={localStorage.getItem('openCashValue')} />
+            <Closing close={handleCloseCash} openCashValue={localStorage.getItem('openCashValue')} />
          </div>
 
-         <div className="infosSystemInvoicing none">
-            <Invoicing close={closingCash} />
-         </div>
+         <div className="flex" id="modals">
+            {invoicingModal && <Invoicing close={handleCloseCash} />}
 
-         <div className="infosSystemFindProducts none" id="infosSystemFindProducts">
-            <FindProducts close={closeFindProductModal} />
+            {findProductsModal && <FindProducts close={handleFindProductModal} />}
          </div>
 
          <section className="sectionSystem">
@@ -147,7 +204,7 @@ export default function OpenSystem({ close }: CloseType) {
                      <CashRegister w='24' h='24' fill='var(--text)' className='ml-1 text-color' />
                   </button>
 
-                  <button className="btn btn-danger ml-2 border" id="btn_closeCash" style={{display: 'none'}} onClick={closingCash}>
+                  <button className="btn btn-danger ml-2 border" id="btn_closeCash" style={{ display: 'none' }} onClick={handleCloseCash}>
                      Fechar Caixa
                      <CashRegister w='24' h='24' fill='var(--text)' className='ml-1 text-color' />
                   </button>
@@ -185,7 +242,7 @@ export default function OpenSystem({ close }: CloseType) {
                      <SackDollar w='20' h='20' fill='var(--text)' className='ml-1' />
                   </button>
 
-                  <button className="btn btn-warning ml-1" onClick={closeFindProductModal}>
+                  <button className="btn btn-warning ml-1" onClick={handleFindProductModal} onKeyDown={handleKeyDown}>
                      F9 Pesquisar
                      <MagnifyingGlass w='20' h='20' fill='var(--text-dark)' className='ml-1' />
                   </button>

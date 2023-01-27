@@ -1,0 +1,32 @@
+@font-face {
+   font-family: 'JetBrains Mono';
+   src: url('../assets/Fonts/JetBrainsMono-Medium.ttf');
+}
+
+* {
+   box-sizing: border-box;
+   padding: 0;
+   margin: 0;
+   font-family: 'JetBrains Mono';
+}
+
+@import '../SCSS/global';
+@import '../SCSS/tipography';
+@import '../SCSS/align';
+@import '../SCSS/button';
+@import '../SCSS/colors';
+@import '../SCSS/spacing';
+
+@import '../Pages/Login/Login';
+
+@import '../Components/Invoicing/Invoice';
+@import '../Components/Closing/Closing';
+@import '../Components/OpenCash/OpenCash';
+@import '../Components/FindProducts/FindProducts';
+@import '../Components/EditProduct/EditProduct';
+@import '../Components/EditUser/EditUser';
+
+@import '../Pages/RegisterUser/RegisterUser';
+@import '../Pages/Login/Login';
+@import '../Pages/RegisterProduct/RegisterProduct';
+@import '../Pages/OpenSystem/OpenSystem';

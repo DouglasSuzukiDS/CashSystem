@@ -1,6 +1,6 @@
 @font-face {
   font-family: "JetBrains Mono";
-  src: url(../src/assets/Fonts/JetBrainsMono-MediumItalic.ttf);
+  src: url("../assets/Fonts/JetBrainsMono-Medium.ttf");
 }
 * {
   box-sizing: border-box;
@@ -44,6 +44,10 @@ a {
 
 .none {
   display: none;
+}
+
+.hidden {
+  visibility: hidden;
 }
 
 .border {
@@ -1263,11 +1267,6 @@ h4 {
 .inUser {
   font-size: 100px;
   color: pink;
-}
-
-.testUser {
-  color: red;
-  font-size: 50px;
 }
 
 .forms {

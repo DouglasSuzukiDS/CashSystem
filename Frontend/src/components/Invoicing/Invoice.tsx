@@ -57,7 +57,7 @@ export default function Invoicing({ close }: CloseType) {
    }
 
    return(
-      <main className="container flex" id='closeInvoicing'>
+      <section className="container flex pr-3" id='closeInvoicing'>
          <div className="forms flex column">
             <form action='/' className="invoicingOfTheDayForm w-100 h-100 f column sbt">
                <h4 className="f sbt">
@@ -195,6 +195,6 @@ export default function Invoicing({ close }: CloseType) {
                </Link>
             </form>
          </div>
-      </main>
+      </section>
    )
 }
