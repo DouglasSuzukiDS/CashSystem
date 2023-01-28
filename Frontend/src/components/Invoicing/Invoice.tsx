@@ -50,12 +50,6 @@ export default function Invoicing({ close }: CloseType) {
       })
    }, [])
 
-   const closeIncoiving = () => {
-      const close = document.querySelector('#closeInvoicing') as HTMLElement
-      // console.log(close)
-      close.style.display = 'none'
-   }
-
    return(
       <section className="container flex pr-3" id='closeInvoicing'>
          <div className="forms flex column">
@@ -70,7 +64,7 @@ export default function Invoicing({ close }: CloseType) {
                      <XMark w='24' h='24' 
                         // fill='var(--bs-danger)' 
                         className=''
-                        onClick={ closeIncoiving }
+                        onClick={ close }
                      />
                   </div>
 

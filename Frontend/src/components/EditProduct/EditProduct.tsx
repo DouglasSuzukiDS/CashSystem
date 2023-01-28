@@ -82,7 +82,7 @@ export default function EditProduct() {
                      Quatidade do Produto: ${newProductQty.value}
                   `)
 
-                  setTimeout(() => navigate('/'), 3000)
+                  setTimeout(() => navigate('/openSystem'), 1000)
                } else if(response.status === 400) {
                   alert('Erro ao cadastrar')
                }

@@ -97,9 +97,9 @@ export default function OpenCash({ close }: CloseType) {
         btn_closeCash.style.display = 'flex'
         
       //   let notAllowedClass = [...document.querySelectorAll('.notAllowed')] as HTMLAttributes
-        let notAllowedClass = document.querySelectorAll<HTMLElement>('.notAllowed')
-        notAllowedClass[0].classList.remove('notAllowed') 
-        notAllowedClass[0].style.cursor = 'pointer'
+      //   let notAllowedClass = document.querySelectorAll<HTMLElement>('.notAllowed')
+      //   notAllowedClass[0].classList.remove('notAllowed') 
+      //   notAllowedClass[0].style.cursor = 'pointer'
       }
 
       //eslint-disable-next-line no-restricted-globals
@@ -108,9 +108,8 @@ export default function OpenCash({ close }: CloseType) {
    }
 
    return (
-      <main className="flex" id='openCashModal'>
+      <article className="flex" id='openCashModal'>
          <div className="formsOpen">
-
             <form action='/' className="formOpenCash w-100 h-100 f column sbt" id='formOpenCash'>
                <h4 className="f sbt pb-2">
 
@@ -119,10 +118,10 @@ export default function OpenCash({ close }: CloseType) {
                      <SackDollar w='24' h='24' fill='var(--bs-info)' className='ml-1' />
                   </div>
 
-                  {/* <div id='closeOpenCash' onClick={props.close}> */}
                   <div id='closeOpenCash'>
                      <XMark w='24' h='24'
                         className=''
+                        onClick={ close }
                      />
                   </div>
                </h4>
@@ -141,13 +140,13 @@ export default function OpenCash({ close }: CloseType) {
                   </div>
                </div>
 
-               <div className="flex btn btn-success mt-3" onClick={openCashValue}>
-                     Confirmar
-                     <CircleCheck w='24' h='24' fill='var(--text)' className='ml-1' />
+               <div className="flex btn btn-success mt-3" onClick={ openCashValue }>
+                  Confirmar
+                  <CircleCheck w='24' h='24' fill='var(--text)' className='ml-1' />
                </div>
 
             </form>
          </div>
-      </main>
+      </article>
    )
 }

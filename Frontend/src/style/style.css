@@ -42,12 +42,28 @@ a {
   cursor: not-allowed;
 }
 
+.pointer {
+  cursor: pointer;
+}
+
 .none {
   display: none;
 }
 
 .hidden {
   visibility: hidden;
+}
+
+.w-bg {
+  background-color: transparent;
+}
+
+.w-border {
+  border: none;
+}
+
+.opacity:hover {
+  opacity: 0.8;
 }
 
 .border {

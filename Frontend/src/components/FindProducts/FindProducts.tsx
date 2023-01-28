@@ -105,6 +105,7 @@ export default function FindProducts({ close }: CloseType) {
                      <div id='closeFindProducts'>
                         <XMark w='24' h='24'
                            className=''
+                           onClick={ close }
                         />
                      </div>
                   </h4>

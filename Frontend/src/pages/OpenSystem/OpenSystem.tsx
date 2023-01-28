@@ -103,20 +103,6 @@ export default function OpenSystem({ close }: CloseType) {
       // let openCashValue = localStorage.getItem('openCashValue')
    }
 
-   const showModal = () => {
-      const modalsDiv = document.querySelector('#modals') as HTMLDivElement
-
-      if (invoicingModal) {
-         <Invoicing close={handleCloseCash} />
-         setFindProductsModal(false)
-      }
-
-      if (findProductsModal) {
-         <FindProducts close={handleFindProductModal} />
-         setInvoicingModal(false)
-      }
-   }
-
    const handleFindProductModal = () => {
       if (open === false) {
          alert('Por obséquio abra o caixa')
@@ -197,8 +183,13 @@ export default function OpenSystem({ close }: CloseType) {
                </div>
 
                <div className="openSystem flex">
-                  <Gears w='24' h='24' fill='var(--bs-secondary)' className='notAllowed' />
+                  { 
+                     !open ?  
+                        <Gears w='24' h='24' fill='var(--bs-secondary)' className='notAllowed' /> :
+                        <Gears w='24' h='24' fill='var(--bs-secondary)' className='pointer opacity' />
+                  }
 
+                  
                   <button className="btn btn-primary ml-2 border" id="btn_openCash" onClick={startJob}>
                      Abrir Caixa
                      <CashRegister w='24' h='24' fill='var(--text)' className='ml-1 text-color' />
@@ -208,14 +199,12 @@ export default function OpenSystem({ close }: CloseType) {
                      Fechar Caixa
                      <CashRegister w='24' h='24' fill='var(--text)' className='ml-1 text-color' />
                   </button>
-
-
                </div>
             </header>
 
             <div className="contentSystem flex" id="contentSystem">
                <div className="none" id="contentSystemStart">
-                  <OpenCash close={startJob} />
+                  <OpenCash close={ startJob } />
                   {/* <p>Teste</p> */}
                </div>
             </div>
