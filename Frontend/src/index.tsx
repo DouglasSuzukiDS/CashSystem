@@ -5,13 +5,16 @@ import './style/style.css'
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import RoutesApp from './routes/routes';
+import { AuthProvider } from './context/Auth/AuthProvider';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
   <React.StrictMode>
-    <RoutesApp />
+    <AuthProvider>
+      <RoutesApp />
+    </AuthProvider>
   </React.StrictMode>
 );
 

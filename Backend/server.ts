@@ -101,6 +101,7 @@ server.post('/login', async(req, res) => { // Error
 
    let findUser: string = `SELECT * FROM users WHERE (userLogin, userPassword) = (?, ?)`
 
+
    db.query(findUser, [userLogin, userPassword], async(err, result) => {
       // console.log(result) // Return User
 
@@ -115,9 +116,19 @@ server.post('/login', async(req, res) => { // Error
             { expiresIn: '2h' } // Tempo de expiração
          )
          //console.log(token)
-         res.status(200).json({ msg: `Logado como: ${userLogin}`, token: `\nToken: ${token}`})
+         let user = JSON.parse(JSON.stringify(result))
+         /*let user = {
+            id: data[0].id,
+            userName: data[0].userName,
+            userLogin: data[0].userLogin,
+            userPassword: data[0].userPassword,
+            userAdmin: data[0].userPassword
+         }*/
+         // console.log(user)
+         // res.status(200).json({ msg: `Logado como: ${userLogin}`, token: `Token: ${token}`, result: `${user}`})
+         res.status(200).send({ msg: `Logado como: ${userLogin}`, token: `${token}`, user: `${user[0]}`})
 
-         // res.json({ status: true, token });
+         // res.json({ status: true, token })
       } else {
          //console.log({ msg: 'Dados incorretos ou não localizados' })
          res.status(404).send({ msg: 'Dados incorretos ou não localizados.' })

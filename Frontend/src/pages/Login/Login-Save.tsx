@@ -1,46 +1,48 @@
 import axios from 'axios'
-import { ChangeEvent, useContext, useState } from 'react';
+import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom'
 import ArrowRightToBracket from "../../assets/Icons/ArrowRightToBracket";
 import IdCard from "../../assets/Icons/IdCard";
-import { AuthContext } from '../../context/Auth/AuthContext';
 
 export default function Login() {
-   const auth = useContext(AuthContext)
+   const backend: string = "http://localhost:3001"
+
    const navigate = useNavigate()
 
-   const [userLogin, setUserLogin] = useState('')
-   const [userPassword, setUserPassword] = useState('')
-   const [loading, setLoading] = useState(false) 
+   const [logon, setLogon] = useState(false)
 
-   const handleuserLogin = (e: ChangeEvent<HTMLInputElement>) => {
-      setUserLogin(e.target.value)
-   }
+   const loginUser = async() => {
+      
+      let userLogin = document.querySelector("#userLogin") as HTMLInputElement;
+      let userPassword = document.querySelector("#userPassword") as HTMLInputElement;
 
-   const handleUserPassword = (e: ChangeEvent<HTMLInputElement>) => {
-      setUserPassword(e.target.value)
-   }
+      if (userLogin.value && userPassword.value !== "") {
+         const login = userLogin.value;
+         const password = userPassword.value;
 
-   const handleLogin = async() => {
-      if(userLogin && userPassword) {
-         console.log(`userLogin: ${userLogin}, userPassword: ${userPassword}`)
-         
-         setLoading(true)
+         await axios.post(`${backend}/login`, {
+            userLogin: login,
+            userPassword: password
+         })
+         .then((response) => {
+            if (response.status === 200) {
+               alert(`Logado como ${login} no front`);
+               console.log(response.data.msg, response.data.token)
 
-         const logged = await auth.loginSystem(userLogin, userPassword)
-         alert(logged)
+               //setTimeout(() => navigate('/'), 2000)
 
-         if(logged) {
-            navigate('/OpenSystem')
-         } else {
-            alert('Falha ao logar. MSG do Component Login')
-            setLoading(false)
-         }
+               setLogon(true)
+
+               setTimeout(() => navigate('/OpenSystem'), 1000)
+            }
+         })
+         .catch(err => {
+            alert(err.response.data.msg)
+            setLogon(false)
+         })
       }
-
-      setLoading(false)
    }
-   
+
    return (
       <main className="container flex">
          <div className="forms">
@@ -55,7 +57,6 @@ export default function Login() {
                   <input type="text" name="userLogin" id="userLogin"
                      placeholder="Login / Matrícula"
                      required
-                     onChange={ handleuserLogin }
                      onInvalid={e => (e.target as HTMLInputElement).setCustomValidity('Digite seu Login/Matrícula')}
                      onInput={e => (e.target as HTMLInputElement).setCustomValidity('')} />
                </div>
@@ -63,7 +64,6 @@ export default function Login() {
                <div className="inputForm">
                   <input type="password" name="userPassword" id="userPassword"
                      required
-                     onChange={ handleUserPassword }
                      placeholder="Senha"
                      onInvalid={e => (e.target as HTMLInputElement).setCustomValidity('Digite a sua senha')}
                      onInput={e => (e.target as HTMLInputElement).setCustomValidity('') } />
@@ -82,28 +82,10 @@ export default function Login() {
                <button
                   id="LogonUser"
                   className="LogonUser btn btn-info"
-                  onClick={ handleLogin } >
+                  onClick={loginUser} >
                   Logar no Sistema
                   <ArrowRightToBracket w='23' h='23' fill='var(--text-color)' className='ml-1' />
                </button>
-
-               {/* {
-                  loading ? 
-                     <button
-                        id="LogonUser"
-                        className="LogonUser btn btn-info" >
-                        Aguarde ...
-                     </button> :
-
-                     <button
-                     id="LogonUser"
-                     className="LogonUser btn btn-info"
-                     onClick={ handleLogin } >
-                     Logar no Sistema
-                     <ArrowRightToBracket w='23' h='23' fill='var(--text-color)' className='ml-1' />
-                  </button>
-               } */}
-               
             </section>
          </div>
       </main>
