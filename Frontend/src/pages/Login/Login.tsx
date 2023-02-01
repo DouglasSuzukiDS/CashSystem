@@ -79,15 +79,15 @@ export default function Login() {
                   </Link>
                </div>
 
-               <button
+               {/* <button
                   id="LogonUser"
                   className="LogonUser btn btn-info"
                   onClick={ handleLogin } >
                   Logar no Sistema
                   <ArrowRightToBracket w='23' h='23' fill='var(--text-color)' className='ml-1' />
-               </button>
+               </button> */}
 
-               {/* {
+                {
                   loading ? 
                      <button
                         id="LogonUser"
@@ -102,7 +102,7 @@ export default function Login() {
                      Logar no Sistema
                      <ArrowRightToBracket w='23' h='23' fill='var(--text-color)' className='ml-1' />
                   </button>
-               } */}
+               }
                
             </section>
          </div>
