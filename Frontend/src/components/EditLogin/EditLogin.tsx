@@ -9,8 +9,8 @@ export default function Login() {
       const db = 'http://localhost:3001'
       // const navigate = useNavigate()
 
-      let userLogin = document.querySelector('#userLogin')
-      let userPassword = document.querySelector('#userPassword')
+      let userLogin = document.querySelector('#userLogin') as HTMLInputElement
+      let userPassword = document.querySelector('#userPassword') as HTMLInputElement
 
       if (userLogin.value && userPassword.value !== '') {
          // alert(`
@@ -46,8 +46,8 @@ export default function Login() {
    async function loginUser() {
       const db = "http://localhost:3001";
 
-      let userLogin = document.querySelector("#userLogin");
-      let userPassword = document.querySelector("#userPassword");
+      let userLogin = document.querySelector("#userLogin") as HTMLInputElement
+      let userPassword = document.querySelector("#userPassword") as HTMLInputElement
 
       if (userLogin.value && userPassword.value !== "") {
          const login = userLogin.value;
@@ -86,16 +86,16 @@ export default function Login() {
                   <input type="text" name="userLogin" id="userLogin"
                      placeholder="Login / Matrícula"
                      required
-                     onInvalid={e => e.target.setCustomValidity('Digite seu Login/Matrícula')}
-                     onInput={e => e.target.setCustomValidity('')} />
+                     onInvalid={e => (e.target as HTMLInputElement).setCustomValidity('Digite seu Login/Matrícula')}
+                     onInput={e => (e.target as HTMLInputElement).setCustomValidity('')} />
                </div>
 
                <div className="inputForm">
                   <input type="password" name="userPassword" id="userPassword"
                      required
                      placeholder="Senha"
-                     onInvalid={e => e.target.setCustomValidity('Digite a sua senha')}
-                     onInput={e => e.target.setCustomValidity('')} />
+                     onInvalid={e => (e.target as HTMLInputElement).setCustomValidity('Digite a sua senha')}
+                     onInput={e => (e.target as HTMLInputElement).setCustomValidity('')} />
                </div>
 
                <div className="actionsLogin f sbt " >

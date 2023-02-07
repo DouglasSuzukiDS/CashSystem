@@ -162,7 +162,8 @@ export default function OpenSystem({ close }: CloseType) {
    return (
       <main className="containerSystem flex p-3">
          <div className="infosSystemClose none" id="infosSystemClose">
-            <Closing close={handleCloseCash} openCashValue={localStorage.getItem('openCashValue')} />
+            {/* <Closing close={handleCloseCash} openCashValue={localStorage.getItem('openCashValue')} /> */}
+            <Closing close={handleCloseCash} />
          </div>
 
          <div className="flex" id="modals">

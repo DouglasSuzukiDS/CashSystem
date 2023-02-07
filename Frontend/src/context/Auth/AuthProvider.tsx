@@ -32,20 +32,20 @@ export const AuthProvider = ({ children }: { children: JSX.Element }) => {
       //    }
 
       // return false 
+         
+      const response = await api.loginSystem(userLogin, userPassword)
+      console.log(response)
+      // let test = JSON.parse(response.user)
+      // console.log(typeof response.user)
 
-
-      await api.loginSystem(userLogin, userPassword) // Aqui me retorna o nome e o token
-         .then(response => {
-            if(response.msg && response) {
-               // setUser(response.data.user)
-               console.log(response.msg)
-               console.log(response.token)
-               createToken(response.token)
-               return true
-            } 
-         }) 
-         .catch(err => console.log(err))
+      if(response) {
+         deleteToken()
+         createToken(response.token)
+         return true
+      } else {
+         alert('Dados incorretos ou inexistentes')
          return false
+      }
    }
 
    const logout = async() => {

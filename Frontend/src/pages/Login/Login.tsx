@@ -28,7 +28,7 @@ export default function Login() {
          setLoading(true)
 
          const logged = await auth.loginSystem(userLogin, userPassword)
-         alert(logged)
+         //alert(logged)
 
          if(logged) {
             navigate('/OpenSystem')

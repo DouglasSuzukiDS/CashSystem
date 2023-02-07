@@ -117,6 +117,8 @@ server.post('/login', async(req, res) => { // Error
          )
          //console.log(token)
          let user = JSON.parse(JSON.stringify(result))
+         // let user = JSON.stringify(result)
+         // console.log(user)
          /*let user = {
             id: data[0].id,
             userName: data[0].userName,
@@ -126,7 +128,7 @@ server.post('/login', async(req, res) => { // Error
          }*/
          // console.log(user)
          // res.status(200).json({ msg: `Logado como: ${userLogin}`, token: `Token: ${token}`, result: `${user}`})
-         res.status(200).send({ msg: `Logado como: ${userLogin}`, token: `${token}`, user: `${user[0]}`})
+         res.status(200).send({ msg: `Logado como: ${userLogin}`, token: `${token}`, user: `${result}`})
 
          // res.json({ status: true, token })
       } else {
