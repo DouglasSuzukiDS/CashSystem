@@ -29,7 +29,7 @@ No Terminal, entre na pasta ***Frontend*** *(Em desenvolvimento)*
 .
 Instale as dependências nas pastas do projeto, pasta ***Frontend*** 
 ```bash
-    yarn add | npm install
+    yarn | npm install
 ```
 
 ## Iniciando o Projeto

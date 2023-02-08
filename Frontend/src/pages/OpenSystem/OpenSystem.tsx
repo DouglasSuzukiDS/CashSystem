@@ -167,7 +167,7 @@ export default function OpenSystem({ close }: CloseType) {
          </div>
 
          <div className="flex" id="modals">
-            {invoicingModal && <Invoicing close={handleCloseCash} />}
+            {invoicingModal && <Invoicing close={ handleCloseCash } />}
 
             {findProductsModal && <FindProducts close={handleFindProductModal} />}
          </div>
@@ -189,7 +189,6 @@ export default function OpenSystem({ close }: CloseType) {
                         <Gears w='24' h='24' fill='var(--bs-secondary)' className='notAllowed' /> :
                         <Gears w='24' h='24' fill='var(--bs-secondary)' className='pointer opacity' />
                   }
-
                   
                   <button className="btn btn-primary ml-2 border" id="btn_openCash" onClick={startJob}>
                      Abrir Caixa

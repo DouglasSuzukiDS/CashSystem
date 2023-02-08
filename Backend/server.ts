@@ -112,11 +112,11 @@ server.post('/login', async(req, res) => { // Error
       } else if( JSON.parse(JSON.stringify(result)).length > 0 ) {
          const token = JTW.sign(
             { userLogin: userLogin, userPassword: userPassword}, // Identificação
-            process.env.TOKEN,
+            process.env.SECRET,
             { expiresIn: '2h' } // Tempo de expiração
          )
          //console.log(token)
-         let user = JSON.parse(JSON.stringify(result))
+         //let user = JSON.parse(JSON.stringify(result))
          // let user = JSON.stringify(result)
          // console.log(user)
          /*let user = {
@@ -127,8 +127,12 @@ server.post('/login', async(req, res) => { // Error
             userAdmin: data[0].userPassword
          }*/
          // console.log(user)
+
+         let user = Object.values(result)
+         console.log(typeof user)
+         console.log(user[0])
          // res.status(200).json({ msg: `Logado como: ${userLogin}`, token: `Token: ${token}`, result: `${user}`})
-         res.status(200).send({ msg: `Logado como: ${userLogin}`, token: `${token}`, user: `${result}`})
+         res.status(200).send({ msg: `Logado como: ${userLogin}`, token: `${token}`, user: `${user[0]}`})
 
          // res.json({ status: true, token })
       } else {

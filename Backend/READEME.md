@@ -24,7 +24,7 @@ No Terminal, entre na pasta ***Backend***. *(Em desenvolvimento)*
 
 Instale as dependências nas pastas do projeto, pasta ***Backend***.
 ```bash
-    yarn add | npm install
+    yarn | npm install
 ```
 
 ## Criando o Banco de Dados *(utilizei o MySQL)*
@@ -68,7 +68,9 @@ Como normas em qualquer lugar onde se contem senhas, a proteção deles devem se
 
     DB_PASSWORD = 'Sua senha do Bando de Dados'
 
-    DB_DATABASE = 'CashSystem' (nome do banco que você criaou).
+    DB_DATABASE = 'CashSystem' (nome do banco que você criou).
+
+    SECRET = 'Sua chave criptografica'
 ```
 
 ## Iniciando o Projeto

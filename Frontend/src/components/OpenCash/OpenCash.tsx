@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-expressions */
 import { useEffect, useState } from "react";
-import { redirect, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import CashRegister from "../../assets/Icons/CashRegister";
 import CircleCheck from "../../assets/Icons/CircleCheck";
 import SackDollar from "../../assets/Icons/SackDollar";
@@ -10,7 +10,7 @@ import { CloseType } from "../../types/CloseType";
 export default function OpenCash({ close }: CloseType) {
    useEffect(() => {
       //localStorage.removeItem('openCashValue')
-      //localStorage.getItem('openCashValue')
+      localStorage.getItem('openCashValue')
       //localStorage
    }, [])
 
@@ -65,7 +65,7 @@ export default function OpenCash({ close }: CloseType) {
 
       //const alertMsgCash = alert('Insira o valor correto')
 
-      function lc(){
+      function createValueLocalStorage(){
          // Create value on Local Storage
          // localStorage.removeItem('openCashValue')
          localStorage.removeItem('openCashValue')
@@ -103,8 +103,9 @@ export default function OpenCash({ close }: CloseType) {
       }
 
       //eslint-disable-next-line no-restricted-globals
-      confirm(`Confirmar Valor: ${openingCash}`) ?
-       lc() : alert('5555')
+      if (confirm(`Confirmar Valor: ${openingCash}`)) {
+         createValueLocalStorage()
+      }
    }
 
    return (

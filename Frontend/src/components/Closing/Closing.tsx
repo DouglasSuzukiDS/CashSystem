@@ -228,7 +228,7 @@ let amountValue = amountMoney + amountBank
                      <ArrowLeftLong w='24' h='24' fill='var(--bs-dark)' className='ml-1' />
                   </Link>
 
-                  <Link to='/' className="btn btn-success ml-1  w-50" >
+                  <Link to='/' className="btn btn-success ml-1  w-50">
                      Fechar(F8)
                      <CircleCheck w='24' h='24' fill='var(--text)' className='ml-1' />
                   </Link>

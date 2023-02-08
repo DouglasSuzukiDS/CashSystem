@@ -50,6 +50,16 @@ export default function Invoicing({ close }: CloseType) {
       })
    }, [])
 
+   // Fecha o sistemam limpa o localStorage e manda para página de login
+   const handleCloseSystem = () => {
+      const closeSystem = window.confirm("Deseja fechar o sistema?")
+      
+      if(closeSystem) {
+         localStorage.clear()
+         navigate('/')
+      }
+   }
+
    return(
       <section className="container flex pr-3" id='closeInvoicing'>
          <div className="forms flex column">
@@ -183,10 +193,10 @@ export default function Invoicing({ close }: CloseType) {
                   </div>
                </div>
 
-               <Link to='/' className="btn btn-success mt-1" >
+               <div className="btn btn-success mt-1" onClick={ handleCloseSystem }>
                   Confirmar Valores (F8)
                   <CircleCheck w='24' h='24' fill='var(--text)' className='ml-1' />
-               </Link>
+               </div>
             </form>
          </div>
       </section>
