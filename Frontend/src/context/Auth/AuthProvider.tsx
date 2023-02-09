@@ -13,11 +13,12 @@ export const AuthProvider = ({ children }: { children: JSX.Element }) => {
          const storageData = localStorage.getItem('authToken')
 
          if(storageData) {
-            const data = await api.validateToken(storageData)
+            // const data = await api.validateToken(storageData)
 
-            if(data.user) {
-               setUser(data.user)
-            }
+            // if(data.user) {
+            //    setUser(data.user)
+            // }
+            await api.validateToken(storageData)
          }
       }
       validateToken()
@@ -41,6 +42,12 @@ export const AuthProvider = ({ children }: { children: JSX.Element }) => {
       if(response) {
          deleteToken()
          createToken(response.token)
+
+         if(response.user) {
+            // console.log(response.user)
+            setUser(response.user)
+            // console.log(user)
+         }
          return true
       } else {
          alert('Dados incorretos ou inexistentes')
@@ -49,9 +56,10 @@ export const AuthProvider = ({ children }: { children: JSX.Element }) => {
    }
 
    const logout = async() => {
-      await api.logout()
       setUser(null)
       deleteToken()
+      console.log('Reset', user)
+      await api.logout()
    }
 
    const createToken = (token: string) => {

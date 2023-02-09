@@ -13,10 +13,14 @@ import Invoicing from "../../Components/Invoicing/Invoice";
 import FindProducts from "../../Components/FindProducts/FindProducts";
 import OpenCash from "../../Components/OpenCash/OpenCash";
 import { CloseType } from "../../types/CloseType";
+import { useNavigate } from "react-router-dom";
 
 
 export default function OpenSystem({ close }: CloseType) {
    const backend = 'http://localhost:3001'
+   const navigate = useNavigate()
+   const AuthTokenLC = localStorage.getItem('AuthToken') 
+   const OpenCashValueLC = localStorage.getItem('openCashValue')
 
    /* useEffect(() => {
        if(localStorage.getItem('openCashValue').valueOf() !== '') {
@@ -41,6 +45,10 @@ export default function OpenSystem({ close }: CloseType) {
        } 
     }, [])*/
 
+    useEffect(() => {
+      checkStatus() // Verifica se existe um Token, se existir verifica se o caixa já foi aberto
+    }, [])
+
    // Get All Users
    const [users, setUsers] = useState([])
 
@@ -49,6 +57,7 @@ export default function OpenSystem({ close }: CloseType) {
 
    // Open System
    const [open, setOpen] = useState(false)
+   const [OpenCashValue, setOpenCashValue] = useState('')
 
    // Modals
    const [invoicingModal, setInvoicingModal] = useState(false)
@@ -92,12 +101,24 @@ export default function OpenSystem({ close }: CloseType) {
       //cashStatus()
    }, []) */
 
+   const checkStatus = () => { // Verifica se existe um Token, se existir verifica se o caixa já foi aberto
+      if(AuthTokenLC) {
+         OpenCashValueLC ? setOpen(true) : setOpen(false) 
+         // if(OpenCashValue) {
+         //    //setOpenCashValue(OpenCashValueLC!)
+         //    setOpen(true)
+         // }
+      } else {
+         navigate('/')
+      }
+   }
+
    const startJob = () => {
       //alert(`Valor do localstorage: ${openCashValue}`)
       const contentSystemStart = document.querySelector('#contentSystemStart') as HTMLDivElement
       contentSystemStart.classList.toggle('flex')
 
-      localStorage.getItem('openCashValue')
+      setOpenCashValue(OpenCashValueLC!)
 
       setOpen(true)
       // let openCashValue = localStorage.getItem('openCashValue')
@@ -116,7 +137,7 @@ export default function OpenSystem({ close }: CloseType) {
    }
 
    const handleCloseCash = () => {
-      localStorage.getItem('openCashValue')
+      // localStorage.getItem('openCashValue')
 
       if (findProductsModal) {
          setFindProductsModal(false)
@@ -189,16 +210,19 @@ export default function OpenSystem({ close }: CloseType) {
                         <Gears w='24' h='24' fill='var(--bs-secondary)' className='notAllowed' /> :
                         <Gears w='24' h='24' fill='var(--bs-secondary)' className='pointer opacity' />
                   }
-                  
+
                   <button className="btn btn-primary ml-2 border" id="btn_openCash" onClick={startJob}>
                      Abrir Caixa
                      <CashRegister w='24' h='24' fill='var(--text)' className='ml-1 text-color' />
-                  </button>
+                  </button> 
 
                   <button className="btn btn-danger ml-2 border" id="btn_closeCash" style={{ display: 'none' }} onClick={handleCloseCash}>
                      Fechar Caixa
                      <CashRegister w='24' h='24' fill='var(--text)' className='ml-1 text-color' />
                   </button>
+                  
+
+
                </div>
             </header>
 

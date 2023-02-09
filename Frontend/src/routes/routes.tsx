@@ -32,13 +32,17 @@ export default function RoutesApp() {
                   <RequireAuth children= { <RegisterUser /> } /> 
                } /> 
 
-               <Route path="/edit/user/:id" element={ < EditUser /> } /> {/* OK */}
+               <Route path="/edit/user/:id" element={ 
+                  <RequireAuth children= { <EditUser /> } />
+                } /> 
 
                <Route path='/OpenCash' element={ <OpenCash /> } /> {/* OK */}
                <Route path='/OpenSystem' element={ <OpenSystem /> } />
 
                <Route path="/registerNewProduct" element={ <RegisterProduct /> } /> {/* OK */}
-               <Route path="/edit/product/:id" element={ <EditProduct /> } /> {/* OK */}
+               <Route path="/edit/product/:id" element={ 
+                  <RequireAuth children={< EditProduct /> } />
+               } /> 
 
                <Route path='*' element={ <Error /> } /> {/* OK  */}
             </Routes>

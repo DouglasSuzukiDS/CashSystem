@@ -129,10 +129,10 @@ server.post('/login', async(req, res) => { // Error
          // console.log(user)
 
          let user = Object.values(result)
-         console.log(typeof user)
+         console.log(typeof user[0])
          console.log(user[0])
          // res.status(200).json({ msg: `Logado como: ${userLogin}`, token: `Token: ${token}`, result: `${user}`})
-         res.status(200).send({ msg: `Logado como: ${userLogin}`, token: `${token}`, user: `${user[0]}`})
+         res.status(200).send({ msg: `Logado como: ${userLogin}`, token: `${token}`, user: `${JSON.stringify(user[0])}`})
 
          // res.json({ status: true, token })
       } else {

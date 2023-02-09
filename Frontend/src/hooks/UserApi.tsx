@@ -15,7 +15,7 @@ export const useApi = () => ({
       let response = await axios.post(`${backend}/login`, {userLogin , userPassword })
          .then((response) => {
             if (response.status === 200) {
-               console.log(response.data.msg, response.data.token)
+               console.log(response.data.msg, response.data.token, response.data.user)
 
                //setTimeout(() => navigate('/'), 2000)
 
