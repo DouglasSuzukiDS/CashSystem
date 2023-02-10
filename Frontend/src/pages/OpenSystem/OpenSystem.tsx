@@ -1,4 +1,4 @@
-import { useState, useEffect, HTMLAttributes } from "react";
+import { useState, useEffect, HTMLAttributes, useContext } from "react";
 import axios from 'axios'
 import CashRegister from "../../assets/Icons/CashRegister";
 import Gears from "../../assets/Icons/Gears";
@@ -14,13 +14,22 @@ import FindProducts from "../../Components/FindProducts/FindProducts";
 import OpenCash from "../../Components/OpenCash/OpenCash";
 import { CloseType } from "../../types/CloseType";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../../context/Auth/AuthContext";
+import { UserType } from "../../types/UserType";
 
 
 export default function OpenSystem({ close }: CloseType) {
    const backend = 'http://localhost:3001'
    const navigate = useNavigate()
-   const AuthTokenLC = localStorage.getItem('AuthToken') 
+   const auth = useContext(AuthContext)
+
+   const { user }  = auth
+   const [userInfos, setUserInfos] = useState<UserType | null>()
+
+   const AuthTokenLC = localStorage.getItem('AuthToken')
    const OpenCashValueLC = localStorage.getItem('openCashValue')
+
+   //let statusSystemH4 = document.querySelector('#statusSystemH4') as HTMLHeadingElement
 
    /* useEffect(() => {
        if(localStorage.getItem('openCashValue').valueOf() !== '') {
@@ -45,9 +54,14 @@ export default function OpenSystem({ close }: CloseType) {
        } 
     }, [])*/
 
-    useEffect(() => {
+   useEffect(() => {
+      // setUserInfos(user as UserType)
+      console.log(`Infos do user ${user}`)
+      setUserInfos(user)
+      console.log(userInfos)
+
       checkStatus() // Verifica se existe um Token, se existir verifica se o caixa já foi aberto
-    }, [])
+   }, [])
 
    // Get All Users
    const [users, setUsers] = useState([])
@@ -103,12 +117,27 @@ export default function OpenSystem({ close }: CloseType) {
 
    const checkStatus = () => { // Verifica se existe um Token, se existir verifica se o caixa já foi aberto
       if(AuthTokenLC) {
-         OpenCashValueLC ? setOpen(true) : setOpen(false) 
-         // if(OpenCashValue) {
-         //    //setOpenCashValue(OpenCashValueLC!)
-         //    setOpen(true)
-         // }
+         // OpenCashValueLC ? setOpen(true) : setOpen(false)
+         if(OpenCashValueLC) {
+            setOpen(true)
+            setOpenCashValue(OpenCashValueLC)
+
+            // Status Cash System
+            let statusSystemH4 = document.querySelector('#statusSystemH4') as HTMLHeadingElement
+            statusSystemH4.classList.remove('text-danger')
+            statusSystemH4.classList.add('text-success')
+            statusSystemH4.innerHTML = 'Caixa Aberto'
+
+             // Button Status Cash
+            let btn_openCash = document.querySelector('#btn_openCash') as HTMLButtonElement
+            let btn_closeCash = document.querySelector('#btn_closeCash') as HTMLButtonElement
+
+
+            btn_openCash.style.display = 'none'
+            btn_closeCash.style.display = 'flex'
+         }
       } else {
+         setOpen(false)
          navigate('/')
       }
    }
@@ -117,11 +146,6 @@ export default function OpenSystem({ close }: CloseType) {
       //alert(`Valor do localstorage: ${openCashValue}`)
       const contentSystemStart = document.querySelector('#contentSystemStart') as HTMLDivElement
       contentSystemStart.classList.toggle('flex')
-
-      setOpenCashValue(OpenCashValueLC!)
-
-      setOpen(true)
-      // let openCashValue = localStorage.getItem('openCashValue')
    }
 
    const handleFindProductModal = () => {
@@ -164,7 +188,7 @@ export default function OpenSystem({ close }: CloseType) {
          F12 = 123
       */
 
-      window.addEventListener('keydown', (event) => { 
+      window.addEventListener('keydown', (event) => {
          if (event.keyCode === 113) { // F2 Historico
             alert('F2')
          } else if (event.keyCode === 115) { // F4 Finalizar
@@ -174,7 +198,7 @@ export default function OpenSystem({ close }: CloseType) {
             handleFindProductModal()
          } else if (event.keyCode === 121) { // F10 Cancelar
             alert('F10')
-         }else if (event.keyCode === 123) { // F12 Pagamento
+         } else if (event.keyCode === 123) { // F12 Pagamento
             alert('F12')
          }
       })
@@ -183,12 +207,11 @@ export default function OpenSystem({ close }: CloseType) {
    return (
       <main className="containerSystem flex p-3">
          <div className="infosSystemClose none" id="infosSystemClose">
-            {/* <Closing close={handleCloseCash} openCashValue={localStorage.getItem('openCashValue')} /> */}
             <Closing close={handleCloseCash} />
          </div>
 
          <div className="flex" id="modals">
-            {invoicingModal && <Invoicing close={ handleCloseCash } />}
+            {invoicingModal && <Invoicing close={handleCloseCash} />}
 
             {findProductsModal && <FindProducts close={handleFindProductModal} />}
          </div>
@@ -205,31 +228,41 @@ export default function OpenSystem({ close }: CloseType) {
                </div>
 
                <div className="openSystem flex">
-                  { 
-                     !open ?  
-                        <Gears w='24' h='24' fill='var(--bs-secondary)' className='notAllowed' /> :
-                        <Gears w='24' h='24' fill='var(--bs-secondary)' className='pointer opacity' />
+                  {
+                     !open ? 
+                        <>
+                           <Gears w='24' h='24' fill='var(--bs-secondary)' className='notAllowed' />
+
+                           {/* <button className="btn btn-primary ml-2 border" id="btn_openCash" onClick={ startJob }>
+                              Abrir Caixa
+                              <CashRegister w='24' h='24' fill='var(--text)' className='ml-1 text-color' />
+                           </button> */}
+                        </> :
+                        <>
+                           <Gears w='24' h='24' fill='var(--bs-secondary)' className='pointer opacity' />
+
+                           {/* <button className="btn btn-danger ml-2 border" id="btn_closeCash" onClick={ handleCloseCash }>
+                              Fechar Caixa
+                              <CashRegister w='24' h='24' fill='var(--text)' className='ml-1 text-color' />
+                           </button> */}
+                        </>
                   }
 
-                  <button className="btn btn-primary ml-2 border" id="btn_openCash" onClick={startJob}>
+                  <button className="btn btn-primary ml-2 border" id="btn_openCash" onClick={ startJob }>
                      Abrir Caixa
                      <CashRegister w='24' h='24' fill='var(--text)' className='ml-1 text-color' />
-                  </button> 
+                  </button>
 
-                  <button className="btn btn-danger ml-2 border" id="btn_closeCash" style={{ display: 'none' }} onClick={handleCloseCash}>
+                  <button className="btn btn-danger ml-2 border" id="btn_closeCash" onClick={ handleCloseCash } style={{ display: 'none' }}>
                      Fechar Caixa
                      <CashRegister w='24' h='24' fill='var(--text)' className='ml-1 text-color' />
                   </button>
-                  
-
-
                </div>
             </header>
 
             <div className="contentSystem flex" id="contentSystem">
                <div className="none" id="contentSystemStart">
-                  <OpenCash close={ startJob } />
-                  {/* <p>Teste</p> */}
+                  <OpenCash />
                </div>
             </div>
 

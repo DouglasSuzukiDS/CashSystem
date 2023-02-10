@@ -1,17 +1,27 @@
 import axios from 'axios'
-import { ChangeEvent, useContext, useState } from 'react';
+import { ChangeEvent, useContext, useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom'
 import ArrowRightToBracket from "../../assets/Icons/ArrowRightToBracket";
 import IdCard from "../../assets/Icons/IdCard";
 import { AuthContext } from '../../context/Auth/AuthContext';
 
+
 export default function Login() {
+   useEffect(() => {
+      const authToken = localStorage.getItem('authToken')
+
+      if(authToken !== undefined){
+         //navigate('/OpenSystem') 
+      } 
+   })
+
    const auth = useContext(AuthContext)
+   
    const navigate = useNavigate()
 
    const [userLogin, setUserLogin] = useState('')
    const [userPassword, setUserPassword] = useState('')
-   const [loading, setLoading] = useState(false) 
+   const [loading, setLoading] = useState(false)
 
    const handleuserLogin = (e: ChangeEvent<HTMLInputElement>) => {
       setUserLogin(e.target.value)

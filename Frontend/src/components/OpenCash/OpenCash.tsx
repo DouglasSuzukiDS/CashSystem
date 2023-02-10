@@ -11,8 +11,16 @@ export default function OpenCash({ close }: CloseType) {
    useEffect(() => {
       //localStorage.removeItem('openCashValue')
       localStorage.getItem('openCashValue')
-      //localStorage
    }, [])
+
+   const navigate = useNavigate()
+   
+   const handleOpenCashModal = () => {
+      // Modal OpenCash
+      let modal = document.querySelector('#openCashModal') as HTMLElement
+      modal.classList.remove('flex')
+      modal.classList.add('none')
+   }
 
    const cashStatus = () => {
       // Status Cash System
@@ -27,39 +35,11 @@ export default function OpenCash({ close }: CloseType) {
 
       btn_openCash.style.display = 'none'
       btn_closeCash.style.display = 'flex'
-      
-      // let notAllowedClass =[...document.querySelectorAll('.notAllowed')]
-      // notAllowedClass[0].classList.remove('notAllowed')
-      // notAllowedClass[0].style.cursos = 'pointer'
+
    }
 
-   /*if(localStorage.getItem('openCashValue') !== '') {
-   //    let statusSystemH4 = document.querySelector('#statusSystemH4')
-   //    statusSystemH4.classList.remove('text-danger')
-   //    statusSystemH4.classList.add('text-success')
-   //    statusSystemH4.innerHTML = 'Caixa Aberto'
-
-   //    // Button Status Cash
-   //   let btn_openCash = document.querySelector('#btn_openCash')
-   //   let btn_closeCash = document.querySelector('#btn_closeCash')
-
-
-   //   btn_openCash.style.display = 'none'
-   //   btn_closeCash.style.display = 'flex'
-     
-   //   let notAllowedClass =[...document.querySelectorAll('.notAllowed')]
-   //   notAllowedClass[0].classList.remove('notAllowed')
-   //   notAllowedClass[0].style.cursos = 'pointer'
-
-     cashStatus()
-   } else {
-
-   }*/
-
-   const navigate = useNavigate()
    
    const openCashValue = () => {
-      // let openingCash = parseFloat(document.querySelector('#openingCash').value).toFixed(2)
       let openingCashInput = document.querySelector('#openingCash') as HTMLInputElement
       let openingCash = parseFloat(openingCashInput.value).toFixed(2)
 
@@ -67,19 +47,15 @@ export default function OpenCash({ close }: CloseType) {
 
       function createValueLocalStorage(){
          // Create value on Local Storage
-         // localStorage.removeItem('openCashValue')
          localStorage.removeItem('openCashValue')
          localStorage.setItem('openCashValue', openingCash)
 
-         //navigate('/')
-
-         //cashStatus()
-
-         // Modal OpenCash
-         let modal = document.querySelector('#openCashModal') as HTMLElement
-         modal.classList.remove('flex')
-         modal.classList.add('none')
+         // // Modal OpenCash
+         // let modal = document.querySelector('#openCashModal') as HTMLElement
+         // modal.classList.remove('flex')
+         // modal.classList.add('none')
          // console.log(modal)
+         handleOpenCashModal()
 
          // Status Cash System
          let statusSystemH4 = document.querySelector('#statusSystemH4') as HTMLHeadingElement
@@ -95,11 +71,6 @@ export default function OpenCash({ close }: CloseType) {
       //   btn_closeCash.classList.remove('none')
         btn_openCash.style.display = 'none'
         btn_closeCash.style.display = 'flex'
-        
-      //   let notAllowedClass = [...document.querySelectorAll('.notAllowed')] as HTMLAttributes
-      //   let notAllowedClass = document.querySelectorAll<HTMLElement>('.notAllowed')
-      //   notAllowedClass[0].classList.remove('notAllowed') 
-      //   notAllowedClass[0].style.cursor = 'pointer'
       }
 
       //eslint-disable-next-line no-restricted-globals
@@ -122,7 +93,7 @@ export default function OpenCash({ close }: CloseType) {
                   <div id='closeOpenCash'>
                      <XMark w='24' h='24'
                         className=''
-                        onClick={ close }
+                        onClick={ handleOpenCashModal }
                      />
                   </div>
                </h4>
