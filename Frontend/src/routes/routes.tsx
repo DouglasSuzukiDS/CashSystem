@@ -1,18 +1,19 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import AllIcons from "../AllIcons";
-import EditProduct from "../Components/EditProduct/EditProduct";
-import EditUser from "../Components/EditUser/EditUser";
+import EditProduct from "../components/EditProduct/EditProduct";
+import EditUser from "../components/EditUser/EditUser";
 
-import FindProducts from "../Components/FindProducts/FindProducts";
-import OpenCash from "../Components/OpenCash/OpenCash";
+import FindProducts from "../components/FindProducts/FindProducts";
+import OpenCash from "../components/OpenCash/OpenCash";
 import { AuthProvider } from "../context/Auth/AuthProvider";
 import { RequireAuth } from "../context/Auth/RequireAuth";
-import Error from "../Pages/Error/Error";
-import Login from "../Pages/Login/Login";
-import OpenSystem from "../Pages/OpenSystem/OpenSystem";
-import RegisterProduct from "../Pages/RegisterProduct/RegisterProduct";
-import RegisterUser from "../Pages/RegisterUser/RegisterUser";
-// import Login from "../Pages/Login/Login";
+import Login from "../pages/Login/Login";
+import OpenSystem from "../pages/OpenSystem/OpenSystem";
+import RegisterProduct from "../pages/RegisterProduct/RegisterProduct";
+import RegisterUser from "../pages/RegisterUser/RegisterUser";
+import Error from "../pages/Error/Error";
+
+// import Login from "../pages/Login/Login";
 
 
 export default function RoutesApp() {
@@ -40,9 +41,10 @@ export default function RoutesApp() {
                <Route path='/OpenSystem' element={ <OpenSystem /> } />
 
                <Route path="/registerNewProduct" element={ <RegisterProduct /> } /> {/* OK */}
-               <Route path="/edit/product/:id" element={ 
+               {/* <Route path="/edit/product/:id" element={ 
                   <RequireAuth children={< EditProduct /> } />
-               } /> 
+               } />  */}
+               <Route path="/edit/product/:id" element={ < EditProduct /> } /> 
 
                <Route path='*' element={ <Error /> } /> {/* OK  */}
             </Routes>

@@ -1,6 +1,6 @@
 import { useContext } from "react"
-import Error from "../../Pages/Error/Error"
-import Login from "../../Pages/Login/Login"
+import Error from "../../pages/Error/Error"
+import Login from "../../pages/Login/Login"
 import { AuthContext } from "./AuthContext"
 
 export const RequireAuth = ({ children }: {children: JSX.Element}) => {

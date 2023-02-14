@@ -9,26 +9,24 @@ import TrashCanXMark from "../../assets/Icons/TrashCanXMark"
 import { Link } from "react-router-dom"
 import { Products } from "../../types/ProductsType"
 import { CloseType } from "../../types/CloseType"
-import EditProduct from "../EditProduct/EditProduct"
 
 export default function FindProducts({ close }: CloseType) {
    const server = 'http://localhost:3001'
 
    // Get All Users
    const [users, setUsers] = useState([])
-
+   
    useEffect(() => {
       axios.get(`${server}/users`)
-         .then(response => setUsers(response.data.result))
-         .catch(err => console.log(err))
+      .then(response => setUsers(response.data.result))
+      .catch(err => console.log(err))
    }, [])
    //console.log(users)
-
+   
    // Get All Products
    const [products, setProducts] = useState<Products[]>([]) // First Search on List
    const [find, setFind] = useState<Products[]>([]) // List before Search
    const [items, setItems] = useState<Products[]>([]) // List if Search is empty
-   const [editProductModel, setEditProductModal] = useState(false)
 
    useEffect(() => {
       axios.get(`${server}/products`)
@@ -40,15 +38,15 @@ export default function FindProducts({ close }: CloseType) {
          .catch(err => console.log(err))
    }, [])
 
-   const findItem = async (search: string) => {
+   const findItem = async(search: string) => {
       // let findProductInput = document.querySelector('#findProduct')
       await axios.get(`${server}/products/type`)
          // .then(response => setFind(response.data.result))
          .then(response => response.data.msg)
          .catch(err => console.log(err))
 
-      // console.log(findProductInput.value + ' no console')
-      // console.log(find)
+         // console.log(findProductInput.value + ' no console')
+         // console.log(find)
    }
 
    // Delete Product
@@ -56,13 +54,12 @@ export default function FindProducts({ close }: CloseType) {
       axios.delete(`${server}/delete/product/${id}`)
          .then(response => {
             if (response.status === 200) {
-               //alert(response.data.msg)
+               alert(response.data.msg)
             } else if (response.status !== 200) {
                console.log(response.data.status, response.data.msg)
             }
          })
-         // .catch(err => alert(err.response.data.msg))
-         .catch(err => console.log(err.response.data.msg))
+         .catch(err => alert(err.response.data.msg))
 
       return setProducts(products.filter(prod => prod.id !== id))
    }
@@ -70,7 +67,7 @@ export default function FindProducts({ close }: CloseType) {
    const returnProduct = async (e: ChangeEvent<HTMLInputElement>) => {
       let term = e.target.value
 
-      if (term === '') {
+      if(term === '') {
          // console.log('O term é: ' + term)
          setProducts(items)
       } else {
@@ -82,7 +79,7 @@ export default function FindProducts({ close }: CloseType) {
 
          let findByType = find.filter(prod => prod.pdt_type.includes(search))
 
-         if (findByName.length !== 0) {
+         if(findByName.length !== 0) {
             setProducts(findByName)
          } else {
             setProducts(findByType)
@@ -90,31 +87,25 @@ export default function FindProducts({ close }: CloseType) {
       }
    }
 
-   const handleEditProduct = async (id: string) => {
-      // alert(`O id do produto para edição é ${id}`)
-      setEditProductModal(!editProductModel)
-   }
-
    return (
+      <>
+         <article className="container flex pr-3" id='FindProductModal'>
 
-      <article className="container flex pr-3 border3 w-100 h-100" id='FindProductModal'>
+            <div className="forms">
 
-         <div className="forms">
+               <form action='/' className="formsFindProducts w-100 h-100 f column sbt" id='formsFindProducts'>
+                  <h4 className="f sbt pb-2">
 
-            {!editProductModel ?
-               <form action='/' className="findProductsForm w-100 h-100 f column sbt border3" id='findProductsForm'>
-                  <h4 className="flex sbt">
-
-                     <div className="flex text-center w-100">
-                        <h5 className='flex text-info'>Edit um Produto</h5>
+                     <div className="flex text-center">
+                        <h5 className='flex text-info'>Pesquise um Produto</h5>
                         <MagnifyingGlass w='24' h='24' fill='var(--bs-info)' className='ml-1' />
                      </div>
 
                      {/* <div id='closeFindProducts' onClick={props.close}> */}
-                     <div id='closeFindProducts border'>
+                     <div id='closeFindProducts'>
                         <XMark w='24' h='24'
                            className=''
-                           onClick={close}
+                           onClick={ close }
                         />
                      </div>
                   </h4>
@@ -130,7 +121,7 @@ export default function FindProducts({ close }: CloseType) {
                      </div>
                   </div>
 
-                  <div className="tableFormList mt-1" id="tableFormList">
+                  <div className="tableFormList" id="tableFormList">
                      <table className="tableFindProduct text-center pg5 bold" id="tableFindProduct">
                         <thead className="none">
                            <tr className="">
@@ -153,9 +144,9 @@ export default function FindProducts({ close }: CloseType) {
                                        <td>{prod.pdt_qty}</td>
                                        <td>
                                           <div className="flex jsc aic">
-                                             {/* <Link to={`/edit/product/${prod.id}`} > */}
-                                             <PenToSquare w='16' h='16' fill='var(--bs-warning)' className='warning-hover' onClick={() => handleEditProduct(prod.id)} />
-                                             {/* </Link> */}
+                                             <Link to={`/edit/product/${prod.id}`} >
+                                                <PenToSquare w='16' h='16' fill='var(--bs-warning)' className='warning-hover' />
+                                             </Link>
 
                                              <Link to='/findproducts' onClick={() => handleDeleteProduct(prod.id)}>
                                                 <TrashCanXMark w='16' h='16' fill='var(--bs-danger)' className='danger-hover' />
@@ -176,11 +167,12 @@ export default function FindProducts({ close }: CloseType) {
                      <CircleCheck w='24' h='24' fill='var(--text)' className='ml-1' />
                   </div>
 
-               </form> :
-               <EditProduct close={ () => handleEditProduct } />
-            }
-         </div>
-      </article>
+               </form>
+            </div>
+         </article>
+      </>
+
+
    )
 
 }

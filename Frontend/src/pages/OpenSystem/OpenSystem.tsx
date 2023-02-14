@@ -8,14 +8,16 @@ import MagnifyingGlass from "../../assets/Icons/MagnifyingGlass";
 import SackDollar from "../../assets/Icons/SackDollar";
 import Signature from "../../assets/Icons/Signature";
 import TrashCan from "../../assets/Icons/TrashCan";
-import Closing from "../../Components/Closing/Closing";
-import Invoicing from "../../Components/Invoicing/Invoice";
-import FindProducts from "../../Components/FindProducts/FindProducts";
-import OpenCash from "../../Components/OpenCash/OpenCash";
+import Closing from "../../components/Closing/Closing";
+import Invoicing from "../../components/Invoicing/Invoice";
+import FindProducts from "../../components/FindProducts/FindProducts";
+import OpenCash from "../../components/OpenCash/OpenCash";
 import { CloseType } from "../../types/CloseType";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/Auth/AuthContext";
 import { UserType } from "../../types/UserType";
+import EditUser from "../../components/EditUser/EditUser";
+import EditProduct from "../../components/EditProduct/EditProduct";
 
 
 export default function OpenSystem({ close }: CloseType) {
@@ -148,7 +150,7 @@ export default function OpenSystem({ close }: CloseType) {
       contentSystemStart.classList.toggle('flex')
    }
 
-   const handleFindProductModal = () => {
+   const handleToogleFindProductModal = () => {
       if (open === false) {
          alert('Por obséquio abra o caixa')
       } else {
@@ -195,7 +197,7 @@ export default function OpenSystem({ close }: CloseType) {
             alert('F4')
          } else if (event.keyCode === 120) { // F9 Pesquisar
             // alert('F9')
-            handleFindProductModal()
+            handleToogleFindProductModal()
          } else if (event.keyCode === 121) { // F10 Cancelar
             alert('F10')
          } else if (event.keyCode === 123) { // F12 Pagamento
@@ -204,17 +206,21 @@ export default function OpenSystem({ close }: CloseType) {
       })
    }
 
+   const handleManager = () => {
+
+   }
+
    return (
       <main className="containerSystem flex p-3">
          <div className="infosSystemClose none" id="infosSystemClose">
             <Closing close={handleCloseCash} />
          </div>
 
-         <div className="flex" id="modals">
+         {/* <div className="flex" id="modals">
             {invoicingModal && <Invoicing close={handleCloseCash} />}
 
-            {findProductsModal && <FindProducts close={handleFindProductModal} />}
-         </div>
+            {findProductsModal && <FindProducts close={handleToogleFindProductModal} />}
+         </div> */}
 
          <section className="sectionSystem">
             <header className="headerSystem flex sbt">
@@ -239,7 +245,7 @@ export default function OpenSystem({ close }: CloseType) {
                            </button> */}
                         </> :
                         <>
-                           <Gears w='24' h='24' fill='var(--bs-secondary)' className='pointer opacity' />
+                           <Gears w='24' h='24' fill='var(--bs-secondary)' className='pointer opacity' onClick={ handleToogleFindProductModal } />
 
                            {/* <button className="btn btn-danger ml-2 border" id="btn_closeCash" onClick={ handleCloseCash }>
                               Fechar Caixa
@@ -263,6 +269,12 @@ export default function OpenSystem({ close }: CloseType) {
             <div className="contentSystem flex" id="contentSystem">
                <div className="none" id="contentSystemStart">
                   <OpenCash />
+               </div>
+
+               <div className="managerArea flex border">
+                  { !findProductsModal &&
+                     <FindProducts close={ handleToogleFindProductModal } />
+                  }
                </div>
             </div>
 
@@ -288,7 +300,7 @@ export default function OpenSystem({ close }: CloseType) {
                      <SackDollar w='20' h='20' fill='var(--text)' className='ml-1' />
                   </button>
 
-                  <button className="btn btn-warning ml-1" onClick={handleFindProductModal} onKeyDown={handleKeyDown}>
+                  <button className="btn btn-warning ml-1" onClick={handleToogleFindProductModal} onKeyDown={handleKeyDown}>
                      F9 Pesquisar
                      <MagnifyingGlass w='20' h='20' fill='var(--text-dark)' className='ml-1' />
                   </button>

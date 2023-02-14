@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import ArrowRightToBracket from "../../assets/Icons/ArrowRightToBracket";
 import IdCard from "../../assets/Icons/IdCard";
 
-export default function Login() {
+export default function LoginSave() {
    const backend: string = "http://localhost:3001"
 
    const navigate = useNavigate()

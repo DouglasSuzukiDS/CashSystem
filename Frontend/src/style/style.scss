@@ -10,23 +10,23 @@
    font-family: 'JetBrains Mono';
 }
 
-@import '../SCSS/global';
-@import '../SCSS/tipography';
-@import '../SCSS/align';
-@import '../SCSS/button';
-@import '../SCSS/colors';
-@import '../SCSS/spacing';
+// @import '../scss/global';
+// @import '../scss/tipography';
+// @import '../scss/align';
+// @import '../scss/button';
+// @import '../scss/colors';
+// @import '../scss/spacing';
 
-@import '../Pages/Login/Login';
+// @import '../pages/Login/Login';
 
-@import '../Components/Invoicing/Invoice';
-@import '../Components/Closing/Closing';
-@import '../Components/OpenCash/OpenCash';
-@import '../Components/FindProducts/FindProducts';
-@import '../Components/EditProduct/EditProduct';
-@import '../Components/EditUser/EditUser';
+// @import '../components/Invoicing/Invoice';
+// @import '../components/Closing/Closing';
+// @import '../components/OpenCash/OpenCash';
+@import '../components/FindProducts/FindProducts';
+// @import '../components/EditProduct/EditProduct';
+// @import '../components/EditUser/EditUser';
 
-@import '../Pages/RegisterUser/RegisterUser';
-@import '../Pages/Login/Login';
-@import '../Pages/RegisterProduct/RegisterProduct';
-@import '../Pages/OpenSystem/OpenSystem';
+// @import '../pages/RegisterUser/RegisterUser';
+// @import '../pages/Login/Login';
+// @import '../pages/RegisterProduct/RegisterProduct';
+// @import '../pages/OpenSystem/OpenSystem';

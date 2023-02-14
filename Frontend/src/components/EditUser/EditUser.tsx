@@ -9,7 +9,7 @@ import UserPlus from "../../assets/Icons/UserPlus"
 import ArrowLeftLong from "../../assets/Icons/ArrowLeftLong"
 import { useEffect } from "react"
 
-export default function EditUserSave() {
+export default function EditUser() {
    const server = 'http://localhost:3001'
 
    const { id } = useParams()
