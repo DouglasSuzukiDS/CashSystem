@@ -10,10 +10,11 @@ import { CloseType } from "../../types/CloseType";
 import XMark from "../../assets/Icons/XMark";
 import { PropsIcons } from "../../types/PropsIcons";
 
-export default function EditProduct({ close }: CloseType) {
+export default function EditProduct({ close, id }: CloseType) {
    const server: string = 'http://localhost:3001'
 
-   const { id } = useParams()
+   // const { id } = useParams()
+   console.log(id)
 
    const navigate = useNavigate()
 
@@ -21,21 +22,15 @@ export default function EditProduct({ close }: CloseType) {
 
    let findProductInput = document.querySelector('#findProduct')
 
-   useEffect(() => {  // Lista os Arquivos
+   useEffect(() => { // Chama a função para setar os campos com os dados do produto
+      // getProducts()
+      getProduct()
+   },[])
+
+   const getProducts = async() => {
       axios.get(`${server}/products`)
          .then(response => setProduct(response.data.result))
-   }, [])
-
-   useEffect(() => { // Chama a função para setar os campos com os dados do produto
-      getProduct()
-   })
-
-   //console.log(product)
-   // console.log(id)
-
-   let test = async () => {
-      await axios.get(`${server}/product/${id}`)
-         .then(response => console.log(response.data.result[0]))
+         .catch(err => alert(err.response.data))
    }
 
    let newProductName = document.querySelector('#newProductName') as HTMLInputElement
@@ -43,7 +38,7 @@ export default function EditProduct({ close }: CloseType) {
    let newProductType = document.querySelector('#newProductType') as HTMLInputElement
    let newProductQty = document.querySelector('#newProductQty') as HTMLInputElement
 
-   async function getProduct() { // Seta os campos com o dado do produto
+   const getProduct = async() => { // Seta os campos com o dado do produto
       await axios.get(`${server}/product/${id}`)
          .then(response => {
             let pdt_name = response.data.result[0].pdt_name
@@ -55,13 +50,14 @@ export default function EditProduct({ close }: CloseType) {
             newProductPrice.value = pdt_price
             newProductType.value = pdt_type
             newProductQty.value = pdt_qty
+
          })
          // .catch(err => alert(err.response.data))
-         .catch(err => console.log(err.response.data))
+         .catch(err => console.log(err))
 
    }
 
-   async function updateProduct(id: string) { // Atualiza o produto
+   const updateProduct = async(id: string) => { // Atualiza o produto
 
       await axios.put(`${server}/edit/product/${id}`, {
          // pdt_name, pdt_price, pdt_type, pdt_qty
@@ -86,7 +82,9 @@ export default function EditProduct({ close }: CloseType) {
                      Quatidade do Produto: ${newProductQty.value}
                   `)
 
-                  setTimeout(() => navigate('/openSystem'), 1000)
+                  // setTimeout(() => navigate('/openSystem'), 1000)
+                  // getProducts()
+                  
                } else if (response.status === 400) {
                   alert('Erro ao cadastrar')
                }
@@ -169,7 +167,7 @@ export default function EditProduct({ close }: CloseType) {
                <MoneyCheckPen w='25' h='25' fill='var(--bs-info)' className='ml-1' />
             </div>
 
-            <div id='closeEditProduct'>
+            <div id='closeEditProduct' className="flex">
                <XMark w='24' h='24'
                   className=''
                   onClick={ close }
@@ -221,10 +219,10 @@ export default function EditProduct({ close }: CloseType) {
             <Registered w='24' h='24' fill='var(--bs-dark)' className='ml-1' />
          </button>
 
-         <Link to='/' className="btn btn-warning" >
+         <button className="btn btn-warning" onClick={ close } >
             Voltar
             <ArrowLeftLong w='24' h='24' fill='var(--bs-dark)' className='ml-1' />
-         </Link>
+         </button>
       </section>
    )
 }

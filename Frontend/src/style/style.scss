@@ -10,23 +10,23 @@
    font-family: 'JetBrains Mono';
 }
 
-// @import '../scss/global';
-// @import '../scss/tipography';
-// @import '../scss/align';
-// @import '../scss/button';
-// @import '../scss/colors';
-// @import '../scss/spacing';
+@import '../scss/global';
+@import '../scss/tipography';
+@import '../scss/align';
+@import '../scss/button';
+@import '../scss/colors';
+@import '../scss/spacing';
 
-// @import '../pages/Login/Login';
+@import '../pages/Login/Login';
 
-// @import '../components/Invoicing/Invoice';
-// @import '../components/Closing/Closing';
-// @import '../components/OpenCash/OpenCash';
+@import '../components/Invoicing/Invoice';
+@import '../components/Closing/Closing';
+@import '../components/OpenCash/OpenCash';
 @import '../components/FindProducts/FindProducts';
-// @import '../components/EditProduct/EditProduct';
-// @import '../components/EditUser/EditUser';
+@import '../components/EditProduct/EditProduct';
+@import '../components/EditUser/EditUser';
 
-// @import '../pages/RegisterUser/RegisterUser';
-// @import '../pages/Login/Login';
-// @import '../pages/RegisterProduct/RegisterProduct';
-// @import '../pages/OpenSystem/OpenSystem';
+@import '../pages/RegisterUser/RegisterUser';
+@import '../pages/Login/Login';
+@import '../pages/RegisterProduct/RegisterProduct';
+@import '../pages/OpenSystem/OpenSystem';

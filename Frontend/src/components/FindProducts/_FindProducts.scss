@@ -9,6 +9,10 @@
    scroll-behavior: smooth;
 }
 
+ #findProductsForm h4 > #closeFindProducts:hover {
+   cursor: pointer;
+   opacity: 0.5;
+}
 
 .tableFormList {
    max-height: 330px;

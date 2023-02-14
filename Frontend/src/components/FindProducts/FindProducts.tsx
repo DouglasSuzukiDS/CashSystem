@@ -29,6 +29,7 @@ export default function FindProducts({ close }: CloseType) {
    const [find, setFind] = useState<Products[]>([]) // List before Search
    const [items, setItems] = useState<Products[]>([]) // List if Search is empty
    const [editProductModel, setEditProductModal] = useState(false)
+   const [idItem, setIdItem] = useState('')
 
    useEffect(() => {
       axios.get(`${server}/products`)
@@ -77,13 +78,16 @@ export default function FindProducts({ close }: CloseType) {
          let search = term.replace(term[0], term[0].toLocaleUpperCase())
          // setProducts(find.filter(prod => prod.pdt_name.includes(search)))
          // setProducts(find.filter(prod => prod.pdt_type.includes(search)))
-
+         //console.log(search)
+         
          let findByName = find.filter(prod => prod.pdt_name.includes(search))
+         //console.log(findByName)
 
          let findByType = find.filter(prod => prod.pdt_type.includes(search))
 
          if (findByName.length !== 0) {
             setProducts(findByName)
+            // console.log(products)
          } else {
             setProducts(findByType)
          }
@@ -91,8 +95,13 @@ export default function FindProducts({ close }: CloseType) {
    }
 
    const handleEditProduct = async (id: string) => {
-      // alert(`O id do produto para edição é ${id}`)
+      // Função responsável por passar o ID via prop para o EditProduct, consequentemente buscando o dado no Backend para Editar e mostrar o modal
+      setIdItem(id)
       setEditProductModal(!editProductModel)
+   }
+
+   const handleCloseEditProductModal = () => {
+      setEditProductModal(false)
    }
 
    return (
@@ -102,7 +111,7 @@ export default function FindProducts({ close }: CloseType) {
          <div className="forms">
 
             {!editProductModel ?
-               <form action='/' className="findProductsForm w-100 h-100 f column sbt border3" id='findProductsForm'>
+               <form action='/' className="findProductsForm w-100 h-100 f column sbt" id='findProductsForm'>
                   <h4 className="flex sbt">
 
                      <div className="flex text-center w-100">
@@ -111,19 +120,19 @@ export default function FindProducts({ close }: CloseType) {
                      </div>
 
                      {/* <div id='closeFindProducts' onClick={props.close}> */}
-                     <div id='closeFindProducts border'>
+                     <div id='closeFindProducts' className="flex">
                         <XMark w='24' h='24'
                            className=''
-                           onClick={close}
+                           onClick={ close }
                         />
                      </div>
                   </h4>
 
-                  <div className="inputForm f aic sbt p-1"> {/* Abertura */}
+                  <div className="inputForm f aic sbt p-1"> {/* Input Search */}
                      <div className="flex inputValue w-100">
 
                         <p className='text-primary'>
-                           <input type="text" onChange={returnProduct}
+                           <input type="text" onChange={ returnProduct }
                               className='text-primary border pg3 text-center inputFindProduct'
                               id="findProduct" placeholder="Faça uma busca" />
                         </p>
@@ -152,14 +161,20 @@ export default function FindProducts({ close }: CloseType) {
                                        <td>{prod.pdt_type}</td>
                                        <td>{prod.pdt_qty}</td>
                                        <td>
-                                          <div className="flex jsc aic">
+                                          <div className="flex">
                                              {/* <Link to={`/edit/product/${prod.id}`} > */}
-                                             <PenToSquare w='16' h='16' fill='var(--bs-warning)' className='warning-hover' onClick={() => handleEditProduct(prod.id)} />
+                                             <span className="flex" onClick={ () => handleEditProduct(prod.id) }>
+                                                <PenToSquare w='16' h='16' fill='var(--bs-warning)' className='warning-hover' />
+                                             </span>
                                              {/* </Link> */}
 
-                                             <Link to='/findproducts' onClick={() => handleDeleteProduct(prod.id)}>
+                                             <span className="flex" onClick={ () => handleDeleteProduct(prod.id) }>   
                                                 <TrashCanXMark w='16' h='16' fill='var(--bs-danger)' className='danger-hover' />
-                                             </Link>
+
+                                                {/* <Link to='/findproducts' onClick={() => handleDeleteProduct(prod.id)}>
+                                                   <TrashCanXMark w='16' h='16' fill='var(--bs-danger)' className='danger-hover' />
+                                                </Link> */}
+                                             </span>
                                           </div>
                                        </td>
                                     </tr>
@@ -171,13 +186,13 @@ export default function FindProducts({ close }: CloseType) {
                   </div>
 
                   {/* <div className="flex btn btn-success mt-3" onClick={props.close}> */}
-                  <div className="flex btn btn-success mt-3">
-                     Confirmar
+                  <div className="flex btn btn-success mt-3" onClick={ close }>
+                     Ok
                      <CircleCheck w='24' h='24' fill='var(--text)' className='ml-1' />
                   </div>
 
                </form> :
-               <EditProduct close={ () => handleEditProduct } />
+               <EditProduct id={idItem} close={ handleCloseEditProductModal } />
             }
          </div>
       </article>
