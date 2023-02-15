@@ -9,38 +9,49 @@ import TrashCanXMark from "../../assets/Icons/TrashCanXMark";
 import { CloseType } from "../../types/CloseType";
 import XMark from "../../assets/Icons/XMark";
 import { PropsIcons } from "../../types/PropsIcons";
+import { Products } from "../../types/ProductsType";
 
 export default function EditProduct({ close, id }: CloseType) {
    const server: string = 'http://localhost:3001'
 
    // const { id } = useParams()
-   console.log(id)
+   //console.log(id)
 
    const navigate = useNavigate()
 
-   const [product, setProduct] = useState([])
+   const [products, setProducts] = useState<Products[]>([])
+   const [product, setProduct] = useState<Products[]>([])
 
    let findProductInput = document.querySelector('#findProduct')
 
    useEffect(() => { // Chama a função para setar os campos com os dados do produto
-      // getProducts()
-      getProduct()
-   },[])
-
+      getProducts()
+      // console.log(products)
+   }, [products])
+   
    const getProducts = async() => {
-      axios.get(`${server}/products`)
-         .then(response => setProduct(response.data.result))
+      await axios.get(`${server}/products`)
+         .then(response =>{
+            setProducts(response.data.result)
+            //console.log(products) 
+         })
+         .then(() => {
+            setProduct(products.filter((prod) => prod.id === id))
+            //console.log(product)
+            getProduct()
+         })
          .catch(err => alert(err.response.data))
    }
-
-   let newProductName = document.querySelector('#newProductName') as HTMLInputElement
-   let newProductPrice = document.querySelector('#newProductPrice') as HTMLInputElement
-   let newProductType = document.querySelector('#newProductType') as HTMLInputElement
-   let newProductQty = document.querySelector('#newProductQty') as HTMLInputElement
+      
+   const newProductName = document.querySelector('#newProductName') as HTMLInputElement
+   const newProductPrice = document.querySelector('#newProductPrice') as HTMLInputElement
+   const newProductType = document.querySelector('#newProductType') as HTMLInputElement
+   const newProductQty = document.querySelector('#newProductQty') as HTMLInputElement
 
    const getProduct = async() => { // Seta os campos com o dado do produto
       await axios.get(`${server}/product/${id}`)
          .then(response => {
+            //console.log(response.data.result[0])
             let pdt_name = response.data.result[0].pdt_name
             let pdt_price = response.data.result[0].pdt_price
             let pdt_type = response.data.result[0].pdt_type
@@ -55,7 +66,23 @@ export default function EditProduct({ close, id }: CloseType) {
          // .catch(err => alert(err.response.data))
          .catch(err => console.log(err))
 
+         //const productId = products.filter((prod) => prod.id === id)
+         // return setProduct(productId)
+
+         /*let pdt_name = product[0].pdt_name
+         let pdt_price = product[0].pdt_price
+         let pdt_type = product[0].pdt_type
+         let pdt_qty = product[0].pdt_qty
+
+         newProductName.value = pdt_name
+         newProductPrice.value = pdt_price
+         newProductType.value = pdt_type
+         newProductQty.value = pdt_qty*/
+         
+        // console.log(product)
    }
+
+   //getProduct()
 
    const updateProduct = async(id: string) => { // Atualiza o produto
 

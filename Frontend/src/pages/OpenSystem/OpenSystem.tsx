@@ -148,6 +148,16 @@ export default function OpenSystem({ close }: CloseType) {
       //alert(`Valor do localstorage: ${openCashValue}`)
       const contentSystemStart = document.querySelector('#contentSystemStart') as HTMLDivElement
       contentSystemStart.classList.toggle('flex')
+      
+      verifyOpenCashValue()
+   }
+
+   const verifyOpenCashValue = () => {
+      if(localStorage.getItem('openCashValue') !== '' || 
+         localStorage.getItem('openCashValue') !== undefined ||
+         localStorage.getItem('openCashValue') !== null) {
+            setOpen(true)
+      }
    }
 
    const handleToogleFindProductModal = () => {
@@ -165,7 +175,7 @@ export default function OpenSystem({ close }: CloseType) {
    const handleCloseCash = () => {
       // localStorage.getItem('openCashValue')
 
-      if (findProductsModal) {
+      if (!findProductsModal) {
          setFindProductsModal(false)
       }
       setInvoicingModal(!invoicingModal)
