@@ -20,25 +20,26 @@ export default function EditProduct({ close, id }: CloseType) {
    const navigate = useNavigate()
 
    const [products, setProducts] = useState<Products[]>([])
-   const [product, setProduct] = useState<Products[]>([])
+   const [product, setProduct] = useState<Products>()
 
    let findProductInput = document.querySelector('#findProduct')
 
    useEffect(() => { // Chama a função para setar os campos com os dados do produto
       getProducts()
-      // console.log(products)
-   }, [products])
+   }, [])
+
+   useEffect(() => {
+      getProduct()
+      //console.log(product)
+   }, [product])
    
    const getProducts = async() => {
       await axios.get(`${server}/products`)
          .then(response =>{
             setProducts(response.data.result)
-            //console.log(products) 
-         })
-         .then(() => {
-            setProduct(products.filter((prod) => prod.id === id))
-            //console.log(product)
-            getProduct()
+
+            setProduct((response.data.result).filter((prod: { id: string }) => prod.id === id))
+            // getProduct()
          })
          .catch(err => alert(err.response.data))
    }
@@ -49,9 +50,30 @@ export default function EditProduct({ close, id }: CloseType) {
    const newProductQty = document.querySelector('#newProductQty') as HTMLInputElement
 
    const getProduct = async() => { // Seta os campos com o dado do produto
-      await axios.get(`${server}/product/${id}`)
+
+      console.log(product)
+
+      let pdt_name = product?.pdt_name
+      let pdt_price = product?.pdt_price
+      let pdt_type = product?.pdt_type
+      let pdt_qty = product?.pdt_qty
+
+      console.log(pdt_name)
+      console.log(pdt_price)
+      console.log(pdt_type)
+      console.log(pdt_qty)
+      console.log(product?.id)
+
+      newProductName.value = product?.pdt_name!
+      newProductPrice.value = pdt_price!
+      newProductType.value = pdt_type!
+      newProductQty.value = pdt_qty!
+
+      /*await axios.get(`${server}/product/${id}`)
          .then(response => {
-            //console.log(response.data.result[0])
+            // console.log(response.data.result[0])
+            //let res = JSON.stringify(response.data.result[0])
+
             let pdt_name = response.data.result[0].pdt_name
             let pdt_price = response.data.result[0].pdt_price
             let pdt_type = response.data.result[0].pdt_type
@@ -64,10 +86,10 @@ export default function EditProduct({ close, id }: CloseType) {
 
          })
          // .catch(err => alert(err.response.data))
-         .catch(err => console.log(err))
+         //.catch(err => console.log(err))
 
          //const productId = products.filter((prod) => prod.id === id)
-         // return setProduct(productId)
+         // return setProduct(productId)*/
 
          /*let pdt_name = product[0].pdt_name
          let pdt_price = product[0].pdt_price
@@ -125,68 +147,6 @@ export default function EditProduct({ close, id }: CloseType) {
    }
 
    return (
-      // <main className="container flex">
-      //    <div className="forms border">
-
-      //       <section className="registerNewProducForm w-100 h-100 f column sbt">
-      //          <h4 className="flex">
-      //             Atualizar Produto
-      //             <MoneyCheckPen w='25' h='25' fill='var(--bs-info)' className='ml-1' />
-      //          </h4>
-
-      //          <div className="inputForm">
-      //             <input type="text" name="newProductName" id="newProductName"
-      //                placeholder="Nome do produto"
-      //                required
-      //                onInvalid={e => (e.target  as HTMLInputElement).setCustomValidity('Digite o nome do Produto')}
-      //                onInput={e => (e.target  as HTMLInputElement).setCustomValidity('')} />
-      //          </div>
-
-      //          <div className="inputForm">
-      //             <input type="number" name="newProductPrice" id="newProductPrice"
-      //                placeholder="Preço"
-      //                required
-      //                onInvalid={e => (e.target  as HTMLInputElement).setCustomValidity('Digite o preço do Produto')}
-      //                onInput={e => (e.target  as HTMLInputElement).setCustomValidity('')}
-      //             />
-      //          </div>
-
-      //          <div className="inputForm">
-      //             <select name="newProductType" id="newProductType" className="" required>
-      //                <option value="" className="withoutBg">Escolha o tipo</option>
-      //                <option value="Comidas" className="withoutBg">Comidas</option>
-      //                <option value="Bebibas" className="withoutBg">Bebidas</option>
-      //                <option value="Cigarros" className="withoutBg">Cigarros</option>
-      //                <option value="Diversos" className="withoutBg">Diversos</option>
-      //             </select>
-      //          </div>
-
-      //          <div className="inputForm">
-      //             <input type="number" name="newProductQty" id="newProductQty"
-      //                placeholder="Quantidade"
-      //                required
-      //                onInvalid={e => (e.target  as HTMLInputElement).setCustomValidity('Informe a quantidade do Produto')}
-      //                onInput={e => (e.target  as HTMLInputElement).setCustomValidity('')} />
-      //          </div>
-
-      //          <button
-      //             id="btnRegisterNewProduct"
-      //             className="btnRegisterNewProduct btn btn-info"
-      //             onClick={ () => updateProduct(`${id}`) }
-      //          >
-      //             Atualizar Produto
-      //             <Registered w='24' h='24' fill='var(--bs-dark)' className='ml-1' />
-      //          </button>
-
-      //          <Link to='/' className="btn btn-warning" >
-      //             Voltar
-      //             <ArrowLeftLong w='24' h='24' fill='var(--bs-dark)' className='ml-1' />
-      //          </Link>
-      //       </section>
-
-      //    </div>
-      // </main>
-
       <section className="editProductForm w-100 h-100 f column sbt">
          <h4 className="flex sbt">
             <div className="flex text-center w-100">

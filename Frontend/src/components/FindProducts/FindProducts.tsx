@@ -106,7 +106,7 @@ export default function FindProducts({ close }: CloseType) {
 
    return (
 
-      <article className="container flex pr-3 border3 w-100 h-100" id='FindProductModal'>
+      <article className="container flex pr-3  w-100 h-100" id='FindProductModal'>
 
          <div className="forms">
 

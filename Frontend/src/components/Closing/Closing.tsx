@@ -107,7 +107,7 @@ let amountValue = amountMoney + amountBank
                   <div id='closeElementFormDay'>
                      <XMark w='24' h='24'
                         className=''
-                        onClick={close}
+                        onClick={ close }
                      />
                   </div>
                </h4>
