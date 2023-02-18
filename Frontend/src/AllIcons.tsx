@@ -91,7 +91,6 @@ export default function AllIcons() {
    )*/
    
    return(
-      <>
          <div className="forms">
             <div className="inputForm">
                <input type="text" className='' />
@@ -101,6 +100,6 @@ export default function AllIcons() {
 
             </div>
          </div>
-      </>
+
    )
 }

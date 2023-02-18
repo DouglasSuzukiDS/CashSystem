@@ -9,7 +9,8 @@ import TrashCanXMark from "../../assets/Icons/TrashCanXMark";
 import { CloseType } from "../../types/CloseType";
 import XMark from "../../assets/Icons/XMark";
 import { PropsIcons } from "../../types/PropsIcons";
-import { Products } from "../../types/ProductsType";
+import { Product } from "../../types/ProductType";
+import { allProducts, findProductById }  from '../../services/product.service'
 
 export default function EditProduct({ close, id }: CloseType) {
    const server: string = 'http://localhost:3001'
@@ -19,12 +20,16 @@ export default function EditProduct({ close, id }: CloseType) {
 
    const navigate = useNavigate()
 
-   const [products, setProducts] = useState<Products[]>([])
-   const [product, setProduct] = useState<Products>()
+   const [products, setProducts] = useState<Product[]>([])
+   const [product, setProduct] = useState<Product>({
+      id:  '',
+      pdt_name: '',
+      pdt_price: '',
+      pdt_qty: '',
+      pdt_type: ''
+   })
 
-   let findProductInput = document.querySelector('#findProduct')
-
-   useEffect(() => { // Chama a função para setar os campos com os dados do produto
+   /*useEffect(() => { // Chama a função para setar os campos com os dados do produto
       getProducts()
    }, [])
 
@@ -42,8 +47,25 @@ export default function EditProduct({ close, id }: CloseType) {
             // getProduct()
          })
          .catch(err => alert(err.response.data))
-   }
+   }*/
       
+   useEffect(() => {
+      allProducts()
+         .then(setProducts)
+         .catch(e => console.log(e))
+
+      findProductById(id!)
+         .then(setProduct)
+         .catch(e => console.log(e))
+   }, [])
+
+   useEffect(() => {
+      getProduct()
+   })
+
+   // console.log(products)
+   // console.log(product)
+
    const newProductName = document.querySelector('#newProductName') as HTMLInputElement
    const newProductPrice = document.querySelector('#newProductPrice') as HTMLInputElement
    const newProductType = document.querySelector('#newProductType') as HTMLInputElement
@@ -51,23 +73,23 @@ export default function EditProduct({ close, id }: CloseType) {
 
    const getProduct = async() => { // Seta os campos com o dado do produto
 
-      console.log(product)
+      //console.log(product)
 
-      let pdt_name = product?.pdt_name
-      let pdt_price = product?.pdt_price
-      let pdt_type = product?.pdt_type
-      let pdt_qty = product?.pdt_qty
+      let pdt_name = product.pdt_name
+      let pdt_price = product.pdt_price
+      let pdt_type = product.pdt_type
+      let pdt_qty = product.pdt_qty
 
-      console.log(pdt_name)
-      console.log(pdt_price)
-      console.log(pdt_type)
-      console.log(pdt_qty)
-      console.log(product?.id)
+      // console.log(pdt_name)
+      // console.log(pdt_price)
+      // console.log(pdt_type)
+      // console.log(pdt_qty)
+      // console.log(product?.id)
 
-      newProductName.value = product?.pdt_name!
-      newProductPrice.value = pdt_price!
-      newProductType.value = pdt_type!
-      newProductQty.value = pdt_qty!
+      newProductName.value = pdt_name
+      newProductPrice.value = pdt_price
+      newProductType.value = pdt_type
+      newProductQty.value = pdt_qty
 
       /*await axios.get(`${server}/product/${id}`)
          .then(response => {

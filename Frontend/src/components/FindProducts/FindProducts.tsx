@@ -7,9 +7,10 @@ import XMark from "../../assets/Icons/XMark"
 import PenToSquare from "../../assets/Icons/PenToSquare"
 import TrashCanXMark from "../../assets/Icons/TrashCanXMark"
 import { Link } from "react-router-dom"
-import { Products } from "../../types/ProductsType"
 import { CloseType } from "../../types/CloseType"
 import EditProduct from "../EditProduct/EditProduct"
+import { Product } from "../../types/ProductType"
+import { allProducts } from "../../services/product.service"
 
 export default function FindProducts({ close }: CloseType) {
    const server = 'http://localhost:3001'
@@ -18,16 +19,20 @@ export default function FindProducts({ close }: CloseType) {
    const [users, setUsers] = useState([])
 
    useEffect(() => {
-      axios.get(`${server}/users`)
+      /*axios.get(`${server}/users`)
          .then(response => setUsers(response.data.result))
-         .catch(err => console.log(err))
+         .catch(err => console.log(err))*/
+      
+         allProducts()
+            .then(setProducts)
+            .catch(e => console.log(e))
    }, [])
    //console.log(users)
 
    // Get All Products
-   const [products, setProducts] = useState<Products[]>([]) // First Search on List
-   const [find, setFind] = useState<Products[]>([]) // List before Search
-   const [items, setItems] = useState<Products[]>([]) // List if Search is empty
+   const [products, setProducts] = useState<Product[]>([]) // First Search on List
+   const [find, setFind] = useState<Product[]>([]) // List before Search
+   const [items, setItems] = useState<Product[]>([]) // List if Search is empty
    const [editProductModel, setEditProductModal] = useState(false)
    const [idItem, setIdItem] = useState('')
 

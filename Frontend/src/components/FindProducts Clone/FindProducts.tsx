@@ -7,8 +7,8 @@ import XMark from "../../assets/Icons/XMark"
 import PenToSquare from "../../assets/Icons/PenToSquare"
 import TrashCanXMark from "../../assets/Icons/TrashCanXMark"
 import { Link } from "react-router-dom"
-import { Products } from "../../types/ProductsType"
 import { CloseType } from "../../types/CloseType"
+import { Product } from "../../types/ProductType"
 
 export default function FindProducts({ close }: CloseType) {
    const server = 'http://localhost:3001'
@@ -24,9 +24,9 @@ export default function FindProducts({ close }: CloseType) {
    //console.log(users)
    
    // Get All Products
-   const [products, setProducts] = useState<Products[]>([]) // First Search on List
-   const [find, setFind] = useState<Products[]>([]) // List before Search
-   const [items, setItems] = useState<Products[]>([]) // List if Search is empty
+   const [products, setProducts] = useState<Product[]>([]) // First Search on List
+   const [find, setFind] = useState<Product[]>([]) // List before Search
+   const [items, setItems] = useState<Product[]>([]) // List if Search is empty
 
    useEffect(() => {
       axios.get(`${server}/products`)
