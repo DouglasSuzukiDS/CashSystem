@@ -18,6 +18,23 @@ export default function FindProducts({ close }: CloseType) {
    // Get All Users
    const [users, setUsers] = useState([])
 
+   // Get All Products
+   const [products, setProducts] = useState<Product[]>([]) // First Search on List
+   const [find, setFind] = useState<Product[]>([]) // List before Search
+   const [items, setItems] = useState<Product[]>([]) // List if Search is empty
+   const [editProductModel, setEditProductModal] = useState(false)
+   const [idItem, setIdItem] = useState('')
+
+   /*useEffect(() => {
+      axios.get(`${server}/products`)
+         .then(response => {
+            setProducts(response.data.result)
+            setFind(response.data.result)
+            setItems(response.data.result)
+         })
+         .catch(err => console.log(err))
+   }, [])*/
+
    useEffect(() => {
       /*axios.get(`${server}/users`)
          .then(response => setUsers(response.data.result))
@@ -26,25 +43,10 @@ export default function FindProducts({ close }: CloseType) {
          allProducts()
             .then(setProducts)
             .catch(e => console.log(e))
-   }, [])
+   }, [editProductModel])
    //console.log(users)
 
-   // Get All Products
-   const [products, setProducts] = useState<Product[]>([]) // First Search on List
-   const [find, setFind] = useState<Product[]>([]) // List before Search
-   const [items, setItems] = useState<Product[]>([]) // List if Search is empty
-   const [editProductModel, setEditProductModal] = useState(false)
-   const [idItem, setIdItem] = useState('')
-
-   useEffect(() => {
-      axios.get(`${server}/products`)
-         .then(response => {
-            setProducts(response.data.result)
-            setFind(response.data.result)
-            setItems(response.data.result)
-         })
-         .catch(err => console.log(err))
-   }, [])
+   
 
    const findItem = async (search: string) => {
       // let findProductInput = document.querySelector('#findProduct')
@@ -120,7 +122,7 @@ export default function FindProducts({ close }: CloseType) {
                   <h4 className="flex sbt">
 
                      <div className="flex text-center w-100">
-                        <h5 className='flex text-info'>Edit um Produto</h5>
+                        <h5 className='flex text-info'>Edite um Produto</h5>
                         <MagnifyingGlass w='24' h='24' fill='var(--bs-info)' className='ml-1' />
                      </div>
 
@@ -197,7 +199,7 @@ export default function FindProducts({ close }: CloseType) {
                   </div>
 
                </form> :
-               <EditProduct id={idItem} close={ handleCloseEditProductModal } />
+               <EditProduct id={idItem} listProducts={ products } close={ handleCloseEditProductModal } />
             }
          </div>
       </article>

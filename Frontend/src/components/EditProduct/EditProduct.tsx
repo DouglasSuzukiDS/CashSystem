@@ -12,7 +12,7 @@ import { PropsIcons } from "../../types/PropsIcons";
 import { Product } from "../../types/ProductType";
 import { allProducts, findProductById }  from '../../services/product.service'
 
-export default function EditProduct({ close, id }: CloseType) {
+export default function EditProduct({ close, id, listProducts }: CloseType) {
    const server: string = 'http://localhost:3001'
 
    // const { id } = useParams()
@@ -50,13 +50,22 @@ export default function EditProduct({ close, id }: CloseType) {
    }*/
       
    useEffect(() => {
-      allProducts()
-         .then(setProducts)
-         .catch(e => console.log(e))
+      // allProducts()
+      //    .then(setProducts)
+      //    .catch(e => console.log(e))
 
-      findProductById(id!)
-         .then(setProduct)
-         .catch(e => console.log(e))
+      if(listProducts) {
+         setProducts(listProducts)
+   
+         findProductById(id!)
+            .then(setProduct)
+            .catch(e => console.log(e))
+
+         allProducts()
+            .then(setProducts)
+            .catch(e => console.log(e))
+      }
+
    }, [])
 
    useEffect(() => {
