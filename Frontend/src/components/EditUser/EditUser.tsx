@@ -9,7 +9,7 @@ import UserPlus from "../../assets/Icons/UserPlus"
 import ArrowLeftLong from "../../assets/Icons/ArrowLeftLong"
 import { useEffect } from "react"
 
-export default function EditUser() {
+export const EditUser = () => {
    const server = 'http://localhost:3001'
 
    const { id } = useParams()
@@ -35,7 +35,7 @@ export default function EditUser() {
    let newUserPassword = document.querySelector('#newUserPassword') as HTMLInputElement
    let newUserAdmin = document.querySelector('#isAdmin') as HTMLSpanElement | Boolean
    
-   async function getUser() {
+   const getUser = async() => {
       await axios.get(`${server}/user/${id}`)
          .then(response => {
             let userName = response.data.result[0].userName 
@@ -86,7 +86,6 @@ export default function EditUser() {
          alert('Preencha os campos')
       }
    }
-
 
    return (
       <>

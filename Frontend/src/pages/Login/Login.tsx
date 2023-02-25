@@ -5,8 +5,7 @@ import ArrowRightToBracket from "../../assets/Icons/ArrowRightToBracket";
 import IdCard from "../../assets/Icons/IdCard";
 import { AuthContext } from '../../context/Auth/AuthContext';
 
-
-export default function Login() {
+export const Login = () => {
    useEffect(() => {
       const authToken = localStorage.getItem('authToken')
 

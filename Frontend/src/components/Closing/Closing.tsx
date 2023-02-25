@@ -11,7 +11,7 @@ import CircleCheck from '../../assets/Icons/CircleCheck'
 import { Link, useNavigate } from 'react-router-dom'
 import { useEffect } from 'react'
 import XMark from '../../assets/Icons/XMark'
-import { CloseType } from '../../types/CloseType'
+import { ActionsType } from '../../types/ActionsType'
 
 /*  Blocked Keys
    F1 => Help
@@ -44,7 +44,7 @@ const closeFormDay = () => {
    close.style.display = 'flex' ? close.style.display = 'none' : close.style.display = 'flex'
 }
 
-export default function Closing({ close }: CloseType) {
+export const Closing = ({ close }: ActionsType) => {
    const navigate = useNavigate()
 
    // Values Brute

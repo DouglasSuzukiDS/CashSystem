@@ -1,17 +1,17 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import AllIcons from "../AllIcons";
-import EditProduct from "../components/EditProduct/EditProduct";
-import EditUser from "../components/EditUser/EditUser";
+import { EditProduct } from "../components/EditProduct/EditProduct";
+import { EditUser } from "../components/EditUser/EditUser";
 
-import FindProducts from "../components/FindProducts/FindProducts";
-import OpenCash from "../components/OpenCash/OpenCash";
+import { FindProducts } from "../components/FindProducts/FindProducts";
+import { OpenCash } from "../components/OpenCash/OpenCash";
 import { AuthProvider } from "../context/Auth/AuthProvider";
 import { RequireAuth } from "../context/Auth/RequireAuth";
-import Login from "../pages/Login/Login";
-import OpenSystem from "../pages/OpenSystem/OpenSystem";
-import RegisterProduct from "../pages/RegisterProduct/RegisterProduct";
-import RegisterUser from "../pages/RegisterUser/RegisterUser";
-import Error from "../pages/Error/Error";
+import { Login } from "../pages/Login/Login";
+import { OpenSystem } from "../pages/OpenSystem/OpenSystem";
+import { RegisterProduct } from "../pages/RegisterProduct/RegisterProduct";
+import { RegisterUser } from "../pages/RegisterUser/RegisterUser";
+import { Error } from "../pages/Error/Error";
 
 // import Login from "../pages/Login/Login";
 

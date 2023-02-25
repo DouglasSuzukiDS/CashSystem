@@ -2,7 +2,7 @@ import ShieldExclamation from "../../assets/Icons/ShieldExclamation";
 import { Link } from 'react-router-dom'
 import RightToBracket from "../../assets/Icons/RightToBracket";
 
-export default function Error() {
+export const Error = () => {
    return(
       <>
          <main className="container errorPage flex column">

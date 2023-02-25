@@ -8,7 +8,7 @@ import CircleCheck from '../../assets/Icons/CircleCheck'
 import { Link, useNavigate } from 'react-router-dom'
 import { ChangeEvent, useEffect } from 'react'
 import XMark from '../../assets/Icons/XMark'
-import { CloseType } from '../../types/CloseType'
+import { ActionsType } from '../../types/ActionsType'
 
 // Values Brute
 let money = 258
@@ -39,7 +39,7 @@ let amount = (moneyPix + amountCards) // 331,48
 
 // console.log(document.querySelector('#closeInvoicing'))
 
-export default function Invoicing({ close }: CloseType) {
+export const Invoicing = ({ close }: ActionsType) => {
    const navigate = useNavigate()
 
    useEffect(() => {

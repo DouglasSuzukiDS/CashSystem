@@ -29,6 +29,14 @@
          border: 1px solid var(--bg-dark);
       }
 
+      thead {
+         background-color: var(--fb4);
+      }
+
+      tbody tr {
+         color: var(--bs-dark);
+      }
+
       tbody tr:nth-child(odd) {
          // Impar
          background-color: var(--bg-light);

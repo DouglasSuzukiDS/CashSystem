@@ -7,21 +7,21 @@ import XMark from "../../assets/Icons/XMark"
 import PenToSquare from "../../assets/Icons/PenToSquare"
 import TrashCanXMark from "../../assets/Icons/TrashCanXMark"
 import { Link } from "react-router-dom"
-import { CloseType } from "../../types/CloseType"
-import EditProduct from "../EditProduct/EditProduct"
-import { Product } from "../../types/ProductType"
+import { ActionsType } from "../../types/ActionsType"
+import { EditProduct } from "../EditProduct/EditProduct"
+import { ProductType } from "../../types/ProductType"
 import { allProducts } from "../../services/product.service"
 
-export default function FindProducts({ close }: CloseType) {
+export const FindProducts = ({ close }: ActionsType) => {
    const server = 'http://localhost:3001'
 
    // Get All Users
    const [users, setUsers] = useState([])
 
    // Get All Products
-   const [products, setProducts] = useState<Product[]>([]) // First Search on List
-   const [find, setFind] = useState<Product[]>([]) // List before Search
-   const [items, setItems] = useState<Product[]>([]) // List if Search is empty
+   const [products, setProducts] = useState<ProductType[]>([]) // First Search on List
+   const [find, setFind] = useState<ProductType[]>([]) // List before Search
+   const [items, setItems] = useState<ProductType[]>([]) // List if Search is empty
    const [editProductModel, setEditProductModal] = useState(false)
    const [idItem, setIdItem] = useState('')
 
@@ -148,12 +148,12 @@ export default function FindProducts({ close }: CloseType) {
 
                   <div className="tableFormList mt-1" id="tableFormList">
                      <table className="tableFindProduct text-center pg5 bold" id="tableFindProduct">
-                        <thead className="none">
+                        <thead className="text-color">
                            <tr className="">
                               <td>Nome</td>
                               <td>Preço</td>
                               <td>Tipo</td>
-                              <td>Quandidade</td>
+                              <td>Qtd</td>
                               <td>Ação</td>
                            </tr>
                         </thead>

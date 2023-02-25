@@ -6,13 +6,13 @@ import MoneyCheckPen from "../../assets/Icons/MoneyCheckPen";
 import ArrowLeftLong from "../../assets/Icons/ArrowLeftLong";
 import Registered from "../../assets/Icons/Registered";
 import TrashCanXMark from "../../assets/Icons/TrashCanXMark";
-import { CloseType } from "../../types/CloseType";
+import { ActionsType } from "../../types/ActionsType";
 import XMark from "../../assets/Icons/XMark";
 import { PropsIcons } from "../../types/PropsIcons";
-import { Product } from "../../types/ProductType";
+import { ProductType } from "../../types/ProductType";
 import { allProducts, findProductById }  from '../../services/product.service'
 
-export default function EditProduct({ close, id, listProducts }: CloseType) {
+export const EditProduct = ({ close, id, listProducts }: ActionsType) => {
    const server: string = 'http://localhost:3001'
 
    // const { id } = useParams()
@@ -20,8 +20,8 @@ export default function EditProduct({ close, id, listProducts }: CloseType) {
 
    const navigate = useNavigate()
 
-   const [products, setProducts] = useState<Product[]>([])
-   const [product, setProduct] = useState<Product>({
+   const [products, setProducts] = useState<ProductType[]>([])
+   const [product, setProduct] = useState<ProductType>({
       id:  '',
       pdt_name: '',
       pdt_price: '',

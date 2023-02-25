@@ -8,19 +8,19 @@ import MagnifyingGlass from "../../assets/Icons/MagnifyingGlass";
 import SackDollar from "../../assets/Icons/SackDollar";
 import Signature from "../../assets/Icons/Signature";
 import TrashCan from "../../assets/Icons/TrashCan";
-import Closing from "../../components/Closing/Closing";
-import Invoicing from "../../components/Invoicing/Invoice";
-import FindProducts from "../../components/FindProducts/FindProducts";
-import OpenCash from "../../components/OpenCash/OpenCash";
-import { CloseType } from "../../types/CloseType";
+import { Closing } from "../../components/Closing/Closing";
+import { Invoicing } from "../../components/Invoicing/Invoice";
+import { FindProducts } from "../../components/FindProducts/FindProducts";
+import { OpenCash } from "../../components/OpenCash/OpenCash";
+import { ActionsType } from "../../types/ActionsType";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/Auth/AuthContext";
 import { UserType } from "../../types/UserType";
-import EditUser from "../../components/EditUser/EditUser";
-import EditProduct from "../../components/EditProduct/EditProduct";
+import { EditUser } from "../../components/EditUser/EditUser";
+import { EditProduct } from "../../components/EditProduct/EditProduct";
+import { allUsers } from "../../services/user.service";
 
-
-export default function OpenSystem({ close }: CloseType) {
+export const OpenSystem = ({ close }: ActionsType) => {
    const backend = 'http://localhost:3001'
    const navigate = useNavigate()
    const auth = useContext(AuthContext)
@@ -63,6 +63,8 @@ export default function OpenSystem({ close }: CloseType) {
       console.log(userInfos)
 
       checkStatus() // Verifica se existe um Token, se existir verifica se o caixa já foi aberto
+
+      console.log(allUsers())
    }, [])
 
    // Get All Users

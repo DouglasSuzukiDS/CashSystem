@@ -5,12 +5,12 @@ import MoneyCheckPen from "../../assets/Icons/MoneyCheckPen";
 import ArrowLeftLong from "../../assets/Icons/ArrowLeftLong";
 import Registered from "../../assets/Icons/Registered";
 
-export default function RegisterProduct() {
+export const RegisterProduct = () => {
    
    const server: string = 'http://localhost:3001'
    const navigate = useNavigate()
 
-   async function registerNewProduct() {
+   const registerNewProduct = async() => {
 
       let newProductName = document.querySelector('#newProductName') as HTMLInputElement
       let newProductPrice = document.querySelector('#newProductPrice') as HTMLInputElement

@@ -1,16 +1,16 @@
 import axios from "axios";
-import { Product } from "../types/ProductType";
+import { ProductType } from "../types/ProductType";
 
 const server: string = 'http://localhost:3001'
 
-export const allProducts = async (): Promise<Product[]> => {
+export const allProducts = async (): Promise<ProductType[]> => {
   return await axios.get(`${server}/products`)
     .then(({ data }) => data.result)
     .catch(e => console.log(e))
 }
 
-export const findProductById = async (id: string): Promise<Product> => {
-  const productById = (product: Product) => product.id === id
+export const findProductById = async (id: string): Promise<ProductType> => {
+  const productById = (product: ProductType) => product.id === id
 
   const productOrNone = (await allProducts()).find(productById);
 

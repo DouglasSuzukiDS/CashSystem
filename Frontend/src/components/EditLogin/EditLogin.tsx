@@ -3,9 +3,9 @@ import { Link, useNavigate } from 'react-router-dom'
 import ArrowRightToBracket from "../../assets/Icons/ArrowRightToBracket";
 import IdCard from "../../assets/Icons/IdCard";
 
-export default function Login() {
+export const Login = () => {
 
-   async function loginUsers() {
+   const loginUsers = async() => {
       const db = 'http://localhost:3001'
       // const navigate = useNavigate()
 
@@ -43,7 +43,7 @@ export default function Login() {
       }
    }
 
-   async function loginUser() {
+   const loginUser = async() => {
       const db = "http://localhost:3001";
 
       let userLogin = document.querySelector("#userLogin") as HTMLInputElement

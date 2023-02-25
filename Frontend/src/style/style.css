@@ -1249,6 +1249,12 @@ h4 {
 .tableFormList #tableFindProduct table, .tableFormList #tableFindProduct thead, .tableFormList #tableFindProduct tbody, .tableFormList #tableFindProduct tr, .tableFormList #tableFindProduct td {
   border: 1px solid var(--bg-dark);
 }
+.tableFormList #tableFindProduct thead {
+  background-color: var(--fb4);
+}
+.tableFormList #tableFindProduct tbody tr {
+  color: var(--bs-dark);
+}
 .tableFormList #tableFindProduct tbody tr:nth-child(odd) {
   background-color: var(--bg-light);
 }

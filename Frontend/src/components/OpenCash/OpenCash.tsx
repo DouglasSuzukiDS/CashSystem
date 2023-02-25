@@ -5,9 +5,9 @@ import CashRegister from "../../assets/Icons/CashRegister";
 import CircleCheck from "../../assets/Icons/CircleCheck";
 import SackDollar from "../../assets/Icons/SackDollar";
 import XMark from "../../assets/Icons/XMark";
-import { CloseType } from "../../types/CloseType";
+import { ActionsType } from "../../types/ActionsType";
 
-export default function OpenCash({ close }: CloseType) {
+export const OpenCash = ({ close }: ActionsType) => {
    useEffect(() => {
       //localStorage.removeItem('openCashValue')
       localStorage.getItem('openCashValue')
@@ -37,7 +37,6 @@ export default function OpenCash({ close }: CloseType) {
       btn_closeCash.style.display = 'flex'
 
    }
-
    
    const openCashValue = () => {
       let openingCashInput = document.querySelector('#openingCash') as HTMLInputElement
@@ -45,7 +44,7 @@ export default function OpenCash({ close }: CloseType) {
 
       //const alertMsgCash = alert('Insira o valor correto')
 
-      function createValueLocalStorage(){
+      const createValueLocalStorage = () => {
          // Create value on Local Storage
          localStorage.removeItem('openCashValue')
          localStorage.setItem('openCashValue', openingCash)

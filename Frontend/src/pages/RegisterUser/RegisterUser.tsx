@@ -11,16 +11,14 @@ import ArrowLeftLong from "../../assets/Icons/ArrowLeftLong"
 type Timer = NodeJS.Timeout
 
 
-export default function RegisterUser() {
+export const RegisterUser = () => {
    const server: string = 'http://localhost:3001'
    
    const navigate = useNavigate()
 
    let [admin, setAdmin] = useState(false)
 
-
-
-   async function newUserRegister() {
+   const newUserRegister = async() => {
       let newUserFullName = document.querySelector('#newUserName') as HTMLInputElement
       let newUserLogin = document.querySelector('#newUserLogin') as HTMLInputElement
       let newUserPassword = document.querySelector('#newUserPassword') as HTMLInputElement

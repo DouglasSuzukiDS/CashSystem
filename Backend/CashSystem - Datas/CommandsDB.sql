@@ -6,13 +6,12 @@ CREATE TABLE users (
 	id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
     userName VARCHAR(50) NOT NULL,
     userLogin VARCHAR(50) UNIQUE NOT NULL,
-    userPassword VARCHAR(50) NOT NULL,
+    userPassword VARCHAR(120) NOT NULL,
     userAdmin BOOLEAN DEFAULT false
 );
-
 /* ALTER TABLE users AUTO_INCREMENT = 4; /* Reset AutoIncrement */
 /* RENAME TABLE oldName TO newName; /* Rename Table */
-/* INSERT INTO users VALUES (01, 'Admin', 'Admin', 'Admin', true); */
+/* INSERT INTO users VALUES (01, 'Admin', 'admin', 'admin', true); */
 /* 
 	DELETE FROM users WHERE id = 3; 
 	DELETE FROM users WHERE id = 4; 
@@ -36,7 +35,7 @@ CREATE TABLE users (
 CREATE TABLE products (
 	id INT PRIMARY KEY AUTO_INCREMENT,
     pdt_name VARCHAR(50) UNIQUE NOT NULL ,
-    pdt_price DECIMAL NOT NULL,
+    pdt_price DECIMAL(10,2) NOT NULL,
     pdt_type VARCHAR(50) NOT NULL,
     pdt_qty INT NOT NULL
 );

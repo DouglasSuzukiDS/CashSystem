@@ -74,7 +74,7 @@ Instale as dependências nas pastas do projeto, pasta ***Frontend*** e pasta ***
         id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
         userName VARCHAR(50) NOT NULL,
         userLogin VARCHAR(50) UNIQUE NOT NULL,
-        userPassword VARCHAR(50) NOT NULL,
+        userPassword VARCHAR(120) NOT NULL,
         userAdmin BOOLEAN DEFAULT false
     );
 ```

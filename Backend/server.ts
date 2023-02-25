@@ -3,6 +3,8 @@ import cors from 'cors'
 import mysql from 'mysql2'
 import fs from 'fs'
 
+import bcrypt from 'bcrypt'
+
 const JTW = require('jsonwebtoken')
 
 import dotenv from 'dotenv'
@@ -164,8 +166,12 @@ server.post('/registerNewUser', async (req, res) => { // Error
 
          let SQL = `INSERT INTO users (userName, userLogin, userPassword, userAdmin) VALUES (?, ?, ?, ?)`
          // ${newUserFullName}, ${newUserLogin}, ${newUserPassword}, ${newUserAdmin}
+
+         
+         const newUserPasswordHash = bcrypt.hashSync(newUserPassword, 10)
+         // console.log(newUserPasswordHash)
             
-         db.query(SQL, [newUserFullName, newUserLogin, newUserPassword, newUserAdmin], async (err, result) => {
+         db.query(SQL, [newUserFullName, newUserLogin, newUserPasswordHash, newUserAdmin], async (err, result) => {
             if (err) {
                console.log(err)
                res.status(400).send({ msg: 'Erro ao cadastrar usuário' })
@@ -201,6 +207,8 @@ server.put('/edit/user/:id', (req, res) => {
 
             } else {
                let SQL: string = 'UPDATE users SET userName = ?, userLogin = ?, userPassword = ?, userAdmin = ? WHERE id = ?'
+
+               const newUserPasswordHash = bcrypt.hashSync(newUserPassword, 10)
             
                db.query(SQL, [ newUserName, newUserLogin, newUserPassword, newUserAdmin, id ], async(err, result) => {
                   if(err) {
