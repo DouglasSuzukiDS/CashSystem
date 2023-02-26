@@ -1,4 +1,4 @@
-import { useState, useEffect, HTMLAttributes, useContext } from "react";
+import { useState, useEffect, useContext } from "react";
 import axios from 'axios'
 import CashRegister from "../../assets/Icons/CashRegister";
 import Gears from "../../assets/Icons/Gears";

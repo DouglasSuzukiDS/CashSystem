@@ -23,7 +23,7 @@ Qualificação | Expecificação
 
 ***Front-end:*** React, Node, Icones do FontAwesome, Axios, cores do Bootstrap, cores da UI Dark do Facebook. *(Em desenvolvimento)*
 
-***Back-end:*** Node, Express, Axios, JWT. *(Em desenvolvimento)*
+***Back-end:*** Node, Express, Axios, JWT.
 
 
 ## Referências

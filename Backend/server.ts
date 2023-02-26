@@ -103,8 +103,9 @@ server.post('/login', async(req, res) => { // Error
 
    let findUser: string = `SELECT * FROM users WHERE (userLogin, userPassword) = (?, ?)`
 
+   const password = bcrypt.compareSync(userPassword, findUser)
 
-   db.query(findUser, [userLogin, userPassword], async(err, result) => {
+   db.query(findUser, [userLogin, password], async(err, result) => {
       // console.log(result) // Return User
 
       if(err) {
