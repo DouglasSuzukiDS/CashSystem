@@ -1,6 +1,6 @@
-import { PropsIcons } from "../../types/PropsIcons"
+import { IconsProps } from "../../types/IconsProps"
 
-export default function PiggyBank({ w, h, className, fill, onClick }: PropsIcons) {
+export const PiggyBank = ({ w, h, className, fill, onClick }: IconsProps) => {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 578 512"
       width={w} height={h} className={className} fill={fill} onClick={onClick}>

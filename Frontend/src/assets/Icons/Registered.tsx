@@ -1,6 +1,6 @@
-import { PropsIcons } from "../../types/PropsIcons"
+import { IconsProps } from "../../types/IconsProps"
 
-export default function Registered({ w, h, className, fill, onClick }: PropsIcons) {
+export const Registered = ({ w, h, className, fill, onClick }: IconsProps) => {
    return (
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" 
          width={w} height={h} className={className} fill={fill} onClick={onClick}>

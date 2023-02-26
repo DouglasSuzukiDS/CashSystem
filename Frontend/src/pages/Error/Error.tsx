@@ -1,6 +1,6 @@
-import ShieldExclamation from "../../assets/Icons/ShieldExclamation";
 import { Link } from 'react-router-dom'
-import RightToBracket from "../../assets/Icons/RightToBracket";
+import { ShieldExclamation } from "../../assets/Icons/ShieldExclamation";
+import { RightToBracket } from "../../assets/Icons/RightToBracket";
 
 export const Error = () => {
    return(

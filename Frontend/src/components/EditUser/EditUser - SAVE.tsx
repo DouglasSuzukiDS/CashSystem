@@ -2,11 +2,11 @@ import { useState } from "react"
 import { Link, useNavigate, useParams } from "react-router-dom"
 import axios from 'axios'
 
-import Square from "../../assets/Icons/Square"
-import SquareX from "../../assets/Icons/SquareXMark"
-import UserPen from "../../assets/Icons/UserPen"
-import UserPlus from "../../assets/Icons/UserPlus"
-import ArrowLeftLong from "../../assets/Icons/ArrowLeftLong"
+import { Square } from "../../assets/Icons/Square"
+import { SquareXMark } from "../../assets/Icons/SquareXMark"
+import { UserPen } from "../../assets/Icons/UserPen"
+import { UserPlus } from "../../assets/Icons/UserPlus"
+import { ArrowLeftLong } from "../../assets/Icons/ArrowLeftLong"
 import { useEffect } from "react"
 
 export default function EditUserSave() {
@@ -123,7 +123,7 @@ export default function EditUserSave() {
                      <span className="flex" id="isAdmin" onClick={() => setAdmin(!admin)}>
                         {
                            admin ?
-                              <SquareX w='24' h='24' fill='#0DCAF0' className='mr-2' /> /* TRUE */ :
+                              <SquareXMark w='24' h='24' fill='#0DCAF0' className='mr-2' /> /* TRUE */ :
                               <Square w='24' h='24' fill='#0DCAF0' className='mr-2' /> /* FALSE */
                         }
                      </span>

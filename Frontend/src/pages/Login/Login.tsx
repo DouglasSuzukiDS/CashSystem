@@ -1,8 +1,8 @@
 import axios from 'axios'
 import { ChangeEvent, useContext, useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom'
-import ArrowRightToBracket from "../../assets/Icons/ArrowRightToBracket";
-import IdCard from "../../assets/Icons/IdCard";
+import { ArrowRightToBracket  } from "../../assets/Icons/ArrowRightToBracket";
+import { IdCard } from "../../assets/Icons/IdCard";
 import { AuthContext } from '../../context/Auth/AuthContext';
 
 export const Login = () => {

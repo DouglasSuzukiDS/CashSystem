@@ -2,13 +2,13 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 
-import MoneyCheckPen from "../../assets/Icons/MoneyCheckPen";
-import ArrowLeftLong from "../../assets/Icons/ArrowLeftLong";
-import Registered from "../../assets/Icons/Registered";
-import TrashCanXMark from "../../assets/Icons/TrashCanXMark";
+import { MoneyCheckPen } from "../../assets/Icons/MoneyCheckPen";
+import { ArrowLeftLong } from "../../assets/Icons/ArrowLeftLong";
+import { Registered } from "../../assets/Icons/Registered";
+import { TrashCanXMark } from "../../assets/Icons/TrashCanXMark";
 import { ActionsType } from "../../types/ActionsType";
-import XMark from "../../assets/Icons/XMark";
-import { PropsIcons } from "../../types/PropsIcons";
+import { XMark } from "../../assets/Icons/XMark";
+import { IconsProps } from "../../types/IconsProps";
 import { ProductType } from "../../types/ProductType";
 import { allProducts, findProductById }  from '../../services/product.service'
 

@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { Link, useNavigate } from 'react-router-dom'
-import ArrowRightToBracket from "../../assets/Icons/ArrowRightToBracket";
-import IdCard from "../../assets/Icons/IdCard";
+import { ArrowRightToBracket  } from "../../assets/Icons/ArrowRightToBracket";
+import { IdCard } from "../../assets/Icons/IdCard";
 
 export const Login = () => {
 

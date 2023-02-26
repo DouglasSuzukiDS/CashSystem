@@ -1,9 +1,9 @@
 import { Link, useNavigate } from "react-router-dom";
 import axios from 'axios'
 
-import MoneyCheckPen from "../../assets/Icons/MoneyCheckPen";
-import ArrowLeftLong from "../../assets/Icons/ArrowLeftLong";
-import Registered from "../../assets/Icons/Registered";
+import { MoneyCheckPen } from "../../assets/Icons/MoneyCheckPen";
+import { ArrowLeftLong } from "../../assets/Icons/ArrowLeftLong";
+import { Registered } from "../../assets/Icons/Registered";
 
 export const RegisterProduct = () => {
    

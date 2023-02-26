@@ -1,4 +1,4 @@
-export type PropsIcons = {
+export type IconsProps = {
    w?: string
    h?: string 
    fill?: string

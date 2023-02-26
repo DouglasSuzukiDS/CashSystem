@@ -1,10 +1,10 @@
 /* eslint-disable no-unused-expressions */
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import CashRegister from "../../assets/Icons/CashRegister";
-import CircleCheck from "../../assets/Icons/CircleCheck";
-import SackDollar from "../../assets/Icons/SackDollar";
-import XMark from "../../assets/Icons/XMark";
+import { CashRegister } from "../../assets/Icons/CashRegister";
+import { CircleCheck } from "../../assets/Icons/CircleCheck";
+import { SackDollar } from "../../assets/Icons/SackDollar";
+import { XMark } from "../../assets/Icons/XMark";
 import { ActionsType } from "../../types/ActionsType";
 
 export const OpenCash = ({ close }: ActionsType) => {
