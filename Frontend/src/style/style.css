@@ -1271,6 +1271,57 @@ h4 {
   padding: 4px;
 }
 
+::-webkit-scrollbar {
+  width: 5px;
+  background-color: var(--bg-dark);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--bg-normal);
+  border-radius: 8px;
+  scroll-behavior: smooth;
+}
+
+#findUsersForm h4 > #closeFindUsers:hover {
+  cursor: pointer;
+  opacity: 0.5;
+}
+
+.tableFormUserList {
+  max-height: 330px;
+  border: 1px solid green;
+  overflow: auto;
+}
+.tableFormUserList #tableFindUser {
+  border-collapse: collapse;
+  width: 100%;
+  height: 100%;
+}
+.tableFormUserList #tableFindUser table, .tableFormUserList #tableFindUser thead, .tableFormUserList #tableFindUser tbody, .tableFormUserList #tableFindUser tr, .tableFormUserList #tableFindUser td {
+  border: 1px solid var(--bg-dark);
+}
+.tableFormUserList #tableFindUser thead {
+  background-color: var(--fb4);
+}
+.tableFormUserList #tableFindUser tbody tr {
+  color: var(--bs-dark);
+}
+.tableFormUserList #tableFindUser tbody tr:nth-child(odd) {
+  background-color: var(--bg-light);
+}
+.tableFormUserList #tableFindUser tbody tr:nth-child(odd):hover {
+  background-color: #797C7C;
+}
+.tableFormUserList #tableFindUser tbody tr:nth-child(even) {
+  background-color: var(--bg-normal);
+}
+.tableFormUserList #tableFindUser tbody tr:nth-child(even):hover {
+  background-color: #3E4042;
+}
+.tableFormUserList #tableFindUser td {
+  padding: 4px;
+}
+
 .editProductForm h4 > #closeEditProduct:hover {
   cursor: pointer;
   opacity: 0.5;
@@ -1284,9 +1335,17 @@ h4 {
   text-align: center;
 }
 
-.inUser {
-  font-size: 100px;
-  color: pink;
+.editUserForm h4 > #closeEditUser:hover {
+  cursor: pointer;
+  opacity: 0.5;
+}
+
+.inputFindUser::-moz-placeholder {
+  text-align: center;
+}
+
+.inputFindUser::placeholder {
+  text-align: center;
 }
 
 .forms {

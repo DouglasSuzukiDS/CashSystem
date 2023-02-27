@@ -211,7 +211,7 @@ server.put('/edit/user/:id', (req, res) => {
 
                const newUserPasswordHash = bcrypt.hashSync(newUserPassword, 10)
             
-               db.query(SQL, [ newUserName, newUserLogin, newUserPassword, newUserAdmin, id ], async(err, result) => {
+               db.query(SQL, [ newUserName, newUserLogin, newUserPasswordHash, newUserAdmin, id ], async(err, result) => {
                   if(err) {
                      console.log(err)
                      res.status(404).send({ msg: 'Erro ao editar os dados do colaborador. O login de colaborador pode já existir no sistema.' })

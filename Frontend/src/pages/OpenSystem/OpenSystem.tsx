@@ -23,6 +23,8 @@ import { allUsers } from "../../services/user.service";
 import { Texugo } from "../../assets/Icons/Texugo";
 import { ProductType } from "../../types/ProductType";
 import { CartCircleExclamation } from "../../assets/Icons/cart-circle-exclamation";
+import { MessageTexugo } from "../../components/MessageTexugo/MessageTexugo";
+import { FindUsers } from "../../components/FindUsers/FindUsers";
 
 export const OpenSystem = ({ close }: ActionsType) => {
    const backend = 'http://localhost:3001'
@@ -186,9 +188,13 @@ export const OpenSystem = ({ close }: ActionsType) => {
       }
    }
 
+   const handleToogleFindUserModal = () => {
+
+   }
+
    const optionsSystemModal = () => {
       setOptionsSystem(!optionsSystem)
-      // console.log(optionsSystem)
+      console.log(optionsSystem)
    }
 
    const handleCloseCash = () => {
@@ -276,7 +282,7 @@ export const OpenSystem = ({ close }: ActionsType) => {
                            </button> */}
                         </> :
                         <>
-                           <Gears w='24' h='24' fill='var(--bs-secondary)' className='pointer opacity' onClick={optionsSystemModal} />
+                           <Gears w='24' h='24' fill='var(--bs-secondary)' className='pointer opacity' onClick={ optionsSystemModal } />
 
                            {/* <button className="btn btn-danger ml-2 border" id="btn_closeCash" onClick={ handleCloseCash }>
                               Fechar Caixa
@@ -297,39 +303,31 @@ export const OpenSystem = ({ close }: ActionsType) => {
                </div>
             </header>
 
-            <div className="contentSystem flex" id="contentSystem">
-               {optionsSystem ??
-                  <FindProducts close={handleToogleFindProductModal} />
+            <div className="contentSystem flex border" id="contentSystem">
+               { optionsSystem ?
+                  <FindUsers close={ optionsSystemModal } /> : ''
                }
 
-               {
-                  cartItems.length !== 0 ? <p>Lista</p> :
-                  <span className="flex column">
-                     <h1 className="mb-2 text-info flex">
-                        Carrinho Vazio meu Chapa 
-                        <CartCircleExclamation w="38" h="38" fill="var(--bs-warning)" className="ml-1" />
-                     </h1>
-                     <Texugo w="100" h="100" />
-                  </span> 
-               } 
+               {/* { !open ?
+                  <MessageTexugo msg="Abra o caixa meu Chapa" tw="100" th="100" /> : ''
+               } */}
 
-
+               {/* {  
+               cartItems.length === 0 ??
+               <MessageTexugo msg="Carrinho vazio meu Chapa" tw="100" th="100" />
+               }  */}
                {/* { OpenCashValueLC ?
-                  <>
-                     <div className="managerArea flex">
-                        {findProductsModal &&
-                           <FindProducts close={handleToogleFindProductModal} />
-                        }
-                     </div>
-                  </>
-                  :
-
+                  <div className="managerArea flex">
+                     {findProductsModal &&
+                        <FindProducts close={ handleToogleFindProductModal } />
+                     }
+                  </div> :
                   <div className="none" id="contentSystemStart">
                      <OpenCash />
                   </div>
-               }
+               } */}
 
-               { !closeSystem ??
+               {/* { !closeSystem ??
                   <Closing close={ handleCloseCash } />
                }               */}
 

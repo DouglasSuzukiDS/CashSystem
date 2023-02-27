@@ -46,6 +46,8 @@ export default function RoutesApp() {
                } />  */}
                <Route path="/edit/product/:id" element={ < EditProduct /> } /> 
 
+               <Route path='/findProduct' element={ <FindProducts /> } />
+
                <Route path='*' element={ <Error /> } /> {/* OK  */}
             </Routes>
          </BrowserRouter>

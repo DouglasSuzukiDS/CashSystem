@@ -11,55 +11,65 @@ import { ActionsType } from "../../types/ActionsType"
 import { EditProduct } from "../EditProduct/EditProduct"
 import { ProductType } from "../../types/ProductType"
 import { allProducts } from "../../services/product.service"
+import { UserType } from "../../types/UserType"
 
-export const FindProducts = ({ close }: ActionsType) => {
+export const FindProducts = ({ close, id, listProducts }: ActionsType) => {
    const server = 'http://localhost:3001'
-
-   // Get All Users
-   const [users, setUsers] = useState([])
 
    // Get All Products
    const [products, setProducts] = useState<ProductType[]>([]) // First Search on List
-   const [find, setFind] = useState<ProductType[]>([]) // List before Search
-   const [items, setItems] = useState<ProductType[]>([]) // List if Search is empty
+   const [cloneProducts, setCloneProducts] = useState<ProductType[]>([]) // List if Search is empty
    const [editProductModel, setEditProductModal] = useState(false)
    const [idItem, setIdItem] = useState('')
 
-   /*useEffect(() => {
-      axios.get(`${server}/products`)
-         .then(response => {
-            setProducts(response.data.result)
-            setFind(response.data.result)
-            setItems(response.data.result)
-         })
-         .catch(err => console.log(err))
-   }, [])*/
-
    useEffect(() => {
-      /*axios.get(`${server}/users`)
-         .then(response => setUsers(response.data.result))
-         .catch(err => console.log(err))*/
-      
-         allProducts()
-            .then(setProducts)
-            .catch(e => console.log(e))
+      allProducts()
+         .then(setProducts)
+         .catch(e => console.log(e))
+
+      allProducts()
+         .then(setCloneProducts)
+         .catch(e => console.log(e))
    }, [editProductModel])
    //console.log(users)
 
-   
+   // Return Product in Search
+   const returnProduct = async (e: ChangeEvent<HTMLInputElement>) => {
+      let term = e.target.value
 
-   const findItem = async (search: string) => {
-      // let findProductInput = document.querySelector('#findProduct')
-      await axios.get(`${server}/products/type`)
-         // .then(response => setFind(response.data.result))
-         .then(response => response.data.msg)
-         .catch(err => console.log(err))
+      if (term === '') {
+         // console.log('O term é: ' + term)
+         console.log(cloneProducts)
+         setProducts(cloneProducts)
+      } else {
+         let search = term.replace(term[0], term[0].toLocaleUpperCase())
+         // setProducts(find.filter(prod => prod.pdt_name.includes(search)))
+         // setProducts(find.filter(prod => prod.pdt_type.includes(search)))
+         //console.log(search)
+         
+         let findByName = products.filter(prod => prod.pdt_name.includes(search))
+         //console.log(findByName)
 
-      // console.log(findProductInput.value + ' no console')
-      // console.log(find)
+         let findByType = products.filter(prod => prod.pdt_type.includes(search))
+
+         if (findByName.length !== 0) {
+            setProducts(findByName)
+            // console.log(products)
+         } else {
+            setProducts(findByType)
+         }
+      }
    }
 
-   // Delete Product
+   // Edit Product by ID
+   const handleEditProduct = async (id: string) => {
+      // Função responsável por passar o ID via prop para o EditProduct, consequentemente buscando o dado no Backend para Editar e mostrar o modal
+      console.log(`Edit Product By ID: ${id}`)
+      setIdItem(id)
+      setEditProductModal(!editProductModel)
+   }
+
+   // Delete Product by ID
    const handleDeleteProduct = (id: string) => {
       axios.delete(`${server}/delete/product/${id}`)
          .then(response => {
@@ -72,47 +82,18 @@ export const FindProducts = ({ close }: ActionsType) => {
          // .catch(err => alert(err.response.data.msg))
          .catch(err => console.log(err.response.data.msg))
 
-      return setProducts(products.filter(prod => prod.id !== id))
+      return(
+         setProducts(products.filter(prod => prod.id !== id)),
+         setCloneProducts(cloneProducts.filter(prod => prod.id !== id))
+      )  
    }
 
-   const returnProduct = async (e: ChangeEvent<HTMLInputElement>) => {
-      let term = e.target.value
-
-      if (term === '') {
-         // console.log('O term é: ' + term)
-         setProducts(items)
-      } else {
-         let search = term.replace(term[0], term[0].toLocaleUpperCase())
-         // setProducts(find.filter(prod => prod.pdt_name.includes(search)))
-         // setProducts(find.filter(prod => prod.pdt_type.includes(search)))
-         //console.log(search)
-         
-         let findByName = find.filter(prod => prod.pdt_name.includes(search))
-         //console.log(findByName)
-
-         let findByType = find.filter(prod => prod.pdt_type.includes(search))
-
-         if (findByName.length !== 0) {
-            setProducts(findByName)
-            // console.log(products)
-         } else {
-            setProducts(findByType)
-         }
-      }
-   }
-
-   const handleEditProduct = async (id: string) => {
-      // Função responsável por passar o ID via prop para o EditProduct, consequentemente buscando o dado no Backend para Editar e mostrar o modal
-      setIdItem(id)
-      setEditProductModal(!editProductModel)
-   }
-
+   // Show Edit Product Modal
    const handleCloseEditProductModal = () => {
       setEditProductModal(false)
    }
 
    return (
-
       <article className="container flex pr-3  w-100 h-100" id='FindProductModal'>
 
          <div className="forms">

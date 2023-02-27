@@ -26,11 +26,11 @@ CREATE TABLE `users` (
   `id` int NOT NULL AUTO_INCREMENT,
   `userName` varchar(50) NOT NULL,
   `userLogin` varchar(50) NOT NULL,
-  `userPassword` varchar(50) NOT NULL,
+  `userPassword` varchar(120) NOT NULL,
   `userAdmin` tinyint(1) DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `userLogin` (`userLogin`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -39,7 +39,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'Percio Valente','percio.valente','123',1),(2,'Tonhao Motomoto','tonhao.motomoto','123',0),(3,'Chico Palha','chico.palha','123',0),(4,'Admin','admin','123',1),(5,'Test','test','123',1);
+INSERT INTO `users` VALUES (1,'Admin','admin','$2b$10$lbe01cY1gaQhJvQR9mrA9OS/SMsPfMKXZc4ZvT9jM8l5JC3/Pr9TC',1),(2,'Nick','nick','$2b$10$lGbAE0/IXsC2i2ODt4Y0uOIp7jkhymTulgpIK6h8xISfZf7fbhvVG',1),(3,'Chico Palha','chico.palha','$2b$10$YEVuG2dcYSZfNhMB4ggc9.LMJcpCUrkZOTsHqlwqt5qq01WzMmtbS',1),(4,'Tonhao Moto Moto','tonhao.motomoto','$2b$10$oYybqmWBcpfyOgSAb0/nquqeokBIXESs2I3KfFO3tIXT9dZASKQkW',0);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -52,4 +52,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-01-11 16:48:24
+-- Dump completed on 2023-02-26 23:00:07

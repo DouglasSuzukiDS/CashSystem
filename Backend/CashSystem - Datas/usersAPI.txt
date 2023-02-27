@@ -1,0 +1,27 @@
+{
+    "newUserFullName": "Admin",
+    "newUserLogin": "admin",
+    "newUserPassword": "admin",
+    "newUserAdmin": 1
+}
+
+{
+    "newUserFullName": "Nick",
+    "newUserLogin": "nick",
+    "newUserPassword": "123",
+    "newUserAdmin": 1
+}
+
+{
+    "newUserFullName": "Chico Palha",
+    "newUserLogin": "chico.palha",
+    "newUserPassword": "123",
+    "newUserAdmin": 1
+}
+
+{
+    "newUserFullName": "Tonhao Moto Moto",
+    "newUserLogin": "tonhao.motomoto",
+    "newUserPassword": "123",
+    "newUserAdmin": 0
+}

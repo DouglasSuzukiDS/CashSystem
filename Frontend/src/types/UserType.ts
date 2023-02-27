@@ -1,8 +1,8 @@
 export type UserType = {
    id: string
-   name: string
+   userName: string
    userLogin: string
    userPassword?: string
-   admin: boolean
-   token: string
+   userAdmin: boolean
+
 }
