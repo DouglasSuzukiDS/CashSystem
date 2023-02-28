@@ -1238,8 +1238,9 @@ h4 {
 
 .tableFormList {
   max-height: 330px;
-  border: 1px solid green;
+  border: 1px solid var(--fb1);
   overflow: auto;
+  border-radius: 8px;
 }
 .tableFormList #tableFindProduct {
   border-collapse: collapse;
@@ -1254,6 +1255,14 @@ h4 {
 }
 .tableFormList #tableFindProduct tbody tr {
   color: var(--bs-dark);
+}
+.tableFormList #tableFindProduct tbody tr tr:first-child {
+  border-radius: 8px 8px 0 0;
+  border-top: 2px solid var(--fb1);
+}
+.tableFormList #tableFindProduct tbody tr tr:last-child {
+  border-radius: 0 0 8px 8px;
+  border-bottom: 2px solid var(--fb1);
 }
 .tableFormList #tableFindProduct tbody tr:nth-child(odd) {
   background-color: var(--bg-light);
@@ -1289,8 +1298,9 @@ h4 {
 
 .tableFormUserList {
   max-height: 330px;
-  border: 1px solid green;
+  border: 1px solid var(--fb1);
   overflow: auto;
+  border-radius: 8px;
 }
 .tableFormUserList #tableFindUser {
   border-collapse: collapse;
@@ -1346,6 +1356,43 @@ h4 {
 
 .inputFindUser::placeholder {
   text-align: center;
+}
+
+.managerSystem {
+  background-color: var(--bs-dark);
+  border: 2px solid var(--fb1);
+  border-radius: 8px;
+}
+.managerSystem ul {
+  list-style: none;
+  padding: 24px;
+  cursor: pointer;
+}
+.managerSystem ul li {
+  padding: 8px;
+  width: 100%;
+  border-left: 2px solid var(--fb1);
+  border-right: 2px solid var(--fb1);
+}
+.managerSystem ul li:first-child {
+  border-radius: 8px 8px 0 0;
+  border-top: 2px solid var(--fb1);
+}
+.managerSystem ul li:last-child {
+  border-radius: 0 0 8px 8px;
+  border-bottom: 2px solid var(--fb1);
+}
+.managerSystem ul li:nth-child(even) {
+  background-color: var(--bg-normal);
+}
+.managerSystem ul li:nth-child(even):hover {
+  background-color: #3E4042;
+}
+.managerSystem ul li:nth-child(odd) {
+  background-color: var(--bg-light);
+}
+.managerSystem ul li:nth-child(odd):hover {
+  background-color: #797C7C;
 }
 
 .forms {

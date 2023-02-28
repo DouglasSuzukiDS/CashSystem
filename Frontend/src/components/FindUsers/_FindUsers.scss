@@ -16,9 +16,9 @@
 
 .tableFormUserList {
    max-height: 330px;
-   border: 1px solid green;
+   border: 1px solid var(--fb1);
    overflow: auto;
-
+   border-radius: 8px;
 
    #tableFindUser {
       border-collapse: collapse;

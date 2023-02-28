@@ -5,10 +5,10 @@ import { CashRegister } from "../../assets/Icons/CashRegister";
 import { Gears } from "../../assets/Icons/Gears";
 import { HandHoldingDollar } from "../../assets/Icons/HandHoldingDollar";
 import { ListCheck } from "../../assets/Icons/ListCheck";
-import { MagnifyingGlass  }from "../../assets/Icons/MagnifyingGlass";
-import { SackDollar  } from "../../assets/Icons/SackDollar";
-import { Signature  } from "../../assets/Icons/Signature";
-import { TrashCan  }from "../../assets/Icons/TrashCan";
+import { MagnifyingGlass } from "../../assets/Icons/MagnifyingGlass";
+import { SackDollar } from "../../assets/Icons/SackDollar";
+import { Signature } from "../../assets/Icons/Signature";
+import { TrashCan } from "../../assets/Icons/TrashCan";
 import { Closing } from "../../components/Closing/Closing";
 import { Invoicing } from "../../components/Invoicing/Invoice";
 import { FindProducts } from "../../components/FindProducts/FindProducts";
@@ -25,6 +25,8 @@ import { ProductType } from "../../types/ProductType";
 import { CartCircleExclamation } from "../../assets/Icons/cart-circle-exclamation";
 import { MessageTexugo } from "../../components/MessageTexugo/MessageTexugo";
 import { FindUsers } from "../../components/FindUsers/FindUsers";
+import { ManagerSystem } from "../../components/ManagerSystem/ManagerSystem";
+import { allProducts } from "../../services/product.service";
 
 export const OpenSystem = ({ close }: ActionsType) => {
    const backend = 'http://localhost:3001'
@@ -35,10 +37,10 @@ export const OpenSystem = ({ close }: ActionsType) => {
 
    const [userInfos, setUserInfos] = useState<UserType | null>()
    // Get All Users
-   const [users, setUsers] = useState([])
+   const [users, setUsers] = useState<UserType[]>([])
 
    // Get All Products
-   const [products, setProducts] = useState([])
+   const [products, setProducts] = useState<ProductType[]>([])
 
    // Open System
    const [open, setOpen] = useState(false)
@@ -55,6 +57,12 @@ export const OpenSystem = ({ close }: ActionsType) => {
    const [findProductsModal, setFindProductsModal] = useState(false)
 
    const [closeSystem, setCloseSystem] = useState(false)
+
+   const [managerProductsModal, setManagerProductsModal] = useState(false)
+
+   const [managerUsersModal, setManagerUsersModal] = useState(false)
+
+   const [managerOption, setManagerOption] = useState(false)
 
 
    const AuthTokenLC = localStorage.getItem('AuthToken')
@@ -86,17 +94,19 @@ export const OpenSystem = ({ close }: ActionsType) => {
     }, [])*/
 
    useEffect(() => { // checkStatus()
-      // setUserInfos(user as UserType)
-      // console.log(`Infos do user ${user}`)
-      // setUserInfos(user)
-      // console.log(userInfos)
-
       checkStatus() // Verifica se existe um Token, se existir verifica se o caixa já foi aberto
-
       //console.log(allUsers())
+
+      allProducts()
+         .then(setProducts)
+         .catch(e => console.log(e))
+
+      allUsers()
+         .then(setUsers)
+         .catch(e => console.log(e))
    }, [])
 
-   // Get All Users
+   /*// Get All Users
    useEffect(() => {
       axios.get(`${backend}/users`)
          .then(response => setUsers(response.data.result))
@@ -107,7 +117,7 @@ export const OpenSystem = ({ close }: ActionsType) => {
       axios.get(`${backend}/products`)
          .then(response => setProducts(response.data.result))
    }, [])
-   //console.log(products)
+   //console.log(products)*/
 
    // KeyPress Event
    useEffect(() => {
@@ -184,12 +194,20 @@ export const OpenSystem = ({ close }: ActionsType) => {
             setInvoicingModal(false)
          }
 
-         setFindProductsModal(!findProductsModal)
+         setManagerProductsModal(!managerProductsModal)
       }
    }
 
    const handleToogleFindUserModal = () => {
+      if (open === false) {
+         alert('Por obséquio abra o caixa')
+      } else {
+         if (invoicingModal) {
+            setInvoicingModal(false)
+         }
 
+         setManagerUsersModal(!managerUsersModal)
+      }
    }
 
    const optionsSystemModal = () => {
@@ -243,8 +261,18 @@ export const OpenSystem = ({ close }: ActionsType) => {
       })
    }
 
-   const handleManager = () => {
+   const handleManagerUser = () => {
+      // setManagerOption(true)
+      // return managerOption 
+      setOptionsSystem(false)
+      setManagerUsersModal(true)
+   }
 
+   const handleManagerProduct = () => {
+      // setManagerOption(true)
+      // return managerOption 
+      setOptionsSystem(false)
+      setManagerProductsModal(true)
    }
 
    return (
@@ -275,19 +303,10 @@ export const OpenSystem = ({ close }: ActionsType) => {
                      !open ?
                         <>
                            <Gears w='24' h='24' fill='var(--bs-secondary)' className='notAllowed' />
-
-                           {/* <button className="btn btn-primary ml-2 border" id="btn_openCash" onClick={ startJob }>
-                              Abrir Caixa
-                              <CashRegister w='24' h='24' fill='var(--text)' className='ml-1 text-color' />
-                           </button> */}
                         </> :
                         <>
-                           <Gears w='24' h='24' fill='var(--bs-secondary)' className='pointer opacity' onClick={ optionsSystemModal } />
+                           <Gears w='24' h='24' fill='var(--bs-secondary)' className='pointer opacity' onClick={optionsSystemModal} />
 
-                           {/* <button className="btn btn-danger ml-2 border" id="btn_closeCash" onClick={ handleCloseCash }>
-                              Fechar Caixa
-                              <CashRegister w='24' h='24' fill='var(--text)' className='ml-1 text-color' />
-                           </button> */}
                         </>
                   }
 
@@ -303,14 +322,56 @@ export const OpenSystem = ({ close }: ActionsType) => {
                </div>
             </header>
 
-            <div className="contentSystem flex border" id="contentSystem">
-               { optionsSystem ?
-                  <FindUsers close={ optionsSystemModal } /> : ''
+            <div className="contentSystem flex" id="contentSystem">
+               {optionsSystem ?
+                  <>
+                     {/* // <ManagerSystem 
+                  //    close={ () => setOptionsSystem(false) } 
+                  //    handleManager={ handleManager }/> : '' */}
+
+                     <section className="managerSystem flex" onMouseLeave={close}>
+                        <ul className="flex column text-dark bold">
+                           <li className="flex" 
+                              onClick={ handleManagerUser }>Editar Usuário</li>
+
+                           <li className="flex" 
+                              onClick={ handleManagerProduct }>Editar Produtos</li>
+                        </ul>
+                     </section>
+                  </> : ''
                }
 
-               {/* { !open ?
-                  <MessageTexugo msg="Abra o caixa meu Chapa" tw="100" th="100" /> : ''
+               {
+                  managerProductsModal ?
+                     <FindProducts listProducts={ products } close={() => setManagerProductsModal(false)} /> : ''
+               }
+
+               {
+                  managerUsersModal ?
+                     <FindUsers listUsers={ users } close={() => setManagerUsersModal(false)} /> : ''
+               }
+
+               {/* {
+                  !managerProductsModal ?
+                     <FindProducts close={ () => setManagerProductsModal(!managerUsersModal) } /> : ''
                } */}
+
+
+               {!open ?
+                  //<MessageTexugo msg="Abra o caixa meu Chapa" tw="100" th="100" /> : ''
+                  <div className="none" id="contentSystemStart">
+                     <OpenCash />
+                  </div> :
+                  <>
+                     {findProductsModal ?
+                        <FindProducts listProducts={products} close={() => setFindProductsModal(false)} /> : ''}
+                  </>
+               }
+
+               {
+                  closeSystem ? <Closing close={ () => setCloseSystem(false) } /> : ''
+               }
+
 
                {/* {  
                cartItems.length === 0 ??

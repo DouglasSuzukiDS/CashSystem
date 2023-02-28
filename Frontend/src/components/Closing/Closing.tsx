@@ -36,6 +36,8 @@ import { XMark } from '../../assets/Icons/XMark'
 //    console.log(event.keyCode)
 // })
 
+// const navigate = useNavigate()
+
 const closeFormDay = () => {
    const close = document.querySelector('#closingFormDay') as HTMLDivElement
    // console.log(close)
@@ -92,6 +94,12 @@ let amountValue = amountMoney + amountBank
          }
       })
    }, [])
+
+   const closeSystem = async() => {
+      await localStorage.removeItem('openCashValue')
+      await localStorage.removeItem('AuthToken')
+      window.location.href = 'http://localhost:3000'
+   }
 
    return (
       <main className="container flex pr-3" id='closingFormDay'>
@@ -224,15 +232,15 @@ let amountValue = amountMoney + amountBank
                </div>
 
                <span className="flex sbt mt-1">
-                  <Link to='/invoicing' className="btn btn-warning mr-1 w-50" >
+                  <button className="btn btn-warning mr-1 w-50"  onClick={ close } >
                      Voltar(F7)
                      <ArrowLeftLong w='24' h='24' fill='var(--bs-dark)' className='ml-1' />
-                  </Link>
+                  </button>
 
-                  <Link to='/' className="btn btn-success ml-1  w-50">
+                  <button className="btn btn-success ml-1 w-50" onClick={ close } >
                      Fechar(F8)
                      <CircleCheck w='24' h='24' fill='var(--text)' className='ml-1' />
-                  </Link>
+                  </button>
                </span>
             </form>
          </div>

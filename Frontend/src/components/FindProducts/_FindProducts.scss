@@ -16,8 +16,9 @@
 
 .tableFormList {
    max-height: 330px;
-   border: 1px solid green;
+   border: 1px solid var(--fb1);
    overflow: auto;
+   border-radius: 8px;
 
 
    #tableFindProduct {
@@ -35,6 +36,16 @@
 
       tbody tr {
          color: var(--bs-dark);
+
+         tr:first-child {
+            border-radius: 8px 8px 0 0;
+            border-top: 2px solid var(--fb1);
+         }
+
+         tr:last-child {
+            border-radius: 0 0 8px 8px;
+            border-bottom: 2px solid var(--fb1);
+         }
       }
 
       tbody tr:nth-child(odd) {
