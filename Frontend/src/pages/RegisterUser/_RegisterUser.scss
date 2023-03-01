@@ -12,6 +12,11 @@
       &:hover {
          color: #31D2F2;
       }
+
+      #closeNewUser:hover {
+         cursor: pointer;
+         opacity: 0.5;
+      }
    }
    
    .registerNewUser {

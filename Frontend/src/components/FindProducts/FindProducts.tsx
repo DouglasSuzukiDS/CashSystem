@@ -19,6 +19,7 @@ export const FindProducts = ({ close, id, listProducts }: ActionsType) => {
    // Get All Products
    const [products, setProducts] = useState<ProductType[]>([]) // First Search on List
    const [cloneProducts, setCloneProducts] = useState<ProductType[]>([]) // List if Search is empty
+   const [findProducts, setFindProducts] = useState<ProductType[]>([]) // List if Search is empty
    const [editProductModel, setEditProductModal] = useState(false)
    const [idItem, setIdItem] = useState('')
 
@@ -30,6 +31,10 @@ export const FindProducts = ({ close, id, listProducts }: ActionsType) => {
       allProducts()
          .then(setCloneProducts)
          .catch(e => console.log(e))
+      
+      allProducts()
+         .then(setFindProducts)
+         .catch(e => console.log(e))
    }, [editProductModel])
    //console.log(users)
 
@@ -39,7 +44,7 @@ export const FindProducts = ({ close, id, listProducts }: ActionsType) => {
 
       if (term === '') {
          // console.log('O term é: ' + term)
-         console.log(cloneProducts)
+         //console.log(cloneProducts)
          setProducts(cloneProducts)
       } else {
          let search = term.replace(term[0], term[0].toLocaleUpperCase())
@@ -47,10 +52,10 @@ export const FindProducts = ({ close, id, listProducts }: ActionsType) => {
          // setProducts(find.filter(prod => prod.pdt_type.includes(search)))
          //console.log(search)
          
-         let findByName = products.filter(prod => prod.pdt_name.includes(search))
+         let findByName = findProducts.filter(prod => prod.pdt_name.includes(search))
          //console.log(findByName)
 
-         let findByType = products.filter(prod => prod.pdt_type.includes(search))
+         let findByType = findProducts.filter(prod => prod.pdt_type.includes(search))
 
          if (findByName.length !== 0) {
             setProducts(findByName)

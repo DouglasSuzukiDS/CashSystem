@@ -7,7 +7,7 @@ import { SackDollar } from "../../assets/Icons/SackDollar";
 import { XMark } from "../../assets/Icons/XMark";
 import { ActionsType } from "../../types/ActionsType";
 
-export const OpenCash = ({ close }: ActionsType) => {
+export const OpenCash = ({ close, onClick }: ActionsType) => {
    useEffect(() => {
       //localStorage.removeItem('openCashValue')
       localStorage.getItem('openCashValue')
@@ -111,6 +111,7 @@ export const OpenCash = ({ close }: ActionsType) => {
                   </div>
                </div>
 
+               {/* <div className="flex btn btn-success mt-3" onClick={ openCashValue }> */}
                <div className="flex btn btn-success mt-3" onClick={ openCashValue }>
                   Confirmar
                   <CircleCheck w='24' h='24' fill='var(--text)' className='ml-1' />

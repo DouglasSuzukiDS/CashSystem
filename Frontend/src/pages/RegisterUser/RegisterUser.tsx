@@ -7,11 +7,14 @@ import { SquareXMark } from "../../assets/Icons/SquareXMark"
 import { UserPen } from "../../assets/Icons/UserPen"
 import { UserPlus } from "../../assets/Icons/UserPlus"
 import { ArrowLeftLong } from "../../assets/Icons/ArrowLeftLong"
+import { ActionsType } from "../../types/ActionsType"
+import { XMark } from "../../assets/Icons/XMark"
+import { CircleCheck } from "../../assets/Icons/CircleCheck"
 
 type Timer = NodeJS.Timeout
 
 
-export const RegisterUser = () => {
+export const RegisterUser = ({ close }: ActionsType) => {
    const server: string = 'http://localhost:3001'
    
    const navigate = useNavigate()
@@ -60,9 +63,18 @@ export const RegisterUser = () => {
             <div className="forms">
 
                <section className="registerNewUser w-100 h-100  f column sbt">
-                  <h4 className="flex">
-                     Registro de Usuário
-                     <UserPlus w='24' h='24' fill='#0DCAF0' className='ml-1' />
+                  <h4 className="flex sbt">
+                     <div className="flex text-center w-100">
+                        <h5>Registro de Usuário</h5>
+                        <UserPlus w='24' h='24' fill='#0DCAF0' className='ml-1' />
+                     </div>
+
+                     <div id="closeNewUser" className="flex">
+                        <XMark w='24' h='24'
+                           className=''
+                           onClick={close}
+                        />
+                     </div>
                   </h4>
 
                   <div className="inputForm">
@@ -104,10 +116,10 @@ export const RegisterUser = () => {
                      <UserPen w='24' h='24' fill='var(--bs-dark)' className='ml-2' />
                   </button>
 
-                  <Link to='/' className="btn btn-warning" >
-                     Voltar
-                     <ArrowLeftLong w='24' h='24' fill='var(--bs-dark)' className='ml-1' />
-                  </Link>
+                  <button className="btn btn-success" onClick={ close } >
+                     Ok
+                     <CircleCheck w='24' h='24' fill='var(--text)' className='ml-1' />
+                  </button>
                </section>
             </div>
          </main>

@@ -27,13 +27,15 @@ import { MessageTexugo } from "../../components/MessageTexugo/MessageTexugo";
 import { FindUsers } from "../../components/FindUsers/FindUsers";
 import { ManagerSystem } from "../../components/ManagerSystem/ManagerSystem";
 import { allProducts } from "../../services/product.service";
+import { RegisterUser } from "../RegisterUser/RegisterUser";
+import { RegisterProduct } from "../RegisterProduct/RegisterProduct";
+import { SystemSatusButton } from "../../components/SystemStatusButton/SystemStatusButton";
 
 export const OpenSystem = ({ close }: ActionsType) => {
    const backend = 'http://localhost:3001'
    const navigate = useNavigate()
    const auth = useContext(AuthContext)
    const { user } = auth
-
 
    const [userInfos, setUserInfos] = useState<UserType | null>()
    // Get All Users
@@ -50,6 +52,8 @@ export const OpenSystem = ({ close }: ActionsType) => {
    const [cartItems, setCartItems] = useState<ProductType[]>([])
 
    // Modals
+   const [contentSystemModal, setContentSystemModal] = useState(false)
+
    const [optionsSystem, setOptionsSystem] = useState(false)
 
    const [invoicingModal, setInvoicingModal] = useState(false)
@@ -58,9 +62,13 @@ export const OpenSystem = ({ close }: ActionsType) => {
 
    const [closeSystem, setCloseSystem] = useState(false)
 
-   const [managerProductsModal, setManagerProductsModal] = useState(false)
+   const [newUserModal, setNewUserModal] = useState(false)
 
    const [managerUsersModal, setManagerUsersModal] = useState(false)
+
+   const [NewProductModal, setNewProductModal] = useState(false)
+
+   const [managerProductsModal, setManagerProductsModal] = useState(false)
 
    const [managerOption, setManagerOption] = useState(false)
 
@@ -105,6 +113,11 @@ export const OpenSystem = ({ close }: ActionsType) => {
          .then(setUsers)
          .catch(e => console.log(e))
    }, [])
+
+
+   const userData = () => {
+
+   }
 
    /*// Get All Users
    useEffect(() => {
@@ -172,18 +185,32 @@ export const OpenSystem = ({ close }: ActionsType) => {
 
    const startJob = () => {
       //alert(`Valor do localstorage: ${openCashValue}`)
-      const contentSystemStart = document.querySelector('#contentSystemStart') as HTMLDivElement
-      contentSystemStart.classList.toggle('flex')
+      // const contentSystemStart = document.querySelector('#contentSystemStart') as HTMLDivElement
+      // contentSystemStart.classList.toggle('flex')
 
-      verifyOpenCashValue()
+      setContentSystemModal(!contentSystemModal)
+      console.log('Abrir')
+
+      //verifyOpenCashValue()
    }
 
    const verifyOpenCashValue = () => {
       if (localStorage.getItem('openCashValue') !== '' ||
          localStorage.getItem('openCashValue') !== undefined ||
          localStorage.getItem('openCashValue') !== null) {
-         setOpen(true)
+         setOpen(!open)
       }
+   }
+
+   const handleCloseCash = () => {
+      // localStorage.getItem('openCashValue')
+
+      /*if (!findProductsModal || !invoicingModal) {
+         setFindProductsModal(false)
+         setInvoicingModal(false)
+      }*/
+      setCloseSystem(!closeSystem)
+      //console.log(closeSystem)
    }
 
    const handleToogleFindProductModal = () => {
@@ -215,16 +242,7 @@ export const OpenSystem = ({ close }: ActionsType) => {
       console.log(optionsSystem)
    }
 
-   const handleCloseCash = () => {
-      // localStorage.getItem('openCashValue')
 
-      /*if (!findProductsModal || !invoicingModal) {
-         setFindProductsModal(false)
-         setInvoicingModal(false)
-      }*/
-      setCloseSystem(!closeSystem)
-      console.log(closeSystem)
-   }
 
    const handleKeyDown = () => {
       /*  Blocked Keys
@@ -261,11 +279,21 @@ export const OpenSystem = ({ close }: ActionsType) => {
       })
    }
 
+   const handleNewUser = () => {
+      setOptionsSystem(false)
+      setNewUserModal(true)
+   }
+
    const handleManagerUser = () => {
       // setManagerOption(true)
       // return managerOption 
       setOptionsSystem(false)
       setManagerUsersModal(true)
+   }
+
+   const handleNewProduct = () => {
+      setOptionsSystem(false)
+      setNewProductModal(true)
    }
 
    const handleManagerProduct = () => {
@@ -300,17 +328,45 @@ export const OpenSystem = ({ close }: ActionsType) => {
 
                <div className="openSystem flex">
                   {
-                     !open ?
+                     !contentSystemModal ?
                         <>
                            <Gears w='24' h='24' fill='var(--bs-secondary)' className='notAllowed' />
+
+                           {/* <SystemSatusButton id="btn_openCash" text="Abrir Caixa"
+                              className="btn btn-primary ml-2" onClick={startJob} /> */}
+
+                           <button className="btn btn-primary ml-2 border" id="btn_openCash" onClick={startJob}>
+                              Abrir Caixa
+                              <CashRegister w='24' h='24' fill='var(--text)' className='ml-1 text-color' />
+                           </button>
+
                         </> :
                         <>
                            <Gears w='24' h='24' fill='var(--bs-secondary)' className='pointer opacity' onClick={optionsSystemModal} />
 
+                           {/* <SystemSatusButton id="btn_closeCash" text="Fechar Caixa"
+                              className="btn btn-danger ml-2" onClick={handleCloseCash} /> */}
+
+
+                           <button className="btn btn-danger ml-2 border" id="btn_closeCash" onClick={handleCloseCash} style={{ display: 'none' }}>
+                              Fechar Caixa
+                              <CashRegister w='24' h='24' fill='var(--text)' className='ml-1 text-color' />
+                           </button>
                         </>
+
                   }
 
-                  <button className="btn btn-primary ml-2 border" id="btn_openCash" onClick={startJob}>
+                  {/* {
+                     open ?
+                     <>
+                           <Gears w='24' h='24' fill='var(--bs-secondary)' className='pointer opacity' onClick={optionsSystemModal} />
+
+                           <SystemSatusButton id="btn_closeCash" text="Fechar Caixa"
+                              className="btn btn-danger ml-2" onClick={ handleCloseCash } />
+                        </> : ''
+                  } */}
+
+                  {/* <button className="btn btn-primary ml-2 border" id="btn_openCash" onClick={startJob}>
                      Abrir Caixa
                      <CashRegister w='24' h='24' fill='var(--text)' className='ml-1 text-color' />
                   </button>
@@ -318,7 +374,8 @@ export const OpenSystem = ({ close }: ActionsType) => {
                   <button className="btn btn-danger ml-2 border" id="btn_closeCash" onClick={handleCloseCash} style={{ display: 'none' }}>
                      Fechar Caixa
                      <CashRegister w='24' h='24' fill='var(--text)' className='ml-1 text-color' />
-                  </button>
+                  </button> */}
+
                </div>
             </header>
 
@@ -329,26 +386,42 @@ export const OpenSystem = ({ close }: ActionsType) => {
                   //    close={ () => setOptionsSystem(false) } 
                   //    handleManager={ handleManager }/> : '' */}
 
-                     <section className="managerSystem flex" onMouseLeave={close}>
+                     <section className="managerSystem flex" onMouseLeave={() => setOptionsSystem(false)}>
                         <ul className="flex column text-dark bold">
-                           <li className="flex" 
-                              onClick={ handleManagerUser }>Editar Usuário</li>
+                           <li className="flex"
+                              onClick={handleNewUser}>Novo Usuário</li>
 
-                           <li className="flex" 
-                              onClick={ handleManagerProduct }>Editar Produtos</li>
+                           <li className="flex"
+                              onClick={handleManagerUser}>Editar Usuário</li>
+
+                           <li className="flex"
+                              onClick={handleNewProduct}>Novo Produto</li>
+
+                           <li className="flex"
+                              onClick={handleManagerProduct}>Editar Produtos</li>
                         </ul>
                      </section>
                   </> : ''
                }
 
                {
-                  managerProductsModal ?
-                     <FindProducts listProducts={ products } close={() => setManagerProductsModal(false)} /> : ''
+                  newUserModal ?
+                     <RegisterUser close={() => setNewUserModal(false)} /> : ''
                }
 
                {
                   managerUsersModal ?
-                     <FindUsers listUsers={ users } close={() => setManagerUsersModal(false)} /> : ''
+                     <FindUsers listUsers={users} close={() => setManagerUsersModal(false)} /> : ''
+               }
+
+               {
+                  NewProductModal ?
+                     <RegisterProduct close={() => setNewProductModal(false)} /> : ''
+               }
+
+               {
+                  managerProductsModal ?
+                     <FindProducts listProducts={products} close={() => setManagerProductsModal(false)} /> : ''
                }
 
                {/* {
@@ -356,8 +429,17 @@ export const OpenSystem = ({ close }: ActionsType) => {
                      <FindProducts close={ () => setManagerProductsModal(!managerUsersModal) } /> : ''
                } */}
 
+               {/* { contentSystemModal ? <OpenCash onClick={ verifyOpenCashValue } /> : '' } */}
 
                {!open ?
+                  //<MessageTexugo msg="Abra o caixa meu Chapa" tw="100" th="100" /> : ''
+                  <div className="none" id="contentSystemStart">
+                     <OpenCash />
+                  </div> : ''
+               }
+
+
+               {/* {!open ?
                   //<MessageTexugo msg="Abra o caixa meu Chapa" tw="100" th="100" /> : ''
                   <div className="none" id="contentSystemStart">
                      <OpenCash />
@@ -366,10 +448,10 @@ export const OpenSystem = ({ close }: ActionsType) => {
                      {findProductsModal ?
                         <FindProducts listProducts={products} close={() => setFindProductsModal(false)} /> : ''}
                   </>
-               }
+               } */}
 
                {
-                  closeSystem ? <Closing close={ () => setCloseSystem(false) } /> : ''
+                  closeSystem ? <Closing close={() => setCloseSystem(false)} /> : ''
                }
 
 
@@ -399,7 +481,8 @@ export const OpenSystem = ({ close }: ActionsType) => {
                   <p className="pg5 bold text-color">Colaborador</p>
 
                   <p className="pg3 bold italic text-dark-blue flex column" id="employeerName">
-                     Chico Palha
+                     {user?.userName}
+
                      {/* { employeerName } */}
                      <Signature w='24' h='24' fill='var(--dark-blue)' />
                   </p>
