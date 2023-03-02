@@ -54,6 +54,8 @@ export const OpenSystem = ({ close }: ActionsType) => {
    // Modals
    const [contentSystemModal, setContentSystemModal] = useState(false)
 
+   const [contentSystemStartModal, setContentSystemStartModal] = useState(false)
+
    const [optionsSystem, setOptionsSystem] = useState(false)
 
    const [invoicingModal, setInvoicingModal] = useState(false)
@@ -185,13 +187,18 @@ export const OpenSystem = ({ close }: ActionsType) => {
 
    const startJob = () => {
       //alert(`Valor do localstorage: ${openCashValue}`)
-      // const contentSystemStart = document.querySelector('#contentSystemStart') as HTMLDivElement
-      // contentSystemStart.classList.toggle('flex')
+      setContentSystemStartModal(!contentSystemModal)
 
-      setContentSystemModal(!contentSystemModal)
-      console.log('Abrir')
+      if (!contentSystemModal) {
+         const contentSystemStart = document.querySelector('#contentSystemStart') as HTMLDivElement
+         contentSystemStart.classList.toggle('none')
+         contentSystemStart.classList.toggle('flex')
 
-      //verifyOpenCashValue()
+         verifyOpenCashValue()
+         //console.log(contentSystemStartModal)
+      }
+
+      //setContentSystemModal(!contentSystemModal)
    }
 
    const verifyOpenCashValue = () => {
@@ -205,10 +212,10 @@ export const OpenSystem = ({ close }: ActionsType) => {
    const handleCloseCash = () => {
       // localStorage.getItem('openCashValue')
 
-      /*if (!findProductsModal || !invoicingModal) {
+      if (!findProductsModal || !invoicingModal) {
          setFindProductsModal(false)
          setInvoicingModal(false)
-      }*/
+      }
       setCloseSystem(!closeSystem)
       //console.log(closeSystem)
    }
@@ -241,8 +248,6 @@ export const OpenSystem = ({ close }: ActionsType) => {
       setOptionsSystem(!optionsSystem)
       console.log(optionsSystem)
    }
-
-
 
    const handleKeyDown = () => {
       /*  Blocked Keys
@@ -328,17 +333,17 @@ export const OpenSystem = ({ close }: ActionsType) => {
 
                <div className="openSystem flex">
                   {
-                     !contentSystemModal ?
+                     !open ?
                         <>
                            <Gears w='24' h='24' fill='var(--bs-secondary)' className='notAllowed' />
 
                            {/* <SystemSatusButton id="btn_openCash" text="Abrir Caixa"
                               className="btn btn-primary ml-2" onClick={startJob} /> */}
 
-                           <button className="btn btn-primary ml-2 border" id="btn_openCash" onClick={startJob}>
+                           {/* <button className="btn btn-primary ml-2 border" id="btn_openCash" onClick={startJob}>
                               Abrir Caixa
                               <CashRegister w='24' h='24' fill='var(--text)' className='ml-1 text-color' />
-                           </button>
+                           </button> */}
 
                         </> :
                         <>
@@ -348,10 +353,10 @@ export const OpenSystem = ({ close }: ActionsType) => {
                               className="btn btn-danger ml-2" onClick={handleCloseCash} /> */}
 
 
-                           <button className="btn btn-danger ml-2 border" id="btn_closeCash" onClick={handleCloseCash} style={{ display: 'none' }}>
+                           {/* <button className="btn btn-danger ml-2 border" id="btn_closeCash" onClick={handleCloseCash} style={{ display: 'none' }}>
                               Fechar Caixa
                               <CashRegister w='24' h='24' fill='var(--text)' className='ml-1 text-color' />
-                           </button>
+                           </button> */}
                         </>
 
                   }
@@ -366,7 +371,12 @@ export const OpenSystem = ({ close }: ActionsType) => {
                         </> : ''
                   } */}
 
-                  {/* <button className="btn btn-primary ml-2 border" id="btn_openCash" onClick={startJob}>
+                  {/* <button className="btn btn-primary ml-2 border" id="btn_statusCash" onClick={startJob}>
+                     Abrir Caixa
+                     <CashRegister w='24' h='24' fill='var(--text)' className='ml-1 text-color' />
+                  </button> */}
+
+                  <button className="btn btn-primary ml-2 border" id="btn_openCash" onClick={startJob}>
                      Abrir Caixa
                      <CashRegister w='24' h='24' fill='var(--text)' className='ml-1 text-color' />
                   </button>
@@ -374,12 +384,23 @@ export const OpenSystem = ({ close }: ActionsType) => {
                   <button className="btn btn-danger ml-2 border" id="btn_closeCash" onClick={handleCloseCash} style={{ display: 'none' }}>
                      Fechar Caixa
                      <CashRegister w='24' h='24' fill='var(--text)' className='ml-1 text-color' />
-                  </button> */}
+                  </button>
 
                </div>
             </header>
 
             <div className="contentSystem flex" id="contentSystem">
+
+               {contentSystemStartModal ?
+                  <div className="none" id="contentSystemStart">
+                     <OpenCash onClick={ () => handleCloseCash }/>
+                  </div> : ''
+                  //<MessageTexugo msg="Abra o caixa meu Chapa" tw="100" th="100" /> : ''
+                  // <div className="" id="contentSystemStart">
+                  //    <OpenCash />
+                  // </div> 
+               }
+
                {optionsSystem ?
                   <>
                      {/* // <ManagerSystem 
@@ -430,13 +451,6 @@ export const OpenSystem = ({ close }: ActionsType) => {
                } */}
 
                {/* { contentSystemModal ? <OpenCash onClick={ verifyOpenCashValue } /> : '' } */}
-
-               {!open ?
-                  //<MessageTexugo msg="Abra o caixa meu Chapa" tw="100" th="100" /> : ''
-                  <div className="none" id="contentSystemStart">
-                     <OpenCash />
-                  </div> : ''
-               }
 
 
                {/* {!open ?

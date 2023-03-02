@@ -237,7 +237,7 @@ let amountValue = amountMoney + amountBank
                      <ArrowLeftLong w='24' h='24' fill='var(--bs-dark)' className='ml-1' />
                   </button>
 
-                  <button className="btn btn-success ml-1 w-50" onClick={ close } >
+                  <button className="btn btn-success ml-1 w-50" onClick={ closeSystem } >
                      Fechar(F8)
                      <CircleCheck w='24' h='24' fill='var(--text)' className='ml-1' />
                   </button>

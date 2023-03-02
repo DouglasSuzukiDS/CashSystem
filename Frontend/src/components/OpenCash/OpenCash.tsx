@@ -14,7 +14,7 @@ export const OpenCash = ({ close, onClick }: ActionsType) => {
    }, [])
 
    const navigate = useNavigate()
-   
+
    const handleOpenCashModal = () => {
       // Modal OpenCash
       let modal = document.querySelector('#openCashModal') as HTMLElement
@@ -37,7 +37,7 @@ export const OpenCash = ({ close, onClick }: ActionsType) => {
       btn_closeCash.style.display = 'flex'
 
    }
-   
+
    const openCashValue = () => {
       let openingCashInput = document.querySelector('#openingCash') as HTMLInputElement
       let openingCash = parseFloat(openingCashInput.value).toFixed(2)
@@ -62,14 +62,21 @@ export const OpenCash = ({ close, onClick }: ActionsType) => {
          statusSystemH4.classList.add('text-success')
          statusSystemH4.innerHTML = 'Caixa Aberto'
 
-        // Button Status Cash
-        let btn_openCash = document.querySelector('#btn_openCash') as HTMLButtonElement
-        let btn_closeCash = document.querySelector('#btn_closeCash') as HTMLButtonElement
+         // Button Status Cash
+         let btn_openCash = document.querySelector('#btn_openCash') as HTMLButtonElement
+         let btn_closeCash = document.querySelector('#btn_closeCash') as HTMLButtonElement
+         // let btn_statusCash = document.querySelector('#btn_statusCash') as HTMLButtonElement
+         // btn_statusCash.innerHTML = 'Fechar Caixa'
+         // btn_statusCash.onclick = () => onClick
+         // btn_statusCash.classList.remove('btn-primary')
+         // btn_statusCash.classList.add('btn-danger')
 
-      //   btn_openCash.classList.add('none')
-      //   btn_closeCash.classList.remove('none')
-        btn_openCash.style.display = 'none'
-        btn_closeCash.style.display = 'flex'
+         //   btn_openCash.classList.add('none')
+         //   btn_closeCash.classList.remove('none')
+         btn_openCash.style.display = 'none'
+         btn_closeCash.style.display = 'flex'
+
+
       }
 
       //eslint-disable-next-line no-restricted-globals
@@ -92,7 +99,7 @@ export const OpenCash = ({ close, onClick }: ActionsType) => {
                   <div id='closeOpenCash'>
                      <XMark w='24' h='24'
                         className=''
-                        onClick={ handleOpenCashModal }
+                        onClick={handleOpenCashModal}
                      />
                   </div>
                </h4>
@@ -105,14 +112,14 @@ export const OpenCash = ({ close, onClick }: ActionsType) => {
                      <p className='inputTF text-primary'>
                         <input type="text"
                            className='text-primary pg3 text-center'
-                           id="openingCash" placeholder="0,00"/>
+                           id="openingCash" placeholder="0,00" />
                         {/* {opening.toFixed(2)} */}
                      </p>
                   </div>
                </div>
 
                {/* <div className="flex btn btn-success mt-3" onClick={ openCashValue }> */}
-               <div className="flex btn btn-success mt-3" onClick={ openCashValue }>
+               <div className="flex btn btn-success mt-3" onClick={openCashValue}>
                   Confirmar
                   <CircleCheck w='24' h='24' fill='var(--text)' className='ml-1' />
                </div>
