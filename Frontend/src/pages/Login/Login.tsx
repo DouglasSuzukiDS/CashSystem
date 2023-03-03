@@ -10,7 +10,7 @@ export const Login = () => {
       const authToken = localStorage.getItem('authToken')
 
       if(authToken !== undefined){
-         //navigate('/OpenSystem') 
+         // navigate('/OpenSystem') 
       } 
    })
 

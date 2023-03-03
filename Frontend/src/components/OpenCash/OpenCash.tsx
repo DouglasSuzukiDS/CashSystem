@@ -73,16 +73,14 @@ export const OpenCash = ({ close, onClick }: ActionsType) => {
 
          //   btn_openCash.classList.add('none')
          //   btn_closeCash.classList.remove('none')
-         btn_openCash.style.display = 'none'
-         btn_closeCash.style.display = 'flex'
-
-
+         // btn_openCash.style.display = 'none'
+         // btn_closeCash.style.display = 'flex'
       }
 
       //eslint-disable-next-line no-restricted-globals
       if (confirm(`Confirmar Valor: ${openingCash}`)) {
          createValueLocalStorage()
-      }
+      } 
    }
 
    return (
@@ -99,7 +97,7 @@ export const OpenCash = ({ close, onClick }: ActionsType) => {
                   <div id='closeOpenCash'>
                      <XMark w='24' h='24'
                         className=''
-                        onClick={handleOpenCashModal}
+                        onClick={ handleOpenCashModal }
                      />
                   </div>
                </h4>
@@ -119,7 +117,7 @@ export const OpenCash = ({ close, onClick }: ActionsType) => {
                </div>
 
                {/* <div className="flex btn btn-success mt-3" onClick={ openCashValue }> */}
-               <div className="flex btn btn-success mt-3" onClick={openCashValue}>
+               <div className="flex btn btn-success mt-3" onClick={ openCashValue }>
                   Confirmar
                   <CircleCheck w='24' h='24' fill='var(--text)' className='ml-1' />
                </div>
