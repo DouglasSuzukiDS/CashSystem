@@ -1395,6 +1395,77 @@ h4 {
   background-color: #797C7C;
 }
 
+::-webkit-scrollbar {
+  width: 5px;
+  background-color: var(--bg-dark);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--bg-normal);
+  border-radius: 8px;
+  scroll-behavior: smooth;
+}
+
+.containerCartList {
+  background-color: #363738;
+  border: 2px solid var(--fb1);
+  border-radius: 8px;
+}
+
+.cartList {
+  border: 2px solid var(--fb1);
+  border-radius: 8px;
+}
+.cartList ::-webkit-scrollbar {
+  width: 5px;
+  background-color: var(--bg-dark);
+}
+.cartList ::-webkit-scrollbar-thumb {
+  background-color: var(--bg-normal);
+  border-radius: 8px;
+  scroll-behavior: smooth;
+}
+.cartList .tableCartList {
+  width: 850px;
+  border-collapse: collapse;
+}
+.cartList .tableCartList thead {
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+.cartList .tableCartList table, .cartList .tableCartList thead, .cartList .tableCartList tbody, .cartList .tableCartList tr, .cartList .tableCartList td {
+  text-align: center;
+}
+.cartList .tableCartList tbody tr {
+  color: var(--text);
+}
+.cartList .tableCartList tbody tr:nth-child(odd) {
+  background-color: var(--bg-dark);
+}
+.cartList .tableCartList tbody tr:nth-child(odd):hover {
+  background-color: #797C7C;
+}
+.cartList .tableCartList tbody tr:nth-child(even) {
+  background-color: var(--bg-normal);
+}
+.cartList .tableCartList tbody tr:nth-child(even):hover {
+  background-color: #3E4042;
+}
+.cartList .cartListFooter {
+  background-color: var(--bs-secondary);
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+.cartList .cartListFooter p {
+  color: var(--dark-blue);
+  font-size: 24px;
+  font-weight: bold;
+}
+.cartList .cartListFooter .cartListValue {
+  font-size: 24px;
+  font-weight: bold;
+}
+
 .forms {
   width: 380px;
   height: 420px;

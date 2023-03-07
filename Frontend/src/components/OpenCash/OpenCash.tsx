@@ -81,6 +81,8 @@ export const OpenCash = ({ close, onClick }: ActionsType) => {
       if (confirm(`Confirmar Valor: ${openingCash}`)) {
          createValueLocalStorage()
       } 
+
+      window.location.href = 'http://localhost:3000/OpenSystem'
    }
 
    return (

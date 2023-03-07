@@ -30,6 +30,8 @@ import { allProducts } from "../../services/product.service";
 import { RegisterUser } from "../RegisterUser/RegisterUser";
 import { RegisterProduct } from "../RegisterProduct/RegisterProduct";
 import { SystemSatusButton } from "../../components/SystemStatusButton/SystemStatusButton";
+import { AddProducts } from "../../components/AddProducts/AddProducts";
+import { CartList } from "../../components/CartList/CartList";
 
 export const OpenSystem = ({ close }: ActionsType) => {
    const backend = 'http://localhost:3001'
@@ -63,6 +65,12 @@ export const OpenSystem = ({ close }: ActionsType) => {
    const [invoicingModal, setInvoicingModal] = useState(false)
 
    const [findProductsModal, setFindProductsModal] = useState(false)
+
+   const [addProduct, setAddProduct] = useState(false)
+
+   const [cartProductsModal, setCartProductsModal] = useState(true)
+
+   const [cartList, setCartList] = useState<ProductType[]>([])
 
    const [closeSystem, setCloseSystem] = useState(false)
 
@@ -217,16 +225,8 @@ export const OpenSystem = ({ close }: ActionsType) => {
       }
    }
 
-   const handleToogleFindUserModal = () => {
-      if (open === false) {
-         alert('Por obséquio abra o caixa')
-      } else {
-         if (invoicingModal) {
-            setInvoicingModal(false)
-         }
-
-         setManagerUsersModal(!managerUsersModal)
-      }
+   const handleAddProductModal = () => {
+      setAddProduct(!addProduct)
    }
 
    const optionsSystemModal = () => {
@@ -414,6 +414,14 @@ export const OpenSystem = ({ close }: ActionsType) => {
                }  */}
 
                {
+                  addProduct ? <AddProducts listProducts={products} close={ handleAddProductModal } cartAddItem={ setCartItems } /> : ''
+               }
+
+               {
+                  cartProductsModal ? <CartList listProducts={ cartItems } /> : ''
+               }
+
+               {
                   closeSystem ? <Closing close={() => setCloseSystem(false)} /> : ''
                }
 
@@ -462,7 +470,7 @@ export const OpenSystem = ({ close }: ActionsType) => {
                      <SackDollar w='20' h='20' fill='var(--text)' className='ml-1' />
                   </button>
 
-                  <button className="btn btn-warning ml-1" onClick={handleToogleFindProductModal} onKeyDown={handleKeyDown}>
+                  <button className="btn btn-warning ml-1" onClick={ handleAddProductModal } onKeyDown={ handleKeyDown }>
                      F9 Pesquisar
                      <MagnifyingGlass w='20' h='20' fill='var(--text-dark)' className='ml-1' />
                   </button>
