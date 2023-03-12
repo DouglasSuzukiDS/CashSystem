@@ -35,7 +35,9 @@
 
    .tableCartList {
       width: 850px;
+      overflow-x: auto;
       // border-collapse: collapse;
+
       tr, td {
          @extend %flex;
          width: 25%;
@@ -46,6 +48,9 @@
          padding: 8px;
       }
 
+      .itemName {
+         justify-content: space-between;
+      }
       thead {
          border-top-left-radius: 8px;
          border-top-right-radius: 8px;
@@ -57,8 +62,13 @@
 
       tr, tbody {
          @extend %flex;
-         @extend %sbt;
+         // @extend %sbt;
          width: 100%;
+      }
+
+      tbody {
+         overflow-x: auto;
+         height: 195px;
       }
 
       tbody tr {
@@ -87,6 +97,7 @@
          background-color: var(--bs-secondary);
          border-bottom-left-radius: 8px;
          border-bottom-right-radius: 8px;
+
       
          p {
             color: var(--dark-blue);

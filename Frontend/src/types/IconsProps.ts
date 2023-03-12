@@ -6,4 +6,6 @@ export type IconsProps = {
    fill?: string
    className?: string
    onClick?: () => void
+   handleAdd?: (id: any) => {}
+   handleMinus?: (id: any) => {}
 }

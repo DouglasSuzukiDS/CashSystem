@@ -198,7 +198,7 @@ h4 {
   justify-content: center;
 }
 
-.sbt, .cartList .tableCartList tr, .cartList .tableCartList tbody {
+.sbt {
   justify-content: space-between;
 }
 
@@ -1427,6 +1427,7 @@ h4 {
 }
 .cartList .tableCartList {
   width: 850px;
+  overflow-x: auto;
 }
 .cartList .tableCartList tr, .cartList .tableCartList td {
   width: 25%;
@@ -1434,6 +1435,9 @@ h4 {
 }
 .cartList .tableCartList td {
   padding: 8px;
+}
+.cartList .tableCartList .itemName {
+  justify-content: space-between;
 }
 .cartList .tableCartList thead {
   border-top-left-radius: 8px;
@@ -1444,6 +1448,10 @@ h4 {
 }
 .cartList .tableCartList tr, .cartList .tableCartList tbody {
   width: 100%;
+}
+.cartList .tableCartList tbody {
+  overflow-x: auto;
+  height: 195px;
 }
 .cartList .tableCartList tbody tr {
   color: var(--text);

@@ -230,6 +230,7 @@ export const OpenSystem = ({ close }: ActionsType) => {
    }
 
    const optionsSystemModal = () => {
+      setAddProduct(false)
       setOptionsSystem(!optionsSystem)
       // console.log(optionsSystem)
    }
@@ -376,7 +377,7 @@ export const OpenSystem = ({ close }: ActionsType) => {
                
                {/* // Create new User/Product or Find User/Product */}
                { optionsSystem ?
-                  <section className="managerSystem flex" onMouseLeave={() => setOptionsSystem(false)}>
+                  <section className="managerSystem flex mr-3" onMouseLeave={() => setOptionsSystem(false)}>
                      <ul className="flex column text-dark bold">
                         <li className="flex"
                            onClick={handleNewUser}>Novo Usuário</li>
