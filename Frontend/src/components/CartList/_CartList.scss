@@ -35,7 +35,16 @@
 
    .tableCartList {
       width: 850px;
-      border-collapse: collapse;
+      // border-collapse: collapse;
+      tr, td {
+         @extend %flex;
+         width: 25%;
+         font-size: 12px;
+      }
+
+      td {
+         padding: 8px;
+      }
 
       thead {
          border-top-left-radius: 8px;
@@ -44,6 +53,12 @@
 
       table, thead, tbody, tr, td {
          text-align: center;
+      }
+
+      tr, tbody {
+         @extend %flex;
+         @extend %sbt;
+         width: 100%;
       }
 
       tbody tr {
@@ -67,23 +82,24 @@
             background-color: #3E4042;
          }
       }
-   }
-   
-   .cartListFooter {
-      background-color: var(--bs-secondary);
-      border-bottom-left-radius: 8px;
-      border-bottom-right-radius: 8px;
-   
-      p {
-         color: var(--dark-blue);
-         font-size: 24px;
-         font-weight: bold
-      }
 
-      .cartListValue {
-         font-size: 24px;
-         font-weight: bold;
-      }
+      tfoot {
+         background-color: var(--bs-secondary);
+         border-bottom-left-radius: 8px;
+         border-bottom-right-radius: 8px;
       
+         p {
+            color: var(--dark-blue);
+            font-size: 24px;
+            font-weight: bold
+         }
+   
+         .cartListValue {
+            font-size: 24px;
+            font-weight: bold;
+         }
+         
+      }
    }
+   
 }

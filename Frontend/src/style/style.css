@@ -188,7 +188,7 @@ h4 {
   align-items: center;
 }
 
-.flex {
+.flex, .cartList .tableCartList tbody, .cartList .tableCartList tr, .cartList .tableCartList td {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -198,7 +198,7 @@ h4 {
   justify-content: center;
 }
 
-.sbt {
+.sbt, .cartList .tableCartList tr, .cartList .tableCartList tbody {
   justify-content: space-between;
 }
 
@@ -1427,7 +1427,13 @@ h4 {
 }
 .cartList .tableCartList {
   width: 850px;
-  border-collapse: collapse;
+}
+.cartList .tableCartList tr, .cartList .tableCartList td {
+  width: 25%;
+  font-size: 12px;
+}
+.cartList .tableCartList td {
+  padding: 8px;
 }
 .cartList .tableCartList thead {
   border-top-left-radius: 8px;
@@ -1435,6 +1441,9 @@ h4 {
 }
 .cartList .tableCartList table, .cartList .tableCartList thead, .cartList .tableCartList tbody, .cartList .tableCartList tr, .cartList .tableCartList td {
   text-align: center;
+}
+.cartList .tableCartList tr, .cartList .tableCartList tbody {
+  width: 100%;
 }
 .cartList .tableCartList tbody tr {
   color: var(--text);
@@ -1451,17 +1460,17 @@ h4 {
 .cartList .tableCartList tbody tr:nth-child(even):hover {
   background-color: #3E4042;
 }
-.cartList .cartListFooter {
+.cartList .tableCartList tfoot {
   background-color: var(--bs-secondary);
   border-bottom-left-radius: 8px;
   border-bottom-right-radius: 8px;
 }
-.cartList .cartListFooter p {
+.cartList .tableCartList tfoot p {
   color: var(--dark-blue);
   font-size: 24px;
   font-weight: bold;
 }
-.cartList .cartListFooter .cartListValue {
+.cartList .tableCartList tfoot .cartListValue {
   font-size: 24px;
   font-weight: bold;
 }

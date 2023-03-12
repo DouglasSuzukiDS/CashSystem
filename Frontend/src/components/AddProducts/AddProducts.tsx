@@ -20,7 +20,7 @@ export const AddProducts = ({ close, id, listProducts, cartAddItem }: ActionsTyp
    const [idItem, setIdItem] = useState('')
    const [addItem, setAddItem] = useState<ProductType>()
 
-   useEffect(() => {
+   /*useEffect(() => {
       allProducts()
          .then(setProducts)
          .catch(e => console.log(e))
@@ -32,7 +32,16 @@ export const AddProducts = ({ close, id, listProducts, cartAddItem }: ActionsTyp
       allProducts()
          .then(setFindProducts)
          .catch(e => console.log(e))
-   }, [addProductModel])
+   }, [addProductModel])*/
+
+   useEffect(() => {
+      if(listProducts) {
+         setProducts(listProducts)
+         setCloneProducts(listProducts)
+         setFindProducts(listProducts)
+      }
+   }, [])
+
    //console.log(users)
 
    // Return Product in Search
@@ -66,16 +75,30 @@ export const AddProducts = ({ close, id, listProducts, cartAddItem }: ActionsTyp
    // Edit Product by ID
    const handleAddProduct = async (id: string) => {
       // Função responsável por passar o ID via prop para o EditProduct, consequentemente buscando o dado no Backend para Editar e mostrar o modal
-      console.log(`Add Product By ID: ${id}`)
+      /*console.log(`Add Product By ID: ${id}`)
       setIdItem(id)
       const item = findProducts.find(el => el.id === id)
       console.log(item)
 
-      item ?? setAddItem(item) 
+      //item ?? setAddItem(item) 
+      if(item) {
+         setAddItem(item)
+      }
       
-      cartAddItem(item)
-      cartAddItem(listProducts.filter(el => el.id === id))
-      cartAddItem(addItem)
+      if(listProducts) {
+         let filterProductById = listProducts.filter(el => el.id === id)
+         console.log(`Filtrad: ${JSON.stringify(filterProductById[0])}`)
+         if(filterProductById.length > 0) {
+            // return cartAddItem = () => filterProductById
+            return cartAddItem?.(filterProductById)
+         }
+      } 
+      //cartAddItem(item)
+      //cartAddItem(addItem)*/
+      if(listProducts) {
+         console.log(listProducts.filter(el => el.id === id))
+         return cartAddItem?.(products.filter(el => el.id === id)[0])
+      }
    }
 
    // Show Add Product Modal
@@ -142,6 +165,7 @@ export const AddProducts = ({ close, id, listProducts, cartAddItem }: ActionsTyp
                                           <div className="flex">
                                              {/* <Link to={`/edit/product/${prod.id}`} > */}
                                              <span className="flex" onClick={ () => handleAddProduct(prod.id) }>
+                                             {/* <span className="flex" onClick={ () => cartAddItem?.(products.filter(prod => prod.id === id)) }> */}
                                                 <CartCirclePlus w='16' h='16' fill='var(--bs-success)' className='success-hover pointer' />
                                              </span>
                                              {/* </Link> */}

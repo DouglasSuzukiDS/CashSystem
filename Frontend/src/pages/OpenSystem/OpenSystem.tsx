@@ -68,7 +68,7 @@ export const OpenSystem = ({ close }: ActionsType) => {
 
    const [addProduct, setAddProduct] = useState(false)
 
-   const [cartProductsModal, setCartProductsModal] = useState(true)
+   const [cartProductsModal, setCartProductsModal] = useState(false)
 
    const [cartList, setCartList] = useState<ProductType[]>([])
 
@@ -313,6 +313,16 @@ export const OpenSystem = ({ close }: ActionsType) => {
       setTimeout(() => setContentSystemStartModal(false), 10000)
    }
 
+   const addItemOnCart = (data: ProductType) => {
+      setCartItems([...cartItems, data])
+      console.log(cartItems)
+      console.log(cartItems.length)
+
+      if(cartItems.length > 0) {
+         setCartProductsModal(true)
+      }
+   }
+
    return (
       <main className="containerSystem flex p-3">
          { closeSystem ?? (
@@ -414,7 +424,8 @@ export const OpenSystem = ({ close }: ActionsType) => {
                }  */}
 
                {
-                  addProduct ? <AddProducts listProducts={products} close={ handleAddProductModal } cartAddItem={ setCartItems } /> : ''
+                  // addProduct ? <AddProducts listProducts={products} close={ handleAddProductModal } cartAddItem={ setCartItems } /> : ''
+                  addProduct ? <AddProducts listProducts={products} close={ handleAddProductModal } cartAddItem={ addItemOnCart } /> : ''
                }
 
                {

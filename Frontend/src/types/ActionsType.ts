@@ -6,7 +6,7 @@ export type ActionsType = {
    close?: () => void
    handleManager?: () => boolean
    onClick?: () => void
-   cartAddItem?: (prod: ProductType[]) => void
+   cartAddItem?: (prod: ProductType) => void
    className?: string
    id?: string
    listProducts?: ProductType[]

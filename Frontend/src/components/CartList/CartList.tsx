@@ -7,41 +7,50 @@ import { ProductType } from "../../types/ProductType"
 import { MessageTexugo } from "../MessageTexugo/MessageTexugo"
 
 export const CartList = ({ listProducts }: ActionsType) => {
-   const [cartItems, setCartItems] = useState<ProductType[]>([])
+   const [items, setItems] = useState<ProductType[]>([])
 
    useEffect(() => {
       if (listProducts) {
-         setCartItems(listProducts)
+         setItems(listProducts)
+         console.log(listProducts)
       }
    }, [])
+
+   const handleRemoveProductOnList = (id: string) => {
+      console.log(items.filter(prod => prod.id !== id))
+      // console.log(items.filter(prod => prod.id !== id))
+      // items.filter(prod => prod.id !== id)
+   } 
+
    return (
       <>
-         {cartItems.length >= 0 ?
+         {items.length >= 0 ?
             <article className="containerCartList flex column w-100 h-100 p-2">
                <>
                   <p className="w-100 text-center text-info pb-2">Lista de compras</p>
                   <div className="cartList flex sbt column w-100 h-100">
-                     <section className="cartListSection">
+                     <section className="cartListSection w-100 h-100">
+                        
+                        <table className="tableCartList f column sbt w-100 h-100">
+                           <span className="w-100 h-100">
+                              <thead className="text-primary bold flex sbt w-100">
+                                 <tr>
+                                    <td>Nome do Produto</td>
+                                    <td>QTD</td>
+                                    <td>Preço Unitário</td>
+                                    <td>Valor</td>
+                                 </tr>
+                              </thead>
 
-                        <table className="tableCartList">
-                           <thead className="text-primary bold">
-                              <tr>
-                                 <td colSpan={2}>Nome do Produto</td>
-                                 <td>QTD</td>
-                                 <td>Preço Unitário</td>
-                                 <td>Valor</td>
-                              </tr>
-                           </thead>
-
-                           <tbody className="text-center">
-                              <tr>
-                                 {cartItems.map((prod) => (
-                                    <>
-                                       <tr>
-                                          <td>{prod.pdt_name}</td>
+                              <tbody className="text-center w-100">
+                                 <tr>
+                                    {items.map((prod) => (
+                                       <>
                                           <td>
-                                             <CartCircleXMark w='16' h='16' fill='var(--bs-danger)' className="pointer mr-1" />
+                                             {prod.pdt_name}
+                                             <CartCircleXMark w='16' h='16' fill='var(--bs-danger)' className="pointer ml-1" onClick={ () => handleRemoveProductOnList(prod.id) } />
                                           </td>
+   
                                           <td className="flex">
                                              <Minus w='16' h='16' fill='var(--bs-danger)' className="pointer mr-1" />
                                              2
@@ -49,79 +58,22 @@ export const CartList = ({ listProducts }: ActionsType) => {
                                           </td>
                                           <td>{ prod.pdt_price }</td>
                                           <td>10,00</td>
-                                       </tr>
+                                       </>
 
-                                    </>
+                                    ))}
 
-                                 ))}
-
-                              </tr>
-                           </tbody>
-
-                           {/* <tbody className="text-center">
-                                 <tr>
-                                    <td>Heineken 269M</td>
-                                    <td>
-                                       <CartCircleXMark w='16' h='16' fill='var(--bs-danger)' className="pointer mr-1" />
-                                    </td>
-                                    <td className="flex">
-                                       <Minus w='16' h='16' fill='var(--bs-danger)' className="pointer mr-1" />
-                                       2
-                                       <Plus w='16' h='16' fill='var(--bs-success)' className="pointer ml-1"  />
-                                    </td>
-                                    <td>4,00</td>
-                                    <td>8,00</td>
                                  </tr>
+                              </tbody>
+                           </span>
 
-                                 <tr>
-                                    <td>Brizadeiro</td>
-                                    <td>
-                                       <CartCircleXMark w='16' h='16' fill='var(--bs-danger)' className="pointer mr-1" />
-                                    </td>
-                                    <td className="flex">
-                                       <Minus w='16' h='16' fill='var(--bs-danger)' className="pointer mr-1" />
-                                       1
-                                       <Plus w='16' h='16' fill='var(--bs-success)' className="pointer ml-1"  />
-                                    </td>
-                                    <td>5,00</td>
-                                    <td>5,00</td>
-                                 </tr>
-
-                                 <tr>
-                                    <td>Kit Noia</td>
-                                    <td>
-                                       <CartCircleXMark w='16' h='16' fill='var(--bs-danger)' className="pointer mr-1" />
-                                    </td>
-                                    <td className="flex">
-                                       <Minus w='16' h='16' fill='var(--bs-danger)' className="pointer mr-1" />
-                                       1
-                                       <Plus w='16' h='16' fill='var(--bs-success)' className="pointer ml-1"  />
-                                    </td>
-                                    <td>10,00</td>
-                                    <td>10,00</td>
-                                 </tr>
-
-                                 <tr>
-                                    <td>Jack Daniels c/ Gelo & Red Bull</td>
-                                    <td>
-                                       <CartCircleXMark w='16' h='16' fill='var(--bs-danger)' className="pointer mr-1" />
-                                    </td>
-                                    <td className="flex">
-                                       <Minus w='16' h='16' fill='var(--bs-danger)' className="pointer mr-1 hover-danger" />
-                                       1
-                                       <Plus w='16' h='16' fill='var(--bs-success)' className="pointer ml-1 hover-success" />
-                                    </td>
-                                    <td>35,00</td>
-                                    <td>35,00</td>
-                                 </tr>
-                           </tbody> */}
+                           <tfoot className="cartListFooter flex sbt p-1 ">
+                              <p>Total</p>
+                              <span className="cartListValue text-danger">10,00 </span>
+                           </tfoot>
+                           
                         </table>
                      </section>
 
-                     <footer className="cartListFooter flex sbt w-100 p-1 ">
-                        <p>Total</p>
-                        <span className="cartListValue text-danger">R$ 43,00</span>
-                     </footer>
                   </div>
                </>
             </article> : <MessageTexugo th="100" tw="100" msg="Carrinho vazio, meu chapa" />

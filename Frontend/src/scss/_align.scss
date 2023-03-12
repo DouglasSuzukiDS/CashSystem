@@ -1,26 +1,26 @@
-.f { display: flex; }
+.f, %f { display: flex; }
 
 .wrap { flex-wrap: wrap; align-items: center; }
 
-.flex {
+.flex, %flex {
    display: flex;
    justify-content: center;
    align-items: center;
 }
 
-.jcc {
+.jcc, %jcc {
    justify-content: center;
 }
 
-.sbt {
+.sbt, %sbt {
    justify-content: space-between;
 }
 
-.sar {
+.sar, %sar {
    justify-content: space-around;
 }
 
-.aic {
+.aic, %aic {
    align-items: center;
 }
 

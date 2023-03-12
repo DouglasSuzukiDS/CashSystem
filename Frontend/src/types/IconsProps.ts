@@ -1,3 +1,5 @@
+import { ProductType } from "./ProductType"
+
 export type IconsProps = {
    w?: string
    h?: string 
