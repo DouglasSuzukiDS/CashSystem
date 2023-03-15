@@ -6,7 +6,7 @@ import { ActionsType } from "../../types/ActionsType"
 import { ProductType } from "../../types/ProductType"
 import { MessageTexugo } from "../MessageTexugo/MessageTexugo"
 
-export const CartList = ({ listProducts }: ActionsType) => {
+export const CartList = ({ listProducts, returnItems }: ActionsType) => {
    const [items, setItems] = useState<ProductType[]>([])
    const [qty, setQty] = useState(1)
 
@@ -18,9 +18,17 @@ export const CartList = ({ listProducts }: ActionsType) => {
    }, [])
 
    const handleRemoveProductOnList = (id: string) => {
-      console.log(items.filter(prod => prod.id !== id))
       // console.log(items.filter(prod => prod.id !== id))
-      // items.filter(prod => prod.id !== id)
+      // console.log(items.filter(prod => prod.id !== id))
+      items.filter(prod => prod.id !== id)
+
+      setItems(items.filter(prod => prod.id !== id))
+      console.log(items.filter(prod => prod.id !== id))
+      console.log(id)
+   }
+
+   const handleReturnItems = () => {
+
    }
 
    const handleAddQty = (id?: string) => {

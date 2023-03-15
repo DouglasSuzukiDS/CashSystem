@@ -444,4 +444,53 @@ server.delete('/delete/product/:id', async(req, res) => {
 
 })
 
+// Add Product
+server.get('/cartlist', (req, res) => {
+   let SQL: string = 'SELECT * FROM cartlist'
+
+   db.query(SQL, async(err, result) => {
+      if(err) {
+         res.status(404).send({ msg: 'Erro ao listar os produtos na lists' })
+      } else {
+         res.status(200).send({ msg: 'Produtos no carrinho', result })
+      }
+   }) 
+})
+
+server.post('/cartlist', (req, res) => {
+   const { pdt_name, pdt_price, pdt_type, pdt_qty, pdt_value } = req.body
+   console.log(pdt_name, pdt_price, pdt_type, pdt_qty, pdt_value)
+
+   let checkIfProductExistInList: string = `SELECT * FROM cartlist WHERE pdt_name = (?)`
+
+   db.query(checkIfProductExistInList, [pdt_name], async(err, result) => {
+      if(err) {
+         res.status(400).send({ msg: 'Produto já se encontra na lista' })
+      } else {
+         let SQL: string = `INSERT INTO cartlist (pdt_name, pdt_price, pdt_type, pdt_qty, pdt_value) VALUES (?,?,?,?,?)`
+
+         db.query(SQL, [pdt_name, pdt_price, pdt_type, pdt_qty, pdt_value], async(err, result) => {
+            if(err) {
+               console.log(err)
+               res.status(400).send({ msg: 'Erro ao adicionar o produto na lista' })
+            } else {
+               res.status(201).send({ msg: 'Produto adicionado na lista' })
+            }
+         })
+      }
+   })
+})
+
+server.delete('/deleteCart', async(req, res) => {
+   let SQL: string = 'DELETE FROM cartlist'
+
+   db.query(SQL, async(err, result) => {
+      if(err) {
+         res.status(404).send({ msg: 'Erro ao limpar o carrinho' })
+      } else {
+         res.status(200).send({ msg: 'Carrinho limpo com sucesso' })
+      }
+   })
+})
+
 server.listen('3001', () => console.log('Backend Running in port 3001'))

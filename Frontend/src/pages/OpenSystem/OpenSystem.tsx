@@ -324,6 +324,14 @@ export const OpenSystem = ({ close }: ActionsType) => {
       }
    }
 
+   const handleReturnItems = (data: ProductType) => {
+      setCartItems([...cartItems, data])
+
+      if(cartItems.length < 0) {
+         setCartProductsModal(false)
+      }
+   }
+
    return (
       <main className="containerSystem flex p-3">
          { closeSystem ?? (
@@ -430,7 +438,7 @@ export const OpenSystem = ({ close }: ActionsType) => {
                }
 
                {
-                  cartProductsModal ? <CartList listProducts={ cartItems } /> : ''
+                  cartProductsModal ? <CartList listProducts={ cartItems } returnItems={ handleReturnItems } /> : ''
                }
 
                {

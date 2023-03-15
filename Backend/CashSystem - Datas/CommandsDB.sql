@@ -102,3 +102,7 @@ CREATE TABLE products (
     INSERT INTO products VALUES (29, 'Eight Solto', 0.50, 'Cigarros', 17);
     INSERT INTO products VALUES (30, 'Gudang Garang Solto', 2, 'Cigarros', 14);
 */
+
+/* // Cart
+	DELETE FROM cartlist;
+*/

@@ -1,4 +1,4 @@
-import { ChangeEvent, useEffect, useState } from "react"
+import { ChangeEvent, useContext, useEffect, useState } from "react"
 import { ProductType } from "../../types/ProductType"
 import { allProducts } from "../../services/product.service"
 
@@ -7,6 +7,7 @@ import { MagnifyingGlass  }from "../../assets/Icons/MagnifyingGlass"
 import { XMark } from "../../assets/Icons/XMark"
 import { CartCirclePlus } from "../../assets/Icons/CartCirclePlus"
 import { ActionsType } from "../../types/ActionsType"
+import { ProductsContext } from "../../context/Products/ProductsContext"
 
 
 export const AddProducts = ({ close, id, listProducts, cartAddItem }: ActionsType) => {
@@ -20,7 +21,7 @@ export const AddProducts = ({ close, id, listProducts, cartAddItem }: ActionsTyp
    const [idItem, setIdItem] = useState('')
    const [addItem, setAddItem] = useState<ProductType>()
 
-   /*useEffect(() => {
+   useEffect(() => {
       allProducts()
          .then(setProducts)
          .catch(e => console.log(e))
@@ -32,16 +33,22 @@ export const AddProducts = ({ close, id, listProducts, cartAddItem }: ActionsTyp
       allProducts()
          .then(setFindProducts)
          .catch(e => console.log(e))
-   }, [addProductModel])*/
+   }, [addProductModel])
 
    useEffect(() => {
-      if(listProducts) {
+      /*if(listProducts) {
          setProducts(listProducts)
          setCloneProducts(listProducts)
          setFindProducts(listProducts)
-      }
+      }*/
+
    }, [])
 
+   // const { products } = useContext(ProductsContext)
+   
+   // const [productsList, setProductsList]: ProductType[] = products
+   // const [cloneProducts, setCloneProducts]: ProductType[] = products
+   // const [findProducts, setFindProducts]: ProductType[] = products
    //console.log(users)
 
    // Return Product in Search
@@ -52,6 +59,7 @@ export const AddProducts = ({ close, id, listProducts, cartAddItem }: ActionsTyp
          // console.log('O term é: ' + term)
          //console.log(cloneProducts)
          setProducts(cloneProducts)
+        
       } else {
          let search = term.replace(term[0], term[0].toLocaleUpperCase())
          // setProducts(find.filter(prod => prod.pdt_name.includes(search)))
@@ -70,6 +78,7 @@ export const AddProducts = ({ close, id, listProducts, cartAddItem }: ActionsTyp
             setProducts(findByType)
          }
       }
+
    }
 
    // Edit Product by ID
