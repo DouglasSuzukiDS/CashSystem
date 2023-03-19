@@ -40,6 +40,14 @@ CREATE TABLE products (
     pdt_qty INT NOT NULL
 );
 
+CREATE TABLE cartList (
+	id INT PRIMARY KEY AUTO_INCREMENT,
+    pdt_name VARCHAR(50) UNIQUE NOT NULL ,
+    pdt_price DECIMAL(10, 2) NOT NULL,
+    pdt_qty INT NOT NULL,
+    total DECIMAL(10, 2) NOT NULL
+);
+
 /* ALTER TABLE products MODIFY COLUMN pdt_price DECIMAL(10,2); */
 /* ALTER TABLE products MODIFY COLUMN pdt_name VARCHAR(50) UNIQUE; */
 /* ALTER TABLE users MODIFY COLUMN userLogin VARCHAR(50) UNIQUE; */

@@ -15,7 +15,7 @@ export const ProductProvider = ({ children }: { children: JSX.Element }) => {
    }, [])
    
    return(
-      <ProductsContext.Provider value={ { products } }>
+      <ProductsContext.Provider value={ { products, setProducts } }>
          { children }
       </ProductsContext.Provider>
    )

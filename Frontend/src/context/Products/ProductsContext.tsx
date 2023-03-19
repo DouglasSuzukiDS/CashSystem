@@ -3,8 +3,12 @@ import { ProductType } from '../../types/ProductType';
 
 export type ProductsList = {
    products: ProductType[],
+   setProducts: (newState: ProductType[]) => void
 }
 
-export const ProductsContext = createContext<ProductsList>({
-   products: []
-})
+const initialValue = {
+   products: [],
+   setProducts: () => {}
+}
+
+export const ProductsContext = createContext<ProductsList>(initialValue)

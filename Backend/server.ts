@@ -458,8 +458,8 @@ server.get('/cartlist', (req, res) => {
 })
 
 server.post('/cartlist', (req, res) => {
-   const { pdt_name, pdt_price, pdt_type, pdt_qty, pdt_value } = req.body
-   console.log(pdt_name, pdt_price, pdt_type, pdt_qty, pdt_value)
+   const { pdt_name, pdt_price, pdt_qty, total } = req.body
+   console.log(pdt_name, pdt_price, pdt_qty, total)
 
    let checkIfProductExistInList: string = `SELECT * FROM cartlist WHERE pdt_name = (?)`
 
@@ -467,9 +467,9 @@ server.post('/cartlist', (req, res) => {
       if(err) {
          res.status(400).send({ msg: 'Produto já se encontra na lista' })
       } else {
-         let SQL: string = `INSERT INTO cartlist (pdt_name, pdt_price, pdt_type, pdt_qty, pdt_value) VALUES (?,?,?,?,?)`
+         let SQL: string = `INSERT INTO cartlist (pdt_name, pdt_price, pdt_qty, total) VALUES (?,?,?,?)`
 
-         db.query(SQL, [pdt_name, pdt_price, pdt_type, pdt_qty, pdt_value], async(err, result) => {
+         db.query(SQL, [pdt_name, pdt_price, pdt_qty, total], async(err, result) => {
             if(err) {
                console.log(err)
                res.status(400).send({ msg: 'Erro ao adicionar o produto na lista' })
@@ -481,8 +481,23 @@ server.post('/cartlist', (req, res) => {
    })
 })
 
+server.delete('/deleteItemCart/:id', async(req, res) => {
+   const { id } = req.params
+
+   let SQL: string = 'DELETE FROM cartlist WHERE id = ?'
+
+   db.query(SQL,[id], async(err, result) => {
+      if(err) {
+         res.status(404).send({ msg: 'Erro ao limpar o carrinho' })
+      } else {
+         res.status(200).send({ msg: 'Carrinho limpo com sucesso' })
+      }
+   })
+})
+
 server.delete('/deleteCart', async(req, res) => {
-   let SQL: string = 'DELETE FROM cartlist'
+
+   let SQL: string = 'DELETE FROM cartlist '
 
    db.query(SQL, async(err, result) => {
       if(err) {

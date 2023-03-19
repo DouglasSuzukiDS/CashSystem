@@ -1,5 +1,4 @@
 import { useState, useEffect, useContext } from "react";
-import axios from 'axios'
 
 import { CashRegister } from "../../assets/Icons/CashRegister";
 import { Gears } from "../../assets/Icons/Gears";
@@ -32,19 +31,21 @@ import { RegisterProduct } from "../RegisterProduct/RegisterProduct";
 import { SystemSatusButton } from "../../components/SystemStatusButton/SystemStatusButton";
 import { AddProducts } from "../../components/AddProducts/AddProducts";
 import { CartList } from "../../components/CartList/CartList";
+import { ProductsContext } from "../../context/Products/ProductsContext";
 
 export const OpenSystem = ({ close }: ActionsType) => {
    const backend = 'http://localhost:3001'
    const navigate = useNavigate()
    const auth = useContext(AuthContext)
    const { user } = auth
-
+   
    const [userInfos, setUserInfos] = useState<UserType | null>()
    // Get All Users
    const [users, setUsers] = useState<UserType[]>([])
-
+   
    // Get All Products
-   const [products, setProducts] = useState<ProductType[]>([])
+   const { products, setProducts } = useContext(ProductsContext)
+   //const [products, setProducts] = useState<ProductType[]>([])
 
    // Open System
    const [open, setOpen] = useState(false)
@@ -116,10 +117,6 @@ export const OpenSystem = ({ close }: ActionsType) => {
    useEffect(() => { // checkStatus()
       checkStatus() // Verifica se existe um Token, se existir verifica se o caixa já foi aberto
       //console.log(allUsers())
-
-      allProducts()
-         .then(setProducts)
-         .catch(e => console.log(e))
 
       allUsers()
          .then(setUsers)

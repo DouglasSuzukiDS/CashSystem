@@ -11,17 +11,18 @@ import { ProductsContext } from "../../context/Products/ProductsContext"
 
 
 export const AddProducts = ({ close, id, listProducts, cartAddItem }: ActionsType) => {
+   const { products, setProducts } = useContext(ProductsContext)
    const server = 'http://localhost:3001'
 
    // Get All Products
-   const [products, setProducts] = useState<ProductType[]>([]) // First Search on List
-   const [cloneProducts, setCloneProducts] = useState<ProductType[]>([]) // List if Search is empty
-   const [findProducts, setFindProducts] = useState<ProductType[]>([]) // List if Search is empty
+   //const [products, setProducts] = useState<ProductType[]>([]) // First Search on List
+   const [cloneProducts, setCloneProducts] = useState<ProductType[]>(products) // List if Search is empty
+   const [findProducts, setFindProducts] = useState<ProductType[]>(products) // List if Search is empty
    const [addProductModel, setAddProductModal] = useState(false)
    const [idItem, setIdItem] = useState('')
    const [addItem, setAddItem] = useState<ProductType>()
 
-   useEffect(() => {
+   /*useEffect(() => {
       allProducts()
          .then(setProducts)
          .catch(e => console.log(e))
@@ -33,7 +34,7 @@ export const AddProducts = ({ close, id, listProducts, cartAddItem }: ActionsTyp
       allProducts()
          .then(setFindProducts)
          .catch(e => console.log(e))
-   }, [addProductModel])
+   }, [addProductModel])*/
 
    useEffect(() => {
       /*if(listProducts) {
@@ -104,10 +105,13 @@ export const AddProducts = ({ close, id, listProducts, cartAddItem }: ActionsTyp
       } 
       //cartAddItem(item)
       //cartAddItem(addItem)*/
-      if(listProducts) {
+      /*if(listProducts) {
          console.log(listProducts.filter(el => el.id === id))
          return cartAddItem?.(products.filter(el => el.id === id)[0])
-      }
+      }*/
+      console.log(products.filter(el => el.id === id)[0])
+      cartAddItem?.(products.filter(el => el.id === id)[0])
+      //return products.filter(el => el.id === id)[0]
    }
 
    // Show Add Product Modal

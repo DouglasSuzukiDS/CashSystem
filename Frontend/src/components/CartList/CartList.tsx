@@ -1,30 +1,44 @@
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { CartCircleXMark } from "../../assets/Icons/CartCircleXMark"
 import { Minus } from "../../assets/Icons/Minus"
 import { Plus } from "../../assets/Icons/Plus"
+import { ProductsContext } from "../../context/Products/ProductsContext"
 import { ActionsType } from "../../types/ActionsType"
 import { ProductType } from "../../types/ProductType"
 import { MessageTexugo } from "../MessageTexugo/MessageTexugo"
 
 export const CartList = ({ listProducts, returnItems }: ActionsType) => {
+
+   const { products, setProducts } = useContext(ProductsContext)
+
    const [items, setItems] = useState<ProductType[]>([])
    const [qty, setQty] = useState(1)
+
 
    useEffect(() => {
       if (listProducts) {
          setItems(listProducts)
          console.log(listProducts)
       }
-   }, [])
+   }, [listProducts])
+
+   //console.log(`List Product in Context${products}`)
 
    const handleRemoveProductOnList = (id: string) => {
       // console.log(items.filter(prod => prod.id !== id))
       // console.log(items.filter(prod => prod.id !== id))
-      items.filter(prod => prod.id !== id)
+      // items.filter(prod => prod.id !== id)
+
+      // setItems(items.filter(prod => prod.id !== id))
+      // console.log(items.filter(prod => prod.id !== id))
+      // console.log(id)
+      
+      //setItems(items.filter(prod => prod.id !== id))
 
       setItems(items.filter(prod => prod.id !== id))
-      console.log(items.filter(prod => prod.id !== id))
-      console.log(id)
+      listProducts = items
+      console.log(`Items: ${items.length}`)
+      console.log(`ListProducts: ${listProducts?.length}`)
    }
 
    const handleReturnItems = () => {
@@ -41,7 +55,7 @@ export const CartList = ({ listProducts, returnItems }: ActionsType) => {
 
    return (
       <>
-         {items.length >= 0 ?
+         { items ?
             <article className="containerCartList flex column w-100 h-100 p-2">
                <p className="w-100 text-center text-info mb-2">Lista de compras</p>
 
@@ -60,7 +74,7 @@ export const CartList = ({ listProducts, returnItems }: ActionsType) => {
                            </thead>
 
                            <tbody className="text-center w-100 column">
-                              {items.map((prod) => (
+                              { items.map((prod) => (
                                  <tr>
                                     <td className="itemName">
                                        <span>{ prod.pdt_name }</span>
@@ -79,7 +93,8 @@ export const CartList = ({ listProducts, returnItems }: ActionsType) => {
                                           className="pointer ml-1" onClick={ handleAddQty } />
                                     </td>
                                     <td>{ prod.pdt_price }</td>
-                                    <td>{ (parseFloat(prod.pdt_price) * qty).toFixed(2) }</td>
+                                    {/* <td>{ (parseFloat(prod.pdt_price) * qty).toFixed(2) }</td> */}
+                                    <td>{ prod.pdt_price }</td>
                                  </tr>
 
                               ))}
