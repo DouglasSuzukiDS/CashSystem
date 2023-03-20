@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react"
 import { CartCircleXMark } from "../../assets/Icons/CartCircleXMark"
 import { Minus } from "../../assets/Icons/Minus"
 import { Plus } from "../../assets/Icons/Plus"
+import { CartListContext } from "../../context/CartList/CartListContext"
 import { ProductsContext } from "../../context/Products/ProductsContext"
 import { ActionsType } from "../../types/ActionsType"
 import { ProductType } from "../../types/ProductType"
@@ -10,17 +11,26 @@ import { MessageTexugo } from "../MessageTexugo/MessageTexugo"
 export const CartList = ({ listProducts, returnItems }: ActionsType) => {
 
    const { products, setProducts } = useContext(ProductsContext)
+   const { cartList, setCartList } = useContext(CartListContext)
 
    const [items, setItems] = useState<ProductType[]>([])
    const [qty, setQty] = useState(1)
 
+   let itemId = (id: number) => {
+      document.querySelector(`#qty-${id}`)
+   }
 
-   useEffect(() => {
+   // Original
+   /*useEffect(() => {
       if (listProducts) {
          setItems(listProducts)
          console.log(listProducts)
       }
-   }, [listProducts])
+   }, [listProducts])*/
+
+   useEffect(() => {
+      setCartList(cartList)
+   }, [cartList, setCartList])
 
    //console.log(`List Product in Context${products}`)
 
@@ -35,10 +45,13 @@ export const CartList = ({ listProducts, returnItems }: ActionsType) => {
       
       //setItems(items.filter(prod => prod.id !== id))
 
-      setItems(items.filter(prod => prod.id !== id))
+      // Original
+      /*setItems(items.filter(prod => prod.id !== id))
       listProducts = items
       console.log(`Items: ${items.length}`)
-      console.log(`ListProducts: ${listProducts?.length}`)
+      console.log(`ListProducts: ${listProducts?.length}`)*/
+
+      setCartList(cartList.filter(item => item.id !== id))
    }
 
    const handleReturnItems = () => {
@@ -46,16 +59,25 @@ export const CartList = ({ listProducts, returnItems }: ActionsType) => {
    }
 
    const handleAddQty = (id?: string) => {
-      setQty(qty + 1)
+      // setQty(qty + 1)
+      let itemQty = (document.querySelector(`#qty-${id}`) as HTMLInputElement)
+      let quantity = parseInt(itemQty.innerHTML) 
+      itemQty.innerHTML = `${quantity + 1}`
+      // console.log('add')
    }
 
    const handleMinusQty = (id?: string) => {
-      setQty(qty - 1)
+      // setQty(qty - 1)
+      let itemQty = (document.querySelector(`#qty-${id}`) as HTMLInputElement)
+      let quantity = parseInt(itemQty.innerHTML) 
+      itemQty.innerHTML = `${quantity - 1}`
+      //console.log('remove')
    }
 
    return (
       <>
-         { items ?
+         {/* { items ? */}
+         { cartList ?
             <article className="containerCartList flex column w-100 h-100 p-2">
                <p className="w-100 text-center text-info mb-2">Lista de compras</p>
 
@@ -74,8 +96,9 @@ export const CartList = ({ listProducts, returnItems }: ActionsType) => {
                            </thead>
 
                            <tbody className="text-center w-100 column">
-                              { items.map((prod) => (
-                                 <tr>
+                              {/* { items.map((prod) => ( */}
+                              { cartList.map((prod, index) => (
+                                 <tr key={ index }>
                                     <td className="itemName">
                                        <span>{ prod.pdt_name }</span>
 
@@ -87,14 +110,16 @@ export const CartList = ({ listProducts, returnItems }: ActionsType) => {
 
                                     <td className="flex">
                                        <Minus w='16' h='16' fill='var(--bs-danger)' 
-                                          className="pointer mr-1" onClick={ handleMinusQty } />
-                                       { qty }
+                                          className="pointer mr-1" onClick={ () => handleMinusQty(`${prod.id}`) } />
+                                       <span id={ `qty-${prod.id}` }>1</span>
                                        <Plus w='16' h='16' fill='var(--bs-success)' 
-                                          className="pointer ml-1" onClick={ handleAddQty } />
+                                          className="pointer ml-1" onClick={ () => handleAddQty(`${prod.id}`) } />
                                     </td>
                                     <td>{ prod.pdt_price }</td>
                                     {/* <td>{ (parseFloat(prod.pdt_price) * qty).toFixed(2) }</td> */}
-                                    <td>{ prod.pdt_price }</td>
+                                    <td>{ parseFloat(prod.pdt_price).toFixed(2) }</td>
+                                    {/* <td>{ parseFloat(prod.pdt_price) * parseFloat((document.querySelector(`#qty-${prod.id}`) as HTMLInputElement).value) }</td> */}
+                                    {/* <td>{ (document.querySelector(`#qty-${prod.id}`) as HTMLInputElement).innerText }</td> */}
                                  </tr>
 
                               ))}
@@ -104,7 +129,7 @@ export const CartList = ({ listProducts, returnItems }: ActionsType) => {
                         <tfoot className="cartListFooter flex sbt p-1 ">
                            <p>Total</p>
                            <span className="cartListValue text-danger">
-                              { items.reduce(
+                              { cartList.reduce(
                                  (sum, item) => sum + parseFloat(item.pdt_price), 0
                               ).toFixed(2) }
                            </span>

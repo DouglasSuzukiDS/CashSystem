@@ -32,9 +32,12 @@ import { SystemSatusButton } from "../../components/SystemStatusButton/SystemSta
 import { AddProducts } from "../../components/AddProducts/AddProducts";
 import { CartList } from "../../components/CartList/CartList";
 import { ProductsContext } from "../../context/Products/ProductsContext";
+import { CartListContext } from "../../context/CartList/CartListContext";
 
 export const OpenSystem = ({ close }: ActionsType) => {
    const backend = 'http://localhost:3001'
+
+
    const navigate = useNavigate()
    const auth = useContext(AuthContext)
    const { user } = auth
@@ -46,6 +49,9 @@ export const OpenSystem = ({ close }: ActionsType) => {
    // Get All Products
    const { products, setProducts } = useContext(ProductsContext)
    //const [products, setProducts] = useState<ProductType[]>([])
+
+   // Get CartList
+   const { cartList, setCartList } = useContext(CartListContext)
 
    // Open System
    const [open, setOpen] = useState(false)
@@ -71,7 +77,7 @@ export const OpenSystem = ({ close }: ActionsType) => {
 
    const [cartProductsModal, setCartProductsModal] = useState(false)
 
-   const [cartList, setCartList] = useState<ProductType[]>([])
+   // const [cartList, setCartList] = useState<ProductType[]>([])
 
    const [closeSystem, setCloseSystem] = useState(false)
 
@@ -126,6 +132,12 @@ export const OpenSystem = ({ close }: ActionsType) => {
    useEffect(() => {
       verifyOpenCashValue()
    }, [])
+
+   useEffect(() => {
+      if(cartList.length <= 0) {
+         setCartProductsModal(false)
+      }
+   }, [cartList])
 
    const userData = () => {
 
@@ -312,21 +324,41 @@ export const OpenSystem = ({ close }: ActionsType) => {
    }
 
    const addItemOnCart = (data: ProductType) => {
-      setCartItems([...cartItems, data])
+      // Original
+      /*setCartItems([...cartItems, data])
+      // setCartItems( [data] )
       console.log(cartItems)
       console.log(cartItems.length)
 
       if(cartItems.length > 0) {
          setCartProductsModal(true)
+      }*/
+
+      setCartList([...cartList, data])
+
+      if(cartList.length > 0) {
+         setCartProductsModal(true)
       }
    }
 
    const handleReturnItems = (data: ProductType) => {
-      setCartItems([...cartItems, data])
+      // Original
+      /*setCartItems([...cartItems, data])
 
       if(cartItems.length < 0) {
          setCartProductsModal(false)
+      }*/
+
+      if(cartList.length < 0) {
+         setCartProductsModal(false)
       }
+   }
+
+   const handleClearCartList = () => {
+      console.log(`Antes de limpar: ${cartList.length}`)
+      setCartList([])
+      console.log(`Depois de limpar: ${cartList.length}`)
+      console.log('clear cartList')
    }
 
    return (
@@ -433,9 +465,9 @@ export const OpenSystem = ({ close }: ActionsType) => {
                   // addProduct ? <AddProducts listProducts={products} close={ handleAddProductModal } cartAddItem={ setCartItems } /> : ''
                   addProduct ? <AddProducts listProducts={products} close={ handleAddProductModal } cartAddItem={ addItemOnCart } /> : ''
                }
-
+               
                {
-                  cartProductsModal ? <CartList listProducts={ cartItems } returnItems={ handleReturnItems } /> : ''
+                  cartProductsModal ? <CartList listProducts={ cartItems } returnItems={ handleReturnItems } /> : <MessageTexugo msg="Carrinho vazio meu Chapa" tw="100" th="100" />
                }
 
                {
@@ -492,7 +524,7 @@ export const OpenSystem = ({ close }: ActionsType) => {
                      <MagnifyingGlass w='20' h='20' fill='var(--text-dark)' className='ml-1' />
                   </button>
 
-                  <button className="btn btn-danger ml-1">
+                  <button className="btn btn-danger ml-1" onClick={ handleClearCartList }>
                      F10 Cancelar
                      <TrashCan w='20' h='20' fill='var(--text)' className='ml-1' />
                   </button>

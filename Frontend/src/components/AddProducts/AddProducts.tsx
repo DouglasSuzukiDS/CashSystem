@@ -8,10 +8,14 @@ import { XMark } from "../../assets/Icons/XMark"
 import { CartCirclePlus } from "../../assets/Icons/CartCirclePlus"
 import { ActionsType } from "../../types/ActionsType"
 import { ProductsContext } from "../../context/Products/ProductsContext"
+import { CartListContext } from "../../context/CartList/CartListContext"
 
 
 export const AddProducts = ({ close, id, listProducts, cartAddItem }: ActionsType) => {
+
    const { products, setProducts } = useContext(ProductsContext)
+   const { cartList, setCartList } = useContext(CartListContext)
+
    const server = 'http://localhost:3001'
 
    // Get All Products
@@ -109,9 +113,16 @@ export const AddProducts = ({ close, id, listProducts, cartAddItem }: ActionsTyp
          console.log(listProducts.filter(el => el.id === id))
          return cartAddItem?.(products.filter(el => el.id === id)[0])
       }*/
-      console.log(products.filter(el => el.id === id)[0])
-      cartAddItem?.(products.filter(el => el.id === id)[0])
+
+      // Original 
+      // console.log(products.filter(el => el.id === id)[0])
+      // cartAddItem?.(products.filter(el => el.id === id)[0])
       //return products.filter(el => el.id === id)[0]
+
+      console.log(products.filter(el => el.id === id)[0])
+      const addProd = products.filter(el => el.id === id)
+      setCartList(addProd)
+      cartAddItem?.(addProd[0])
    }
 
    // Show Add Product Modal
