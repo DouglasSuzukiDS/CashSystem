@@ -5,6 +5,7 @@ export type IconsProps = {
    h?: string 
    fill?: string
    className?: string
+   invertedX?: string
    onClick?: () => void
    handleAdd?: (id: any) => {}
    handleMinus?: (id: any) => {}

@@ -40,49 +40,55 @@ export const OpenCash = ({ close, onClick }: ActionsType) => {
 
    const openCashValue = () => {
       let openingCashInput = document.querySelector('#openingCash') as HTMLInputElement
-      let openingCash = parseFloat(openingCashInput.value).toFixed(2)
+      
+      if(openingCashInput.value !== '') {
+         let openingCash = parseFloat(openingCashInput.value).toFixed(2)
 
-      //const alertMsgCash = alert('Insira o valor correto')
-
-      const createValueLocalStorage = () => {
-         // Create value on Local Storage
-         localStorage.removeItem('openCashValue')
-         localStorage.setItem('openCashValue', openingCash)
-
-         // // Modal OpenCash
-         // let modal = document.querySelector('#openCashModal') as HTMLElement
-         // modal.classList.remove('flex')
-         // modal.classList.add('none')
-         // console.log(modal)
-         handleOpenCashModal()
-
-         // Status Cash System
-         let statusSystemH4 = document.querySelector('#statusSystemH4') as HTMLHeadingElement
-         statusSystemH4.classList.remove('text-danger')
-         statusSystemH4.classList.add('text-success')
-         statusSystemH4.innerHTML = 'Caixa Aberto'
-
-         // Button Status Cash
-         let btn_openCash = document.querySelector('#btn_openCash') as HTMLButtonElement
-         let btn_closeCash = document.querySelector('#btn_closeCash') as HTMLButtonElement
-         // let btn_statusCash = document.querySelector('#btn_statusCash') as HTMLButtonElement
-         // btn_statusCash.innerHTML = 'Fechar Caixa'
-         // btn_statusCash.onclick = () => onClick
-         // btn_statusCash.classList.remove('btn-primary')
-         // btn_statusCash.classList.add('btn-danger')
-
-         //   btn_openCash.classList.add('none')
-         //   btn_closeCash.classList.remove('none')
-         // btn_openCash.style.display = 'none'
-         // btn_closeCash.style.display = 'flex'
+         //const alertMsgCash = alert('Insira o valor correto')
+   
+         const createValueLocalStorage = () => {
+            // Create value on Local Storage
+            localStorage.removeItem('openCashValue')
+            localStorage.setItem('openCashValue', openingCash)
+   
+            // // Modal OpenCash
+            // let modal = document.querySelector('#openCashModal') as HTMLElement
+            // modal.classList.remove('flex')
+            // modal.classList.add('none')
+            // console.log(modal)
+            handleOpenCashModal()
+   
+            // Status Cash System
+            let statusSystemH4 = document.querySelector('#statusSystemH4') as HTMLHeadingElement
+            statusSystemH4.classList.remove('text-danger')
+            statusSystemH4.classList.add('text-success')
+            statusSystemH4.innerHTML = 'Caixa Aberto'
+   
+            // Button Status Cash
+            let btn_openCash = document.querySelector('#btn_openCash') as HTMLButtonElement
+            let btn_closeCash = document.querySelector('#btn_closeCash') as HTMLButtonElement
+            // let btn_statusCash = document.querySelector('#btn_statusCash') as HTMLButtonElement
+            // btn_statusCash.innerHTML = 'Fechar Caixa'
+            // btn_statusCash.onclick = () => onClick
+            // btn_statusCash.classList.remove('btn-primary')
+            // btn_statusCash.classList.add('btn-danger')
+   
+            //   btn_openCash.classList.add('none')
+            //   btn_closeCash.classList.remove('none')
+            // btn_openCash.style.display = 'none'
+            // btn_closeCash.style.display = 'flex'
+         }
+   
+         //eslint-disable-next-line no-restricted-globals
+         if (confirm(`Confirmar Valor: ${openingCash}`)) {
+            createValueLocalStorage()
+         } 
+   
+         window.location.href = 'http://localhost:3000/OpenSystem'
+      } else {
+         alert('Por obséquio, informa o valor para abertura do caixa, jaguara.')
       }
 
-      //eslint-disable-next-line no-restricted-globals
-      if (confirm(`Confirmar Valor: ${openingCash}`)) {
-         createValueLocalStorage()
-      } 
-
-      window.location.href = 'http://localhost:3000/OpenSystem'
    }
 
    return (
@@ -99,7 +105,8 @@ export const OpenCash = ({ close, onClick }: ActionsType) => {
                   <div id='closeOpenCash'>
                      <XMark w='24' h='24'
                         className=''
-                        onClick={ handleOpenCashModal }
+                        // onClick={ handleOpenCashModal }
+                        onClick={ close }
                      />
                   </div>
                </h4>

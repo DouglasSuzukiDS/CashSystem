@@ -2,7 +2,7 @@ import { IconsProps } from "../../types/IconsProps"
 
 export const Texugo = ({ w, h, className , onClick }: IconsProps) => {
    return (
-      <svg xmlns="http://www.w3.org/2000/svg"viewBox="0 0 439 495" fill="none" width={w} height={h} className={className}  onClick={onClick}>
+      <svg xmlns="http://www.w3.org/2000/svg"viewBox="0 0 439 495" fill="none" width={w} height={h} className={className}  onClick={onClick} >
          <path d="M385.5 494H122C127.558 419.842 137.549 376.544 164.5 297.032C195.791 292.804 215.916 297.986 261 334.12C291.985 359.324 311.259 340.553 347 283.5C382.92 358.348 385.5 413.926 385.5 494Z" fill="#E0DCE0" stroke="black" />
          <path d="M383 403.5C384.75 442.536 387.499 464.378 385 493.5" stroke="black" />
          <path d="M102 306C70.2797 379.578 64.3492 420.703 59 494H122C126.125 460.147 126.078 441.266 132.5 418.5C206.099 508.632 245.579 494.36 314.5 414.5C335.554 414.801 344.972 412.73 357.5 405C325.054 370.796 300.532 370.328 246 401.5C226.128 374.563 215.151 363.071 196.5 363C190.967 363.516 188.445 357.262 184 345.5C182.73 334.472 179.379 326.4 172 311C155 285.5 132.5 276 116 301.5L102 306Z" fill="#151313" stroke="black" />

@@ -41,11 +41,11 @@ export const OpenSystem = ({ close }: ActionsType) => {
    const navigate = useNavigate()
    const auth = useContext(AuthContext)
    const { user } = auth
-   
+
    const [userInfos, setUserInfos] = useState<UserType | null>()
    // Get All Users
    const [users, setUsers] = useState<UserType[]>([])
-   
+
    // Get All Products
    const { products, setProducts } = useContext(ProductsContext)
    //const [products, setProducts] = useState<ProductType[]>([])
@@ -134,7 +134,7 @@ export const OpenSystem = ({ close }: ActionsType) => {
    }, [])
 
    useEffect(() => {
-      if(cartList.length <= 0) {
+      if (cartList.length <= 0) {
          setCartProductsModal(false)
       }
    }, [cartList])
@@ -235,7 +235,7 @@ export const OpenSystem = ({ close }: ActionsType) => {
    }
 
    const handleAddProductModal = () => {
-      setAddProduct(!addProduct)
+      open ? setAddProduct(!addProduct) : alert('Abra o caixa camarada.')
    }
 
    const optionsSystemModal = () => {
@@ -313,8 +313,8 @@ export const OpenSystem = ({ close }: ActionsType) => {
    const verifyOpenCashValue = () => {
       //console.log(contentSystemModal)
       const openCashValueLC = localStorage.getItem('openCashValue')
-     if( openCashValueLC === '' || 
-         openCashValueLC === undefined || openCashValueLC !== null ) {
+      if (openCashValueLC === '' ||
+         openCashValueLC === undefined || openCashValueLC !== null) {
          setOpen(!open)
       }
       //console.log(openCashValueLC)
@@ -336,7 +336,7 @@ export const OpenSystem = ({ close }: ActionsType) => {
 
       setCartList([...cartList, data])
 
-      if(cartList.length > 0) {
+      if (cartList.length > 0) {
          setCartProductsModal(true)
       }
    }
@@ -349,7 +349,7 @@ export const OpenSystem = ({ close }: ActionsType) => {
          setCartProductsModal(false)
       }*/
 
-      if(cartList.length < 0) {
+      if (cartList.length < 0) {
          setCartProductsModal(false)
       }
    }
@@ -363,9 +363,9 @@ export const OpenSystem = ({ close }: ActionsType) => {
 
    return (
       <main className="containerSystem flex p-3">
-         { closeSystem ?? (
+         {closeSystem ?? (
             <div className="infosSystemClose" id="infosSystemClose">
-               <Closing close={ handleCloseCash } />
+               <Closing close={handleCloseCash} />
             </div>
          )}
 
@@ -387,13 +387,14 @@ export const OpenSystem = ({ close }: ActionsType) => {
                            <Gears w='24' h='24' fill='var(--bs-secondary)' className='notAllowed' />
 
                            <button className="btn btn-primary ml-2 border" id="btn_openCash" onClick={startJob} onChange={ () => setOpen(true) }>
+                           {/* <button className="btn btn-primary ml-2 border" id="btn_openCash" onClick={startJob} > */}
                               Abrir Caixa
                               <CashRegister w='24' h='24' fill='var(--text)' className='ml-1 text-color' />
-                           </button> 
+                           </button>
 
                         </> :
                         <>
-                           <Gears w='24' h='24' fill='var(--bs-secondary)' className='pointer opacity' onClick={ optionsSystemModal } />
+                           <Gears w='24' h='24' fill='var(--bs-secondary)' className='pointer opacity' onClick={optionsSystemModal} />
 
                            <button className="btn btn-danger ml-2 border" id="btn_closeCash" onClick={handleCloseCash} >
                               Fechar Caixa
@@ -406,94 +407,106 @@ export const OpenSystem = ({ close }: ActionsType) => {
             </header>
 
             <div className="contentSystem flex" id="contentSystem">
-               { contentSystemStartModal ?
-                  <div className="flex" id="contentSystemStart">
-                     <OpenCash />
-                  </div> : ''
-               }
-               
-               {/* // Create new User/Product or Find User/Product */}
-               { optionsSystem ?
-                  <section className="managerSystem flex mr-3" onMouseLeave={() => setOptionsSystem(false)}>
-                     <ul className="flex column text-dark bold">
-                        <li className="flex"
-                           onClick={handleNewUser}>Novo Usuário</li>
-
-                        <li className="flex"
-                           onClick={handleManagerUser}>Editar Usuário</li>
-
-                        <li className="flex"
-                           onClick={handleNewProduct}>Novo Produto</li>
-
-                        <li className="flex"
-                           onClick={handleManagerProduct}>Editar Produtos</li>
-                     </ul>
-                  </section> : ''
-               }
-
-               {
-                  newUserModal ?
-                     <RegisterUser close={() => setNewUserModal(false)} /> : ''
-               }
-
-               {
-                  managerUsersModal ?
-                     <FindUsers listUsers={users} close={() => setManagerUsersModal(false)} /> : ''
-               }
-
-               {
-                  NewProductModal ?
-                     <RegisterProduct close={() => setNewProductModal(false)} /> : ''
-               }
-
-               {
-                  managerProductsModal ?
-                     <FindProducts listProducts={products} close={() => setManagerProductsModal(false)} /> : ''
-               }
-
-               {/* {
-                  !managerProductsModal ?
-                     <FindProducts close={ () => setManagerProductsModal(!managerUsersModal) } /> : ''
-               } */}
-
-               {/* { !open ?
-                  <MessageTexugo msg="Abra o caixa, meu Chapa" tw="100" th="100" /> :
-                  <MessageTexugo msg="Carrinho vazio, meu Chapa" tw="100" th="100" /> 
-               }  */}
-
-               {
-                  // addProduct ? <AddProducts listProducts={products} close={ handleAddProductModal } cartAddItem={ setCartItems } /> : ''
-                  addProduct ? <AddProducts listProducts={products} close={ handleAddProductModal } cartAddItem={ addItemOnCart } /> : ''
-               }
-               
-               {
-                  cartProductsModal ? <CartList listProducts={ cartItems } returnItems={ handleReturnItems } /> : <MessageTexugo msg="Carrinho vazio meu Chapa" tw="100" th="100" />
-               }
-
-               {
-                  closeSystem ? <Closing close={() => setCloseSystem(false)} /> : ''
-               }
-
-
-               {/* {  
-               cartItems.length === 0 ??
-               <MessageTexugo msg="Carrinho vazio meu Chapa" tw="100" th="100" />
-               }  */}
-               {/* { OpenCashValueLC ?
-                  <div className="managerArea flex">
-                     {findProductsModal &&
-                        <FindProducts close={ handleToogleFindProductModal } />
+               {/* { !contentSystemStartModal ? */}
+               { !open ?
+                  // Caso o caixa não estver aberto
+                  <> 
+                     { !contentSystemStartModal ?
+                        <div className="flex" id="contentSystemStart">
+                           <OpenCash close={startJob} />
+                        </div> : <MessageTexugo msg="Caixa Fechado, meu Chapa." tw="100" th="100" className="mb-2 flex text-danger " />
                      }
-                  </div> :
-                  <div className="none" id="contentSystemStart">
-                     <OpenCash />
-                  </div>
-               } */}
+                  </> :
+                  // Caso o caixa estiver aberto
+                  <>
+                     {/* // Create new User/Product or Find User/Product */}
+                     {optionsSystem ?
+                        <section className="managerSystem flex mr-3" onMouseLeave={() => setOptionsSystem(false)}>
+                           <ul className="flex column text-dark bold">
+                              <li className="flex"
+                                 onClick={handleNewUser}>Novo Usuário</li>
 
-               {/* { !closeSystem ??
-                  <Closing close={ handleCloseCash } />
-               }               */}
+                              <li className="flex"
+                                 onClick={handleManagerUser}>Editar Usuário</li>
 
+                              <li className="flex"
+                                 onClick={handleNewProduct}>Novo Produto</li>
+
+                              <li className="flex"
+                                 onClick={handleManagerProduct}>Editar Produtos</li>
+                           </ul>
+                        </section> : ''
+                     }
+
+                     {
+                        newUserModal ?
+                           <RegisterUser close={() => setNewUserModal(false)} /> : ''
+                     }
+
+                     {
+                        managerUsersModal ?
+                           <FindUsers listUsers={users} close={() => setManagerUsersModal(false)} /> : ''
+                     }
+
+                     {
+                        NewProductModal ?
+                           <RegisterProduct close={() => setNewProductModal(false)} /> : ''
+                     }
+
+                     {
+                        managerProductsModal ?
+                           <FindProducts listProducts={products} close={() => setManagerProductsModal(false)} /> : ''
+                     }
+
+                     {/* {
+                        !managerProductsModal ?
+                        <FindProducts close={ () => setManagerProductsModal(!managerUsersModal) } /> : ''
+                     } */}
+
+                     {/* { !open ?
+                        <MessageTexugo msg="Abra o caixa, meu Chapa" tw="100" th="100" /> :
+                        <MessageTexugo msg="Carrinho vazio, meu Chapa" tw="100" th="100" /> 
+                     }  */}
+
+                     {
+                        // addProduct ? <AddProducts listProducts={products} close={ handleAddProductModal } cartAddItem={ setCartItems } /> : ''
+                        addProduct ? <AddProducts listProducts={products} close={handleAddProductModal} cartAddItem={addItemOnCart} /> : ''
+                     }
+
+                     {
+                        cartProductsModal ? <CartList listProducts={cartItems} returnItems={handleReturnItems} /> :
+                           <MessageTexugo msg="Carrinho vazio, meu Chapa." tw="100" th="100" className="mb-2 flex text-warning" />
+                          
+                     }
+
+                     {
+                        closeSystem ? <Closing close={() => setCloseSystem(false)} /> : ''
+                     }
+
+
+                     {/* {  
+                        cartItems.length === 0 ??
+                        <MessageTexugo msg="Carrinho vazio meu Chapa" tw="100" th="100" />
+                     }  */}
+
+                     {/* { OpenCashValueLC ?
+                        <div className="managerArea flex">
+                           {findProductsModal &&
+                              <FindProducts close={ handleToogleFindProductModal } />
+                           }
+                        </div> :
+                        <div className="none" id="contentSystemStart">
+                           <OpenCash />
+                        </div>
+                     } */}
+
+                     { /* { !closeSystem ??
+                         <Closing close={ handleCloseCash } />
+                     } */ }
+
+
+                  </>
+               }
             </div>
 
             <footer className="footerSystem flex sbt">
@@ -519,12 +532,12 @@ export const OpenSystem = ({ close }: ActionsType) => {
                      <SackDollar w='20' h='20' fill='var(--text)' className='ml-1' />
                   </button>
 
-                  <button className="btn btn-warning ml-1" onClick={ handleAddProductModal } onKeyDown={ handleKeyDown }>
+                  <button className="btn btn-warning ml-1" onClick={handleAddProductModal} onKeyDown={handleKeyDown}>
                      F9 Pesquisar
                      <MagnifyingGlass w='20' h='20' fill='var(--text-dark)' className='ml-1' />
                   </button>
 
-                  <button className="btn btn-danger ml-1" onClick={ handleClearCartList }>
+                  <button className="btn btn-danger ml-1" onClick={handleClearCartList}>
                      F10 Cancelar
                      <TrashCan w='20' h='20' fill='var(--text)' className='ml-1' />
                   </button>
