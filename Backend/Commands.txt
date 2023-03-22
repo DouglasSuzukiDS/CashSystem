@@ -89,3 +89,27 @@ CREATE TABLE products (
     INSERT INTO products VALUES (29 ,'Eight Solto', 0.50, 'Cigarros', 17);
     INSERT INTO products VALUES (30 ,'Gudang Garang Solto', 2, 'Cigarros', 14);
 */
+
+
+/* Armazenar JSON no DB (Exemplo):
+    CREATE TABLE Pessoa(
+        idPessoa INT UNSIGNED NOT NULL,
+        Nome VARCHAR(120) NOT NULL,
+        Documentos JSON,
+        Primary KEY (idPessoa)
+    );
+    
+    INSERT INTO Pessoa (idPessoa, Nome, Documentos) VALUES (
+        1, 'Kaido', '{"RG": "123456", "CHN": "654321"}'
+    );
+
+    SELECT * FROM Pessoa; 
+    SELECT p.idPessoa, p.Nome, p.Documentos FROM pessoa p;
+
+    SELECT p.idPessoa, p.Nome, p.Documentos->"$,CHN" FROM pessoa p; // Retorna só o valor de CNH de Documentos
+
+    SELECT p.idPessoa, p.Nome, p.Documentos->>"$,CHN" FROM pessoa p; // Retorna só o valor de CNH de Documentos mas sem aspas
+
+    SELECT p.idPessoa, p.Nome, p.Documentos FROM Pessoa p 
+        WHERE p.Documentos->>"$,CHN" = '654321'
+*/

@@ -1,0 +1,17 @@
+.borderForm {
+   border: 2px solid var(--fb1);
+   border-radius: 8px;
+   padding: 8px;
+}
+
+.borderFormFix {
+   border: 2px solid var(--fb1);
+   border-radius: 8px;
+   padding: 8px;
+   width: 125px;
+}
+
+.paymentForm h4 > #closePaymentForm:hover {
+   cursor: pointer;
+   opacity: 0.5;
+}

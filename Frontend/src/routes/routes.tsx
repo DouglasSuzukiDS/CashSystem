@@ -14,6 +14,7 @@ import { RegisterUser } from "../pages/RegisterUser/RegisterUser";
 import { Error } from "../pages/Error/Error";
 import { ProductProvider } from "../context/Products/ProductProvider";
 import { CartListProviver } from "../context/CartList/CartListProvider";
+import { ConfirmPayment } from "../components/ConfirmPayment/ConfirmPaymanet";
 
 // import Login from "../pages/Login/Login";
 
@@ -29,7 +30,8 @@ export default function RoutesApp() {
                      {/* <Route path='/' element={ <AllIcons /> } />  */}
                      <Route path='/findProducts' element={ <FindProducts /> } /> 
 
-                     <Route path='/' element={ <Login /> } /> 
+                     {/* <Route path='/' element={ <Login /> } />  */}
+                     <Route path='/' element={ <ConfirmPayment /> } /> 
 
                      {/* <Route path='/login' element={  <Login /> } />  */}
 

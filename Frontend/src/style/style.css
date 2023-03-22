@@ -1130,11 +1130,6 @@ h4 {
   color: var(--bs-info);
 }
 
-.borderForm {
-  border: 2px solid var(--fb1);
-  border-radius: 8px;
-}
-
 .invoicingOfTheDayForm > h4 > #closeElement:hover {
   cursor: pointer;
   opacity: 0.5;
@@ -1162,11 +1157,6 @@ h4 {
   font-weight: bold;
 }
 
-.borderForm {
-  border: 2px solid var(--fb1);
-  border-radius: 8px;
-}
-
 #closingFormDay h4 > #closeElementFormDay:hover {
   cursor: pointer;
   opacity: 0.5;
@@ -1192,6 +1182,24 @@ h4 {
 .text-yellow-ml {
   color: var(--yellow-ml);
   font-weight: bold;
+}
+
+.borderForm {
+  border: 2px solid var(--fb1);
+  border-radius: 8px;
+  padding: 8px;
+}
+
+.borderFormFix {
+  border: 2px solid var(--fb1);
+  border-radius: 8px;
+  padding: 8px;
+  width: 125px;
+}
+
+.paymentForm h4 > #closePaymentForm:hover {
+  cursor: pointer;
+  opacity: 0.5;
 }
 
 #openCashModal .formsOpen {
