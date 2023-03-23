@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useContext, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { ActionsType } from '../../types/ActionsType'
 
@@ -14,6 +14,8 @@ import { ArrowLeftLong } from '../../assets/Icons/ArrowLeftLong'
 import { CircleCheck } from '../../assets/Icons/CircleCheck'
 import { XMark } from '../../assets/Icons/XMark'
 import { HandHoldingDollar } from '../../assets/Icons/HandHoldingDollar'
+import { ArrowRightToBracket } from '../../assets/Icons/ArrowRightToBracket'
+import { CartListContext } from '../../context/CartList/CartListContext'
 
 /*  Blocked Keys
    F1 => Help
@@ -39,74 +41,106 @@ import { HandHoldingDollar } from '../../assets/Icons/HandHoldingDollar'
 
 // const navigate = useNavigate()
 
-const closeFormDay = () => {
-   const close = document.querySelector('#paymentForm') as HTMLDivElement
-   // console.log(close)
-   // close.style.display = 'none'
-   // close.classList.toggle('none')
-
-   close.style.display = 'flex' ? close.style.display = 'none' : close.style.display = 'flex'
-}
-
 export const ConfirmPayment = ({ close }: ActionsType) => {
-/*   const navigate = useNavigate()
+   const { cartList, setCartList } = useContext(CartListContext)
 
-   // Values Brute
-let opening = 37.80
-let money = 258
-let pix = 27
+   const handleConfirmMethod = () => {
+      const paymentMethod = document.querySelector('input[type=radio]:checked') as HTMLInputElement
+      //console.log(paymentMethod)
+      console.log(paymentMethod.value)
+   
+      let paymentMoney = document.querySelector('#paymentMoney') as HTMLInputElement
+      let paymentPix = document.querySelector('#paymentPix') as HTMLInputElement
+      let paymentDebit = document.querySelector('#paymentDebit') as HTMLInputElement
+      let paymentCredit = document.querySelector('#paymentCredit') as HTMLInputElement
+   
+      if(paymentMethod.value === 'Dinheiro') {
+         paymentMoney.classList.remove('borderFormFix')
+         paymentMoney.classList.add('borderFormFixSuccess')
+   
+         paymentPix.classList.remove('borderFormFixPix')
+         paymentPix.classList.add('borderFormFix')
+   
+         paymentDebit.classList.remove('borderFormFixBlueMP')
+         paymentDebit.classList.add('borderFormFix')
+   
+         paymentCredit.classList.remove('borderFormFixYellowML')
+         paymentCredit.classList.add('borderFormFix')
+   
+      } else if(paymentMethod.value === 'Pix') {
+         paymentPix.classList.remove('borderFormFix')
+         paymentPix.classList.add('borderFormFixPix')
+   
+         paymentMoney.classList.remove('borderFormFixSuccess')
+         paymentMoney.classList.add('borderFormFix')
+   
+         paymentDebit.classList.remove('borderFormFixBlueMP')
+         paymentDebit.classList.add('borderFormFix')
+   
+         paymentCredit.classList.remove('borderFormFixYellowML')
+         paymentCredit.classList.add('borderFormFix')
+   
+      } else if(paymentMethod.value === 'Cartão de Débito') {
+         paymentDebit.classList.remove('borderFormFix')
+         paymentDebit.classList.add('borderFormFixBlueMP')
+   
+         paymentMoney.classList.remove('borderFormFixSuccess')
+         paymentMoney.classList.add('borderFormFix')
+   
+         paymentPix.classList.remove('borderFormFixPix')
+         paymentPix.classList.add('borderFormFix')
+   
+         paymentCredit.classList.remove('borderFormFixYellowML')
+         paymentCredit.classList.add('borderFormFix')
+   
+      } else if(paymentMethod.value === 'Cartão de Crédito') {
+         paymentCredit.classList.remove('borderFormFix')
+         paymentCredit.classList.add('borderFormFixYellowML')
+   
+         paymentMoney.classList.remove('borderFormFixSuccess')
+         paymentMoney.classList.add('borderFormFix')
+   
+         paymentPix.classList.remove('borderFormFixPix')
+         paymentPix.classList.add('borderFormFix')
+   
+         paymentDebit.classList.remove('borderFormFixBlueMP')
+         paymentDebit.classList.add('borderFormFix')
+   
+      }
+   }
+   
+   const handleConfirmPayment = () => {
+      const paymentMethod = document.querySelector('input[type=radio]:checked') as HTMLInputElement
+      //console.log(paymentMethod)
+      let total = cartList.reduce(
+         (sum, item) => sum + parseFloat(item.pdt_price), 0
+      ).toFixed(2)
 
-let debitCard = 34.50
-let creditCard = 13.30
-
-// Tax Card
-let taxDebit = ((debitCard * 1.99) / 100).toFixed(2) 
-let taxCredit = ((creditCard * 4.74) / 100).toFixed(2)
-// console.log(`Taxa Débito: ${taxDebit}`)
-// console.log(`Taxa Crédito: ${taxCredit}`)
-
-let debitCardFinal = debitCard - parseInt(taxDebit) // 33,81
-let creditCardFinal = creditCard - parseInt(taxCredit) // 12,67
-// console.log(`Débito sem a Taxa: ${debitCardFinal}`)
-// console.log(`Crédito sem a Taxa: ${creditCardFinal}`)
-
-// Values Final
-
-let openingPix = opening + pix // 285
-// console.log(`Din + Pix: ${openingPix}`)
-
-let amountCards = (debitCardFinal + creditCardFinal) //  46,48
-// console.log(`Valor Total em Cartões: ${amountCards}`)
-
-let amount = (openingPix + amountCards).toFixed(2) // 331,48
-// console.log(`Total: ${amount}`)
-
-// Values Money
-let amountMoney = money - opening
-let amountBank = pix + amountCards
-let amountValue = amountMoney + amountBank
-
-   useEffect(() => {
-      window.addEventListener('keydown', (event) => {
-         if (event.keyCode === 118) { // F7
-            navigate('/invoicing')
-         } else if (event.keyCode === 119) { // F8
-            navigate('/')
+      if(total > '0.25') {
+         if( paymentMethod.value === 'Pix' || 
+             paymentMethod.value === 'Cartão de Débito' || 
+             paymentMethod.value === 'Cartão de Crédito' ) {
+   
+            let confirmValue = window.confirm(`Confirma o pagamento de R$${total} no ${paymentMethod.value} ?`)
+   
+            alert(confirmValue)
+         } else if(paymentMethod.value === 'Dinheiro') {
+            let confirmValue = window.confirm(`Confirma o pagamento de R$${total} em ${paymentMethod.value} ?`)
+   
+            alert(confirmValue)
+         } else {
+            alert('Por obsérquio, informe o método de pagamento.')
          }
-      })
-   }, [])
+      }
 
-   const closeSystem = async() => {
-      await localStorage.removeItem('openCashValue')
-      await localStorage.removeItem('AuthToken')
-      window.location.href = 'http://localhost:3000'
-   }*/
+   }
+
 
    return (
       <main className="container flex pr-3" id='paymentFormContainer'>
-         <div className="forms">
+         <div className="forms flex sbt column">
 
-            <form action='/' className="paymentForm w-100 h-100 f column sbt">
+            <form action='/' className="paymentForm w-100 h-100 f sbt column">
                <h4 className="flex sbt">
 
                   <div className="flex text-center3 w-100">
@@ -122,13 +156,16 @@ let amountValue = amountMoney + amountBank
                   </div>
                </h4>
 
-               <div className="inputForm flex aic sbt my-1"> {/* Valor da Compra */}
+               <div className="inputForm flex sbt"> {/* Valor da Compra */}
                   <p className='inputTF'>Valor da Compra</p>
 
-                  <div className="purchasePrice borderForm flex inputValue">
+                  <div className="purchasePrice borderFormPrimary flex inputValue">
                      <CashRegister w='24' h='24' fill='var(--bs-primary)' className='mr-1' />
                      <p className='inputTF text-primary'>
-                        120,00
+                        { cartList.reduce(
+                                 (sum, item) => sum + parseFloat(item.pdt_price), 0
+                           ).toFixed(2) 
+                        }
                         {/* {opening.toFixed(2)} */}
                         {/* { openCashValue } */}
                      </p>
@@ -136,52 +173,62 @@ let amountValue = amountMoney + amountBank
                </div>
                <span className='bb-info'></span>
 
-               <div className="mt-1">  {/* Forma de Pagamento */}
+               <div className="">  {/* Forma de Pagamento */}
                   <p className='inputTF text-center'>Forma de Pagamento</p>
 
                   <div className='flex column mt-2' id='choosePaymentMethodContainer'>
                      <div className='flex'>
-                        <div className="paymentMoney borderFormFix flex mr-1 pointer">
-                           <MoneyBillWave w='24' h='24' fill='var(--bs-success)' className='mr-1' />
-                           <p className='inputTF text-success'> Dinheiro </p>
-                        </div>
+                       
+                        <label id='paymentMoney' onClick={ handleConfirmMethod } htmlFor="paymentMethod01" className="paymentMoney borderFormFix flex sbt mr-1 pointer">
+                           <input type="radio" className='mr-1' name="paymentMethod" id="paymentMethod01" value='Dinheiro' />
+                           <p className='inputTF text-success flex'> 
+                              <MoneyBillWave w='24' h='24' fill='var(--bs-success)' className='mr-1' />
+                              Dinheiro 
+                           </p>
+                        </label>
 
-                        <div className="PaymentPix borderFormFix flex ml-1 pointer">
-                           <Pix w='24' h='24' fill='var(--pix)' className='mr-1' />
-                           <p className='inputTF text-pix'> Pix </p>
-                        </div>
+
+                        <label id='paymentPix' onClick={ handleConfirmMethod } htmlFor="paymentMethod02" className="PaymentPix borderFormFix flex sbt ml-1 pointer">
+                           <input type="radio" name="paymentMethod" id="paymentMethod02" value='Pix' />
+                           <p className='inputTF text-pix flex'> 
+                              <Pix w='24' h='24' fill='var(--pix)' className='mr-1' />
+                              Pix 
+                           </p>
+                        </label>
                      </div>
 
                      <div className='flex mt-2'>
-                        <div className="paymentDebit borderFormFix flex mr-1 pointer">
-                           <CreditCard w='24' h='24' fill='var(--blue-mp)' className='mr-1' />
-                           <p className='inputTF text-blue-mp'> Débito </p>
-                        </div>
+                        <label id='paymentDebit' onClick={ handleConfirmMethod } htmlFor="paymentMethod03" className="paymentDebit borderFormFix flex sbt mr-1 pointer">
+                           <input type="radio" className='mr-1' name="paymentMethod" id="paymentMethod03" value='Cartão de Débito' />
+                           <p className='inputTF text-blue-mp flex'> 
+                              <CreditCard w='24' h='24' fill='var(--blue-mp)' className='mr-1' />
+                              Débito
+                           </p>
+                        </label>
 
-                        <div className="PaymentCredit borderFormFix flex ml-1 pointer">
-                           <CreditCard w='24' h='24' fill='var(--yellow-ml)' className='mr-1' />
-                           <p className='inputTF text-yellow-ml'> Crédito </p>
-                        </div>
+                        <label id='paymentCredit' onClick={ handleConfirmMethod } htmlFor="paymentMethod04" className="PaymentCredit borderFormFix flex sbt ml-1 pointer">
+                           <input type="radio" name="paymentMethod" id="paymentMethod04" value='Cartão de Crédito' />
+                           <p className='inputTF text-yellow-ml flex'> 
+                              <CreditCard w='24' h='24' fill='var(--yellow-ml)' className='mr-1' />
+                              <span>
+                                 Crédito 
+                              </span>
+                           </p>
+                        </label>
                      </div>
 
                   </div>
 
                </div>
-               <span className='bb-info mt-1'></span>
-
-               <span className="flex sbt mt-1">
-                  <button className="btn btn-warning mr-1 w-50"  onClick={ close } >
-                     Voltar(F7)
-                     <ArrowLeftLong w='24' h='24' fill='var(--bs-dark)' className='ml-1' />
-                  </button>
-
-                  {/* <button className="btn btn-success ml-1 w-50" onClick={ closeSystem } > */}
-                  <button className="btn btn-success ml-1 w-50" >
-                     Fechar(F8)
-                     <CircleCheck w='24' h='24' fill='var(--text)' className='ml-1' />
-                  </button>
-               </span>
+               <span className='bb-info mb-3'></span>
             </form>
+            
+            <button
+               className="btn btn-success w-100"
+               onClick={ handleConfirmPayment } >
+               Finalizar Venda
+               <ArrowRightToBracket w='23' h='23' fill='var(--text)' className='ml-1' />
+            </button>
          </div>
       </main>
    )

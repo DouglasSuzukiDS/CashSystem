@@ -33,6 +33,7 @@ import { AddProducts } from "../../components/AddProducts/AddProducts";
 import { CartList } from "../../components/CartList/CartList";
 import { ProductsContext } from "../../context/Products/ProductsContext";
 import { CartListContext } from "../../context/CartList/CartListContext";
+import { ConfirmPayment } from "../../components/ConfirmPayment/ConfirmPaymanet";
 
 export const OpenSystem = ({ close }: ActionsType) => {
    const backend = 'http://localhost:3001'
@@ -90,6 +91,8 @@ export const OpenSystem = ({ close }: ActionsType) => {
    const [managerProductsModal, setManagerProductsModal] = useState(false)
 
    const [managerOption, setManagerOption] = useState(false)
+
+   const [confirmPaymentModal, setConfirmPaymentModal] = useState(false)
 
 
    const AuthTokenLC = localStorage.getItem('AuthToken')
@@ -236,9 +239,12 @@ export const OpenSystem = ({ close }: ActionsType) => {
 
    const handleAddProductModal = () => {
       open ? setAddProduct(!addProduct) : alert('Abra o caixa camarada.')
+      setConfirmPaymentModal(false)
+      setOptionsSystem(false)
    }
 
    const optionsSystemModal = () => {
+      setConfirmPaymentModal(false)
       setAddProduct(false)
       setOptionsSystem(!optionsSystem)
       // console.log(optionsSystem)
@@ -361,6 +367,22 @@ export const OpenSystem = ({ close }: ActionsType) => {
       console.log('clear cartList')
    }
 
+   const handleConfirmPayment = () => {
+      let total = cartList.reduce(
+         (sum, item) => sum + parseFloat(item.pdt_price), 0
+      ).toFixed(2)
+
+      if(total < '0.25') {
+         alert('Carrinho vazio.')
+         setConfirmPaymentModal(false)
+      } else {
+         setConfirmPaymentModal(!confirmPaymentModal)
+         setAddProduct(false)
+         setOptionsSystem(false)
+      }
+
+   }
+
    return (
       <main className="containerSystem flex p-3">
          {closeSystem ?? (
@@ -394,9 +416,9 @@ export const OpenSystem = ({ close }: ActionsType) => {
 
                         </> :
                         <>
-                           <Gears w='24' h='24' fill='var(--bs-secondary)' className='pointer opacity' onClick={optionsSystemModal} />
+                           <Gears w='24' h='24' fill='var(--bs-secondary)' className='pointer opacity' onClick={ optionsSystemModal } />
 
-                           <button className="btn btn-danger ml-2 border" id="btn_closeCash" onClick={handleCloseCash} >
+                           <button className="btn btn-danger ml-2 border" id="btn_closeCash" onClick={ handleCloseCash } >
                               Fechar Caixa
                               <CashRegister w='24' h='24' fill='var(--text)' className='ml-1 text-color' />
                            </button>
@@ -469,8 +491,13 @@ export const OpenSystem = ({ close }: ActionsType) => {
                      }  */}
 
                      {
+                        confirmPaymentModal ?
+                           <ConfirmPayment close={ handleConfirmPayment } /> : ''
+                     }
+
+                     {
                         // addProduct ? <AddProducts listProducts={products} close={ handleAddProductModal } cartAddItem={ setCartItems } /> : ''
-                        addProduct ? <AddProducts listProducts={products} close={handleAddProductModal} cartAddItem={addItemOnCart} /> : ''
+                        addProduct ? <AddProducts listProducts={ products } close={handleAddProductModal} cartAddItem={ addItemOnCart } /> : ''
                      }
 
                      {
@@ -527,12 +554,12 @@ export const OpenSystem = ({ close }: ActionsType) => {
                      <ListCheck w='20' h='20' fill='var(--text)' className='ml-1' />
                   </button>
 
-                  <button className="btn btn-success ml-1">
+                  <button className="btn btn-success ml-1" onClick={ handleConfirmPayment }>
                      F4 Finalizar
                      <SackDollar w='20' h='20' fill='var(--text)' className='ml-1' />
                   </button>
 
-                  <button className="btn btn-warning ml-1" onClick={handleAddProductModal} onKeyDown={handleKeyDown}>
+                  <button className="btn btn-warning ml-1" onClick={ handleAddProductModal } onKeyDown={handleKeyDown}>
                      F9 Pesquisar
                      <MagnifyingGlass w='20' h='20' fill='var(--text-dark)' className='ml-1' />
                   </button>

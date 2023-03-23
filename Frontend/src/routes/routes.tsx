@@ -30,8 +30,7 @@ export default function RoutesApp() {
                      {/* <Route path='/' element={ <AllIcons /> } />  */}
                      <Route path='/findProducts' element={ <FindProducts /> } /> 
 
-                     {/* <Route path='/' element={ <Login /> } />  */}
-                     <Route path='/' element={ <ConfirmPayment /> } /> 
+                     <Route path='/' element={ <Login /> } /> 
 
                      {/* <Route path='/login' element={  <Login /> } />  */}
 
