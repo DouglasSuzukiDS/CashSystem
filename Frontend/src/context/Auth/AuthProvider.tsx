@@ -44,8 +44,8 @@ export const AuthProvider = ({ children }: { children: JSX.Element }) => {
          createToken(response.token)
 
          if(response.user) {
-            // console.log(response.user)
-            setUser(response.user)
+            console.log('User =>' + response.user)
+            setUser(JSON.parse(response.user))
             // console.log(user)
          }
          return true

@@ -102,7 +102,7 @@ let amountValue = amountMoney + amountBank
    }
 
    return (
-      <main className="container flex pr-3" id='closingFormDay'>
+      <main className="container flex pr-3 ml-3" id='closingFormDay'>
          <div className="forms">
 
             <form action='/' className="closingDayForm w-100 h-100 f column sbt">

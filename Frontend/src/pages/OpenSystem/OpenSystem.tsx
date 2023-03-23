@@ -41,7 +41,9 @@ export const OpenSystem = ({ close }: ActionsType) => {
 
    const navigate = useNavigate()
    const auth = useContext(AuthContext)
-   const { user } = auth
+   const { user } = useContext(AuthContext)
+   console.log(`Valor de User no OpenSystem é ${user}`)
+   console.log(`O nome de User é ${JSON.stringify(user?.userName)}`)
 
    const [userInfos, setUserInfos] = useState<UserType | null>()
    // Get All Users
@@ -220,8 +222,11 @@ export const OpenSystem = ({ close }: ActionsType) => {
          setFindProductsModal(false)
          setInvoicingModal(false)
       }
+
       setCloseSystem(!closeSystem)
       setOptionsSystem(false)
+      setConfirmPaymentModal(false)
+      setAddProduct(false)
       //console.log(closeSystem)
    }
 
@@ -241,6 +246,7 @@ export const OpenSystem = ({ close }: ActionsType) => {
       open ? setAddProduct(!addProduct) : alert('Abra o caixa camarada.')
       setConfirmPaymentModal(false)
       setOptionsSystem(false)
+      setCloseSystem(false)
    }
 
    const optionsSystemModal = () => {
@@ -372,13 +378,14 @@ export const OpenSystem = ({ close }: ActionsType) => {
          (sum, item) => sum + parseFloat(item.pdt_price), 0
       ).toFixed(2)
 
-      if(total < '0.25') {
+      if (total < '0.25') {
          alert('Carrinho vazio.')
          setConfirmPaymentModal(false)
       } else {
          setConfirmPaymentModal(!confirmPaymentModal)
          setAddProduct(false)
          setOptionsSystem(false)
+         setCloseSystem(false)
       }
 
    }
@@ -408,20 +415,33 @@ export const OpenSystem = ({ close }: ActionsType) => {
                         <>
                            <Gears w='24' h='24' fill='var(--bs-secondary)' className='notAllowed' />
 
-                           <button className="btn btn-primary ml-2 border" id="btn_openCash" onClick={startJob} onChange={ () => setOpen(true) }>
-                           {/* <button className="btn btn-primary ml-2 border" id="btn_openCash" onClick={startJob} > */}
+                           <button className="btn btn-primary ml-2 border" id="btn_openCash" onClick={startJob} onChange={() => setOpen(true)}>
+                              {/* <button className="btn btn-primary ml-2 border" id="btn_openCash" onClick={startJob} > */}
                               Abrir Caixa
                               <CashRegister w='24' h='24' fill='var(--text)' className='ml-1 text-color' />
                            </button>
 
                         </> :
                         <>
-                           <Gears w='24' h='24' fill='var(--bs-secondary)' className='pointer opacity' onClick={ optionsSystemModal } />
+                           { (user?.userAdmin) ?
+                              <>
+                                 <Gears w='24' h='24' fill='var(--bs-secondary)' className='pointer opacity' onClick={optionsSystemModal} />
 
-                           <button className="btn btn-danger ml-2 border" id="btn_closeCash" onClick={ handleCloseCash } >
-                              Fechar Caixa
-                              <CashRegister w='24' h='24' fill='var(--text)' className='ml-1 text-color' />
-                           </button>
+                                 <button className="btn btn-danger ml-2 border" id="btn_closeCash" onClick={handleCloseCash} >
+                                    Fechar Caixa
+                                    <CashRegister w='24' h='24' fill='var(--text)' className='ml-1 text-color' />
+                                 </button>
+                              </> :
+                              <>
+                                 <Gears w='24' h='24' fill='var(--bs-secondary)' className='notAllowed' />
+
+                                 <button className="btn btn-danger ml-2 border" id="btn_closeCash" onClick={handleCloseCash} >
+                                    Fechar Caixa
+                                    <CashRegister w='24' h='24' fill='var(--text)' className='ml-1 text-color' />
+                                 </button>
+                              </>
+
+                           }
                         </>
                   }
 
@@ -430,10 +450,10 @@ export const OpenSystem = ({ close }: ActionsType) => {
 
             <div className="contentSystem flex" id="contentSystem">
                {/* { !contentSystemStartModal ? */}
-               { !open ?
+               {!open ?
                   // Caso o caixa não estver aberto
-                  <> 
-                     { !contentSystemStartModal ?
+                  <>
+                     {!contentSystemStartModal ?
                         <div className="flex" id="contentSystemStart">
                            <OpenCash close={startJob} />
                         </div> : <MessageTexugo msg="Caixa Fechado, meu Chapa." tw="100" th="100" className="mb-2 flex text-danger " />
@@ -492,18 +512,18 @@ export const OpenSystem = ({ close }: ActionsType) => {
 
                      {
                         confirmPaymentModal ?
-                           <ConfirmPayment close={ handleConfirmPayment } /> : ''
+                           <ConfirmPayment close={handleConfirmPayment} /> : ''
                      }
 
                      {
                         // addProduct ? <AddProducts listProducts={products} close={ handleAddProductModal } cartAddItem={ setCartItems } /> : ''
-                        addProduct ? <AddProducts listProducts={ products } close={handleAddProductModal} cartAddItem={ addItemOnCart } /> : ''
+                        addProduct ? <AddProducts listProducts={products} close={handleAddProductModal} cartAddItem={addItemOnCart} /> : ''
                      }
 
                      {
                         cartProductsModal ? <CartList listProducts={cartItems} returnItems={handleReturnItems} /> :
                            <MessageTexugo msg="Carrinho vazio, meu Chapa." tw="100" th="100" className="mb-2 flex text-warning" />
-                          
+
                      }
 
                      {
@@ -554,12 +574,12 @@ export const OpenSystem = ({ close }: ActionsType) => {
                      <ListCheck w='20' h='20' fill='var(--text)' className='ml-1' />
                   </button>
 
-                  <button className="btn btn-success ml-1" onClick={ handleConfirmPayment }>
+                  <button className="btn btn-success ml-1" onClick={handleConfirmPayment}>
                      F4 Finalizar
                      <SackDollar w='20' h='20' fill='var(--text)' className='ml-1' />
                   </button>
 
-                  <button className="btn btn-warning ml-1" onClick={ handleAddProductModal } onKeyDown={handleKeyDown}>
+                  <button className="btn btn-warning ml-1" onClick={handleAddProductModal} onKeyDown={handleKeyDown}>
                      F9 Pesquisar
                      <MagnifyingGlass w='20' h='20' fill='var(--text-dark)' className='ml-1' />
                   </button>
