@@ -1,10 +1,12 @@
 import { useContext, useEffect, useState } from "react"
 import { useApi } from "../../hooks/UserApi"
 import { UserType } from "../../types/UserType"
+import { UserContext } from "../User/UserContext"
 import { AuthContext } from "./AuthContext"
 
 export const AuthProvider = ({ children }: { children: JSX.Element }) => {
    const [user] = useState<UserType | null>(null)
+   const { userData, setUserData } = useContext(UserContext)
 
    const api = useApi()
 
@@ -47,6 +49,8 @@ export const AuthProvider = ({ children }: { children: JSX.Element }) => {
             console.log('User =>' + response.user)
             // setUser(JSON.parse(response.user))
             // console.log(user)
+            console.log('O tipo de res.user no AuthProvider é: ' + typeof JSON.parse(response.user))
+            setUserData(JSON.parse(response.user))
          }
          return true
       } else {

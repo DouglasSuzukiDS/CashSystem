@@ -1,5 +1,6 @@
 import axios from "axios";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { UserContext } from "../context/User/UserContext";
 import { UserType } from "../types/UserType";
 
 
@@ -25,9 +26,9 @@ export const useApi = () => ({
                //setTimeout(() => navigate('/'), 2000)
 
                //setTimeout(() => navigate('/OpenSystem'), 1000)
-               console.log('Response no UserAPI', response)
-               console.log('Nome no UserAPI', response.data.user.userName)
-               //onsole.log(setUserData(response.data.user))
+               //console.log('Response no UserAPI', response)
+               console.log('Nome no UserAPI', JSON.parse(response.data.user))
+               // setUserData(response.data.user)
                return response
             }
          })

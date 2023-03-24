@@ -15,6 +15,7 @@ import { Error } from "../pages/Error/Error";
 import { ProductProvider } from "../context/Products/ProductProvider";
 import { CartListProviver } from "../context/CartList/CartListProvider";
 import { ConfirmPayment } from "../components/ConfirmPayment/ConfirmPaymanet";
+import { UserProvider } from "../context/User/UserProvider";
 
 // import Login from "../pages/Login/Login";
 
@@ -22,42 +23,44 @@ import { ConfirmPayment } from "../components/ConfirmPayment/ConfirmPaymanet";
 export default function RoutesApp() {
    return(
       <AuthProvider>
-         <ProductProvider>
-            <CartListProviver>
-               <BrowserRouter>
-                  <Routes>
-                     {/*  */}
-                     {/* <Route path='/' element={ <AllIcons /> } />  */}
-                     <Route path='/findProducts' element={ <FindProducts /> } /> 
+         <UserProvider>
+            <ProductProvider>
+               <CartListProviver>
+                  <BrowserRouter>
+                     <Routes>
+                        {/*  */}
+                        {/* <Route path='/' element={ <AllIcons /> } />  */}
+                        <Route path='/findProducts' element={ <FindProducts /> } /> 
 
-                     <Route path='/' element={ <Login /> } /> 
+                        <Route path='/' element={ <Login /> } /> 
 
-                     {/* <Route path='/login' element={  <Login /> } />  */}
+                        {/* <Route path='/login' element={  <Login /> } />  */}
 
-                     <Route path="/registerNewUser" element={ 
-                        <RequireAuth children= { <RegisterUser /> } /> 
-                     } /> 
+                        <Route path="/registerNewUser" element={ 
+                           <RequireAuth children= { <RegisterUser /> } /> 
+                        } /> 
 
-                     <Route path="/edit/user/:id" element={ 
-                        <RequireAuth children= { <EditUser /> } />
-                     } /> 
+                        <Route path="/edit/user/:id" element={ 
+                           <RequireAuth children= { <EditUser /> } />
+                        } /> 
 
-                     <Route path='/OpenCash' element={ <OpenCash /> } /> {/* OK */}
-                     <Route path='/OpenSystem' element={ <OpenSystem /> } />
+                        <Route path='/OpenCash' element={ <OpenCash /> } /> {/* OK */}
+                        <Route path='/OpenSystem' element={ <OpenSystem /> } />
 
-                     <Route path="/registerNewProduct" element={ <RegisterProduct /> } /> {/* OK */}
-                     {/* <Route path="/edit/product/:id" element={ 
-                        <RequireAuth children={< EditProduct /> } />
-                     } />  */}
-                     <Route path="/edit/product/:id" element={ < EditProduct /> } /> 
+                        <Route path="/registerNewProduct" element={ <RegisterProduct /> } /> {/* OK */}
+                        {/* <Route path="/edit/product/:id" element={ 
+                           <RequireAuth children={< EditProduct /> } />
+                        } />  */}
+                        <Route path="/edit/product/:id" element={ < EditProduct /> } /> 
 
-                     <Route path='/findProduct' element={ <FindProducts /> } />
+                        <Route path='/findProduct' element={ <FindProducts /> } />
 
-                     <Route path='*' element={ <Error /> } /> {/* OK  */}
-                  </Routes>
-               </BrowserRouter>
-            </CartListProviver>
-         </ProductProvider>
+                        <Route path='*' element={ <Error /> } /> {/* OK  */}
+                     </Routes>
+                  </BrowserRouter>
+               </CartListProviver>
+            </ProductProvider>
+         </UserProvider>
       </AuthProvider>
    )
 }

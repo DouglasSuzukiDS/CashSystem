@@ -44,10 +44,10 @@ export const OpenSystem = ({ close }: ActionsType) => {
    // const auth = useContext(AuthContext)
 
    // const { userData, setUserData } = useContext(AuthContext)
-   // const { user } = useContext(AuthContext)
+   const { user } = useContext(AuthContext)
    const { userData, setUserData } = useContext(UserContext)
-   console.log(`Valor de User no OpenSystem é ${JSON.stringify(userData)}`)
-   console.log(`O nome de User é ${JSON.stringify(userData?.userName)}`)
+   console.log(`Valor de userData no OpenSystem é ${JSON.stringify(userData)}`)
+   console.log(`O nome de userData é ${JSON.stringify(userData?.userName)}`)
 
    const [userInfos, setUserInfos] = useState<UserType | null>()
 
