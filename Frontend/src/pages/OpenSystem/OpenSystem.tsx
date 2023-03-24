@@ -34,18 +34,24 @@ import { CartList } from "../../components/CartList/CartList";
 import { ProductsContext } from "../../context/Products/ProductsContext";
 import { CartListContext } from "../../context/CartList/CartListContext";
 import { ConfirmPayment } from "../../components/ConfirmPayment/ConfirmPaymanet";
+import { UserContext } from "../../context/User/UserContext";
 
 export const OpenSystem = ({ close }: ActionsType) => {
    const backend = 'http://localhost:3001'
-
+   //const { userData, setUserData } = useContext(UserDataContext)
 
    const navigate = useNavigate()
-   const auth = useContext(AuthContext)
-   const { user } = useContext(AuthContext)
-   console.log(`Valor de User no OpenSystem é ${user}`)
-   console.log(`O nome de User é ${JSON.stringify(user?.userName)}`)
+   // const auth = useContext(AuthContext)
+
+   // const { userData, setUserData } = useContext(AuthContext)
+   // const { user } = useContext(AuthContext)
+   const { userData, setUserData } = useContext(UserContext)
+   console.log(`Valor de User no OpenSystem é ${JSON.stringify(userData)}`)
+   console.log(`O nome de User é ${JSON.stringify(userData?.userName)}`)
 
    const [userInfos, setUserInfos] = useState<UserType | null>()
+
+
    // Get All Users
    const [users, setUsers] = useState<UserType[]>([])
 
@@ -144,10 +150,6 @@ export const OpenSystem = ({ close }: ActionsType) => {
       }
    }, [cartList])
 
-   const userData = () => {
-
-   }
-
    /*// Get All Users
    useEffect(() => {
       axios.get(`${backend}/users`)
@@ -211,8 +213,6 @@ export const OpenSystem = ({ close }: ActionsType) => {
          navigate('/')
       }
    }
-
-   // -- startJob & verifyOpenCashValue
 
    // -- startJob & verifyOpenCashValue
    const handleCloseCash = () => {
@@ -423,14 +423,15 @@ export const OpenSystem = ({ close }: ActionsType) => {
 
                         </> :
                         <>
-                           { (user?.userAdmin) ?
+                           {/* { user?.userAdmin ? */}
+                           { userData?.userAdmin ?
                               <>
                                  <Gears w='24' h='24' fill='var(--bs-secondary)' className='pointer opacity' onClick={optionsSystemModal} />
 
                                  <button className="btn btn-danger ml-2 border" id="btn_closeCash" onClick={handleCloseCash} >
                                     Fechar Caixa
                                     <CashRegister w='24' h='24' fill='var(--text)' className='ml-1 text-color' />
-                                 </button>
+                                 </button> 
                               </> :
                               <>
                                  <Gears w='24' h='24' fill='var(--bs-secondary)' className='notAllowed' />
@@ -561,7 +562,7 @@ export const OpenSystem = ({ close }: ActionsType) => {
                   <p className="pg5 bold text-color">Colaborador</p>
 
                   <p className="pg3 bold italic text-dark-blue flex column" id="employeerName">
-                     {user?.userName}
+                     {userData?.userName}
 
                      {/* { employeerName } */}
                      <Signature w='24' h='24' fill='var(--dark-blue)' />

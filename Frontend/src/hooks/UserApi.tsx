@@ -1,10 +1,15 @@
 import axios from "axios";
+import { useState } from "react";
+import { UserType } from "../types/UserType";
 
 
 const backend: string = "http://localhost:3001"
 // const navigate = useNavigate()
 
+//const [userData, setUserData] = useState<UserType>()
+
 export const useApi = () => ({
+   
    validateToken: async(token: string) => {
       const response = await axios.post('/validate', { token })
       
@@ -15,11 +20,14 @@ export const useApi = () => ({
       let response = await axios.post(`${backend}/login`, {userLogin , userPassword })
          .then((response) => {
             if (response.status === 200) {
-               console.log(response.data.msg, response.data.token, response.data.user)
+               console.log(response.data.msg, response.data.token, JSON.parse(response.data.user))
 
                //setTimeout(() => navigate('/'), 2000)
 
                //setTimeout(() => navigate('/OpenSystem'), 1000)
+               console.log('Response no UserAPI', response)
+               console.log('Nome no UserAPI', response.data.user.userName)
+               //onsole.log(setUserData(response.data.user))
                return response
             }
          })

@@ -4,5 +4,4 @@ export type UserType = {
    userLogin: string
    userPassword?: string
    userAdmin: boolean
-
 }

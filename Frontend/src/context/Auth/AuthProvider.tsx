@@ -1,10 +1,10 @@
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { useApi } from "../../hooks/UserApi"
 import { UserType } from "../../types/UserType"
 import { AuthContext } from "./AuthContext"
 
 export const AuthProvider = ({ children }: { children: JSX.Element }) => {
-   const [user, setUser] = useState<UserType | null>(null)
+   const [user] = useState<UserType | null>(null)
 
    const api = useApi()
 
@@ -45,7 +45,7 @@ export const AuthProvider = ({ children }: { children: JSX.Element }) => {
 
          if(response.user) {
             console.log('User =>' + response.user)
-            setUser(JSON.parse(response.user))
+            // setUser(JSON.parse(response.user))
             // console.log(user)
          }
          return true
@@ -56,9 +56,9 @@ export const AuthProvider = ({ children }: { children: JSX.Element }) => {
    }
 
    const logout = async() => {
-      setUser(null)
+      //setUser(null)
       deleteToken()
-      console.log('Reset', user)
+      // console.log('Reset', user)
       await api.logout()
    }
 
@@ -71,6 +71,7 @@ export const AuthProvider = ({ children }: { children: JSX.Element }) => {
    }
 
    return(
+      // <AuthContext.Provider value={{ user, setUser, loginSystem, logout }}>
       <AuthContext.Provider value={{ user, loginSystem, logout }}>
          { children }
       </AuthContext.Provider>
