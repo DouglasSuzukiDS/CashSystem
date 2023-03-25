@@ -35,6 +35,11 @@ import { ProductsContext } from "../../context/Products/ProductsContext";
 import { CartListContext } from "../../context/CartList/CartListContext";
 import { ConfirmPayment } from "../../components/ConfirmPayment/ConfirmPaymanet";
 import { UserContext } from "../../context/User/UserContext";
+import { UserPlus } from "../../assets/Icons/UserPlus";
+import { UserPen } from "../../assets/Icons/UserPen";
+import { Registered } from "../../assets/Icons/Registered";
+import { PenToSquare } from "../../assets/Icons/PenToSquare";
+import { Download } from "../../assets/Icons/Download";
 
 export const OpenSystem = ({ close }: ActionsType) => {
    const backend = 'http://localhost:3001'
@@ -151,7 +156,15 @@ export const OpenSystem = ({ close }: ActionsType) => {
    }, [])
 
    useEffect(() => {
-      if (cartList.length <= 0) {
+      // if (cartList.length <= 0) {
+      //    setCartProductsModal(false)
+      // }
+      let total = cartList.reduce(
+         (sum, item) => sum + parseFloat(item.pdt_price), 0
+      ).toFixed(2)
+
+      if(total === '0.00' && cartList.length <= 0) {
+         setConfirmPaymentModal(false)
          setCartProductsModal(false)
       }
    }, [cartList])
@@ -224,7 +237,6 @@ export const OpenSystem = ({ close }: ActionsType) => {
                   // userAdmin: userData.userAdmin
                })
             }
-
          }
       } else {
          setOpen(false)
@@ -485,16 +497,52 @@ export const OpenSystem = ({ close }: ActionsType) => {
                         <section className="managerSystem flex mr-3" onMouseLeave={() => setOptionsSystem(false)}>
                            <ul className="flex column text-dark bold">
                               <li className="flex"
-                                 onClick={handleNewUser}>Novo Usuário</li>
+                                 onClick={handleNewUser}>
+                                 Novo Usuário
+                                 <UserPlus w="20" h="20" fill="var(--bs-info)" className="ml-1"/>
+                              </li>
 
                               <li className="flex"
-                                 onClick={handleManagerUser}>Editar Usuário</li>
+                                 onClick={handleManagerUser}>
+                                 Editar Usuário
+                                 <UserPen w="20" h="20" fill="var(--bs-warning)" className="ml-1"/>
+                              </li>
 
                               <li className="flex"
-                                 onClick={handleNewProduct}>Novo Produto</li>
+                                 onClick={handleNewProduct}>
+                                 Novo Produto
+                                 <Registered w="20" h="20" fill="var(--bs-info)" className="ml-1"/>
+                              </li>
 
                               <li className="flex"
-                                 onClick={handleManagerProduct}>Editar Produtos</li>
+                                 onClick={handleManagerProduct}>
+                                 Editar Produto
+                                 <PenToSquare w="20" h="20" fill="var(--bs-warning)" className="ml-1"/>
+                              </li>
+
+                              <li className="flex" 
+                                 onClick={ () => {} }>
+                                 Backup Geral
+                                 <Download w="20" h="20" fill="var(--btn)" className="ml-1"/>
+                              </li>
+                              
+                              <li className="flex" 
+                                 onClick={ () => {} }>
+                                 Backup de Vendas
+                                 <Download w="20" h="20" fill="var(--btn)" className="ml-1"/>
+                              </li>
+
+                              <li className="flex" 
+                                 onClick={ () => {} }>
+                                 Backup de Usuários
+                                 <Download w="20" h="20" fill="var(--btn)" className="ml-1"/>
+                              </li>
+
+                              <li className="flex" 
+                                 onClick={ () => {} }>
+                                 Backup Produtos
+                                 <Download w="20" h="20" fill="var(--btn)" className="ml-1"/>
+                              </li>
                            </ul>
                         </section> : ''
                      }
@@ -542,7 +590,6 @@ export const OpenSystem = ({ close }: ActionsType) => {
                      {
                         cartProductsModal ? <CartList listProducts={cartItems} returnItems={handleReturnItems} /> :
                            <MessageTexugo msg="Carrinho vazio, meu Chapa." tw="100" th="100" className="mb-2 flex text-warning" />
-
                      }
 
                      {
@@ -591,7 +638,7 @@ export const OpenSystem = ({ close }: ActionsType) => {
                      <ListCheck w='20' h='20' fill='var(--text)' className='ml-1' />
                   </button>
 
-                  <button className="btn btn-success ml-1" onClick={handleConfirmPayment}>
+                  <button className="btn btn-success ml-1" onClick={ handleConfirmPayment }>
                      F4 Finalizar
                      <SackDollar w='20' h='20' fill='var(--text)' className='ml-1' />
                   </button>

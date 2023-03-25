@@ -16,6 +16,7 @@ import { XMark } from '../../assets/Icons/XMark'
 import { HandHoldingDollar } from '../../assets/Icons/HandHoldingDollar'
 import { ArrowRightToBracket } from '../../assets/Icons/ArrowRightToBracket'
 import { CartListContext } from '../../context/CartList/CartListContext'
+import axios from 'axios'
 
 /*  Blocked Keys
    F1 => Help
@@ -43,6 +44,13 @@ import { CartListContext } from '../../context/CartList/CartListContext'
 
 export const ConfirmPayment = ({ close }: ActionsType) => {
    const { cartList, setCartList } = useContext(CartListContext)
+
+   const server = 'http://localhost:3001'
+   const userDatasSection = localStorage.getItem('UserDatas')
+
+   let total = cartList.reduce(
+      (sum, item) => sum + parseFloat(item.pdt_price), 0
+   ).toFixed(2)
 
    const handleConfirmMethod = () => {
       const paymentMethod = document.querySelector('input[type=radio]:checked') as HTMLInputElement
@@ -109,12 +117,12 @@ export const ConfirmPayment = ({ close }: ActionsType) => {
       }
    }
    
-   const handleConfirmPayment = () => {
+   const handleConfirmPayment = async() => {
       const paymentMethod = document.querySelector('input[type=radio]:checked') as HTMLInputElement
       //console.log(paymentMethod)
-      let total = cartList.reduce(
+      /*let total = cartList.reduce(
          (sum, item) => sum + parseFloat(item.pdt_price), 0
-      ).toFixed(2)
+      ).toFixed(2)*/
 
       if(total > '0.25') {
          if( paymentMethod.value === 'Pix' || 
@@ -122,12 +130,38 @@ export const ConfirmPayment = ({ close }: ActionsType) => {
              paymentMethod.value === 'Cartão de Crédito' ) {
    
             let confirmValue = window.confirm(`Confirma o pagamento de R$${total} no ${paymentMethod.value} ?`)
+
+            if(confirmValue) {
+               await axios.post(`${server}/cartlist`, {
+                  priceSale: total, 
+                  sellerSale: userDatasSection ? JSON.parse(userDatasSection).userName : 'None',
+                  methodSale: paymentMethod.value
+               })
+                  .then(res => {
+                     alert('Venda registrada com sucesso')
+                     setCartList([])
+                  })
+                  .catch(err => console.log(err))
+            }
    
-            alert(confirmValue)
+            // alert(confirmValue)
          } else if(paymentMethod.value === 'Dinheiro') {
             let confirmValue = window.confirm(`Confirma o pagamento de R$${total} em ${paymentMethod.value} ?`)
    
-            alert(confirmValue)
+            // alert(confirmValue)
+
+            if(confirmValue) {
+               await axios.post(`${server}/cartlist`, {
+                  priceSale: total, 
+                  sellerSale: userDatasSection ? JSON.parse(userDatasSection).userName : 'None',
+                  methodSale: "Dinheiro"
+               })
+                  .then(res => {
+                     alert('Venda registrada com sucesso')
+                     setCartList([])
+                  })
+                  .catch(err => console.log(err))
+            }
          } else {
             alert('Por obsérquio, informe o método de pagamento.')
          }

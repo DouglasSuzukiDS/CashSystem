@@ -28,7 +28,7 @@ server.use(express.urlencoded( { extended: true } ))
 server.get('/backupUsers', async(req, res) => {
    let SQL: string = `SELECT * FROM users`
 
-   const day: number = new Date().getDay()
+   const day: number = new Date().getDate()
    const mouth: number = new Date().getMonth()
    const year: number = new Date().getFullYear()
 
@@ -262,7 +262,7 @@ server.delete('/delete/user/:id', async(req, res) => {
 server.get('/backupProducts', async(req, res) => {
    let SQL: string = `SELECT * FROM products`
 
-   const day: number = new Date().getDay()
+   const day: number = new Date().getDate()
    const mouth: number = new Date().getMonth()
    const year: number = new Date().getFullYear()
 
@@ -458,18 +458,43 @@ server.get('/cartlist', (req, res) => {
 })
 
 server.post('/cartlist', (req, res) => {
-   const { pdt_name, pdt_price, pdt_qty, total } = req.body
-   console.log(pdt_name, pdt_price, pdt_qty, total)
+   const { priceSale, sellerSale, methodSale } = req.body
+   console.log(priceSale, sellerSale, methodSale)
 
-   let checkIfProductExistInList: string = `SELECT * FROM cartlist WHERE pdt_name = (?)`
+   const day: number = new Date().getDate()
+   const mouth: number = new Date().getMonth()
+   const year: number = new Date().getFullYear()
+
+   const hour: number = new Date().getHours()
+   const minutes: number = new Date().getMinutes()
+   const seconds: number = new Date().getSeconds()
+
+   // const today: string = (new Date(Date.now()).toLocaleString().split(',')[0]).replace('/', '-')
+   const today: string = `${day}-${mouth + 1}-${year}`
+   const hours: string = `${hour}:${minutes}:${seconds}`
+   const dateNow: string = `${today} ${hours}`
+
+   let SQL: string = `INSERT INTO cartlist (priceSale, sellerSale, methodSale, registrationSale) VALUES (?, ?, ?, ?)`
+
+
+   db.query(SQL, [ priceSale, sellerSale, methodSale, `${dateNow}`], async (err, result) => {
+      if(err) {
+         console.log(err)
+         res.status(404).send({ msg: 'Erro ao adicionar o produto na lista de vendas' })
+      } else {
+         res.status(201).send({ msg: 'Produto adicionado com sucesso' })    
+      }
+   })
+
+   /*let checkIfProductExistInList: string = `SELECT * FROM cartlist WHERE pdt_name = (?)`
 
    db.query(checkIfProductExistInList, [pdt_name], async(err, result) => {
       if(err) {
          res.status(400).send({ msg: 'Produto já se encontra na lista' })
       } else {
-         let SQL: string = `INSERT INTO cartlist (pdt_name, pdt_price, pdt_qty, total) VALUES (?,?,?,?)`
+         let SQL: string = `INSERT INTO cartlist (pdt_name, pdt_price, pdt_type, pdt_qty, pdt_value) VALUES (?,?,?,?,?)`
 
-         db.query(SQL, [pdt_name, pdt_price, pdt_qty, total], async(err, result) => {
+         db.query(SQL, [pdt_name, pdt_price, pdt_type, pdt_qty, pdt_value], async(err, result) => {
             if(err) {
                console.log(err)
                res.status(400).send({ msg: 'Erro ao adicionar o produto na lista' })
@@ -478,32 +503,26 @@ server.post('/cartlist', (req, res) => {
             }
          })
       }
-   })
-})
-
-server.delete('/deleteItemCart/:id', async(req, res) => {
-   const { id } = req.params
-
-   let SQL: string = 'DELETE FROM cartlist WHERE id = ?'
-
-   db.query(SQL,[id], async(err, result) => {
-      if(err) {
-         res.status(404).send({ msg: 'Erro ao limpar o carrinho' })
-      } else {
-         res.status(200).send({ msg: 'Carrinho limpo com sucesso' })
-      }
-   })
+   })*/
 })
 
 server.delete('/deleteCart', async(req, res) => {
-
-   let SQL: string = 'DELETE FROM cartlist '
+   let SQL: string = 'DELETE FROM cartlist'
 
    db.query(SQL, async(err, result) => {
       if(err) {
-         res.status(404).send({ msg: 'Erro ao limpar o carrinho' })
+         res.status(404).send({ msg: 'Erro ao limpar o carrinho.' })
       } else {
-         res.status(200).send({ msg: 'Carrinho limpo com sucesso' })
+         let resetId = `ALTER TABLE cartlist AUTO_INCREMENT = 1`
+
+         db.query(resetId, (err, res) => {
+            if(err) {
+               console.log(err)
+            } else {
+               console.log('Resete de ID realizado.')
+            }
+         })
+         res.status(200).send({ msg: 'Carrinho limpo com sucesso.' })
       }
    })
 })
