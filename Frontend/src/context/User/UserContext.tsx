@@ -7,6 +7,7 @@ type User = {
 }
 
 const initialValue = {
+   // userData: {id: '', userName: '', userLogin: '', userPassword: '', userAdmin: false},
    userData: {id: '', userName: '', userLogin: '', userPassword: '', userAdmin: false},
    setUserData: () => {}
 }

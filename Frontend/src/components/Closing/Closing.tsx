@@ -98,6 +98,7 @@ let amountValue = amountMoney + amountBank
    const closeSystem = async() => {
       await localStorage.removeItem('openCashValue')
       await localStorage.removeItem('AuthToken')
+      await localStorage.removeItem('UserDatas')
       window.location.href = 'http://localhost:3000'
    }
 

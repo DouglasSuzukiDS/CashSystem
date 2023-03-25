@@ -40,14 +40,6 @@ CREATE TABLE products (
     pdt_qty INT NOT NULL
 );
 
-CREATE TABLE cartList (
-	id INT PRIMARY KEY AUTO_INCREMENT,
-    pdt_name VARCHAR(50) UNIQUE NOT NULL ,
-    pdt_price DECIMAL(10, 2) NOT NULL,
-    pdt_qty INT NOT NULL,
-    total DECIMAL(10, 2) NOT NULL
-);
-
 /* ALTER TABLE products MODIFY COLUMN pdt_price DECIMAL(10,2); */
 /* ALTER TABLE products MODIFY COLUMN pdt_name VARCHAR(50) UNIQUE; */
 /* ALTER TABLE users MODIFY COLUMN userLogin VARCHAR(50) UNIQUE; */
@@ -113,4 +105,55 @@ CREATE TABLE cartList (
 
 /* // Cart
 	DELETE FROM cartlist;
+
+    id int AI PK 
+        pdt_name varchar(50) 
+        pdt_price decimal(10,2) 
+        pdt_type varchar(50) 
+        pdt_qty int 
+        pdt_value int
 */
+
+/*
+    CREATE TABLE cartlist(
+        idSale INT PRIMARY KEY AUTO_INCREMENT,
+        priceSale DECIMAL(10, 2),
+        sellerSale VARCHAR(50),
+        methodSale VARCHAR(20),
+        registrationSale VARCHAR(20)
+    );
+
+    ALTER TABLE cartlist ADD COLUMN methodSale VARCHAR(20);
+    ALTER TABLE cartlist DROP COLUMN methodSale;
+    ALTER TABLE cartlist ADD COLUMN RegistrationSale DATETIME;
+    
+    INSERT INTO cartlist (priceSale, sellerSale, methodSale, registrationSale) VALUES (
+		"10.00", "Nick", "Pix", "2023-04-03 10:38:00"
+	);
+    
+    INSERT INTO cartlist (priceSale, sellerSale, methodSale, registrationSale) VALUES (
+		"5.00", "Nick", "Dinheiro", now()
+	);
+    /* ALTER TABLE cartlist AUTO_INCREMENT = 1; /* Reset AutoIncrement */
+    /* DELETE FROM cartlist; */
+
+    INSERT INTO cartlist (idSale, listSale, priceSale, sellerSale, methodSale) VALUES (
+    01, '{
+			"id": 1,
+			"pdt_name": "Skol",
+			"pdt_price": "5.00",
+			"pdt_type": "Bebidas",
+			"pdt_qty": 24
+		}', '5.00', 'Nick', 'Pix'
+    );
+
+    /*create table pessoa (
+        idPessoa INT primary key auto_increment,
+        nome varchar(100) NOT NULL,
+        documento json
+    );
+
+    insert into pessoa (idPessoa, nome, documento) values (
+        1, 'Joao', '{{"RG":"123456", "456", "CNH":"654321"}, {"RG":"123456", "456", "CNH":"654321"}}'
+    );
+    */

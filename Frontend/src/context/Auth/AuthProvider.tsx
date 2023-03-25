@@ -6,7 +6,7 @@ import { AuthContext } from "./AuthContext"
 
 export const AuthProvider = ({ children }: { children: JSX.Element }) => {
    const [user] = useState<UserType | null>(null)
-   const { userData, setUserData } = useContext(UserContext)
+   const [userData, setUserData] = useState<UserType>({id: '', userName: '', userLogin: '', userPassword: '', userAdmin: false })
 
    const api = useApi()
 
@@ -50,7 +50,13 @@ export const AuthProvider = ({ children }: { children: JSX.Element }) => {
             // setUser(JSON.parse(response.user))
             // console.log(user)
             console.log('O tipo de res.user no AuthProvider é: ' + typeof JSON.parse(response.user))
-            setUserData(JSON.parse(response.user))
+
+            //console.log(`O nome é: ${JSON.parse(response.user).userName}`)
+
+            createUserDataToken((JSON.parse(response.user).userName), (JSON.parse(response.user).userAdmin))
+
+            let data = JSON.parse(response.user)
+            setUserData(data)
          }
          return true
       } else {
@@ -70,13 +76,18 @@ export const AuthProvider = ({ children }: { children: JSX.Element }) => {
       localStorage.setItem('AuthToken', token)
    }
 
+   const createUserDataToken = (name: string, admin: boolean) => {
+      let userDatas = { userName: name, userAdmin: admin}
+      localStorage.setItem('UserDatas', JSON.stringify(userDatas))
+   }
+
    const deleteToken = () => {
       localStorage.removeItem('AuthToken')
    }
 
    return(
       // <AuthContext.Provider value={{ user, setUser, loginSystem, logout }}>
-      <AuthContext.Provider value={{ user, loginSystem, logout }}>
+      <AuthContext.Provider value={{ user, loginSystem, logout, userData, setUserData }}>
          { children }
       </AuthContext.Provider>
    )

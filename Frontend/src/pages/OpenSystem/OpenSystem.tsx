@@ -45,11 +45,16 @@ export const OpenSystem = ({ close }: ActionsType) => {
 
    // const { userData, setUserData } = useContext(AuthContext)
    const { user } = useContext(AuthContext)
-   const { userData, setUserData } = useContext(UserContext)
+   const { userData, setUserData } = useContext(AuthContext)
    console.log(`Valor de userData no OpenSystem é ${JSON.stringify(userData)}`)
    console.log(`O nome de userData é ${JSON.stringify(userData?.userName)}`)
 
-   const [userInfos, setUserInfos] = useState<UserType | null>()
+   type UserDataSection = {
+      userName: string,
+      userAdmin: boolean
+   }
+
+   const [userInfos, setUserInfos] = useState<UserDataSection>()
 
 
    // Get All Users
@@ -105,6 +110,7 @@ export const OpenSystem = ({ close }: ActionsType) => {
 
    const AuthTokenLC = localStorage.getItem('AuthToken')
    const OpenCashValueLC = localStorage.getItem('openCashValue')
+   const userDatasSection = localStorage.getItem('UserDatas')
 
    //let statusSystemH4 = document.querySelector('#statusSystemH4') as HTMLHeadingElement
 
@@ -132,7 +138,7 @@ export const OpenSystem = ({ close }: ActionsType) => {
     }, [])*/
 
    useEffect(() => { // checkStatus()
-      checkStatus() // Verifica se existe um Token, se existir verifica se o caixa já foi aberto
+      checkStatus() // Verifica se existe um Token, se existir verifica se o caixa já foi aberto, e verifica quem está logado e se é Admin
       //console.log(allUsers())
 
       allUsers()
@@ -207,6 +213,18 @@ export const OpenSystem = ({ close }: ActionsType) => {
 
             btn_openCash.style.display = 'none'
             btn_closeCash.style.display = 'flex'*/
+
+            if(userDatasSection) {
+               console.log(`Valor de userData LC: ${JSON.parse(userDatasSection).userName}`)
+               console.log(`Valor de userAdmin LC: ${JSON.parse(userDatasSection).userAdmin}`)
+               setUserInfos({
+                  userName: JSON.parse(userDatasSection).userName,
+                  userAdmin: JSON.parse(userDatasSection).userAdmin,
+                  // userName: userData.userName,
+                  // userAdmin: userData.userAdmin
+               })
+            }
+
          }
       } else {
          setOpen(false)
@@ -424,7 +442,7 @@ export const OpenSystem = ({ close }: ActionsType) => {
                         </> :
                         <>
                            {/* { user?.userAdmin ? */}
-                           { userData?.userAdmin ?
+                           { userInfos?.userAdmin ?
                               <>
                                  <Gears w='24' h='24' fill='var(--bs-secondary)' className='pointer opacity' onClick={optionsSystemModal} />
 
@@ -561,10 +579,8 @@ export const OpenSystem = ({ close }: ActionsType) => {
                <div className="employeerFooterSystem flex column px-2 py-1 mr-3">
                   <p className="pg5 bold text-color">Colaborador</p>
 
-                  <p className="pg3 bold italic text-dark-blue flex column" id="employeerName">
-                     {userData?.userName}
-
-                     {/* { employeerName } */}
+                  <p className="pg4 bold italic text-center text-dark-blue flex column" id="employeerName">
+                     { userInfos?.userName === undefined ? userData.userName : userInfos?.userName}
                      <Signature w='24' h='24' fill='var(--dark-blue)' />
                   </p>
                </div>

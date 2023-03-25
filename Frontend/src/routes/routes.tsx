@@ -23,7 +23,7 @@ import { UserProvider } from "../context/User/UserProvider";
 export default function RoutesApp() {
    return(
       <AuthProvider>
-         <UserProvider>
+
             <ProductProvider>
                <CartListProviver>
                   <BrowserRouter>
@@ -60,7 +60,7 @@ export default function RoutesApp() {
                   </BrowserRouter>
                </CartListProviver>
             </ProductProvider>
-         </UserProvider>
+
       </AuthProvider>
    )
 }
