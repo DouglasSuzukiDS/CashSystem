@@ -132,7 +132,7 @@ export const ConfirmPayment = ({ close }: ActionsType) => {
             let confirmValue = window.confirm(`Confirma o pagamento de R$${total} no ${paymentMethod.value} ?`)
 
             if(confirmValue) {
-               await axios.post(`${server}/cartlist`, {
+               await axios.post(`${server}/newSale`, {
                   priceSale: total, 
                   sellerSale: userDatasSection ? JSON.parse(userDatasSection).userName : 'None',
                   methodSale: paymentMethod.value
@@ -151,7 +151,7 @@ export const ConfirmPayment = ({ close }: ActionsType) => {
             // alert(confirmValue)
 
             if(confirmValue) {
-               await axios.post(`${server}/cartlist`, {
+               await axios.post(`${server}/newSale`, {
                   priceSale: total, 
                   sellerSale: userDatasSection ? JSON.parse(userDatasSection).userName : 'None',
                   methodSale: "Dinheiro"

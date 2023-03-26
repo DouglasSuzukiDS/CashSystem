@@ -17,7 +17,6 @@ import { AuthContext } from "../../context/Auth/AuthContext";
 import { UserType } from "../../types/UserType";
 import { allUsers } from "../../services/user.service";
 import { ProductType } from "../../types/ProductType";
-import { CartCircleExclamation } from "../../assets/Icons/cart-circle-exclamation";
 import { MessageTexugo } from "../../components/MessageTexugo/MessageTexugo";
 import { FindUsers } from "../../components/FindUsers/FindUsers";
 import { RegisterUser } from "../RegisterUser/RegisterUser";
@@ -32,6 +31,9 @@ import { UserPen } from "../../assets/Icons/UserPen";
 import { Registered } from "../../assets/Icons/Registered";
 import { PenToSquare } from "../../assets/Icons/PenToSquare";
 import { Download } from "../../assets/Icons/Download";
+import axios from "axios";
+import { SalesType } from "../../types/SalesType";
+import { Sales } from "../../components/Sales/Sales";
 
 export const OpenSystem = ({ close }: ActionsType) => {
    const server = 'http://localhost:3001'
@@ -48,6 +50,7 @@ export const OpenSystem = ({ close }: ActionsType) => {
       userName: string,
       userAdmin: boolean
    }
+
    // Recebe o nome do usuario logado e se ele e Admin
    const [userInfos, setUserInfos] = useState<UserDataSection>()
 
@@ -99,13 +102,22 @@ export const OpenSystem = ({ close }: ActionsType) => {
    const OpenCashValueLC = localStorage.getItem('openCashValue')
    const userDatasSection = localStorage.getItem('UserDatas')
 
+   // Texugo
+   const hiddenTexugo = document.querySelector('#Texugo')
+
+   // Historico de Vendas
+   //let historicSales: HistoricSale[] = []
+   const [historicSale, setHistoricSale] = useState<SalesType[]>([])
+   const [historicSaleModal, setHistoricSaleModal] = useState(false)
+
+
    useEffect(() => { // checkStatus() / Buscar os Usuários
       checkStatus() // Verifica se existe um Token, se existir verifica se o caixa já foi aberto, e verifica quem está logado e se é Admin
       //console.log(allUsers())
-      
+
       verifyOpenCashValue()
 
-      allUsers() 
+      allUsers()
          .then(setUsers)
          .catch(e => console.log(e))
    }, [])
@@ -115,7 +127,7 @@ export const OpenSystem = ({ close }: ActionsType) => {
          (sum, item) => sum + parseFloat(item.pdt_price), 0
       ).toFixed(2)
 
-      if(total === '0.00' && cartList.length <= 0) {
+      if (total === '0.00' && cartList.length <= 0) {
          setConfirmPaymentModal(false)
          setCartProductsModal(false)
       }
@@ -163,7 +175,7 @@ export const OpenSystem = ({ close }: ActionsType) => {
             btn_openCash.style.display = 'none'
             btn_closeCash.style.display = 'flex'*/
 
-            if(userDatasSection) {
+            if (userDatasSection) {
                console.log(`Valor de userData LC: ${JSON.parse(userDatasSection).userName}`)
                console.log(`Valor de userAdmin LC: ${JSON.parse(userDatasSection).userAdmin}`)
                setUserInfos({
@@ -211,6 +223,7 @@ export const OpenSystem = ({ close }: ActionsType) => {
       }
 
       setCloseSystem(!closeSystem)
+      
       setOptionsSystem(false)
       setConfirmPaymentModal(false)
       setAddProduct(false)
@@ -232,16 +245,26 @@ export const OpenSystem = ({ close }: ActionsType) => {
 
    // Função Responsável por mostrar o Modal de Adicionar Produto no Carrinho
    const handleAddProductModal = () => {
-      open ? setAddProduct(!addProduct) : alert('Abra o caixa camarada.')
-      setConfirmPaymentModal(false)
-      setOptionsSystem(false)
-      setCloseSystem(false)
+      //open ? setAddProduct(!addProduct) : alert('Abra o caixa camarada.')
+
+      if (open) {
+         setAddProduct(!addProduct)
+         setConfirmPaymentModal(false)
+         setOptionsSystem(false)
+         setCloseSystem(false)
+
+      } else {
+         alert('Abra o caixa camarada.')
+      }
+
    }
 
-   const optionsSystemModal = () => {
+   const handleOptionSystem = () => {
       setConfirmPaymentModal(false)
       setAddProduct(false)
+
       setOptionsSystem(!optionsSystem)
+      
       // console.log(optionsSystem)
    }
 
@@ -303,7 +326,7 @@ export const OpenSystem = ({ close }: ActionsType) => {
       setOptionsSystem(false)
       setManagerProductsModal(true)
    }
-   
+
    const addItemOnCart = (data: ProductType) => {
       // Original
       /*setCartItems([...cartItems, data])
@@ -333,28 +356,28 @@ export const OpenSystem = ({ close }: ActionsType) => {
       }
    }
 
-   const handleClearCartList = () => {
-      if(open) {
-         if(cartList.length > 0) {
-            console.log(`Antes de limpar: ${cartList.length}`)
-            setCartList([])
-            console.log(`Depois de limpar: ${cartList.length}`)
-            console.log('clear cartList')
-         } else {
-            alert('Carrinho vazio.')
-         }
-      } else {
-         alert('Abra o caixa camarada.')
-      }
+   // Footer Functions
 
+   const handleHistoricModal = async() => { // F2
+      await axios.get(`${server}/SaleDayList`)
+         .then(res => {
+            console.log(res.data.result)
+            setHistoricSale(res.data.result)
+         })
+         .catch(err => console.log(err))
+      
+         setHistoricSaleModal(!historicSaleModal)
+
+        
+         // hiddenTexugo?.classList.toggle('none')
    }
 
-   const handleConfirmPayment = () => {
-      if(open) {
+   const handleConfirmPayment = () => { // F4
+      if (open) {
          let total = cartList.reduce(
             (sum, item) => sum + parseFloat(item.pdt_price), 0
          ).toFixed(2)
-   
+
          if (total < '0.25') {
             alert('Carrinho vazio.')
             setConfirmPaymentModal(false)
@@ -373,9 +396,25 @@ export const OpenSystem = ({ close }: ActionsType) => {
       }
    }
 
+   const handleClearCartList = () => { // F10
+      if (open) {
+         if (cartList.length > 0) {
+            console.log(`Antes de limpar: ${cartList.length}`)
+            setCartList([])
+            console.log(`Depois de limpar: ${cartList.length}`)
+            console.log('clear cartList')
+         } else {
+            alert('Carrinho vazio.')
+         }
+      } else {
+         alert('Abra o caixa camarada.')
+      }
+
+   }
+
    return (
       <main className="containerSystem flex p-3">
-         { closeSystem ?? ( // Fechamento de Caixa
+         {closeSystem ?? ( // Fechamento de Caixa
             <div className="infosSystemClose" id="infosSystemClose">
                <Closing close={handleCloseCash} />
             </div>
@@ -407,14 +446,14 @@ export const OpenSystem = ({ close }: ActionsType) => {
                         </> :
                         <>
                            {/* { user?.userAdmin ? */}
-                           { userInfos?.userAdmin ?
+                           {userInfos?.userAdmin ?
                               <>
-                                 <Gears w='24' h='24' fill='var(--bs-secondary)' className='pointer opacity' onClick={optionsSystemModal} />
+                                 <Gears w='24' h='24' fill='var(--bs-secondary)' className='pointer opacity' onClick={handleOptionSystem} />
 
                                  <button className="btn btn-danger ml-2 border" id="btn_closeCash" onClick={handleCloseCash} >
                                     Fechar Caixa
                                     <CashRegister w='24' h='24' fill='var(--text)' className='ml-1 text-color' />
-                                 </button> 
+                                 </button>
                               </> :
                               <>
                                  <Gears w='24' h='24' fill='var(--bs-secondary)' className='notAllowed' />
@@ -433,10 +472,10 @@ export const OpenSystem = ({ close }: ActionsType) => {
             </header>
 
             <div className="contentSystem flex" id="contentSystem">
-               { !open ? // Verifica se o Caixa foi Aberto
+               {!open ? // Verifica se o Caixa foi Aberto
                   // Caso o caixa não estver aberto
                   <>
-                     { !contentSystemStartModal ? // Abertura de Caixa
+                     {!contentSystemStartModal ? // Abertura de Caixa
                         <div className="flex" id="contentSystemStart">
                            <OpenCash close={startJob} />
                         </div> : <MessageTexugo msg="Caixa Fechado, meu Chapa." tw="100" th="100" className="mb-2 flex text-danger " />
@@ -444,56 +483,57 @@ export const OpenSystem = ({ close }: ActionsType) => {
                   </> :
                   // Caso o caixa estiver aberto
                   <>
-                      {/* // Create new User/Product or Find User/Product */}
-                      {optionsSystem ?
-                        <section className="managerSystem flex mr-3" onMouseLeave={() => setOptionsSystem(false)}>
+                     {/* // Create new User/Product or Find User/Product */}
+                     {optionsSystem ?
+                        // <section className="managerSystem flex mr-3" onMouseLeave={() => setOptionsSystem(false)}>
+                        <section className="managerSystem flex mr-3" onMouseLeave={handleOptionSystem}>
                            <ul className="flex column text-dark bold">
                               <li className="flex"
-                                 onClick={ handleNewUser }>
+                                 onClick={handleNewUser}>
                                  Novo Usuário
-                                 <UserPlus w="20" h="20" fill="var(--bs-info)" className="ml-1"/>
+                                 <UserPlus w="20" h="20" fill="var(--bs-info)" className="ml-1" />
                               </li>
 
                               <li className="flex"
-                                 onClick={ handleManagerUser }>
+                                 onClick={handleManagerUser}>
                                  Editar Usuário
-                                 <UserPen w="20" h="20" fill="var(--bs-warning)" className="ml-1"/>
+                                 <UserPen w="20" h="20" fill="var(--bs-warning)" className="ml-1" />
                               </li>
 
                               <li className="flex"
-                                 onClick={ handleNewProduct }>
+                                 onClick={handleNewProduct}>
                                  Novo Produto
-                                 <Registered w="20" h="20" fill="var(--bs-info)" className="ml-1"/>
+                                 <Registered w="20" h="20" fill="var(--bs-info)" className="ml-1" />
                               </li>
 
                               <li className="flex"
-                                 onClick={handleManagerProduct }>
+                                 onClick={handleManagerProduct}>
                                  Editar Produto
-                                 <PenToSquare w="20" h="20" fill="var(--bs-warning)" className="ml-1"/>
+                                 <PenToSquare w="20" h="20" fill="var(--bs-warning)" className="ml-1" />
                               </li>
 
-                              <li className="flex" 
-                                 onClick={ () => {} }>
+                              <li className="flex"
+                                 onClick={() => { }}>
                                  Backup Geral
-                                 <Download w="20" h="20" fill="var(--btn)" className="ml-1"/>
+                                 <Download w="20" h="20" fill="var(--btn)" className="ml-1" />
                               </li>
-                              
-                              <li className="flex" 
-                                 onClick={ () => {} }>
+
+                              <li className="flex"
+                                 onClick={() => { }}>
                                  Backup de Vendas
-                                 <Download w="20" h="20" fill="var(--btn)" className="ml-1"/>
+                                 <Download w="20" h="20" fill="var(--btn)" className="ml-1" />
                               </li>
 
-                              <li className="flex" 
-                                 onClick={ () => {} }>
+                              <li className="flex"
+                                 onClick={() => { }}>
                                  Backup de Usuários
-                                 <Download w="20" h="20" fill="var(--btn)" className="ml-1"/>
+                                 <Download w="20" h="20" fill="var(--btn)" className="ml-1" />
                               </li>
 
-                              <li className="flex" 
-                                 onClick={ () => {} }>
+                              <li className="flex"
+                                 onClick={() => { }}>
                                  Backup Produtos
-                                 <Download w="20" h="20" fill="var(--btn)" className="ml-1"/>
+                                 <Download w="20" h="20" fill="var(--btn)" className="ml-1" />
                               </li>
                            </ul>
                         </section> : ''
@@ -520,6 +560,11 @@ export const OpenSystem = ({ close }: ActionsType) => {
                      }
 
                      {
+                        historicSaleModal ?
+                           <Sales listSales={ historicSale } close={ () =>  setHistoricSaleModal(!historicSaleModal) } /> : ''
+                     }
+
+                     {
                         confirmPaymentModal ?
                            <ConfirmPayment close={handleConfirmPayment} /> : ''
                      }
@@ -530,12 +575,15 @@ export const OpenSystem = ({ close }: ActionsType) => {
 
                      {
                         cartProductsModal ? <CartList listProducts={cartItems} returnItems={handleReturnItems} /> :
+                        <span id="Texugo">
                            <MessageTexugo msg="Carrinho vazio, meu Chapa." tw="100" th="100" className="mb-2 flex text-warning" />
+                        </span>
                      }
 
                      {
-                        closeSystem ? <Closing close={() => setCloseSystem(false)} /> : ''
+                        closeSystem ? <Closing close={handleCloseCash} /> : ''
                      }
+
                   </>
                }
             </div>
@@ -545,13 +593,13 @@ export const OpenSystem = ({ close }: ActionsType) => {
                   <p className="pg5 bold text-color">Colaborador</p>
 
                   <p className="pg4 bold italic text-center text-dark-blue flex column" id="employeerName">
-                     { userInfos?.userName === undefined ? userData.userName : userInfos?.userName}
+                     {userInfos?.userName === undefined ? userData.userName : userInfos?.userName}
                      <Signature w='24' h='24' fill='var(--dark-blue)' />
                   </p>
                </div>
 
                <div className="actionsFooterSystem flex mr-3">
-                  <button className="btn btn-secondary">
+                  <button className="btn btn-secondary" onClick={ handleHistoricModal } >
                      F2 Historico
                      <ListCheck w='20' h='20' fill='var(--text)' className='ml-1' />
                   </button>
@@ -561,7 +609,7 @@ export const OpenSystem = ({ close }: ActionsType) => {
                      <SackDollar w='20' h='20' fill='var(--text)' className='ml-1' />
                   </button>
 
-                  <button className="btn btn-warning ml-1" onClick={handleAddProductModal} onKeyDown={handleKeyDown}>
+                  <button className="btn btn-warning ml-1" onClick={ handleAddProductModal } onKeyDown={ handleKeyDown }>
                      F9 Pesquisar
                      <MagnifyingGlass w='20' h='20' fill='var(--text-dark)' className='ml-1' />
                   </button>

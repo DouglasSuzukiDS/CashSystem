@@ -1529,6 +1529,65 @@ h4 {
   font-weight: bold;
 }
 
+::-webkit-scrollbar {
+  width: 5px;
+  background-color: var(--bg-dark);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--bg-normal);
+  border-radius: 8px;
+  scroll-behavior: smooth;
+}
+
+.salesContainer {
+  padding: 24px;
+  border: 2px solid var(--fb1);
+  border-radius: 8px;
+  background-color: var(--bs-dark);
+}
+.salesContainer h4 > .salesClose:hover {
+  cursor: pointer;
+  opacity: 0.5;
+}
+
+.salesData {
+  border: 1px solid var(--fb1);
+  height: 180px;
+  overflow: auto;
+  border-radius: 8px;
+}
+.salesData .salesDataTable {
+  height: 100px;
+  background-color: aqua;
+  border-collapse: collapse;
+  width: 100%;
+}
+.salesData .salesDataTable table, .salesData .salesDataTable thead, .salesData .salesDataTable tbody, .salesData .salesDataTable tr, .salesData .salesDataTable td {
+  border: 1px solid var(--bg-dark);
+}
+.salesData .salesDataTable thead {
+  background-color: var(--fb4);
+}
+.salesData .salesDataTable tbody tr {
+  color: var(--bs-dark);
+}
+.salesData .salesDataTable tbody tr:nth-child(odd) {
+  background-color: var(--bg-light);
+}
+.salesData .salesDataTable tbody tr:nth-child(odd):hover {
+  background-color: #797C7C;
+}
+.salesData .salesDataTable tbody tr:nth-child(even) {
+  background-color: var(--bg-normal);
+}
+.salesData .salesDataTable tbody tr:nth-child(even):hover {
+  background-color: #3E4042;
+}
+.salesData .salesDataTable td {
+  padding: 6px;
+}
+
 .forms {
   width: 380px;
   height: 420px;

@@ -103,10 +103,10 @@ CREATE TABLE products (
     INSERT INTO products VALUES (30, 'Gudang Garang Solto', 2, 'Cigarros', 14);
 */
 
-/* // Cart
-	DELETE FROM cartlist;
+/* // Sale
+	DELETE FROM SaleDay;
 
-    id int AI PK 
+		id int AI PK 
         pdt_name varchar(50) 
         pdt_price decimal(10,2) 
         pdt_type varchar(50) 
@@ -115,7 +115,7 @@ CREATE TABLE products (
 */
 
 /*
-    CREATE TABLE cartlist(
+    CREATE TABLE SaleDay(
         idSale INT PRIMARY KEY AUTO_INCREMENT,
         priceSale DECIMAL(10, 2),
         sellerSale VARCHAR(50),
@@ -123,21 +123,22 @@ CREATE TABLE products (
         registrationSale VARCHAR(20)
     );
 
-    ALTER TABLE cartlist ADD COLUMN methodSale VARCHAR(20);
-    ALTER TABLE cartlist DROP COLUMN methodSale;
-    ALTER TABLE cartlist ADD COLUMN RegistrationSale DATETIME;
+    ALTER TABLE SaleDay ADD COLUMN methodSale VARCHAR(20);
+    ALTER TABLE SaleDay DROP COLUMN methodSale;
+    ALTER TABLE SaleDay ADD COLUMN RegistrationSale DATETIME;
     
-    INSERT INTO cartlist (priceSale, sellerSale, methodSale, registrationSale) VALUES (
+    INSERT INTO SaleDay (priceSale, sellerSale, methodSale, registrationSale) VALUES (
 		"10.00", "Nick", "Pix", "2023-04-03 10:38:00"
 	);
     
-    INSERT INTO cartlist (priceSale, sellerSale, methodSale, registrationSale) VALUES (
+    INSERT INTO SaleDay (priceSale, sellerSale, methodSale, registrationSale) VALUES (
 		"5.00", "Nick", "Dinheiro", now()
 	);
-    /* ALTER TABLE cartlist AUTO_INCREMENT = 1; /* Reset AutoIncrement */
-    /* DELETE FROM cartlist; */
+    /* ALTER TABLE SaleDay AUTO_INCREMENT = 1; /* Reset AutoIncrement */
+    /* DELETE FROM SaleDay; */
 
-    INSERT INTO cartlist (idSale, listSale, priceSale, sellerSale, methodSale) VALUES (
+	/* ALTER TABLE SaleDay RENAME to saleDay; */
+    /*INSERT INTO saleDay (idSale, listSale, priceSale, sellerSale, methodSale) VALUES (
     01, '{
 			"id": 1,
 			"pdt_name": "Skol",
@@ -145,7 +146,7 @@ CREATE TABLE products (
 			"pdt_type": "Bebidas",
 			"pdt_qty": 24
 		}', '5.00', 'Nick', 'Pix'
-    );
+    );*/
 
     /*create table pessoa (
         idPessoa INT primary key auto_increment,

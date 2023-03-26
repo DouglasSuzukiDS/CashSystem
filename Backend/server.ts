@@ -445,8 +445,8 @@ server.delete('/delete/product/:id', async(req, res) => {
 })
 
 // Add Product
-server.get('/cartlist', (req, res) => {
-   let SQL: string = 'SELECT * FROM cartlist'
+server.get('/saleDayList', (req, res) => {
+   let SQL: string = 'SELECT * FROM SaleDay'
 
    db.query(SQL, async(err, result) => {
       if(err) {
@@ -457,7 +457,7 @@ server.get('/cartlist', (req, res) => {
    }) 
 })
 
-server.post('/cartlist', (req, res) => {
+server.post('/newSale', (req, res) => {
    const { priceSale, sellerSale, methodSale } = req.body
    console.log(priceSale, sellerSale, methodSale)
 
@@ -474,7 +474,7 @@ server.post('/cartlist', (req, res) => {
    const hours: string = `${hour}:${minutes}:${seconds}`
    const dateNow: string = `${today} ${hours}`
 
-   let SQL: string = `INSERT INTO cartlist (priceSale, sellerSale, methodSale, registrationSale) VALUES (?, ?, ?, ?)`
+   let SQL: string = `INSERT INTO SaleDay (priceSale, sellerSale, methodSale, registrationSale) VALUES (?, ?, ?, ?)`
 
 
    db.query(SQL, [ priceSale, sellerSale, methodSale, `${dateNow}`], async (err, result) => {
@@ -506,14 +506,14 @@ server.post('/cartlist', (req, res) => {
    })*/
 })
 
-server.delete('/deleteCart', async(req, res) => {
-   let SQL: string = 'DELETE FROM cartlist'
+server.delete('/deleteSaleDay', async(req, res) => {
+   let SQL: string = 'DELETE FROM SaleDay'
 
    db.query(SQL, async(err, result) => {
       if(err) {
          res.status(404).send({ msg: 'Erro ao limpar o carrinho.' })
       } else {
-         let resetId = `ALTER TABLE cartlist AUTO_INCREMENT = 1`
+         let resetId = `ALTER TABLE SaleDay AUTO_INCREMENT = 1`
 
          db.query(resetId, (err, res) => {
             if(err) {
