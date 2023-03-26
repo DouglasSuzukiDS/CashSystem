@@ -9,32 +9,24 @@ import { SackDollar } from "../../assets/Icons/SackDollar";
 import { Signature } from "../../assets/Icons/Signature";
 import { TrashCan } from "../../assets/Icons/TrashCan";
 import { Closing } from "../../components/Closing/Closing";
-import { Invoicing } from "../../components/Invoicing/Invoice";
 import { FindProducts } from "../../components/FindProducts/FindProducts";
 import { OpenCash } from "../../components/OpenCash/OpenCash";
 import { ActionsType } from "../../types/ActionsType";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/Auth/AuthContext";
 import { UserType } from "../../types/UserType";
-import { EditUser } from "../../components/EditUser/EditUser";
-import { EditProduct } from "../../components/EditProduct/EditProduct";
 import { allUsers } from "../../services/user.service";
-import { Texugo } from "../../assets/Icons/Texugo";
 import { ProductType } from "../../types/ProductType";
 import { CartCircleExclamation } from "../../assets/Icons/cart-circle-exclamation";
 import { MessageTexugo } from "../../components/MessageTexugo/MessageTexugo";
 import { FindUsers } from "../../components/FindUsers/FindUsers";
-import { ManagerSystem } from "../../components/ManagerSystem/ManagerSystem";
-import { allProducts } from "../../services/product.service";
 import { RegisterUser } from "../RegisterUser/RegisterUser";
 import { RegisterProduct } from "../RegisterProduct/RegisterProduct";
-import { SystemSatusButton } from "../../components/SystemStatusButton/SystemStatusButton";
 import { AddProducts } from "../../components/AddProducts/AddProducts";
 import { CartList } from "../../components/CartList/CartList";
 import { ProductsContext } from "../../context/Products/ProductsContext";
 import { CartListContext } from "../../context/CartList/CartListContext";
 import { ConfirmPayment } from "../../components/ConfirmPayment/ConfirmPaymanet";
-import { UserContext } from "../../context/User/UserContext";
 import { UserPlus } from "../../assets/Icons/UserPlus";
 import { UserPen } from "../../assets/Icons/UserPen";
 import { Registered } from "../../assets/Icons/Registered";
@@ -42,123 +34,83 @@ import { PenToSquare } from "../../assets/Icons/PenToSquare";
 import { Download } from "../../assets/Icons/Download";
 
 export const OpenSystem = ({ close }: ActionsType) => {
-   const backend = 'http://localhost:3001'
-   //const { userData, setUserData } = useContext(UserDataContext)
+   const server = 'http://localhost:3001'
 
    const navigate = useNavigate()
-   // const auth = useContext(AuthContext)
 
-   // const { userData, setUserData } = useContext(AuthContext)
-   const { user } = useContext(AuthContext)
+   // Pega o Nome e Admin do usuário pelo Context
    const { userData, setUserData } = useContext(AuthContext)
-   console.log(`Valor de userData no OpenSystem é ${JSON.stringify(userData)}`)
-   console.log(`O nome de userData é ${JSON.stringify(userData?.userName)}`)
+
+   // console.log(`Valor de userData no OpenSystem é ${JSON.stringify(userData)}`)
+   // console.log(`O nome de userData é ${JSON.stringify(userData?.userName)}`)
 
    type UserDataSection = {
       userName: string,
       userAdmin: boolean
    }
-
+   // Recebe o nome do usuario logado e se ele e Admin
    const [userInfos, setUserInfos] = useState<UserDataSection>()
-
 
    // Get All Users
    const [users, setUsers] = useState<UserType[]>([])
 
    // Get All Products
    const { products, setProducts } = useContext(ProductsContext)
-   //const [products, setProducts] = useState<ProductType[]>([])
 
    // Get CartList
    const { cartList, setCartList } = useContext(CartListContext)
 
    // Open System
-   const [open, setOpen] = useState(false)
-   const [OpenCashValue, setOpenCashValue] = useState('')
+   const [open, setOpen] = useState(false) // Verifica se o Caixa foi Aberto
 
    // Card
    const [cartItems, setCartItems] = useState<ProductType[]>([])
 
    // Modals
-   const [contentSystemModal, setContentSystemModal] = useState(false)
 
-   //const [infosSystemCloseModal, setInfosSystemCloseModal] = useState(false)
+   const [contentSystemStartModal, setContentSystemStartModal] = useState(true) // Mdal responsavel por exibir a abertura do caixa
 
-   const [contentSystemStartModal, setContentSystemStartModal] = useState(false)
+   const [optionsSystem, setOptionsSystem] = useState(false) // Modal para Funções Administrativas
 
-   const [optionsSystem, setOptionsSystem] = useState(false)
+   const [modalSelected, setModalSelected] = useState(false)
 
    const [invoicingModal, setInvoicingModal] = useState(false)
 
-   const [findProductsModal, setFindProductsModal] = useState(false)
+   const [findProductsModal, setFindProductsModal] = useState(false) // Modal para Produrar um Produto
 
-   const [addProduct, setAddProduct] = useState(false)
+   const [newUserModal, setNewUserModal] = useState(false) // Modal Responsavel por exibir o componente de criação de usuário
 
-   const [cartProductsModal, setCartProductsModal] = useState(false)
+   const [managerUsersModal, setManagerUsersModal] = useState(false) // Modal responsavel por Listar/Editar os Usuários
 
-   // const [cartList, setCartList] = useState<ProductType[]>([])
+   const [NewProductModal, setNewProductModal] = useState(false) // Modal responsavel por exibir o omponente de criação de um novo produto
 
-   const [closeSystem, setCloseSystem] = useState(false)
+   const [managerProductsModal, setManagerProductsModal] = useState(false) // Modal responsável por Listar/Editar os Produtos
 
-   const [newUserModal, setNewUserModal] = useState(false)
+   const [confirmPaymentModal, setConfirmPaymentModal] = useState(false) // Modal responsável por exibir o componente de Confirmação de Pagamento
 
-   const [managerUsersModal, setManagerUsersModal] = useState(false)
+   const [addProduct, setAddProduct] = useState(false) // Modal responsavel por mostrar os produtos e seleciona-los para adicionar no carrinho
 
-   const [NewProductModal, setNewProductModal] = useState(false)
+   const [cartProductsModal, setCartProductsModal] = useState(false) // Modal responsável por exibir os produtos no carrinho
 
-   const [managerProductsModal, setManagerProductsModal] = useState(false)
+   const [closeSystem, setCloseSystem] = useState(false) // Modal responsavel por mostrar o Fechamento de Caixa
 
-   const [managerOption, setManagerOption] = useState(false)
-
-   const [confirmPaymentModal, setConfirmPaymentModal] = useState(false)
-
-
+   // LocalStorage Datas
    const AuthTokenLC = localStorage.getItem('AuthToken')
    const OpenCashValueLC = localStorage.getItem('openCashValue')
    const userDatasSection = localStorage.getItem('UserDatas')
 
-   //let statusSystemH4 = document.querySelector('#statusSystemH4') as HTMLHeadingElement
-
-   /*useEffect(() => {
-       if(localStorage.getItem('openCashValue').valueOf() !== '') {
-          let statusSystemH4 = document.querySelector('#statusSystemH4')
-          statusSystemH4.classList.remove('text-danger')
-          statusSystemH4.classList.add('text-success')
-          statusSystemH4.innerHTML = 'Caixa Aberto'
-    
-          // Button Status Cash
-         let btn_openCash = document.querySelector('#btn_openCash')
-         let btn_closeCash = document.querySelector('#btn_closeCash')
-    
-    
-         btn_openCash.style.display = 'none'
-         btn_closeCash.style.display = 'flex'
-         
-       //   let notAllowedClass =[...document.querySelectorAll('.notAllowed')]
-       //   notAllowedClass[0].classList.remove('notAllowed')
-       //   notAllowedClass[0].style.cursos = 'pointer'
-    
-         //cashSystem()
-       } 
-    }, [])*/
-
-   useEffect(() => { // checkStatus()
+   useEffect(() => { // checkStatus() / Buscar os Usuários
       checkStatus() // Verifica se existe um Token, se existir verifica se o caixa já foi aberto, e verifica quem está logado e se é Admin
       //console.log(allUsers())
+      
+      verifyOpenCashValue()
 
-      allUsers()
+      allUsers() 
          .then(setUsers)
          .catch(e => console.log(e))
    }, [])
 
-   useEffect(() => {
-      verifyOpenCashValue()
-   }, [])
-
-   useEffect(() => {
-      // if (cartList.length <= 0) {
-      //    setCartProductsModal(false)
-      // }
+   useEffect(() => { // Soma o valor dos produtos na lista
       let total = cartList.reduce(
          (sum, item) => sum + parseFloat(item.pdt_price), 0
       ).toFixed(2)
@@ -168,19 +120,6 @@ export const OpenSystem = ({ close }: ActionsType) => {
          setCartProductsModal(false)
       }
    }, [cartList])
-
-   /*// Get All Users
-   useEffect(() => {
-      axios.get(`${backend}/users`)
-         .then(response => setUsers(response.data.result))
-   }, [])
-
-   // Get All Products
-   useEffect(() => {
-      axios.get(`${backend}/products`)
-         .then(response => setProducts(response.data.result))
-   }, [])
-   //console.log(products)*/
 
    // KeyPress Event
    useEffect(() => {
@@ -200,13 +139,12 @@ export const OpenSystem = ({ close }: ActionsType) => {
          }
       })
    }, [])
-
    useEffect(() => {
       // localStorage.getItem('openCashValue')
       //cashStatus()
    }, []) */
 
-   const checkStatus = () => { // Verifica se existe um Token, se existir verifica se o caixa já foi aberto
+   const checkStatus = () => { // Verifica se existe um Token, se existir verifica se o caixa já foi aberto, e seta os dados do usuario (nome, e se e admin) 
       if (AuthTokenLC) {
          //OpenCashValueLC ? setOpen(true) : setOpen(false)
          if (OpenCashValueLC) {
@@ -222,8 +160,6 @@ export const OpenSystem = ({ close }: ActionsType) => {
             // Button Status Cash
             /*let btn_openCash = document.querySelector('#btn_openCash') as HTMLButtonElement
             let btn_closeCash = document.querySelector('#btn_closeCash') as HTMLButtonElement
-
-
             btn_openCash.style.display = 'none'
             btn_closeCash.style.display = 'flex'*/
 
@@ -244,7 +180,28 @@ export const OpenSystem = ({ close }: ActionsType) => {
       }
    }
 
-   // -- startJob & verifyOpenCashValue
+   const verifyOpenCashValue = () => {
+      //console.log(contentSystemModal)
+      const openCashValueLC = localStorage.getItem('openCashValue')
+      if (openCashValueLC === '' ||
+         openCashValueLC === undefined || openCashValueLC !== null) {
+         setOpen(!open)
+      }
+      //console.log(openCashValueLC)
+
+      // 'Gato' para o modal contentSystemStartModal sair do HTML
+      setTimeout(() => setContentSystemStartModal(false), 10000)
+   }
+
+   // Abertura de Caixa
+   const startJob = () => {
+      //alert(`Valor do localstorage: ${openCashValue}`)
+      setContentSystemStartModal(!contentSystemStartModal)
+
+      verifyOpenCashValue()
+   }
+
+   // -- Fechamento do Caixa/Sistema
    const handleCloseCash = () => {
       // localStorage.getItem('openCashValue')
 
@@ -260,6 +217,7 @@ export const OpenSystem = ({ close }: ActionsType) => {
       //console.log(closeSystem)
    }
 
+   // Função Responsável por mostrar o Modal de Produtos
    const handleToogleFindProductModal = () => {
       if (open === false) {
          alert('Por obséquio abra o caixa')
@@ -272,6 +230,7 @@ export const OpenSystem = ({ close }: ActionsType) => {
       }
    }
 
+   // Função Responsável por mostrar o Modal de Adicionar Produto no Carrinho
    const handleAddProductModal = () => {
       open ? setAddProduct(!addProduct) : alert('Abra o caixa camarada.')
       setConfirmPaymentModal(false)
@@ -344,34 +303,13 @@ export const OpenSystem = ({ close }: ActionsType) => {
       setOptionsSystem(false)
       setManagerProductsModal(true)
    }
-
-   const startJob = () => {
-      //alert(`Valor do localstorage: ${openCashValue}`)
-      setContentSystemStartModal(!contentSystemStartModal)
-
-      verifyOpenCashValue()
-   }
-
-   const verifyOpenCashValue = () => {
-      //console.log(contentSystemModal)
-      const openCashValueLC = localStorage.getItem('openCashValue')
-      if (openCashValueLC === '' ||
-         openCashValueLC === undefined || openCashValueLC !== null) {
-         setOpen(!open)
-      }
-      //console.log(openCashValueLC)
-
-      // 'Gato' para o modal contentSystemStartModal sair do HTML
-      setTimeout(() => setContentSystemStartModal(false), 10000)
-   }
-
+   
    const addItemOnCart = (data: ProductType) => {
       // Original
       /*setCartItems([...cartItems, data])
       // setCartItems( [data] )
       console.log(cartItems)
       console.log(cartItems.length)
-
       if(cartItems.length > 0) {
          setCartProductsModal(true)
       }*/
@@ -386,7 +324,6 @@ export const OpenSystem = ({ close }: ActionsType) => {
    const handleReturnItems = (data: ProductType) => {
       // Original
       /*setCartItems([...cartItems, data])
-
       if(cartItems.length < 0) {
          setCartProductsModal(false)
       }*/
@@ -397,32 +334,48 @@ export const OpenSystem = ({ close }: ActionsType) => {
    }
 
    const handleClearCartList = () => {
-      console.log(`Antes de limpar: ${cartList.length}`)
-      setCartList([])
-      console.log(`Depois de limpar: ${cartList.length}`)
-      console.log('clear cartList')
-   }
-
-   const handleConfirmPayment = () => {
-      let total = cartList.reduce(
-         (sum, item) => sum + parseFloat(item.pdt_price), 0
-      ).toFixed(2)
-
-      if (total < '0.25') {
-         alert('Carrinho vazio.')
-         setConfirmPaymentModal(false)
+      if(open) {
+         if(cartList.length > 0) {
+            console.log(`Antes de limpar: ${cartList.length}`)
+            setCartList([])
+            console.log(`Depois de limpar: ${cartList.length}`)
+            console.log('clear cartList')
+         } else {
+            alert('Carrinho vazio.')
+         }
       } else {
-         setConfirmPaymentModal(!confirmPaymentModal)
-         setAddProduct(false)
-         setOptionsSystem(false)
-         setCloseSystem(false)
+         alert('Abra o caixa camarada.')
       }
 
    }
 
+   const handleConfirmPayment = () => {
+      if(open) {
+         let total = cartList.reduce(
+            (sum, item) => sum + parseFloat(item.pdt_price), 0
+         ).toFixed(2)
+   
+         if (total < '0.25') {
+            alert('Carrinho vazio.')
+            setConfirmPaymentModal(false)
+         } else {
+            setConfirmPaymentModal(!confirmPaymentModal)
+            setAddProduct(false)
+            setOptionsSystem(false)
+            setCloseSystem(false)
+
+            if(cartList.length <= 0) {
+               setModalSelected(!modalSelected)
+            }
+         }
+      } else {
+         alert('Abra o caixa camarada.')
+      }
+   }
+
    return (
       <main className="containerSystem flex p-3">
-         {closeSystem ?? (
+         { closeSystem ?? ( // Fechamento de Caixa
             <div className="infosSystemClose" id="infosSystemClose">
                <Closing close={handleCloseCash} />
             </div>
@@ -480,11 +433,10 @@ export const OpenSystem = ({ close }: ActionsType) => {
             </header>
 
             <div className="contentSystem flex" id="contentSystem">
-               {/* { !contentSystemStartModal ? */}
-               {!open ?
+               { !open ? // Verifica se o Caixa foi Aberto
                   // Caso o caixa não estver aberto
                   <>
-                     {!contentSystemStartModal ?
+                     { !contentSystemStartModal ? // Abertura de Caixa
                         <div className="flex" id="contentSystemStart">
                            <OpenCash close={startJob} />
                         </div> : <MessageTexugo msg="Caixa Fechado, meu Chapa." tw="100" th="100" className="mb-2 flex text-danger " />
@@ -492,30 +444,30 @@ export const OpenSystem = ({ close }: ActionsType) => {
                   </> :
                   // Caso o caixa estiver aberto
                   <>
-                     {/* // Create new User/Product or Find User/Product */}
-                     {optionsSystem ?
+                      {/* // Create new User/Product or Find User/Product */}
+                      {optionsSystem ?
                         <section className="managerSystem flex mr-3" onMouseLeave={() => setOptionsSystem(false)}>
                            <ul className="flex column text-dark bold">
                               <li className="flex"
-                                 onClick={handleNewUser}>
+                                 onClick={ handleNewUser }>
                                  Novo Usuário
                                  <UserPlus w="20" h="20" fill="var(--bs-info)" className="ml-1"/>
                               </li>
 
                               <li className="flex"
-                                 onClick={handleManagerUser}>
+                                 onClick={ handleManagerUser }>
                                  Editar Usuário
                                  <UserPen w="20" h="20" fill="var(--bs-warning)" className="ml-1"/>
                               </li>
 
                               <li className="flex"
-                                 onClick={handleNewProduct}>
+                                 onClick={ handleNewProduct }>
                                  Novo Produto
                                  <Registered w="20" h="20" fill="var(--bs-info)" className="ml-1"/>
                               </li>
 
                               <li className="flex"
-                                 onClick={handleManagerProduct}>
+                                 onClick={handleManagerProduct }>
                                  Editar Produto
                                  <PenToSquare w="20" h="20" fill="var(--bs-warning)" className="ml-1"/>
                               </li>
@@ -567,23 +519,12 @@ export const OpenSystem = ({ close }: ActionsType) => {
                            <FindProducts listProducts={products} close={() => setManagerProductsModal(false)} /> : ''
                      }
 
-                     {/* {
-                        !managerProductsModal ?
-                        <FindProducts close={ () => setManagerProductsModal(!managerUsersModal) } /> : ''
-                     } */}
-
-                     {/* { !open ?
-                        <MessageTexugo msg="Abra o caixa, meu Chapa" tw="100" th="100" /> :
-                        <MessageTexugo msg="Carrinho vazio, meu Chapa" tw="100" th="100" /> 
-                     }  */}
-
                      {
                         confirmPaymentModal ?
                            <ConfirmPayment close={handleConfirmPayment} /> : ''
                      }
 
                      {
-                        // addProduct ? <AddProducts listProducts={products} close={ handleAddProductModal } cartAddItem={ setCartItems } /> : ''
                         addProduct ? <AddProducts listProducts={products} close={handleAddProductModal} cartAddItem={addItemOnCart} /> : ''
                      }
 
@@ -595,29 +536,6 @@ export const OpenSystem = ({ close }: ActionsType) => {
                      {
                         closeSystem ? <Closing close={() => setCloseSystem(false)} /> : ''
                      }
-
-
-                     {/* {  
-                        cartItems.length === 0 ??
-                        <MessageTexugo msg="Carrinho vazio meu Chapa" tw="100" th="100" />
-                     }  */}
-
-                     {/* { OpenCashValueLC ?
-                        <div className="managerArea flex">
-                           {findProductsModal &&
-                              <FindProducts close={ handleToogleFindProductModal } />
-                           }
-                        </div> :
-                        <div className="none" id="contentSystemStart">
-                           <OpenCash />
-                        </div>
-                     } */}
-
-                     { /* { !closeSystem ??
-                         <Closing close={ handleCloseCash } />
-                     } */ }
-
-
                   </>
                }
             </div>
@@ -648,7 +566,7 @@ export const OpenSystem = ({ close }: ActionsType) => {
                      <MagnifyingGlass w='20' h='20' fill='var(--text-dark)' className='ml-1' />
                   </button>
 
-                  <button className="btn btn-danger ml-1" onClick={handleClearCartList}>
+                  <button className="btn btn-danger ml-1" onClick={ handleClearCartList }>
                      F10 Cancelar
                      <TrashCan w='20' h='20' fill='var(--text)' className='ml-1' />
                   </button>
