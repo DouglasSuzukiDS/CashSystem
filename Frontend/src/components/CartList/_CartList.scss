@@ -13,10 +13,18 @@
    background-color: #363738;
    border: 2px solid var(--fb1);
    border-radius: 8px;
+
+   .containerCartList > div.borderFormDanger {
+      border: 2px solid var(--bg-danger);
+      border-radius: 8px;
+      padding: 8px;
+
+      // background-color: aquamarine;
+   }
 }
 
-.cartList {
 
+.cartList {
    ::-webkit-scrollbar {
       width: 5px;
       background-color: var(--bg-dark); // Background
@@ -32,10 +40,11 @@
    // background-color: var(--fb1);
    border: 2px solid var(--fb1);
    border-radius: 8px;
+   overflow: auto;
 
    .tableCartList {
-      width: 850px;
-      overflow-x: auto;
+      width: 650px;
+      // overflow: auto;
       // border-collapse: collapse;
 
       tr, td {
@@ -67,8 +76,8 @@
       }
 
       tbody {
-         overflow-x: auto;
-         height: 195px;
+         // overflow: scroll;
+         // height: 180px;
       }
 
       tbody tr {

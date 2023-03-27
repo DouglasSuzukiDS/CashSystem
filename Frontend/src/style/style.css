@@ -1457,10 +1457,16 @@ h4 {
   border: 2px solid var(--fb1);
   border-radius: 8px;
 }
+.containerCartList .containerCartList > div.borderFormDanger {
+  border: 2px solid var(--bg-danger);
+  border-radius: 8px;
+  padding: 8px;
+}
 
 .cartList {
   border: 2px solid var(--fb1);
   border-radius: 8px;
+  overflow: auto;
 }
 .cartList ::-webkit-scrollbar {
   width: 5px;
@@ -1472,8 +1478,7 @@ h4 {
   scroll-behavior: smooth;
 }
 .cartList .tableCartList {
-  width: 850px;
-  overflow-x: auto;
+  width: 650px;
 }
 .cartList .tableCartList tr, .cartList .tableCartList td {
   width: 25%;
@@ -1494,10 +1499,6 @@ h4 {
 }
 .cartList .tableCartList tr, .cartList .tableCartList tbody {
   width: 100%;
-}
-.cartList .tableCartList tbody {
-  overflow-x: auto;
-  height: 195px;
 }
 .cartList .tableCartList tbody tr {
   color: var(--text);

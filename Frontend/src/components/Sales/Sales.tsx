@@ -61,7 +61,7 @@ export const Sales = ({ listSales, close }: ActionsType) => {
 
          <div className="valuesSale">
             <div className="moneySale">
-
+a
             </div>
 
             <div className="pixSale">
@@ -75,7 +75,7 @@ export const Sales = ({ listSales, close }: ActionsType) => {
 
             
             <div className="creditSale">
-               
+
             </div>
          </div>
       </div>

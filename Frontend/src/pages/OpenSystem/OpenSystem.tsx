@@ -248,6 +248,10 @@ export const OpenSystem = ({ close }: ActionsType) => {
       //open ? setAddProduct(!addProduct) : alert('Abra o caixa camarada.')
 
       if (open) {
+         if(historicSaleModal) {
+            setHistoricSaleModal(false)
+         }
+
          setAddProduct(!addProduct)
          setConfirmPaymentModal(false)
          setOptionsSystem(false)
@@ -365,6 +369,14 @@ export const OpenSystem = ({ close }: ActionsType) => {
             setHistoricSale(res.data.result)
          })
          .catch(err => console.log(err))
+
+         if(confirmPaymentModal) {
+            setConfirmPaymentModal(false)
+         }
+
+         if(addProduct) {
+            setAddProduct(false)
+         }
       
          setHistoricSaleModal(!historicSaleModal)
 
@@ -382,10 +394,16 @@ export const OpenSystem = ({ close }: ActionsType) => {
             alert('Carrinho vazio.')
             setConfirmPaymentModal(false)
          } else {
+
+            if(historicSaleModal) {
+               setHistoricSaleModal(false)
+            }
+           
             setConfirmPaymentModal(!confirmPaymentModal)
             setAddProduct(false)
             setOptionsSystem(false)
             setCloseSystem(false)
+
 
             if(cartList.length <= 0) {
                setModalSelected(!modalSelected)
