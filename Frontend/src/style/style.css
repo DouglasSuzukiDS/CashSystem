@@ -70,6 +70,22 @@ a {
   transform: scaleX(-1);
 }
 
+.jcfs {
+  justify-content: flex-start;
+}
+
+.jcfe {
+  justify-content: flex-end;
+}
+
+.aifs {
+  align-items: flex-start;
+}
+
+.aife {
+  align-items: flex-end;
+}
+
 .border {
   border: 1px solid #C1C7E0;
   border-radius: 0.25rem;
@@ -1542,6 +1558,8 @@ h4 {
 }
 
 .salesContainer {
+  z-index: 50;
+  max-width: 420px;
   padding: 24px;
   border: 2px solid var(--fb1);
   border-radius: 8px;
@@ -1550,6 +1568,31 @@ h4 {
 .salesContainer h4 > .salesClose:hover {
   cursor: pointer;
   opacity: 0.5;
+}
+.salesContainer .moneySale {
+  border: 2px solid var(--bs-success);
+  border-radius: 8px;
+  padding: 8px;
+}
+.salesContainer .pixSale {
+  border: 2px solid var(--pix);
+  border-radius: 8px;
+  padding: 8px;
+}
+.salesContainer .moneyPixSale, .salesContainer .debitCreditSale {
+  border: 2px solid var(--dark-blue);
+  border-radius: 8px;
+  padding: 8px;
+}
+.salesContainer .debitSale {
+  border: 2px solid var(--blue-mp);
+  border-radius: 8px;
+  padding: 8px;
+}
+.salesContainer .creditSale {
+  border: 2px solid var(--yellow-ml);
+  border-radius: 8px;
+  padding: 8px;
 }
 
 .salesData {

@@ -38,6 +38,10 @@ a { text-decoration: none;}
 .w-border { border: none; }
 .opacity:hover { opacity: 0.8; }
 .invertedX { transform: scaleX(-1); }
+.jcfs { justify-content: flex-start; }
+.jcfe { justify-content: flex-end; }
+.aifs { align-items: flex-start; }
+.aife { align-items: flex-end; }
 
 
 .border { border: 1px solid #C1C7E0; border-radius: .25rem; }

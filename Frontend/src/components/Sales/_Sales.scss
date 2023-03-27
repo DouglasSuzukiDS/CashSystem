@@ -10,7 +10,8 @@
 }
 
 .salesContainer {
-   // width: 380px;
+   z-index: 50;
+   max-width: 420px;
    // height: 280px;
    padding: 24px;
    border: 2px solid var(--fb1);
@@ -21,6 +22,42 @@
       cursor: pointer;
       opacity: 0.5;
    }
+
+   .moneySale {
+      border: 2px solid var(--bs-success);
+      border-radius: 8px;
+      padding: 8px;
+      // width: 120px;
+   }
+
+   .pixSale {
+      border: 2px solid var(--pix);
+      border-radius: 8px;
+      padding: 8px;
+      // width: 120px;
+   }
+
+   .moneyPixSale, .debitCreditSale {
+      // background: linear-gradient(98.57deg, #198754 0%, #2EBDAF 100%);
+      border: 2px solid var(--dark-blue);
+      border-radius: 8px;
+      padding: 8px;
+   }
+
+   .debitSale {
+      border: 2px solid var(--blue-mp);
+      border-radius: 8px;
+      padding: 8px;
+      // width: 120px;
+   }
+
+   .creditSale {
+      border: 2px solid var(--yellow-ml);
+      border-radius: 8px;
+      padding: 8px;
+      // width: 120px;
+   }
+
 }
 
 
@@ -72,4 +109,6 @@
          padding: 6px;
       }
    }
+
+   
 }
