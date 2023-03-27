@@ -217,9 +217,21 @@ export const OpenSystem = ({ close }: ActionsType) => {
    const handleCloseCash = () => {
       // localStorage.getItem('openCashValue')
 
-      if (!findProductsModal || !invoicingModal) {
-         setFindProductsModal(false)
-         setInvoicingModal(false)
+      // if (!findProductsModal || !invoicingModal) {
+      //    setFindProductsModal(false)
+      //    setInvoicingModal(false)
+      // }
+
+      if(historicSaleModal) {
+         setHistoricSaleModal(false)
+      }
+
+      if(confirmPaymentModal) {
+         setConfirmPaymentModal(false)
+      }
+
+      if(addProduct) {
+         setAddProduct(false)
       }
 
       setCloseSystem(!closeSystem)
@@ -264,8 +276,18 @@ export const OpenSystem = ({ close }: ActionsType) => {
    }
 
    const handleOptionSystem = () => {
-      setConfirmPaymentModal(false)
-      setAddProduct(false)
+      if(historicSaleModal) {
+         setHistoricSaleModal(false)
+      }
+
+      if(confirmPaymentModal) {
+         setConfirmPaymentModal(false)
+      }
+
+      if(addProduct) {
+         setAddProduct(false)
+      }
+
 
       setOptionsSystem(!optionsSystem)
       
@@ -369,6 +391,14 @@ export const OpenSystem = ({ close }: ActionsType) => {
             setHistoricSale(res.data.result)
          })
          .catch(err => console.log(err))
+
+         if(optionsSystem) {
+            setOptionsSystem(false)
+         }
+
+         if(closeSystem) {
+            setCloseSystem(false)
+         }
 
          if(confirmPaymentModal) {
             setConfirmPaymentModal(false)
