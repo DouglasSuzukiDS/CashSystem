@@ -1,18 +1,37 @@
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { CreditCard } from "../../assets/Icons/CreditCard"
 import { ListCheck } from "../../assets/Icons/ListCheck"
 import { MoneyBillWave } from "../../assets/Icons/MoneyBillWave"
 import { Pix } from "../../assets/Icons/Pix"
 import { XMark } from "../../assets/Icons/XMark"
+import { ValeusSalesContext } from "../../context/ValuesSales/ValuesSalesContext"
 import { ActionsType } from "../../types/ActionsType"
 import { SalesType } from "../../types/SalesType"
+import { ValuesSalesType } from "../../types/ValuesSalesType"
+import { CartList } from "../CartList/CartList"
 
-export const Sales = ({ listSales, close }: ActionsType) => {
+export const Sales = ({ listSales, valuesSales, close }: ActionsType) => {
+   const [sales, setSales] = useState<SalesType[]>([])
+   const {valuesSalesToday, setValuesSalesToday} = useContext(ValeusSalesContext)
+
    useEffect(() => {
       listSales ? setSales(listSales) : setSales([])
-   }, [])
+      setValuesSalesToday({
+         openCash: localStorage.getItem("openCashValue")!,
+         moneySale: parseFloat(paymentMoney),
+         moneyTotal: parseFloat(paymentMoney) + parseFloat(localStorage.getItem("openCashValue")!),
 
-   const [sales, setSales] = useState<SalesType[]>([])
+         pixSale: parseFloat(paymentPix),
+         moneyPix: parseFloat(paymentMoney) + parseFloat(paymentPix),
+
+         debitSale: parseFloat(paymentDebit),
+         creditSale: parseFloat(paymentCredit),
+         debitCredit: parseFloat(paymentDebit) + parseFloat(paymentCredit),
+
+         valuesBankSale: parseFloat(paymentPix) + parseFloat(debitCredit),
+         totalSale: parseFloat(moneyPix) + parseFloat(debitCredit)
+      })
+   }, [sales])
 
    let paymentMoney =  sales.filter(el => (
       el.methodSale === 'Dinheiro'
@@ -41,7 +60,7 @@ export const Sales = ({ listSales, close }: ActionsType) => {
    let moneyPix = (parseFloat(paymentMoney) +  parseFloat(paymentPix)).toFixed(2)
    let debitCredit = (parseFloat(paymentDebit) + parseFloat(paymentCredit)).toFixed(2)
 
-   console.log(parseFloat(paymentMoney + paymentPix))
+   console.log(parseFloat(paymentMoney + paymentPix).toFixed(2))
 
    return(
       <div className="salesContainer flex sbt column sbt mr-2">
@@ -92,34 +111,34 @@ export const Sales = ({ listSales, close }: ActionsType) => {
          </div>
 
          <div className="valuesSale flex sbt mt-2 w-100">
-            <span className="f column border w-100 sbt aifs">
+            <span className="f column w-100 sbt aifs">
                <p className="moneySale inputTF borderFormMoney flex text-success mb-1">
                   <MoneyBillWave w='24' h='24' fill='var(--bs-success)' className='mr-1' />
-                  { paymentMoney }
+                  { valuesSalesToday.moneySale }
                </p>
 
                <p className="pixSale inputTF borderFormPix flex text-pix mb-1">
                   <Pix w='24' h='24' fill='var(--pix)' className='mr-1' />
-                  { paymentPix }
+                  { valuesSalesToday.pixSale }
                </p>
 
                <p className="moneyPixSale inputTF borderFormMoneyPix flex text-danger">
                   <MoneyBillWave w='24' h='24' fill='var(--bs-success)' className='mr-1' />
                   <span className="mr-1">+</span>
                   <Pix w='24' h='24' fill='var(--pix)' className='mr-1' />
-                  { moneyPix }
+                  { valuesSalesToday.moneyPix }
                </p>
             </span>
 
-            <span className="f column border w-100 sbt aife">
+            <span className="f column w-100 sbt aife">
                <p className="debitSale inputTF borderFormDebit flex text-blue-mp mb-1">
                   <CreditCard w='24' h='24' fill='var(--blue-mp)' className='mr-1' />
-                  { paymentDebit}
+                  { valuesSalesToday.debitSale }
                </p>
 
                <p className="creditSale inputTF borderFormCredit flex text-yellow-ml mb-1">
                   <CreditCard w='24' h='24' fill='var(--yellow-ml)' className='mr-1' />
-                  { paymentCredit}
+                  { valuesSalesToday.creditSale }
                </p>
 
                <p className="debitCreditSale inputTF borderFormCredit flex text-danger">
@@ -127,7 +146,7 @@ export const Sales = ({ listSales, close }: ActionsType) => {
                   <span className="mr-1">+</span>
                   <CreditCard w='24' h='24' fill='var(--yellow-ml)' className='mr-1' />
 
-                  { debitCredit }
+                  { valuesSalesToday.debitCredit }
                </p>
             </span>
          </div>

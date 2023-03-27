@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useContext, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { ActionsType } from '../../types/ActionsType'
 
@@ -13,6 +13,7 @@ import { DollarSign } from '../../assets/Icons/DollarSign'
 import { ArrowLeftLong } from '../../assets/Icons/ArrowLeftLong'
 import { CircleCheck } from '../../assets/Icons/CircleCheck'
 import { XMark } from '../../assets/Icons/XMark'
+import { ValeusSalesContext } from '../../context/ValuesSales/ValuesSalesContext'
 
 /*  Blocked Keys
    F1 => Help
@@ -48,10 +49,11 @@ const closeFormDay = () => {
 }
 
 export const Closing = ({ close }: ActionsType) => {
+   const {valuesSalesToday, setValuesSalesToday} = useContext(ValeusSalesContext)
    const navigate = useNavigate()
 
    // Values Brute
-let opening = 37.80
+// let openCashValue = parseFloat(localStorage.getItem('openCashValue')!).toFixed(2)
 let money = 258
 let pix = 27
 
@@ -71,19 +73,20 @@ let creditCardFinal = creditCard - parseInt(taxCredit) // 12,67
 
 // Values Final
 
-let openingPix = opening + pix // 285
+// let openingPix = openCashValue + pix // 285
+let openingPix = 0 + pix // 285
 // console.log(`Din + Pix: ${openingPix}`)
 
 let amountCards = (debitCardFinal + creditCardFinal) //  46,48
 // console.log(`Valor Total em Cartões: ${amountCards}`)
 
-let amount = (openingPix + amountCards).toFixed(2) // 331,48
+// let amount = parseInt(openingPix + amountCards).toFixed(2) // 331,48
 // console.log(`Total: ${amount}`)
 
 // Values Money
-let amountMoney = money - opening
+// let amountMoney = money - parseInt(openCashValue)
 let amountBank = pix + amountCards
-let amountValue = amountMoney + amountBank
+// let amountValue = amountMoney + amountBank
 
    useEffect(() => {
       window.addEventListener('keydown', (event) => {
@@ -104,13 +107,13 @@ let amountValue = amountMoney + amountBank
 
    return (
       <main className="container flex pr-3 ml-3" id='closingFormDay'>
-         <div className="forms">
+         <div className="formsClosingDay">
 
             <form action='/' className="closingDayForm w-100 h-100 f column sbt">
                <h4 className="f sbt">
 
                   <div className="flex text-center">
-                     <p className='pg1 flex'>Fechamento de Caixa</p>
+                     <p className='pg1 flex text-info'>Fechamento de Caixa</p>
                      <SackDollar w='24' h='24' fill='var(--bs-info)' className='ml-1' />
                   </div>
 
@@ -128,9 +131,7 @@ let amountValue = amountMoney + amountBank
                   <div className="openingValue borderForm flex inputValue">
                      <CashRegister w='24' h='24' fill='var(--bs-primary)' className='mr-1' />
                      <p className='inputTF text-primary'>
-                        {/* 0,00 */}
-                        {/* {opening.toFixed(2)} */}
-                        {/* { openCashValue } */}
+                        { valuesSalesToday.openCash }
                      </p>
                   </div>
                </div>
@@ -141,8 +142,7 @@ let amountValue = amountMoney + amountBank
                   <div className="moneyOfTheDay inputValue borderForm flex">
                      <MoneyBillWave w='24' h='24' fill='var(--bs-success)' className='mr-1' />
                      <p className='inputTF text-success'>
-                        {/* 0,00 */}
-                        {money.toFixed(2)}
+                        { valuesSalesToday.moneyTotal }
                      </p>
                   </div>
                </div>
@@ -160,8 +160,7 @@ let amountValue = amountMoney + amountBank
                      </span>
 
                      <p className='inputTF text-violet-nk'>
-                        {/* 0,00 */}
-                        {amountMoney.toFixed(2)}
+                        { valuesSalesToday.moneySale }
                      </p>
                   </div>
                </div>
@@ -172,8 +171,7 @@ let amountValue = amountMoney + amountBank
                   <div className="valueOfTheDay borderForm flex">
                      <Pix w='24' h='24' fill='var(--pix)' className='mr-1' />
                      <p className='inputTF text-pix'>
-                        {/* 0,00 */}
-                        {pix.toFixed(2)}
+                        { valuesSalesToday.moneyPix }
                      </p>
                   </div>
                </div>
@@ -188,8 +186,7 @@ let amountValue = amountMoney + amountBank
                         <CreditCard w='24' h='24' fill='var(--yellow-ml)' className='mr-1' />
                      </span>
                      <p className='inputTF text-blue-mp'>
-                        {/* 0,00 */}
-                        {amountCards.toFixed(2)}
+                        { valuesSalesToday.debitCredit }
                      </p>
                   </div>
                </div>
@@ -208,8 +205,7 @@ let amountValue = amountMoney + amountBank
                         <CreditCard w='24' h='24' fill='var(--yellow-ml)' className='mr-1' />
                      </span>
                      <p className='inputTF text-orange-in'>
-                        {/* 0,00 */}
-                        {amountBank.toFixed(2)}
+                        { valuesSalesToday.valuesBankSale }  
                      </p>
                   </div>
                </div>
@@ -226,8 +222,7 @@ let amountValue = amountMoney + amountBank
                         <PiggyBank w='24' h='24' fill='var(--orange-in)' className='mr-1' />
                      </span>
                      <p className='inputTF text-dark-green'>
-                        {/* 0,00 */}
-                        {amountValue.toFixed(2)}
+                        { valuesSalesToday.totalSale }
                      </p>
                   </div>
                </div>

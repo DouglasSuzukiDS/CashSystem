@@ -1,3 +1,4 @@
+import { ValuesSalesType } from './ValuesSalesType';
 import { SalesType } from './SalesType';
 import { UserType } from './UserType';
 import { ProductType } from "./ProductType"
@@ -14,6 +15,7 @@ export type ActionsType = {
    listProducts?: ProductType[]
    listUsers?: UserType[]
    listSales?: SalesType[]
+   valuesSales?: ValuesSalesType
    text?: string
    color?: string
    icon?: IconsProps

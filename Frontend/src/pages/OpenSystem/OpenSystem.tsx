@@ -34,6 +34,8 @@ import { Download } from "../../assets/Icons/Download";
 import axios from "axios";
 import { SalesType } from "../../types/SalesType";
 import { Sales } from "../../components/Sales/Sales";
+import { ValuesSalesType } from "../../types/ValuesSalesType";
+import { ValeusSalesContext } from "../../context/ValuesSales/ValuesSalesContext";
 
 export const OpenSystem = ({ close }: ActionsType) => {
    const server = 'http://localhost:3001'
@@ -68,6 +70,10 @@ export const OpenSystem = ({ close }: ActionsType) => {
 
    // Card
    const [cartItems, setCartItems] = useState<ProductType[]>([])
+
+   // Values Sales
+   const {valuesSalesToday, setValuesSalesToday} = useContext(ValeusSalesContext)
+   console.log(valuesSalesToday)
 
    // Modals
 
@@ -385,13 +391,14 @@ export const OpenSystem = ({ close }: ActionsType) => {
    // Footer Functions
 
    const handleHistoricModal = async() => { // F2
-      await axios.get(`${server}/SaleDayList`)
-         .then(res => {
-            console.log(res.data.result)
-            setHistoricSale(res.data.result)
-         })
-         .catch(err => console.log(err))
-
+      if(open) {
+         await axios.get(`${server}/SaleDayList`)
+            .then(res => {
+               console.log(res.data.result)
+               setHistoricSale(res.data.result)
+            })
+            .catch(err => console.log(err))
+   
          if(optionsSystem) {
             setOptionsSystem(false)
          }
@@ -409,9 +416,9 @@ export const OpenSystem = ({ close }: ActionsType) => {
          }
       
          setHistoricSaleModal(!historicSaleModal)
-
-        
-         // hiddenTexugo?.classList.toggle('none')
+      } else {
+         alert('Abra o caixa camarada.')
+      }
    }
 
    const handleConfirmPayment = () => { // F4
@@ -609,7 +616,7 @@ export const OpenSystem = ({ close }: ActionsType) => {
 
                      {
                         historicSaleModal ?
-                           <Sales listSales={ historicSale } close={ () =>  setHistoricSaleModal(!historicSaleModal) } /> : ''
+                           <Sales listSales={ historicSale } valuesSales={ valuesSalesToday } close={ () =>  setHistoricSaleModal(!historicSaleModal) } /> : ''
                      }
 
                      {
