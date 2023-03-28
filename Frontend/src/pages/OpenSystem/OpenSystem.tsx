@@ -73,7 +73,7 @@ export const OpenSystem = ({ close }: ActionsType) => {
 
    // Values Sales
    const {valuesSalesToday, setValuesSalesToday} = useContext(ValeusSalesContext)
-   console.log(valuesSalesToday)
+   // console.log(valuesSalesToday)
 
    // Modals
 
@@ -118,7 +118,7 @@ export const OpenSystem = ({ close }: ActionsType) => {
 
 
    useEffect(() => { // checkStatus() / Buscar os Usuários
-      checkStatus() // Verifica se existe um Token, se existir verifica se o caixa já foi aberto, e verifica quem está logado e se é Admin
+      checkStatus() // Verifica se existe um Token, se existir verifica se o caixa já foi aberto, e verifica quem está logado e se é Admin, e seta os Values nos modais com o valor de abertura (localStorage) e o restante 0
       //console.log(allUsers())
 
       verifyOpenCashValue()
@@ -126,6 +126,19 @@ export const OpenSystem = ({ close }: ActionsType) => {
       allUsers()
          .then(setUsers)
          .catch(e => console.log(e))
+      
+      setValuesSalesToday({
+         openCash: localStorage.getItem("openCashValue")!,
+         moneySale: 0,
+         moneyTotal: 0,
+         pixSale: 0,
+         moneyPix: 0,
+         debitSale: 0,
+         creditSale: 0,
+         debitCredit: 0,
+         valuesBankSale: 0,
+         totalSale: 0
+      })
    }, [])
 
    useEffect(() => { // Soma o valor dos produtos na lista
@@ -246,6 +259,23 @@ export const OpenSystem = ({ close }: ActionsType) => {
       setConfirmPaymentModal(false)
       setAddProduct(false)
       //console.log(closeSystem)
+   }
+
+   // Funções de Backup
+   const handleBackup = async() => {
+
+   }
+
+   const handleBackupSales = async() => {
+
+   }
+
+   const handleBackupUsers = async() => {
+
+   }
+
+   const handleBackupProducts = async() => {
+
    }
 
    // Função Responsável por mostrar o Modal de Produtos
@@ -562,31 +592,31 @@ export const OpenSystem = ({ close }: ActionsType) => {
                               </li>
 
                               <li className="flex"
-                                 onClick={handleManagerProduct}>
+                                 onClick={ handleManagerProduct }>
                                  Editar Produto
                                  <PenToSquare w="20" h="20" fill="var(--bs-warning)" className="ml-1" />
                               </li>
 
                               <li className="flex"
-                                 onClick={() => { }}>
+                                 onClick= { handleBackup }>
                                  Backup Geral
                                  <Download w="20" h="20" fill="var(--btn)" className="ml-1" />
                               </li>
 
                               <li className="flex"
-                                 onClick={() => { }}>
+                                 onClick={ handleBackupSales }>
                                  Backup de Vendas
                                  <Download w="20" h="20" fill="var(--btn)" className="ml-1" />
                               </li>
 
                               <li className="flex"
-                                 onClick={() => { }}>
+                                 onClick={ handleBackupUsers }>
                                  Backup de Usuários
                                  <Download w="20" h="20" fill="var(--btn)" className="ml-1" />
                               </li>
 
                               <li className="flex"
-                                 onClick={() => { }}>
+                                 onClick={ handleBackupProducts }>
                                  Backup Produtos
                                  <Download w="20" h="20" fill="var(--btn)" className="ml-1" />
                               </li>
