@@ -93,7 +93,7 @@ export const FindUsers = ({ close }: ActionsType) => {
    }
 
    return (
-      <article className="container flex pr-3  w-100 h-100" id='FindUserModal'>
+      <article className="container flex pr-3  w-100 h-100 z-index-50" id='FindUserModal'>
 
          <div className="forms">
 

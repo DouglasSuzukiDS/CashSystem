@@ -66,7 +66,7 @@ server.get('/backupUsers', async(req, res) => {
 })
 
 server.get('/users', async(req, res) => {
-   let SQL: string = `SELECT * FROM users`
+   let SQL: string = `SELECT * FROM users WHERE id != 01`
 
    db.query(SQL, (err, result) => {
       if(err) {
@@ -405,7 +405,8 @@ server.put('/edit/product/:id', async(req, res) => {
                      console.log(err)
                      res.status(404).send({msg: 'Erro ao editar o produto. O nome do produto pode já existir no sistema'})
                   } else {
-                     res.status(200).send({msg: `Produto atualizado com Sucesso. Nome: ${pdt_name}, Preço: ${pdt_price}, Tipo: ${pdt_type}, Quantidade: ${pdt_qty}`})
+                     console.log(`Nome: ${pdt_name}, Preço: ${pdt_price}, Tipo: ${pdt_type}, Quantidade: ${pdt_qty}`)
+                     res.status(200).send({msg: `Produto atualizado com Sucesso.`})
                   }
                })
             }

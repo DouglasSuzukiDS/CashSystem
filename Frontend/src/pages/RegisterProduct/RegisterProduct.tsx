@@ -26,7 +26,7 @@ export const RegisterProduct = ({ close }: ActionsType) => {
          // ( (newProductName.value && newProductPrice.value && newProductType.value && newProductQty.value)  !== 0) 
       ) {
 
-         const newRegister = await axios.post(`${server}/registerNewProduct`, {
+         await axios.post(`${server}/registerNewProduct`, {
             // pdt_name, pdt_price, pdt_type, pdt_qty
             pdt_name: newProductName.value,
             pdt_price: newProductPrice.value,
@@ -42,6 +42,11 @@ export const RegisterProduct = ({ close }: ActionsType) => {
                      Tipo do Produto: ${newProductType.value}
                      Quatidade do Produto: ${newProductQty.value}
                   `)
+
+                  newProductName.value = ''
+                  newProductPrice.value = ''
+                  newProductType.value = ''
+                  newProductQty.value = ''
                } else {
                   alert('Erro ao cadastrar')
                }
@@ -56,7 +61,7 @@ export const RegisterProduct = ({ close }: ActionsType) => {
 
 
    return (
-      <main className="container flex">
+      <main className="container flex z-index-50">
          <div className="forms border">
 
             <section className="registerNewProducForm w-100 h-100 f column sbt">

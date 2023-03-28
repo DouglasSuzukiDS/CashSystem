@@ -45,8 +45,7 @@ export const RegisterUser = ({ close }: ActionsType) => {
          })
             .then(response => {
                alert(response.data.msg) // Aqui recebe a resposta do Backend 
-               setTimeout(() => navigate('/'), 2000)
-            })
+               })
             .catch(err => console.log(err))
       } else {
          alert('Preencha os campos')
@@ -55,11 +54,13 @@ export const RegisterUser = ({ close }: ActionsType) => {
       newUserFullName.value = ''
       newUserLogin.value = ''
       newUserPassword.value = ''
+      newUserAdmin = false
+
    }
 
    return (
       <>
-         <main className="container flex">
+         <main className="container flex z-index-50">
             <div className="forms">
 
                <section className="registerNewUser w-100 h-100  f column sbt">
@@ -97,15 +98,15 @@ export const RegisterUser = ({ close }: ActionsType) => {
                         onInput={e => (e.target as HTMLInputElement).setCustomValidity('')} />
                   </div>
 
-                  <div className="isAdminDiv flex" >
-                     <span className="flex" id="isAdmin" onClick={() => setAdmin(!admin)}>
+                  <div className="isAdminDiv pointer flex" onClick={() => setAdmin(!admin)}>
+                     <span className="flex" id="isAdmin" >
                         {
                            admin ?
                               <SquareXMark w='24' h='24' fill='#0DCAF0' className='mr-2' /> /* TRUE */ :
                               <Square w='24' h='24' fill='#0DCAF0' className='mr-2' /> /* FALSE */
                         }
                      </span>
-                     <p>Usuário Administrador</p>
+                     <p className="text-color">Usuário Administrador</p>
                   </div>
 
                   <button

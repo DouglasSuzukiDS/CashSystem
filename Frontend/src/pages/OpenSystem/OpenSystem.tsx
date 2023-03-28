@@ -36,6 +36,7 @@ import { SalesType } from "../../types/SalesType";
 import { Sales } from "../../components/Sales/Sales";
 import { ValuesSalesType } from "../../types/ValuesSalesType";
 import { ValeusSalesContext } from "../../context/ValuesSales/ValuesSalesContext";
+import { ManagerSystem } from "../../components/ManagerSystem/ManagerSystem";
 
 export const OpenSystem = ({ close }: ActionsType) => {
    const server = 'http://localhost:3001'
@@ -261,23 +262,6 @@ export const OpenSystem = ({ close }: ActionsType) => {
       //console.log(closeSystem)
    }
 
-   // Funções de Backup
-   const handleBackup = async() => {
-
-   }
-
-   const handleBackupSales = async() => {
-
-   }
-
-   const handleBackupUsers = async() => {
-
-   }
-
-   const handleBackupProducts = async() => {
-
-   }
-
    // Função Responsável por mostrar o Modal de Produtos
    const handleToogleFindProductModal = () => {
       if (open === false) {
@@ -312,6 +296,16 @@ export const OpenSystem = ({ close }: ActionsType) => {
    }
 
    const handleOptionSystem = () => {
+      if(newUserModal || managerUsersModal) {
+         setNewUserModal(false)
+         setManagerUsersModal(false)
+      }
+
+      if(NewProductModal || managerProductsModal) {
+         setNewProductModal(false)
+         setManagerProductsModal(false)
+      }
+
       if(historicSaleModal) {
          setHistoricSaleModal(false)
       }
@@ -569,7 +563,7 @@ export const OpenSystem = ({ close }: ActionsType) => {
                   // Caso o caixa estiver aberto
                   <>
                      {/* // Create new User/Product or Find User/Product */}
-                     {optionsSystem ?
+                     {/* {optionsSystem ?
                         // <section className="managerSystem flex mr-3" onMouseLeave={() => setOptionsSystem(false)}>
                         <section className="managerSystem flex mr-3" onMouseLeave={handleOptionSystem}>
                            <ul className="flex column text-dark bold">
@@ -622,6 +616,16 @@ export const OpenSystem = ({ close }: ActionsType) => {
                               </li>
                            </ul>
                         </section> : ''
+                     } */}
+
+                     { optionsSystem ?
+                        <ManagerSystem 
+                           handleOptionSystem = { handleOptionSystem } 
+                           handleNewUser = { handleNewUser } 
+                           handleManagerUser = { handleManagerUser }
+                           handleNewProduct = { handleNewProduct }
+                           handleManagerProduct = { handleManagerProduct }
+                        /> : ''
                      }
 
                      {

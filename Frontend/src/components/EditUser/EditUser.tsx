@@ -69,7 +69,7 @@ export const EditUser = ({ close, id, listUsers }: ActionsType) => {
             newUserName.value = userName
             newUserLogin.value = userLogin
             newUserPassword.value = userPassword
-            // newUserAdmin = admin
+            newUserAdmin = userAdmin
 
             // console.log('Valor do admin é: ' + newUserAdmin)
             // console.log('bc ' + newUserAdmin)
@@ -101,6 +101,11 @@ export const EditUser = ({ close, id, listUsers }: ActionsType) => {
          })
             .then(response => {
                alert(response.data.msg)
+
+               if(close) {
+                  close()
+               }
+
             })
             //.then(setTimeout(() => { navigate('/') }, 5000))
             //.then( alert('Usuario cadastrado no sistema com sucesso') )
@@ -118,7 +123,7 @@ export const EditUser = ({ close, id, listUsers }: ActionsType) => {
 
    return (
       <>
-         <section className="editUserForm w-100 h-100 f column sbt">
+         <section className="editUserForm w-100 h-100 f column sbt z-index-50">
                <h4 className="flex sbt">
                   <div className="flex text-center w-100">   
                      Edição de Usuário
@@ -152,8 +157,8 @@ export const EditUser = ({ close, id, listUsers }: ActionsType) => {
                      onInput={e => (e.target  as HTMLInputElement).setCustomValidity('')} />
                </div>
 
-               <div className="isAdminDiv flex" >
-                  <span className="flex" id="isAdmin" onClick={ handleUserAdmin } >
+               <div className="isAdminDiv pointer flex" onClick={ handleUserAdmin } >
+                  <span className="flex" id="isAdmin">
                      {
                         admin ?
                            <SquareXMark w='24' h='24' fill='#0DCAF0' /> /* TRUE */ :

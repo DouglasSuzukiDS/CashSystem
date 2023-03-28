@@ -76,7 +76,7 @@ export const Login = () => {
       <main className="container flex">
          <div className="forms">
 
-            <section className="loginUser w-100 h-100  f column sbt">
+            <section className="loginUser w-100 h-100  f column sbt z-index-50">
                <h4 className="flex">
                   Identifique-se
                   <IdCard w='25' h='25' fill='var(--bs-info)' className='ml-1' />

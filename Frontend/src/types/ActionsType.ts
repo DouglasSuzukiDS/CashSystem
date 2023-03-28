@@ -10,6 +10,11 @@ export type ActionsType = {
    onClick?: () => void
    cartAddItem?: (prod: ProductType) => void
    returnItems?: (prod: ProductType) => void
+   handleOptionSystem?: () => void
+   handleNewUser?: () => void
+   handleManagerUser?: () => void
+   handleNewProduct?: () => void
+   handleManagerProduct?: () => void
    className?: string
    id?: string
    listProducts?: ProductType[]

@@ -28,32 +28,8 @@ export const EditProduct = ({ close, id, listProducts }: ActionsType) => {
       pdt_qty: '',
       pdt_type: ''
    })
-
-   /*useEffect(() => { // Chama a função para setar os campos com os dados do produto
-      getProducts()
-   }, [])
-
-   useEffect(() => {
-      getProduct()
-      //console.log(product)
-   }, [product])
-   
-   const getProducts = async() => {
-      await axios.get(`${server}/products`)
-         .then(response =>{
-            setProducts(response.data.result)
-
-            setProduct((response.data.result).filter((prod: { id: string }) => prod.id === id))
-            // getProduct()
-         })
-         .catch(err => alert(err.response.data))
-   }*/
       
    useEffect(() => {
-      // allProducts()
-      //    .then(setProducts)
-      //    .catch(e => console.log(e))
-
       if(listProducts) {
          setProducts(listProducts)
    
@@ -72,9 +48,6 @@ export const EditProduct = ({ close, id, listProducts }: ActionsType) => {
       getProduct()
    })
 
-   // console.log(products)
-   // console.log(product)
-
    const newProductName = document.querySelector('#newProductName') as HTMLInputElement
    const newProductPrice = document.querySelector('#newProductPrice') as HTMLInputElement
    const newProductType = document.querySelector('#newProductType') as HTMLInputElement
@@ -89,50 +62,10 @@ export const EditProduct = ({ close, id, listProducts }: ActionsType) => {
       let pdt_type = product.pdt_type
       let pdt_qty = product.pdt_qty
 
-      // console.log(pdt_name)
-      // console.log(pdt_price)
-      // console.log(pdt_type)
-      // console.log(pdt_qty)
-      // console.log(product?.id)
-
       newProductName.value = pdt_name
       newProductPrice.value = pdt_price
       newProductType.value = pdt_type
       newProductQty.value = pdt_qty
-
-      /*await axios.get(`${server}/product/${id}`)
-         .then(response => {
-            // console.log(response.data.result[0])
-            //let res = JSON.stringify(response.data.result[0])
-
-            let pdt_name = response.data.result[0].pdt_name
-            let pdt_price = response.data.result[0].pdt_price
-            let pdt_type = response.data.result[0].pdt_type
-            let pdt_qty = response.data.result[0].pdt_qty
-
-            newProductName.value = pdt_name
-            newProductPrice.value = pdt_price
-            newProductType.value = pdt_type
-            newProductQty.value = pdt_qty
-
-         })
-         // .catch(err => alert(err.response.data))
-         //.catch(err => console.log(err))
-
-         //const productId = products.filter((prod) => prod.id === id)
-         // return setProduct(productId)*/
-
-         /*let pdt_name = product[0].pdt_name
-         let pdt_price = product[0].pdt_price
-         let pdt_type = product[0].pdt_type
-         let pdt_qty = product[0].pdt_qty
-
-         newProductName.value = pdt_name
-         newProductPrice.value = pdt_price
-         newProductType.value = pdt_type
-         newProductQty.value = pdt_qty*/
-         
-        // console.log(product)
    }
 
    //getProduct()
@@ -162,6 +95,10 @@ export const EditProduct = ({ close, id, listProducts }: ActionsType) => {
                      Quatidade do Produto: ${newProductQty.value}
                   `)
 
+                  if(close) {
+                     close()
+                  }
+
                   // setTimeout(() => navigate('/openSystem'), 1000)
                   // getProducts()
                   
@@ -178,7 +115,7 @@ export const EditProduct = ({ close, id, listProducts }: ActionsType) => {
    }
 
    return (
-      <section className="editProductForm w-100 h-100 f column sbt">
+      <section className="editProductForm w-100 h-100 f column sbt z-index-50">
          <h4 className="flex sbt">
             <div className="flex text-center w-100">
                Atualizar Produto
