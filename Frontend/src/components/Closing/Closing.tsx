@@ -110,7 +110,7 @@ let amountBank = pix + amountCards
          <div className="formsClosingDay">
 
             <form action='/' className="closingDayForm w-100 h-100 f column sbt">
-               <h4 className="f sbt">
+               <h4 className="f sbt mb-2">
 
                   <div className="flex text-center">
                      <p className='pg1 flex text-info'>Fechamento de Caixa</p>
@@ -125,29 +125,29 @@ let amountBank = pix + amountCards
                   </div>
                </h4>
 
-               <div className="inputForm f aic sbt bb-info"> {/* Abertura */}
+               <div className="inputForm f aic sbt bb-info mb-1 pb-1 pb-1"> {/* Abertura */}
                   <p className='inputTF'>Abertura</p>
 
                   <div className="openingValue borderForm flex inputValue">
                      <CashRegister w='24' h='24' fill='var(--bs-primary)' className='mr-1' />
                      <p className='inputTF text-primary'>
-                        { valuesSalesToday.openCash }
+                        { parseFloat(valuesSalesToday.openCash as string).toFixed(2) }
                      </p>
                   </div>
                </div>
 
-               <div className="inputForm f aic sbt bb-info">  {/* Encerramento */}
+               <div className="inputForm f aic sbt bb-info mb-1 pb-1 pb-1">  {/* Encerramento */}
                   <p className='inputTF'>Encerramento</p>
 
                   <div className="moneyOfTheDay inputValue borderForm flex">
                      <MoneyBillWave w='24' h='24' fill='var(--bs-success)' className='mr-1' />
                      <p className='inputTF text-success'>
-                        { valuesSalesToday.moneyTotal }
+                        { (valuesSalesToday.moneyTotal)?.toFixed(2) }
                      </p>
                   </div>
                </div>
 
-               <div className="inputForm f aic sbt bb-info">  {/* Vendas - Encerramento - Abertura */}
+               <div className="inputForm f aic sbt bb-info mb-1 pb-1">  {/* Vendas - Encerramento - Abertura */}
                   <p className='inputTF'>Vendas</p>
 
                   <div className="amountMoneyOfTheDay inputValue borderForm flex">
@@ -160,23 +160,23 @@ let amountBank = pix + amountCards
                      </span>
 
                      <p className='inputTF text-violet-nk'>
-                        { valuesSalesToday.moneySale }
+                        { (valuesSalesToday.moneySale)?.toFixed(2) }
                      </p>
                   </div>
                </div>
 
-               <div className="inputForm f aic sbt bb-info">  {/* Pix */}
+               <div className="inputForm f aic sbt bb-info mb-1 pb-1">  {/* Pix */}
                   <p className='inputTF'>Pix</p>
 
                   <div className="valueOfTheDay borderForm flex">
                      <Pix w='24' h='24' fill='var(--pix)' className='mr-1' />
                      <p className='inputTF text-pix'>
-                        { valuesSalesToday.moneyPix }
+                        { (valuesSalesToday.pixSale)?.toFixed(2) }
                      </p>
                   </div>
                </div>
 
-               <div className="inputForm f aic sbt bb-info">  {/* Cartões - amountCards */}
+               <div className="inputForm f aic sbt bb-info mb-1 pb-1">  {/* Cartões - amountCards */}
                   <p className='inputTF'>Cartões</p>
 
                   <div className="valueOfTheDay borderForm flex">
@@ -186,12 +186,12 @@ let amountBank = pix + amountCards
                         <CreditCard w='24' h='24' fill='var(--yellow-ml)' className='mr-1' />
                      </span>
                      <p className='inputTF text-blue-mp'>
-                        { valuesSalesToday.debitCredit }
+                        { (valuesSalesToday.debitCredit?.toFixed(2)) }
                      </p>
                   </div>
                </div>
 
-               <div className="inputForm f aic sbt bb-info">  {/* Conta - amountBank */}
+               <div className="inputForm f aic sbt bb-info mb-1 pb-1">  {/* Conta - amountBank */}
                   <p className='inputTF'>Conta</p>
 
                   <div className="valueOfTheDay borderForm flex">
@@ -205,12 +205,12 @@ let amountBank = pix + amountCards
                         <CreditCard w='24' h='24' fill='var(--yellow-ml)' className='mr-1' />
                      </span>
                      <p className='inputTF text-orange-in'>
-                        { valuesSalesToday.valuesBankSale }  
+                        { (valuesSalesToday.valuesBankSale)?.toFixed(2) }  
                      </p>
                   </div>
                </div>
 
-               <div className="inputForm f aic sbt bb-info">  {/* Geral - amountValue */}
+               <div className="inputForm f aic sbt bb-info mb-1 pb-1">  {/* Geral - amountValue */}
                   <p className='inputTF'>Total</p>
 
                   <div className="valueOfTheDay borderForm flex">
@@ -222,7 +222,7 @@ let amountBank = pix + amountCards
                         <PiggyBank w='24' h='24' fill='var(--orange-in)' className='mr-1' />
                      </span>
                      <p className='inputTF text-dark-green'>
-                        { valuesSalesToday.totalSale }
+                        { (valuesSalesToday.totalSale)?.toFixed(2) }
                      </p>
                   </div>
                </div>

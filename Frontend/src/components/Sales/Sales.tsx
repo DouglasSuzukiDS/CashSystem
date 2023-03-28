@@ -60,7 +60,18 @@ export const Sales = ({ listSales, valuesSales, close }: ActionsType) => {
    let moneyPix = (parseFloat(paymentMoney) +  parseFloat(paymentPix)).toFixed(2)
    let debitCredit = (parseFloat(paymentDebit) + parseFloat(paymentCredit)).toFixed(2)
 
-   console.log(parseFloat(paymentMoney + paymentPix).toFixed(2))
+   console.log(`
+      Cash: ${localStorage.getItem("openCashValue")!}
+      Money: ${paymentMoney}
+      MoneyTotal: ${ parseFloat(paymentMoney) + parseFloat(localStorage.getItem("openCashValue")!)}
+      Pix: ${paymentPix}
+      MoneyPix: ${parseFloat(paymentMoney) + parseFloat(paymentPix)}
+      Debit: ${paymentDebit}
+      Credit: ${paymentCredit}
+      DebitCredit: ${parseFloat(paymentDebit) + parseFloat(paymentCredit)}
+      Bank: ${parseFloat(paymentPix) + parseFloat(paymentDebit) + parseFloat(paymentCredit)}
+      Total: ${parseFloat(paymentMoney) + parseFloat(paymentPix) + parseFloat(paymentDebit) + parseFloat(paymentCredit)}
+   `)
 
    return(
       <div className="salesContainer flex sbt column sbt mr-2">
@@ -114,31 +125,31 @@ export const Sales = ({ listSales, valuesSales, close }: ActionsType) => {
             <span className="f column w-100 sbt aifs">
                <p className="moneySale inputTF borderFormMoney flex text-success mb-1">
                   <MoneyBillWave w='24' h='24' fill='var(--bs-success)' className='mr-1' />
-                  { valuesSalesToday.moneySale }
+                  { (valuesSalesToday.moneySale)?.toFixed(2) }
                </p>
 
                <p className="pixSale inputTF borderFormPix flex text-pix mb-1">
                   <Pix w='24' h='24' fill='var(--pix)' className='mr-1' />
-                  { valuesSalesToday.pixSale }
+                  { (valuesSalesToday.pixSale)?.toFixed(2) }
                </p>
 
                <p className="moneyPixSale inputTF borderFormMoneyPix flex text-danger">
                   <MoneyBillWave w='24' h='24' fill='var(--bs-success)' className='mr-1' />
                   <span className="mr-1">+</span>
                   <Pix w='24' h='24' fill='var(--pix)' className='mr-1' />
-                  { valuesSalesToday.moneyPix }
+                  { (valuesSalesToday.moneyPix)?.toFixed(2) }
                </p>
             </span>
 
             <span className="f column w-100 sbt aife">
                <p className="debitSale inputTF borderFormDebit flex text-blue-mp mb-1">
                   <CreditCard w='24' h='24' fill='var(--blue-mp)' className='mr-1' />
-                  { valuesSalesToday.debitSale }
+                  { (valuesSalesToday.debitSale)?.toFixed(2) }
                </p>
 
                <p className="creditSale inputTF borderFormCredit flex text-yellow-ml mb-1">
                   <CreditCard w='24' h='24' fill='var(--yellow-ml)' className='mr-1' />
-                  { valuesSalesToday.creditSale }
+                  { (valuesSalesToday.creditSale)?.toFixed(2) }
                </p>
 
                <p className="debitCreditSale inputTF borderFormCredit flex text-danger">
@@ -146,7 +157,7 @@ export const Sales = ({ listSales, valuesSales, close }: ActionsType) => {
                   <span className="mr-1">+</span>
                   <CreditCard w='24' h='24' fill='var(--yellow-ml)' className='mr-1' />
 
-                  { valuesSalesToday.debitCredit }
+                  { (valuesSalesToday.debitCredit)?.toFixed(2) }
                </p>
             </span>
          </div>

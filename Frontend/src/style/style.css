@@ -1483,8 +1483,8 @@ h4 {
   border: 2px solid var(--fb1);
   border-radius: 8px;
 }
-.containerCartList .containerCartList > div.borderFormDanger {
-  border: 2px solid var(--bg-danger);
+.containerCartList div div.borderFormDanger {
+  border: 2px solid var(--dark-blue);
   border-radius: 8px;
   padding: 8px;
 }
