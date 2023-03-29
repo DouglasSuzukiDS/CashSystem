@@ -37,6 +37,8 @@ import { Sales } from "../../components/Sales/Sales";
 import { ValuesSalesType } from "../../types/ValuesSalesType";
 import { ValeusSalesContext } from "../../context/ValuesSales/ValuesSalesContext";
 import { ManagerSystem } from "../../components/ManagerSystem/ManagerSystem";
+import { FooterSystem } from "../../components/FooterSystem/FooterSystem";
+import { UserDataSectionType } from "../../types/UserDataSectionType";
 
 export const OpenSystem = ({ close }: ActionsType) => {
    const server = 'http://localhost:3001'
@@ -48,14 +50,9 @@ export const OpenSystem = ({ close }: ActionsType) => {
 
    // console.log(`Valor de userData no OpenSystem é ${JSON.stringify(userData)}`)
    // console.log(`O nome de userData é ${JSON.stringify(userData?.userName)}`)
-
-   type UserDataSection = {
-      userName: string,
-      userAdmin: boolean
-   }
-
+   
    // Recebe o nome do usuario logado e se ele e Admin
-   const [userInfos, setUserInfos] = useState<UserDataSection>()
+   const [userInfos, setUserInfos] = useState<UserDataSectionType>()
 
    // Get All Users
    const [users, setUsers] = useState<UserType[]>([])
@@ -195,16 +192,17 @@ export const OpenSystem = ({ close }: ActionsType) => {
             btn_openCash.style.display = 'none'
             btn_closeCash.style.display = 'flex'*/
 
-            if (userDatasSection) {
+            /*if (userDatasSection) {
                console.log(`Valor de userData LC: ${JSON.parse(userDatasSection).userName}`)
                console.log(`Valor de userAdmin LC: ${JSON.parse(userDatasSection).userAdmin}`)
+
                setUserInfos({
                   userName: JSON.parse(userDatasSection).userName,
                   userAdmin: JSON.parse(userDatasSection).userAdmin,
-                  // userName: userData.userName,
-                  // userAdmin: userData.userAdmin
                })
-            }
+            }*/
+
+            checkUserInfos()
          }
       } else {
          setOpen(false)
@@ -212,6 +210,18 @@ export const OpenSystem = ({ close }: ActionsType) => {
       }
    }
 
+   const checkUserInfos = () => {
+      if (userDatasSection) {
+         console.log(`Valor de userData LC: ${JSON.parse(userDatasSection).userName}`)
+         console.log(`Valor de userAdmin LC: ${JSON.parse(userDatasSection).userAdmin}`)
+
+         setUserInfos({
+            userName: JSON.parse(userDatasSection).userName,
+            userAdmin: JSON.parse(userDatasSection).userAdmin,
+         })
+      }
+   }
+ 
    const verifyOpenCashValue = () => {
       //console.log(contentSystemModal)
       const openCashValueLC = localStorage.getItem('openCashValue')
@@ -677,7 +687,7 @@ export const OpenSystem = ({ close }: ActionsType) => {
                }
             </div>
 
-            <footer className="footerSystem flex sbt">
+            {/* <footer className="footerSystem flex sbt">
                <div className="employeerFooterSystem flex column px-2 py-1 mr-3">
                   <p className="pg5 bold text-color">Colaborador</p>
 
@@ -714,7 +724,16 @@ export const OpenSystem = ({ close }: ActionsType) => {
                   </button>
 
                </div>
-            </footer>
+            </footer> */}
+
+            <FooterSystem 
+               userInfos = { userInfos }
+               handleHistoricModal = { handleHistoricModal }
+               handleConfirmPayment = { handleConfirmPayment }
+               handleAddProductModal = {  handleAddProductModal }
+               handleClearCartList = { handleClearCartList }
+               onKeyDown = { handleKeyDown }
+            />
          </section>
       </main>
    )

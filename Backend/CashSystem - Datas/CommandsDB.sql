@@ -59,9 +59,9 @@ CREATE TABLE products (
 */
 
 /* // Users
-	DELETE FROM users where id = 2;
+	DELETE FROM users where id = 6;
 	SELECT * FROM users;
-    ALTER TABLE users AUTO_INCREMENT = 1;
+    ALTER TABLE users AUTO_INCREMENT = 6;
 	INSERT INTO users VALUES (01, 'Percio Valente', 'percio.valente', 123, 1);
     INSERT INTO users VALUES (02, 'Tonhao Motomoto', 'tonhao.motomoto', 123, 0);
     INSERT INTO users VALUES (03, 'Chico Palha', 'chico.palha', 123, 0);

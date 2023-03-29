@@ -29,7 +29,7 @@ export const ManagerSystem = ({ handleOptionSystem, handleNewUser, handleManager
       <section className="managerSystem flex mr-3" onMouseLeave={handleOptionSystem}>
          <ul className="flex column text-dark bold">
             <li className="flex"
-               onClick={handleNewUser}>
+               onClick={ handleNewUser }>
                Novo Usuário
                <UserPlus w="20" h="20" fill="var(--bs-info)" className="ml-1" />
             </li>
