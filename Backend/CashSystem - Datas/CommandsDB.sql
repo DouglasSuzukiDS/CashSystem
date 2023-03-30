@@ -51,17 +51,16 @@ CREATE TABLE products (
 	DELETE FROM products WHERE id = 3; 
 	DELETE FROM products WHERE id = 4; 
 	DELETE FROM products WHERE id = 5; 
-    ALTER TABLE products AUTO_INCREMENT = 3;
-    SELECT * FROM products;
-    SELECT * FROM products 
+    ALTER TABLE products AUTO_INCREMENT = 1;
+    SELECT * FROM users
 		WHERE userLogin = 'chico.palha' 
-        AND userPassword = 123;
+        AND userPassword = '$2b$10$YEVuG2dcYSZfNhMB4ggc9.LMJcpCUrkZOTsHqlwqt5qq01WzMmtbS';
 */
 
 /* // Users
 	DELETE FROM users where id = 6;
 	SELECT * FROM users;
-    ALTER TABLE users AUTO_INCREMENT = 6;
+    ALTER TABLE users AUTO_INCREMENT = 1;
 	INSERT INTO users VALUES (01, 'Percio Valente', 'percio.valente', 123, 1);
     INSERT INTO users VALUES (02, 'Tonhao Motomoto', 'tonhao.motomoto', 123, 0);
     INSERT INTO users VALUES (03, 'Chico Palha', 'chico.palha', 123, 0);

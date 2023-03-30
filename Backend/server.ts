@@ -42,8 +42,9 @@ server.get('/backupUsers', async(req, res) => {
 
    db.query(SQL, (err, result) => {
       if(err) {
-         console.log({ msg: 'Erro ao listar todos os usuários' })
+         console.log({ msg: 'Erro ao fazer backup dos usuários' })
          console.log(err)
+         res.status(404).send({ msg: 'Erro ao fazer backup dos usuários' })
       } else {
          // Escreve o arquivo
          // writeFile('PATH', CONTEUDO, CALLBACK)
@@ -57,6 +58,15 @@ server.get('/backupUsers', async(req, res) => {
                fs.readFile(`backup/backupUsers/${dateNow}users.json`, (err, data) => {
                   err ? console.log(err) : console.log('Usuários: ' + data)
                })
+            }
+         })
+
+         // Salvamento na pasta do computador para ser upada no drive automática em formato SQL
+         fs.writeFile(`C:/Users/${process.env.NAME}/Downloads/OneDrive/backup/backupUsers/${dateNow}users.sql`, JSON.stringify(result), (err) => {
+            if(err) {
+               console.log(err)
+            } else {
+               console.log('Backup de usuários salvo com Sucesso no computador!')
             }
          })
 
@@ -96,6 +106,52 @@ server.get('/user/:id', async(req, res) => { // Error
    })
 })
 
+// server.post('/login', async(req, res) => { // Error
+
+//    const { userLogin, userPassword } = req.body
+//    // console.log(`User => ${userLogin}, Senha => ${userPassword}`)
+
+//    let findUser: string = `SELECT * FROM users WHERE (userLogin, userPassword) = (?, ?)`
+
+//    const password = bcrypt.compareSync(userPassword, findUser)
+
+//    db.query(findUser, [userLogin, password], async(err, result) => {
+//       // console.log(result) // Return User
+
+//       if(err) {
+//          console.log({ msg: 'Ocorreu um erro' })
+//          res.status(404).json({ msg: 'Erro ao logar' })
+
+//       } else if( JSON.parse(JSON.stringify(result)).length > 0 ) {
+//          /*const token = JTW.sign(
+//             { userLogin: userLogin, userPassword: userPassword}, // Identificação
+//             process.env.SECRET,
+//             { expiresIn: '2h' } // Tempo de expiração
+//          )*/
+
+//          if(await bcrypt.compareSync(userPassword, JSON.parse(result).userPassword)) {
+//             const token = JTW.sign(
+//                { userLogin: userLogin, userPassword: userPassword}, // Identificação
+//                process.env.SECRET,
+//                { expiresIn: '2h' } // Tempo de expiração
+//             )
+//             let user = Object.values(result)
+//             console.log(typeof user[0])
+//             console.log(user[0])
+//             // res.status(200).json({ msg: `Logado como: ${userLogin}`, token: `Token: ${token}`, result: `${user}`})
+//             res.status(200).send({ msg: `Logado como: ${userLogin}`, token: `${token}`, user: `${JSON.stringify(user[0])}`})
+//          }
+
+
+//          // res.json({ status: true, token })
+//       } else {
+//          //console.log({ msg: 'Dados incorretos ou não localizados' })
+//          res.status(404).send({ msg: 'Dados incorretos ou não localizados.' })
+//       }
+//    })
+
+// })
+
 server.post('/login', async(req, res) => { // Error
 
    const { userLogin, userPassword } = req.body
@@ -118,18 +174,6 @@ server.post('/login', async(req, res) => { // Error
             process.env.SECRET,
             { expiresIn: '2h' } // Tempo de expiração
          )
-         //console.log(token)
-         //let user = JSON.parse(JSON.stringify(result))
-         // let user = JSON.stringify(result)
-         // console.log(user)
-         /*let user = {
-            id: data[0].id,
-            userName: data[0].userName,
-            userLogin: data[0].userLogin,
-            userPassword: data[0].userPassword,
-            userAdmin: data[0].userPassword
-         }*/
-         // console.log(user)
 
          let user = Object.values(result)
          console.log(typeof user[0])
@@ -276,8 +320,9 @@ server.get('/backupProducts', async(req, res) => {
 
    db.query(SQL, (err, result) => {
       if(err) {
-         console.log({ msg: 'Erro ao listar todos os produtos' })
+         console.log({ msg: 'Erro ao fazer backup dos produtos' })
          console.log(err)
+         res.status(404).send({ msg: 'Erro ao fazer backup dos produtos' })
       } else {
 
          // writeFile('PATH', CONTEUDO, CALLBACK) => 
@@ -290,6 +335,15 @@ server.get('/backupProducts', async(req, res) => {
                fs.readFile(`backup/backupProducts/${dateNow}products.json`, (err, data) => {
                   err ? console.log(err) : console.log('Produtos: ' + data)
                })
+            }
+         })
+
+         // Salvamento na pasta do computador para ser upada no drive automática em formato SQL
+         fs.writeFile(`C:/Users/${process.env.NAME}/Downloads/OneDrive/backup/backupProducts/${dateNow}products.sql`, JSON.stringify(result), (err) => {
+            if(err) {
+               console.log(err)
+            } else {
+               console.log('Backup de produtos salvo com Sucesso no computador!')
             }
          })
 
