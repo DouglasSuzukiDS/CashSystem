@@ -39,6 +39,7 @@ import { ValeusSalesContext } from "../../context/ValuesSales/ValuesSalesContext
 import { ManagerSystem } from "../../components/ManagerSystem/ManagerSystem";
 import { FooterSystem } from "../../components/FooterSystem/FooterSystem";
 import { UserDataSectionType } from "../../types/UserDataSectionType";
+import { Logo } from "../../assets/Icons/Logo";
 
 export const OpenSystem = ({ close }: ActionsType) => {
    const server = 'http://localhost:3001'
@@ -512,7 +513,7 @@ export const OpenSystem = ({ close }: ActionsType) => {
          <section className="sectionSystem">
             <header className="headerSystem flex sbt">
                <div className="logoSystem text-primary pg3 bold">
-                  CashSystem
+                  <Logo w="130" h="60" className="pointer" />
                </div>
 
                <div className="statusSystem flex column" id="statusSystem">
