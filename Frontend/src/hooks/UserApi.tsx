@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const backend: string = "http://localhost:3001"
+const server: string = "http://localhost:3001"
 
 export const useApi = () => ({
    
@@ -11,7 +11,7 @@ export const useApi = () => ({
    },
 
    loginSystem: async(userLogin: string, userPassword: string) => {
-      let response = await axios.post(`${backend}/login`, {userLogin , userPassword })
+      let response = await axios.post(`${server}/login`, { userLogin , userPassword })
          .then((response) => {
             if (response.status === 200) {
                console.log(response.data.msg, response.data.token, JSON.parse(response.data.user))
@@ -25,7 +25,7 @@ export const useApi = () => ({
          .catch(err => {
             // alert('userAPI ' + err.response.data.msg)
             //return err.response.data.msg
-            return err
+            return err.response.data.msg
          })
 
       return response.data

@@ -137,6 +137,7 @@ server.post('/login', async(req, res) => { // Error
 
             res.status(200).send({ msg: `Logado como: ${userLogin}`, token: `Token: ${token}`, result: `${JSON.stringify(user)}`})
          } else {
+            console.log('Senha errada')
             res.status(404).send({ msg: 'Dados incorretos ou não localizados.' })
          }
       } else {
@@ -575,6 +576,50 @@ server.delete('/deleteSaleDay', async(req, res) => {
          res.status(200).send({ msg: 'Carrinho limpo com sucesso.' })
       }
    })
+})
+
+// System
+server.get('/sales', async(req, res) => {
+   let SQL = `SELECT * FROM Sales;`
+
+   db.query(SQL, async(err, result) => {
+      if(err) {
+         console.log(err)
+         res.status(404).send({ msg: 'Erro ao lista todos as vendas' })
+      } else {
+         res.status(200).send({ msg: 'Vendas registadas', result })
+      }
+   })
+})
+
+
+server.post('/closeSystem', async(req, res) => {
+   const { dateSale, sellerSale, openCash, totalSale, openSystem, closeSystem, moneySale, pixSale, debitSale, creditSale, cardsSale, bankSale } = req.body
+
+   const day: number = new Date().getDate()
+   const mouth: number = new Date().getMonth()
+   const year: number = new Date().getFullYear()
+
+   const hour: number = new Date().getHours()
+   const minutes: number = new Date().getMinutes()
+   const seconds: number = new Date().getSeconds()
+
+   // const today: string = (new Date(Date.now()).toLocaleString().split(',')[0]).replace('/', '-')
+   const today: string = `${day}-${mouth + 1}-${year}`
+   const hours: string = `${hour}:${minutes}:${seconds}`
+   const dateNow: string = `${today} ${hours}`
+
+   const SQL = `INSERT INTO Sales (dateSale, sellerSale, openCash, totalSale, openSystem, closeSystem, moneySale, pixSale, debitSale, creditSale, cardsSale, bankSale) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)` 
+
+   db.query(SQL, [dateSale, sellerSale, openCash, totalSale, openSystem, closeSystem, moneySale, pixSale, debitSale, creditSale, cardsSale, bankSale], async(err, result) => {
+      if(err) {
+         console.log(err)
+         res.status(404).send({ msg: 'Erro ao salvar faturamento do dia' })
+      } else {
+         res.status(201).send({ msg: 'Produto adicionado com sucesso' })    
+      }
+   })
+
 })
 
 server.listen('3001', () => console.log('Backend Running in port 3001'))

@@ -102,18 +102,8 @@ CREATE TABLE products (
     INSERT INTO products VALUES (30, 'Gudang Garang Solto', 2, 'Cigarros', 14);
 */
 
-/* // Sale
+/* // SaleDay
 	DELETE FROM SaleDay;
-
-		id int AI PK 
-        pdt_name varchar(50) 
-        pdt_price decimal(10,2) 
-        pdt_type varchar(50) 
-        pdt_qty int 
-        pdt_value int
-*/
-
-/*
     CREATE TABLE SaleDay(
         idSale INT PRIMARY KEY AUTO_INCREMENT,
         priceSale DECIMAL(10, 2),
@@ -156,4 +146,39 @@ CREATE TABLE products (
     insert into pessoa (idPessoa, nome, documento) values (
         1, 'Joao', '{{"RG":"123456", "456", "CNH":"654321"}, {"RG":"123456", "456", "CNH":"654321"}}'
     );
-    */
+*/
+
+
+-- // Sales
+/*CREATE TABLE Sales(
+    idSale INT PRIMARY KEY AUTO_INCREMENT,
+    dateSale VARCHAR(30) NOT NULL,
+    sellerSale VARCHAR(50) NOT NULL,
+    openCash DECIMAL (10, 2) NOT NULL,
+    totalSale DECIMAL (10, 2) NOT NULL,
+    openSystem VARCHAR(50) NOT NULL,
+    closeSystem VARCHAR(50) NOT NULL,
+    moneySale DECIMAL (10, 2) NOT NULL,
+    pixSale DECIMAL (10, 2) NOT NULL,
+    debitSale DECIMAL (10, 2) NOT NULL,
+    creditSale DECIMAL (10, 2) NOT NULL,
+    cardsSale DECIMAL (10, 2) NOT NULL,
+    bankSale DECIMAL (10, 2) NOT NULL
+);*/
+
+/*INSERT INTO Sales (dateSale, sellerSale, openCash, totalSale, openSystem, closeSystem, moneySale, pixSale, debitSale, creditSale, cardsSale, bankSale) VALUES (
+    "30/03/2023",
+    "Nick",
+    "12.00",
+    "150.00",
+    "12:50:00",
+    "18:00:00",
+    "30.00",
+    "80.00",
+    "20.00",
+    "20.00",
+    "40.00",
+    "120.00"
+);*/
+
+-- SELECT * FROM Sales;
