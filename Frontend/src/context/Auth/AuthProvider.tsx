@@ -47,7 +47,7 @@ export const AuthProvider = ({ children }: { children: JSX.Element }) => {
 
          if(response.user) {
             console.log('User =>' + response.user)
-            // setUser(JSON.parse(response.user))
+            //setUser(JSON.parse(response.user))
             // console.log(user)
             console.log('O tipo de res.user no AuthProvider é: ' + typeof JSON.parse(response.user))
 
