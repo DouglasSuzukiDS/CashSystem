@@ -37,9 +37,9 @@ export const AuthProvider = ({ children }: { children: JSX.Element }) => {
       // return false 
          
       const response = await api.loginSystem(userLogin, userPassword)
-      console.log(response)
+      console.log(response + ' no AuthProvider')
       // let test = JSON.parse(response.user)
-      // console.log(typeof response.user)
+      console.log(typeof response)
 
       if(response) {
          deleteToken()

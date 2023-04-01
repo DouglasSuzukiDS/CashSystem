@@ -40,6 +40,7 @@ import { ManagerSystem } from "../../components/ManagerSystem/ManagerSystem";
 import { FooterSystem } from "../../components/FooterSystem/FooterSystem";
 import { UserDataSectionType } from "../../types/UserDataSectionType";
 import { Logo } from "../../assets/Icons/Logo";
+import { ArrowLeftLong } from "../../assets/Icons/ArrowLeftLong";
 
 export const OpenSystem = ({ close }: ActionsType) => {
    const server = 'http://localhost:3001'
@@ -271,6 +272,13 @@ export const OpenSystem = ({ close }: ActionsType) => {
       setConfirmPaymentModal(false)
       setAddProduct(false)
       //console.log(closeSystem)
+   }
+
+   const handleCloseSystem = async() => {
+      await localStorage.removeItem('openCashValue')
+      await localStorage.removeItem('AuthToken')
+      await localStorage.removeItem('UserDatas')
+      window.location.href = 'http://localhost:3000'
    }
 
    // Função Responsável por mostrar o Modal de Produtos
@@ -525,6 +533,8 @@ export const OpenSystem = ({ close }: ActionsType) => {
                   {   // Gears and Buttons
                      !open ?
                         <>
+                           <ArrowLeftLong w='24' h='24' fill='var(--bs-danger)' className='pointer mr-1' onClick={ handleCloseSystem }/>
+
                            <Gears w='24' h='24' fill='var(--bs-secondary)' className='notAllowed' />
 
                            <button className="btn btn-primary ml-2 border" id="btn_openCash" onClick={startJob} onChange={() => setOpen(true)}>

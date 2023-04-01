@@ -134,8 +134,9 @@ server.post('/login', async(req, res) => { // Error
                process.env.SECRET,
                { expiresIn: '2h' } // Tempo de expiração
             )
-
-            res.status(200).send({ msg: `Logado como: ${userLogin}`, token: `Token: ${token}`, result: `${JSON.stringify(user)}`})
+            console.log(user[0])
+            // res.status(200).send({ msg: `Logado como: ${userLogin}`, token: `Token: ${token}`, result: `${JSON.stringify(user)}`})
+            res.status(200).send({ msg: `Logado como: ${userLogin}`, token: `Token: ${token}`, result: `${user}`})
          } else {
             console.log('Senha errada')
             res.status(404).send({ msg: 'Dados incorretos ou não localizados.' })

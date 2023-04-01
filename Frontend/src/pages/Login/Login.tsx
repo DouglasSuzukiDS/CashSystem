@@ -37,7 +37,7 @@ export const Login = () => {
          setLoading(true)
 
          const logged = await auth.loginSystem(userLogin, userPassword)
-         //alert(logged)
+        //  alert('Login Logged' + logged)
 
          if(logged) {
             navigate('/OpenSystem')
