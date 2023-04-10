@@ -738,6 +738,7 @@ export const OpenSystem = ({ close }: ActionsType) => {
             </footer> */}
 
             <FooterSystem 
+               // userInfos = { userInfos }
                userInfos = { userInfos }
                handleHistoricModal = { handleHistoricModal }
                handleConfirmPayment = { handleConfirmPayment }

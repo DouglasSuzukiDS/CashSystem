@@ -136,8 +136,8 @@ server.post('/login', async(req, res) => { // Error
             )
             console.log(user[0])
             // res.status(200).send({ msg: `Logado como: ${userLogin}`, token: `Token: ${token}`, result: `${JSON.stringify(user)}`})
-            res.status(200).send({ msg: `Logado como: ${userLogin}`, token: `${token}`, userInfos: [`${user[0].userName}`, `${user[0].userAdmin}`]  , result: `${user[0]}`})
-            res.json()
+            res.status(200).send({ msg: `Logado como: ${userLogin}`, token: `${token}`, userInfos: [`${user[0].userName}`, `${user[0].userAdmin}`]  , result: `${JSON.stringify(user)}`})
+            //res.json()
          } else {
             console.log('Senha errada')
             res.status(404).send({ msg: 'Dados incorretos ou não localizados.' })

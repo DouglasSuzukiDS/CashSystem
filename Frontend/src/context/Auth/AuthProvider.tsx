@@ -8,7 +8,7 @@ import axios from "axios"
 export const AuthProvider = ({ children }: { children: JSX.Element }) => {
    const [user] = useState<UserType | null>(null)
    const [userData, setUserData] = useState<UserType>({ id: '', userName: '', userLogin: '', userPassword: '', userAdmin: false })
-
+   
    const api = useApi()
 
    useEffect(() => {
@@ -69,7 +69,11 @@ export const AuthProvider = ({ children }: { children: JSX.Element }) => {
    const signIn = async (userLogin: string, userPassword: string) => {
       const response = await api.signIn(userLogin, userPassword)
       if (response.status === 200) {
-         // console.log(response)
+         let data = JSON.parse(response.data.result)
+         console.log(data)
+         setUserData(data)
+
+         //console.log((response.data.result.userName))
          deleteToken()
          createToken(response.token)
          createUserDataToken(response.data.userInfos[0], response.data.userInfos[1])
