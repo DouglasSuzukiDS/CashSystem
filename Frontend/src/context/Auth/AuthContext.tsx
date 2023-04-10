@@ -3,7 +3,8 @@ import { UserType } from "../../types/UserType";
 
 export type AuthContextType = {
    user: UserType | null
-   loginSystem: (userLogin: string, userPassword: string) => Promise<boolean>
+   loginSystem?: (userLogin: string, userPassword: string) => Promise<boolean>
+   signIn: (userLogin: string, userPassword: string) => Promise<boolean>
    logout: () => void
    userData: UserType
    setUserData: Dispatch<SetStateAction<UserType>>

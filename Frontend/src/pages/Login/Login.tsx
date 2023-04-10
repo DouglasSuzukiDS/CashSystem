@@ -30,7 +30,7 @@ export const Login = () => {
       setUserPassword(e.target.value)
    }
 
-   const handleLogin = async() => {
+   /*const handleLogin = async() => {
       if(userLogin && userPassword) {
          console.log(`userLogin: ${userLogin}, userPassword: ${userPassword}`)
          
@@ -43,6 +43,27 @@ export const Login = () => {
             navigate('/OpenSystem')
          } else {
             alert('Falha ao logar. MSG do Component Login')
+            setLoading(false)
+         }
+      }
+
+      setLoading(false)
+   }*/
+
+   const handleLogin = async() => {
+      if(userLogin && userPassword) {
+         console.log(`userLogin: ${userLogin}, userPassword: ${userPassword}`)
+         
+         setLoading(true)
+
+         const logged = await auth.signIn(userLogin, userPassword)
+        //  alert('Login Logged' + logged)
+
+         if(logged) {
+            navigate('/OpenSystem')
+         } else {
+            // alert('Falha ao logar. MSG do Component Login')
+            alert('Login ou senha inválidos')
             setLoading(false)
          }
       }

@@ -35,7 +35,35 @@ export const useApi = () => ({
             return err
          })
 
+         /*const response = await fetch(`${server}/login` ,{
+            method: 'POST',
+            headers: {
+               "Content-Type": "application/json",
+             },
+            body: JSON.stringify({
+               userLogin, userPassword
+            })
+         })
+         //.then(res => res.json())
+         .then(res => res.text())
+         .catch(err => console.log(err))*/
+
       return response
+   },
+
+   signIn: async(userLogin: string, userPassword: string) => {
+      const login = await axios.post(`${server}/login`, { userLogin, userPassword })
+      .then(res => {
+         if(res.status === 200) {
+            console.log(res.data)
+            return res
+         }
+      })
+      .catch(err => {
+         console.log(`Erro no UserApi, ${err}`)
+         return err
+      })
+   return login
    },
 
    logout: async() => {
