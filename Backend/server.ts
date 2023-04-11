@@ -70,7 +70,7 @@ server.get('/backupUsers', async(req, res) => {
             }
          })
 
-         res.status(200).send({ msg: 'Backup Realizado', result })
+         res.status(200).send({ msg: 'Backup de Usuários Realizado com Sucesso', result })
       }
    })
 })
@@ -345,7 +345,7 @@ server.get('/backupProducts', async(req, res) => {
             }
          })
 
-         res.status(200).send({ msg: 'Backup Realizado', result })
+         res.status(200).send({ msg: 'Backup dos Produtos Realizado com Sucesso', result })
       }
    })
 })
@@ -499,7 +499,7 @@ server.delete('/delete/product/:id', async(req, res) => {
 
 // Add Product
 server.get('/saleDayList', (req, res) => {
-   let SQL: string = 'SELECT * FROM SaleDay'
+   let SQL: string = 'SELECT * FROM SalesDay'
 
    db.query(SQL, async(err, result) => {
       if(err) {
@@ -527,7 +527,7 @@ server.post('/newSale', (req, res) => {
    const hours: string = `${hour}:${minutes}:${seconds}`
    const dateNow: string = `${today} ${hours}`
 
-   let SQL: string = `INSERT INTO SaleDay (priceSale, sellerSale, methodSale, registrationSale) VALUES (?, ?, ?, ?)`
+   let SQL: string = `INSERT INTO SalesDay (priceSale, sellerSale, methodSale, registrationSale) VALUES (?, ?, ?, ?)`
 
 
    db.query(SQL, [ priceSale, sellerSale, methodSale, `${dateNow}`], async (err, result) => {
@@ -581,6 +581,55 @@ server.delete('/deleteSaleDay', async(req, res) => {
 })
 
 // System
+server.get('/backupSalesDay', async(req, res) => {
+   let SQL: string = `SELECT * FROM SalesDay`
+
+   const day: number = new Date().getDate()
+   const mouth: number = new Date().getMonth()
+   const year: number = new Date().getFullYear()
+
+   const hour: number = new Date().getHours()
+   const minutes: number = new Date().getMinutes()
+   const seconds: number = new Date().getSeconds()
+
+   const today: string = `${day}-${mouth + 1}-${year}`
+   const hours: string = `${hour}-${minutes}-${seconds}-`
+   const dateNow: string = `${today}-${hours}`
+
+   db.query(SQL, (err, result) => {
+      if(err) {
+         console.log({ msg: 'Erro ao fazer backup das vendas do dia' })
+         console.log(err)
+         res.status(404).send({ msg: 'Erro ao fazer backup das vendas do dia' })
+      } else {
+
+         // writeFile('PATH', CONTEUDO, CALLBACK) => 
+         fs.writeFile(`backup/backupSalesDay/${dateNow}salesDay.json`, JSON.stringify(result), (err) => {
+            if(err) {
+               console.log(err)
+            } else {
+               console.log('Backup das vendas do dia salvo com Sucesso!')
+
+               fs.readFile(`backup/backupSalesDay/${dateNow}salesDay.json`, (err, data) => {
+                  err ? console.log(err) : console.log('Vendas: ' + data)
+               })
+            }
+         })
+
+         // Salvamento na pasta do computador para ser upada no drive automática em formato SQL
+         fs.writeFile(`C:/Users/${process.env.NAME}/Downloads/OneDrive/backup/backupSalesDay/${dateNow}SalesDay.sql`, JSON.stringify(result), (err) => {
+            if(err) {
+               console.log(err)
+            } else {
+               console.log('Backup de produtos salvo com Sucesso no computador!')
+            }
+         })
+
+         res.status(200).send({ msg: 'Backup das Vendas do Dia Realizado', result })
+      }
+   })
+})
+
 server.get('/sales', async(req, res) => {
    let SQL = `SELECT * FROM Sales;`
 
@@ -593,7 +642,6 @@ server.get('/sales', async(req, res) => {
       }
    })
 })
-
 
 server.post('/closeSystem', async(req, res) => {
    const { dateSale, sellerSale, openCash, totalSale, openSystem, closeSystem, moneySale, pixSale, debitSale, creditSale, cardsSale, bankSale } = req.body

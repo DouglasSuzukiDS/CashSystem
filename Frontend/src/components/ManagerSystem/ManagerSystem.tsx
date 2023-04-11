@@ -12,7 +12,7 @@ export const ManagerSystem = ({ handleOptionSystem, handleNewUser, handleManager
    const server = 'http://localhost:3001'
 
    // Funções de Backup
-   const handleBackup = async () => {
+   const handleBackups = async () => {
       await axios.get(`${server}/backupUsers`)
          .then(response => {
             if(response.status === 200) { 
@@ -22,7 +22,14 @@ export const ManagerSystem = ({ handleOptionSystem, handleNewUser, handleManager
                .then(response => {
                   if(response.status === 200) { 
                      // alert(`${response.data.msg} 😎`)
-                     alert('Backup de Usuários e Produtos realizado com sucesso 😎')
+                     // alert('Backup de Usuários e Produtos realizado com sucesso 😎')
+
+                     axios.get(`${server}/backupSalesDay`)
+                        .then(response => {
+                           if(response.status === 200) {
+                              alert('Backup de Usuários, Produtos & Vendas, realizado com sucesso 😎')
+                           }
+                        })
                   } else {
                      alert(`${response.data.msg}`)
                   }
@@ -41,7 +48,14 @@ export const ManagerSystem = ({ handleOptionSystem, handleNewUser, handleManager
    }
    
    const handleBackupSales = async () => {
-      
+      await axios.get(`${server}/backupSalesDay`)
+         .then(response => {
+            if(response.status === 200) {
+               alert('Backup das vendas realizadas, realizado com sucesso 😎')
+            } else {
+               alert(`${response.data.msg}`)
+            }
+         })
    }
    
    const handleBackupUsers = async () => {
@@ -100,13 +114,13 @@ export const ManagerSystem = ({ handleOptionSystem, handleNewUser, handleManager
             </li>
 
             <li className="flex"
-               onClick={handleBackup}>
+               onClick={ handleBackups }>
                Backup Geral
                <Download w="20" h="20" fill="var(--btn)" className="ml-1" />
             </li>
 
             <li className="flex"
-               onClick={handleBackupSales}>
+               onClick={ handleBackupSales }>
                BKP de Vendas
                <Download w="20" h="20" fill="var(--btn)" className="ml-1" />
             </li>

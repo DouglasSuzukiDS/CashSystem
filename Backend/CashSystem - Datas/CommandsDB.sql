@@ -182,3 +182,5 @@ CREATE TABLE products (
 );*/
 
 -- SELECT * FROM Sales;
+-- SELECT * FROM SaleDay;
+-- ALTER TABLE saleday RENAME SalesDay;

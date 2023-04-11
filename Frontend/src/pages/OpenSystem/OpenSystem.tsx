@@ -41,6 +41,8 @@ import { FooterSystem } from "../../components/FooterSystem/FooterSystem";
 import { UserDataSectionType } from "../../types/UserDataSectionType";
 import { Logo } from "../../assets/Icons/Logo";
 import { ArrowLeftLong } from "../../assets/Icons/ArrowLeftLong";
+import { allProducts } from "../../services/product.service";
+import { LogoBlue } from "../../assets/Icons/Logo Blue";
 
 export const OpenSystem = ({ close }: ActionsType) => {
    const server = 'http://localhost:3001'
@@ -152,6 +154,13 @@ export const OpenSystem = ({ close }: ActionsType) => {
       }
    }, [cartList])
 
+   useEffect(() => {
+      allProducts()
+         .then(setProducts)
+         .catch(e => console.log(e))
+   }, [addProduct])
+
+   
    // KeyPress Event
    useEffect(() => {
       window.addEventListener('keydown', (event) => {
@@ -521,7 +530,7 @@ export const OpenSystem = ({ close }: ActionsType) => {
          <section className="sectionSystem">
             <header className="headerSystem flex sbt">
                <div className="logoSystem text-primary pg3 bold">
-                  <Logo w="130" h="60" className="pointer" />
+                  <LogoBlue w="130" h="60" className="pointer" />
                </div>
 
                <div className="statusSystem flex column" id="statusSystem">

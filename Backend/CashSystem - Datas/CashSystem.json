@@ -1,7 +1,7 @@
 {
     "client": "Thunder Client",
     "collectionName": "CashSystem",
-    "dateExported": "2023-03-27T02:55:37.646Z",
+    "dateExported": "2023-04-11T03:08:41.648Z",
     "version": "1.1",
     "folders": [
         {
@@ -24,6 +24,13 @@
             "containerId": "",
             "created": "2023-03-24T23:01:37.303Z",
             "sortNum": 30000
+        },
+        {
+            "_id": "269900a1-92d4-4dca-825a-80ad9b852ca7",
+            "name": "System",
+            "containerId": "",
+            "created": "2023-03-31T03:09:22.657Z",
+            "sortNum": 40000
         }
     ],
     "requests": [
@@ -202,7 +209,7 @@
             "method": "POST",
             "sortNum": 65000,
             "created": "2023-03-24T23:01:37.313Z",
-            "modified": "2023-03-24T23:01:37.313Z",
+            "modified": "2023-03-31T22:43:10.249Z",
             "headers": [
                 {
                     "name": "Accept",
@@ -303,7 +310,7 @@
             "method": "GET",
             "sortNum": 100000,
             "created": "2023-03-24T23:01:37.318Z",
-            "modified": "2023-03-26T20:01:27.017Z",
+            "modified": "2023-04-11T02:40:40.383Z",
             "headers": [],
             "params": [],
             "tests": []
@@ -318,6 +325,53 @@
             "sortNum": 110000,
             "created": "2023-03-24T23:01:37.319Z",
             "modified": "2023-03-24T23:01:37.319Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "e0d78491-1159-463b-b200-7a6d72c9af16",
+            "colId": "291ddf43-fc8d-4b88-b442-e7f4f0658eb9",
+            "containerId": "269900a1-92d4-4dca-825a-80ad9b852ca7",
+            "name": "Sales",
+            "url": "localhost:3001/closeSystem",
+            "method": "POST",
+            "sortNum": 120000,
+            "created": "2023-03-31T03:09:30.777Z",
+            "modified": "2023-03-31T03:12:41.121Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"dateSale\": \"30/03/2023\", \n  \"sellerSale\": \"Nick\", \n  \"openCash\": \"12.00\", \n  \"totalSale\":\"150.00\", \n  \"openSystem\": \"12:50:00\",\n  \"closeSystem\": \"18:00:00\", \n  \"moneySale\": \"30.00\", \n  \"pixSale\": \"80.00\" , \n  \"debitSale\": \"20.00\", \n  \"creditSale\": \"20.00\", \n  \"cardsSale\": \"40.00\", \n  \"bankSale\": \"120.00\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "25909a0e-940a-4a20-8e72-f1602b2ccd92",
+            "colId": "291ddf43-fc8d-4b88-b442-e7f4f0658eb9",
+            "containerId": "269900a1-92d4-4dca-825a-80ad9b852ca7",
+            "name": "Sales List",
+            "url": "localhost:3001/sales",
+            "method": "GET",
+            "sortNum": 130000,
+            "created": "2023-03-31T03:13:00.064Z",
+            "modified": "2023-03-31T03:13:11.823Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "4590afda-9268-4e5f-b4f8-2bab87dd6699",
+            "colId": "291ddf43-fc8d-4b88-b442-e7f4f0658eb9",
+            "containerId": "269900a1-92d4-4dca-825a-80ad9b852ca7",
+            "name": "Backup Sales Day",
+            "url": "localhost:3001/backupSalesDay",
+            "method": "GET",
+            "sortNum": 140000,
+            "created": "2023-04-11T02:35:48.932Z",
+            "modified": "2023-04-11T02:35:57.520Z",
             "headers": [],
             "params": [],
             "tests": []
