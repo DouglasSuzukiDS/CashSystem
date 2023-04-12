@@ -29,7 +29,7 @@ CREATE TABLE `salesday` (
   `methodSale` varchar(20) DEFAULT NULL,
   `registrationSale` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`idSale`)
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -38,7 +38,6 @@ CREATE TABLE `salesday` (
 
 LOCK TABLES `salesday` WRITE;
 /*!40000 ALTER TABLE `salesday` DISABLE KEYS */;
-INSERT INTO `salesday` VALUES (1,20.00,'Persio Valente','Pix','24-3-2023 23:0:53'),(2,12.25,'Nick','Cartão de Crédito','25-3-2023 23:1:6'),(3,5.25,'Nick','Pix','25-3-2023 23:6:23'),(4,10.00,'Nick','Pix','25-3-2023 23:9:16'),(5,22.00,'Nick','Pix','25-3-2023 23:11:25'),(6,12.25,'Nick','Pix','25-3-2023 23:29:54'),(7,22.00,'Nick','Cartão de Débito','25-3-2023 23:30:42'),(8,10.00,'Nick','Dinheiro','25-3-2023 23:34:18'),(9,10.00,'Nick','Cartão de Crédito','25-3-2023 23:34:59'),(10,4.25,'Nick','Cartão de Débito','25-3-2023 23:38:23'),(11,10.00,'Nick','Pix','25-3-2023 23:51:34'),(12,10.00,'Nick','Pix','26-3-2023 16:43:20'),(13,15.00,'Nick','Cartão de Crédito','26-3-2023 16:44:22'),(14,10.00,'Nick','Pix','26-3-2023 16:45:54'),(15,20.25,'Nick','Dinheiro','26-3-2023 16:47:55'),(16,9.00,'Nick','Pix','26-3-2023 16:48:23'),(17,5.00,'Nick','Pix','26-3-2023 17:3:20'),(18,5.00,'Nick','Pix','26-3-2023 19:8:17'),(19,22.00,'Nick','Cartão de Débito','26-3-2023 19:9:2'),(20,10.25,'Nick','Pix','26-3-2023 19:9:51'),(21,12.00,'Nick','Dinheiro','26-3-2023 19:10:23'),(22,10.00,'Nick','Pix','26-3-2023 19:53:35'),(23,52.25,'Nick','Cartão de Crédito','26-3-2023 21:18:48'),(24,34.00,'Nick','Cartão de Crédito','26-3-2023 22:24:55'),(25,0.50,'Nick','Pix','27-3-2023 17:28:6'),(26,9.00,'Nick','Cartão de Débito','28-3-2023 21:42:2'),(27,10.00,'None','Pix','31-3-2023 22:39:33'),(28,22.00,'Nick','Cartão de Débito','9-4-2023 23:34:42'),(29,10.50,'Admin','Dinheiro','10-4-2023 20:13:24'),(30,10.00,'Admin','Pix','10-4-2023 23:51:52');
 /*!40000 ALTER TABLE `salesday` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -51,4 +50,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-04-11  0:07:33
+-- Dump completed on 2023-04-11 23:20:45

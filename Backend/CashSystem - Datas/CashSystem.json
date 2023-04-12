@@ -1,7 +1,7 @@
 {
     "client": "Thunder Client",
     "collectionName": "CashSystem",
-    "dateExported": "2023-04-11T03:08:41.648Z",
+    "dateExported": "2023-04-12T02:20:56.336Z",
     "version": "1.1",
     "folders": [
         {
@@ -320,11 +320,11 @@
             "colId": "291ddf43-fc8d-4b88-b442-e7f4f0658eb9",
             "containerId": "6f8b1e47-1bb0-404b-a356-5cb5fd839138",
             "name": "Delete Sale Day",
-            "url": "localhost:3001/deletecart",
+            "url": "localhost:3001/deleteSalesDay",
             "method": "DELETE",
             "sortNum": 110000,
             "created": "2023-03-24T23:01:37.319Z",
-            "modified": "2023-03-24T23:01:37.319Z",
+            "modified": "2023-04-12T01:58:11.000Z",
             "headers": [],
             "params": [],
             "tests": []
@@ -338,12 +338,12 @@
             "method": "POST",
             "sortNum": 120000,
             "created": "2023-03-31T03:09:30.777Z",
-            "modified": "2023-03-31T03:12:41.121Z",
+            "modified": "2023-04-12T00:47:08.928Z",
             "headers": [],
             "params": [],
             "body": {
                 "type": "json",
-                "raw": "{\n  \"dateSale\": \"30/03/2023\", \n  \"sellerSale\": \"Nick\", \n  \"openCash\": \"12.00\", \n  \"totalSale\":\"150.00\", \n  \"openSystem\": \"12:50:00\",\n  \"closeSystem\": \"18:00:00\", \n  \"moneySale\": \"30.00\", \n  \"pixSale\": \"80.00\" , \n  \"debitSale\": \"20.00\", \n  \"creditSale\": \"20.00\", \n  \"cardsSale\": \"40.00\", \n  \"bankSale\": \"120.00\"\n}",
+                "raw": "{\n\n  \"sellerSale\": \"Tonhao Moto Moto\", \n  \"openCash\": \"12.00\", \n  \"totalSale\":\"150.00\", \n  \"openSystemHour\": \"12:50:00\",\n  \"closeSystemHour\": \"18:00:00\", \n  \"moneySale\": \"30.00\", \n  \"pixSale\": \"80.00\" , \n  \"debitSale\": \"20.00\", \n  \"creditSale\": \"20.00\", \n  \"cardsSale\": \"40.00\", \n  \"bankSale\": \"120.00\"\n}",
                 "form": []
             },
             "tests": []
