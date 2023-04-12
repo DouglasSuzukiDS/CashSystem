@@ -50,6 +50,12 @@ export const OpenCash = ({ close, onClick }: ActionsType) => {
             // Create value on Local Storage
             localStorage.removeItem('openCashValue')
             localStorage.setItem('openCashValue', openingCash)
+
+            const hour: number = new Date().getHours()
+            const minutes: number = new Date().getMinutes()
+            const seconds: number = new Date().getSeconds()
+
+            localStorage.setItem('openHour', `${hour}-${minutes}-${seconds}`)
    
             // // Modal OpenCash
             // let modal = document.querySelector('#openCashModal') as HTMLElement

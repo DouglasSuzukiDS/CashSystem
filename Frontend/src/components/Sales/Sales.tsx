@@ -7,12 +7,10 @@ import { XMark } from "../../assets/Icons/XMark"
 import { ValeusSalesContext } from "../../context/ValuesSales/ValuesSalesContext"
 import { ActionsType } from "../../types/ActionsType"
 import { SalesType } from "../../types/SalesType"
-import { ValuesSalesType } from "../../types/ValuesSalesType"
-import { CartList } from "../CartList/CartList"
 
 export const Sales = ({ listSales, valuesSales, close }: ActionsType) => {
-   const [sales, setSales] = useState<SalesType[]>([])
-   const {valuesSalesToday, setValuesSalesToday} = useContext(ValeusSalesContext)
+   const [sales, setSales] = useState<SalesType[]>([]) // Recebe a lista de vendas do historicSale
+   const {valuesSalesToday, setValuesSalesToday} = useContext(ValeusSalesContext) // Pega os valores de sales e injeta em valuesSalesDay
 
    useEffect(() => {
       listSales ? setSales(listSales) : setSales([])
@@ -26,10 +24,12 @@ export const Sales = ({ listSales, valuesSales, close }: ActionsType) => {
 
          debitSale: parseFloat(paymentDebit),
          creditSale: parseFloat(paymentCredit),
-         debitCredit: parseFloat(paymentDebit) + parseFloat(paymentCredit),
+         debitCredit: (parseFloat(paymentDebit) + parseFloat(paymentCredit) - 6.73),
 
-         valuesBankSale: parseFloat(paymentPix) + parseFloat(debitCredit),
-         totalSale: parseFloat(moneyPix) + parseFloat(debitCredit)
+         // valuesBankSale: parseFloat(paymentPix) + parseFloat(debitCredit),
+         // totalSale: parseFloat(moneyPix) + parseFloat(debitCredit)
+         valuesBankSale: parseFloat(paymentPix) + (parseFloat(paymentDebit) + parseFloat(paymentCredit) - 6.73),
+         totalSale: parseFloat(moneyPix) + (parseFloat(paymentDebit) + parseFloat(paymentCredit) - 6.73)
       })
    }, [sales])
 
@@ -157,7 +157,8 @@ export const Sales = ({ listSales, valuesSales, close }: ActionsType) => {
                   <span className="mr-1">+</span>
                   <CreditCard w='24' h='24' fill='var(--yellow-ml)' className='mr-1' />
 
-                  { (valuesSalesToday.debitCredit)?.toFixed(2) }
+                  {/* { (valuesSalesToday.debitCredit)?.toFixed(2) } */}
+                  { parseFloat(debitCredit).toFixed(2) }
                </p>
             </span>
          </div>

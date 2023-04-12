@@ -181,6 +181,10 @@ CREATE TABLE products (
     "120.00"
 );*/
 
+-- SELECT * FROM Products;
+-- SELECT * FROM Users;
 -- SELECT * FROM Sales;
--- SELECT * FROM SaleDay;
+-- SELECT * FROM SalesDay;
 -- ALTER TABLE saleday RENAME SalesDay;
+-- ALTER TABLE Sales RENAME COLUMN openSystem TO openSystemHour;
+-- ALTER TABLE Sales RENAME COLUMN closeSystem TO closeSystemHour;

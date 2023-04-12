@@ -2,12 +2,6 @@ import { useState, useEffect, useContext } from "react";
 
 import { CashRegister } from "../../assets/Icons/CashRegister";
 import { Gears } from "../../assets/Icons/Gears";
-import { HandHoldingDollar } from "../../assets/Icons/HandHoldingDollar";
-import { ListCheck } from "../../assets/Icons/ListCheck";
-import { MagnifyingGlass } from "../../assets/Icons/MagnifyingGlass";
-import { SackDollar } from "../../assets/Icons/SackDollar";
-import { Signature } from "../../assets/Icons/Signature";
-import { TrashCan } from "../../assets/Icons/TrashCan";
 import { Closing } from "../../components/Closing/Closing";
 import { FindProducts } from "../../components/FindProducts/FindProducts";
 import { OpenCash } from "../../components/OpenCash/OpenCash";
@@ -26,20 +20,13 @@ import { CartList } from "../../components/CartList/CartList";
 import { ProductsContext } from "../../context/Products/ProductsContext";
 import { CartListContext } from "../../context/CartList/CartListContext";
 import { ConfirmPayment } from "../../components/ConfirmPayment/ConfirmPaymanet";
-import { UserPlus } from "../../assets/Icons/UserPlus";
-import { UserPen } from "../../assets/Icons/UserPen";
-import { Registered } from "../../assets/Icons/Registered";
-import { PenToSquare } from "../../assets/Icons/PenToSquare";
-import { Download } from "../../assets/Icons/Download";
 import axios from "axios";
 import { SalesType } from "../../types/SalesType";
 import { Sales } from "../../components/Sales/Sales";
-import { ValuesSalesType } from "../../types/ValuesSalesType";
 import { ValeusSalesContext } from "../../context/ValuesSales/ValuesSalesContext";
 import { ManagerSystem } from "../../components/ManagerSystem/ManagerSystem";
 import { FooterSystem } from "../../components/FooterSystem/FooterSystem";
 import { UserDataSectionType } from "../../types/UserDataSectionType";
-import { Logo } from "../../assets/Icons/Logo";
 import { ArrowLeftLong } from "../../assets/Icons/ArrowLeftLong";
 import { allProducts } from "../../services/product.service";
 import { LogoBlue } from "../../assets/Icons/Logo Blue";
@@ -255,7 +242,7 @@ export const OpenSystem = ({ close }: ActionsType) => {
    }
 
    // -- Fechamento do Caixa/Sistema
-   const handleCloseCash = () => {
+   const handleCloseCash = async() => {
       // localStorage.getItem('openCashValue')
 
       // if (!findProductsModal || !invoicingModal) {
@@ -681,6 +668,8 @@ export const OpenSystem = ({ close }: ActionsType) => {
                      {
                         historicSaleModal ?
                            <Sales listSales={ historicSale } valuesSales={ valuesSalesToday } close={ () =>  setHistoricSaleModal(!historicSaleModal) } /> : ''
+                           // listSales => Recebe a lista de vendas do historicSale via component
+                           // valuesSales => Pega os valores de sales e injeta em valuesSalesDay via component
                      }
 
                      {
@@ -700,7 +689,7 @@ export const OpenSystem = ({ close }: ActionsType) => {
                      }
 
                      {
-                        closeSystem ? <Closing close={handleCloseCash} /> : ''
+                        closeSystem ? <Closing close={ handleCloseCash } userInfos = { userInfos } /> : ''
                      }
 
                   </>

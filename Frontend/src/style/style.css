@@ -1214,6 +1214,10 @@ h4 {
   font-weight: bold;
 }
 
+.text-small {
+  font-size: 10px;
+}
+
 .borderForm {
   border: 2px solid var(--fb1);
   border-radius: 8px;

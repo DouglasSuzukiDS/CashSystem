@@ -36,8 +36,8 @@ server.get('/backupUsers', async(req, res) => {
    const minutes: number = new Date().getMinutes()
    const seconds: number = new Date().getSeconds()
 
-   const today: string = `${day}-${mouth + 1}-${year}`
-   const hours: string = `${hour}-${minutes}-${seconds}-`
+   const today: string = `${(day < 10) ? 0 + day : day}/${(mouth + 1) < 10 ? 0 + (mouth + 1) : mouth + 1}/${year}`
+   const hours: string = `${(hour < 10) ? 0 + hour : hour}-${minutes < 10 ? 0 + minutes : minutes}-${seconds < 10 ? 0 + seconds : seconds}-`
    const dateNow: string = `${today}-${hours}`
 
    db.query(SQL, (err, result) => {
@@ -312,8 +312,8 @@ server.get('/backupProducts', async(req, res) => {
    const minutes: number = new Date().getMinutes()
    const seconds: number = new Date().getSeconds()
 
-   const today: string = `${day}-${mouth + 1}-${year}`
-   const hours: string = `${hour}-${minutes}-${seconds}-`
+   const today: string = `${(day < 10) ? 0 + day : day}/${(mouth + 1) < 10 ? 0 + (mouth + 1) : mouth + 1}/${year}`
+   const hours: string = `${(hour < 10) ? 0 + hour : hour}-${minutes < 10 ? 0 + minutes : minutes}-${seconds < 10 ? 0 + seconds : seconds}-`
    const dateNow: string = `${today}-${hours}`
 
    db.query(SQL, (err, result) => {
@@ -559,14 +559,14 @@ server.post('/newSale', (req, res) => {
    })*/
 })
 
-server.delete('/deleteSaleDay', async(req, res) => {
-   let SQL: string = 'DELETE FROM SaleDay'
+server.delete('/deleteSalesDay', async(req, res) => {
+   let SQL: string = 'DELETE FROM SalesDay'
 
    db.query(SQL, async(err, result) => {
       if(err) {
          res.status(404).send({ msg: 'Erro ao limpar o carrinho.' })
       } else {
-         let resetId = `ALTER TABLE SaleDay AUTO_INCREMENT = 1`
+         let resetId = `ALTER TABLE SalesDay AUTO_INCREMENT = 1`
 
          db.query(resetId, (err, res) => {
             if(err) {
@@ -592,8 +592,8 @@ server.get('/backupSalesDay', async(req, res) => {
    const minutes: number = new Date().getMinutes()
    const seconds: number = new Date().getSeconds()
 
-   const today: string = `${day}-${mouth + 1}-${year}`
-   const hours: string = `${hour}-${minutes}-${seconds}-`
+   const today: string = `${(day < 10) ? 0 + day : day}-${(mouth + 1) < 10 ? 0 + (mouth + 1) : mouth + 1}-${year}`
+   const hours: string = `${(hour < 10) ? 0 + hour : hour}-${minutes < 10 ? 0 + minutes : minutes}-${seconds < 10 ? 0 + seconds : seconds}-`
    const dateNow: string = `${today}-${hours}`
 
    db.query(SQL, (err, result) => {
@@ -644,7 +644,8 @@ server.get('/sales', async(req, res) => {
 })
 
 server.post('/closeSystem', async(req, res) => {
-   const { dateSale, sellerSale, openCash, totalSale, openSystem, closeSystem, moneySale, pixSale, debitSale, creditSale, cardsSale, bankSale } = req.body
+   // const { dateSale, sellerSale, openCash, totalSale, openSystem, closeSystem, moneySale, pixSale, debitSale, creditSale, cardsSale, bankSale } = req.body
+   const { sellerSale, openCash, totalSale, openSystemHour, closeSystemHour, moneySale, pixSale, debitSale, creditSale, cardsSale, bankSale } = req.body
 
    const day: number = new Date().getDate()
    const mouth: number = new Date().getMonth()
@@ -655,18 +656,18 @@ server.post('/closeSystem', async(req, res) => {
    const seconds: number = new Date().getSeconds()
 
    // const today: string = (new Date(Date.now()).toLocaleString().split(',')[0]).replace('/', '-')
-   const today: string = `${day}-${mouth + 1}-${year}`
-   const hours: string = `${hour}:${minutes}:${seconds}`
+   const today: string = `${(day < 10) ? 0 + day : day}-${(mouth + 1) < 10 ? 0 + (mouth + 1) : mouth + 1}-${year}`
+   const hours: string = `${hour}-${minutes < 10 ? 0 + minutes : minutes}-${seconds < 10 ? 0 + seconds : seconds}`
    const dateNow: string = `${today} ${hours}`
 
-   const SQL = `INSERT INTO Sales (dateSale, sellerSale, openCash, totalSale, openSystem, closeSystem, moneySale, pixSale, debitSale, creditSale, cardsSale, bankSale) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)` 
+   const SQL = `INSERT INTO Sales (dateSale, sellerSale, openCash, totalSale, openSystemHour, closeSystemHour, moneySale, pixSale, debitSale, creditSale, cardsSale, bankSale) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)` 
 
-   db.query(SQL, [dateSale, sellerSale, openCash, totalSale, openSystem, closeSystem, moneySale, pixSale, debitSale, creditSale, cardsSale, bankSale], async(err, result) => {
+   db.query(SQL, [today, sellerSale, openCash, totalSale, openSystemHour, closeSystemHour, moneySale, pixSale, debitSale, creditSale, cardsSale, bankSale], async(err, result) => {
       if(err) {
          console.log(err)
          res.status(404).send({ msg: 'Erro ao salvar faturamento do dia' })
       } else {
-         res.status(201).send({ msg: 'Produto adicionado com sucesso' })    
+         res.status(200).send({ msg: 'Faturamento do dia salvo com sucesso! Bye Bye' })    
       }
    })
 

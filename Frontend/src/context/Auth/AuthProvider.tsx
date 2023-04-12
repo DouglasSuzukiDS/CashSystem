@@ -75,7 +75,7 @@ export const AuthProvider = ({ children }: { children: JSX.Element }) => {
 
          //console.log((response.data.result.userName))
          deleteToken()
-         createToken(response.token)
+         createToken(response.data.token)
          createUserDataToken(response.data.userInfos[0], response.data.userInfos[1])
 
          return true

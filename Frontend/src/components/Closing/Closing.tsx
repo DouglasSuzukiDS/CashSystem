@@ -14,6 +14,7 @@ import { ArrowLeftLong } from '../../assets/Icons/ArrowLeftLong'
 import { CircleCheck } from '../../assets/Icons/CircleCheck'
 import { XMark } from '../../assets/Icons/XMark'
 import { ValeusSalesContext } from '../../context/ValuesSales/ValuesSalesContext'
+import axios from 'axios'
 
 /*  Blocked Keys
    F1 => Help
@@ -48,45 +49,11 @@ const closeFormDay = () => {
    close.style.display = 'flex' ? close.style.display = 'none' : close.style.display = 'flex'
 }
 
-export const Closing = ({ close }: ActionsType) => {
+const server = 'http://localhost:3001'
+
+export const Closing = ({ close, userInfos }: ActionsType) => {
    const {valuesSalesToday, setValuesSalesToday} = useContext(ValeusSalesContext)
    const navigate = useNavigate()
-
-   // Values Brute
-// let openCashValue = parseFloat(localStorage.getItem('openCashValue')!).toFixed(2)
-let money = 258
-let pix = 27
-
-let debitCard = 34.50
-let creditCard = 13.30
-
-// Tax Card
-let taxDebit = ((debitCard * 1.99) / 100).toFixed(2) 
-let taxCredit = ((creditCard * 4.74) / 100).toFixed(2)
-// console.log(`Taxa Débito: ${taxDebit}`)
-// console.log(`Taxa Crédito: ${taxCredit}`)
-
-let debitCardFinal = debitCard - parseInt(taxDebit) // 33,81
-let creditCardFinal = creditCard - parseInt(taxCredit) // 12,67
-// console.log(`Débito sem a Taxa: ${debitCardFinal}`)
-// console.log(`Crédito sem a Taxa: ${creditCardFinal}`)
-
-// Values Final
-
-// let openingPix = openCashValue + pix // 285
-let openingPix = 0 + pix // 285
-// console.log(`Din + Pix: ${openingPix}`)
-
-let amountCards = (debitCardFinal + creditCardFinal) //  46,48
-// console.log(`Valor Total em Cartões: ${amountCards}`)
-
-// let amount = parseInt(openingPix + amountCards).toFixed(2) // 331,48
-// console.log(`Total: ${amount}`)
-
-// Values Money
-// let amountMoney = money - parseInt(openCashValue)
-let amountBank = pix + amountCards
-// let amountValue = amountMoney + amountBank
 
    useEffect(() => {
       window.addEventListener('keydown', (event) => {
@@ -99,10 +66,52 @@ let amountBank = pix + amountCards
    }, [])
 
    const closeSystem = async() => {
-      await localStorage.removeItem('openCashValue')
-      await localStorage.removeItem('AuthToken')
-      await localStorage.removeItem('UserDatas')
-      window.location.href = 'http://localhost:3000'
+      const OpenCashValueLC = localStorage.getItem('openCashValue')
+      const openHour = localStorage.getItem('openHour')
+
+      const day: number = new Date().getDate()
+      const mouth: number = new Date().getMonth()
+      const year: number = new Date().getFullYear()
+
+      const hour: number = new Date().getHours()
+      const minutes: number = new Date().getMinutes()
+      const seconds: number = new Date().getSeconds()
+
+      const today: string = `${day}/${(mouth + 1) < 10 ? 0 + (mouth + 1) : (mouth + 1)}/${year}`
+      const closeHours: string = `${hour}:${minutes}:${seconds}`
+
+      await axios.post(`${server}/closeSystem`, { 
+         sellerSale: userInfos?.userName, 
+         openCash: OpenCashValueLC, 
+         totalSale: valuesSalesToday.totalSale, 
+         openSystemHour: openHour,
+         closeSystemHour: closeHours, 
+         moneySale: valuesSalesToday.moneyTotal, 
+         pixSale: valuesSalesToday.pixSale, 
+         debitSale: valuesSalesToday.debitCredit, 
+         creditSale: valuesSalesToday.creditSale, 
+         cardsSale: valuesSalesToday.debitCredit, 
+         bankSale: valuesSalesToday.valuesBankSale
+      })
+         .then(response => {
+            console.log(response)
+            if(response.status === 200) {
+
+               axios.delete(`${server}/deleteSalesDay`)
+                  .then(res => {
+                     if(res.status === 200) {
+                        alert(
+                           `${response.data.msg} 😎`
+                        )
+                     }
+                  })
+                  .catch(err => console.log(err))
+
+               localStorage.clear()
+               window.location.href = 'http://localhost:3000'
+            }
+         }).catch(err => console.log(err))
+
    }
 
    return (
@@ -177,7 +186,12 @@ let amountBank = pix + amountCards
                </div>
 
                <div className="inputForm f aic sbt bb-info mb-1 pb-1">  {/* Cartões - amountCards */}
-                  <p className='inputTF'>Cartões</p>
+                  <p className='inputTF flexborder3'>Cartões</p>
+
+                  <span className='text-small flex column'>
+                     <span className='text-blue-mp'>- 6.73%</span>
+                     <span className='text-yellow-ml'>(taxas)</span>
+                  </span>
 
                   <div className="valueOfTheDay borderForm flex">
                      <span className='inputTF flex'>
