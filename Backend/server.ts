@@ -36,7 +36,7 @@ server.get('/backupUsers', async(req, res) => {
    const minutes: number = new Date().getMinutes()
    const seconds: number = new Date().getSeconds()
 
-   const today: string = `${(day < 10) ? 0 + day : day}/${(mouth + 1) < 10 ? 0 + (mouth + 1) : mouth + 1}/${year}`
+   const today: string = `${(day < 10) ? 0 + day : day}-${(mouth + 1) < 10 ? 0 + (mouth + 1) : mouth + 1}-${year}`
    const hours: string = `${(hour < 10) ? 0 + hour : hour}-${minutes < 10 ? 0 + minutes : minutes}-${seconds < 10 ? 0 + seconds : seconds}-`
    const dateNow: string = `${today}-${hours}`
 
@@ -312,7 +312,7 @@ server.get('/backupProducts', async(req, res) => {
    const minutes: number = new Date().getMinutes()
    const seconds: number = new Date().getSeconds()
 
-   const today: string = `${(day < 10) ? 0 + day : day}/${(mouth + 1) < 10 ? 0 + (mouth + 1) : mouth + 1}/${year}`
+   const today: string = `${(day < 10) ? 0 + day : day}-${(mouth + 1) < 10 ? 0 + (mouth + 1) : mouth + 1}-${year}`
    const hours: string = `${(hour < 10) ? 0 + hour : hour}-${minutes < 10 ? 0 + minutes : minutes}-${seconds < 10 ? 0 + seconds : seconds}-`
    const dateNow: string = `${today}-${hours}`
 
@@ -323,7 +323,7 @@ server.get('/backupProducts', async(req, res) => {
          res.status(404).send({ msg: 'Erro ao fazer backup dos produtos' })
       } else {
 
-         // writeFile('PATH', CONTEUDO, CALLBACK) => 
+         // writeFile('PATH', CONTEUDO, CALLBACK) =>
          fs.writeFile(`backup/backupProducts/${dateNow}products.json`, JSON.stringify(result), (err) => {
             if(err) {
                console.log(err)
@@ -349,6 +349,7 @@ server.get('/backupProducts', async(req, res) => {
       }
    })
 })
+
 
 server.get('/products', async(req, res) => {
    let SQL: string = `SELECT * FROM products`
@@ -603,7 +604,7 @@ server.get('/backupSalesDay', async(req, res) => {
          res.status(404).send({ msg: 'Erro ao fazer backup das vendas do dia' })
       } else {
 
-         // writeFile('PATH', CONTEUDO, CALLBACK) => 
+         // writeFile('PATH', CONTEUDO, CALLBACK) =>
          fs.writeFile(`backup/backupSalesDay/${dateNow}salesDay.json`, JSON.stringify(result), (err) => {
             if(err) {
                console.log(err)
