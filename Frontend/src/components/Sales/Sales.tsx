@@ -22,14 +22,18 @@ export const Sales = ({ listSales, valuesSales, close }: ActionsType) => {
          pixSale: parseFloat(paymentPix),
          moneyPix: parseFloat(paymentMoney) + parseFloat(paymentPix),
 
-         debitSale: parseFloat(paymentDebit),
-         creditSale: parseFloat(paymentCredit),
-         debitCredit: (parseFloat(paymentDebit) + parseFloat(paymentCredit) - 6.73),
+         // debitSale: parseFloat(paymentDebit),
+         debitSale: parseFloat(paymentDebit) - (parseFloat(paymentDebit) * (1.99 / 100)),
+         // creditSale: parseFloat(paymentCredit),
+         creditSale: parseFloat(paymentCredit) - (parseFloat(paymentCredit) * (4.74 / 100)),
+         // debitCredit: (parseFloat(paymentDebit) + parseFloat(paymentCredit)) - ((parseFloat(paymentDebit) + parseFloat(paymentCredit)) * (6.73 / 100)),
+         debitCredit: (parseFloat(paymentDebit) - (parseFloat(paymentDebit) * (1.99 / 100))) + (parseFloat(paymentCredit) - (parseFloat(paymentCredit) * (4.74 / 100))),
 
          // valuesBankSale: parseFloat(paymentPix) + parseFloat(debitCredit),
          // totalSale: parseFloat(moneyPix) + parseFloat(debitCredit)
-         valuesBankSale: parseFloat(paymentPix) + (parseFloat(paymentDebit) + parseFloat(paymentCredit) - 6.73),
-         totalSale: parseFloat(moneyPix) + (parseFloat(paymentDebit) + parseFloat(paymentCredit) - 6.73)
+         valuesBankSale: parseFloat(paymentPix) + ((parseFloat(paymentDebit) - (parseFloat(paymentDebit) * (1.99 / 100))) +  parseFloat(paymentCredit) - (parseFloat(paymentCredit) * (4.74 / 100))),
+         // totalSale: parseFloat(moneyPix) + ((parseFloat(paymentDebit) + parseFloat(paymentCredit)) - ((parseFloat(paymentDebit) + parseFloat(paymentCredit)) * (6.73 / 100)))
+         totalSale: parseFloat(moneyPix) + ((parseFloat(paymentDebit) - (parseFloat(paymentDebit) * (1.99 / 100))) +  parseFloat(paymentCredit) - (parseFloat(paymentCredit) * (4.74 / 100)))
       })
    }, [sales])
 

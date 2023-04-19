@@ -17,6 +17,7 @@ import { CartListProviver } from "../context/CartList/CartListProvider";
 import { ConfirmPayment } from "../components/ConfirmPayment/ConfirmPaymanet";
 import { UserProvider } from "../context/User/UserProvider";
 import { ValuesSalesProvider } from "../context/ValuesSales/ValuesSalesProvider";
+import { AboutMe } from "../components/AboutMe/AboutMe";
 
 // import Login from "../pages/Login/Login";
 
@@ -30,10 +31,10 @@ export default function RoutesApp() {
                   <BrowserRouter>
                      <Routes>
                         {/*  */}
-                        {/* <Route path='/' element={ <AllIcons /> } />  */}
+                        <Route path='/' element={ <AboutMe /> } /> 
                         <Route path='/findProducts' element={ <FindProducts /> } /> 
 
-                        <Route path='/' element={ <Login /> } /> 
+                        {/* <Route path='/' element={ <Login /> } />  */}
 
                         {/* <Route path='/login' element={  <Login /> } />  */}
 
