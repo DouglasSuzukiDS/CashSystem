@@ -17,21 +17,21 @@ import { ValeusSalesContext } from '../../context/ValuesSales/ValuesSalesContext
 import axios from 'axios'
 
 /*  Blocked Keys
-   F1 => Help
-   F3 => Find Word
-   F5 => Regarrega
-   F6 => Fecha e Abre o navegador
-   F7 => Fullscreen
+F1 => Help
+F3 => Find Word
+F5 => Regarrega
+F6 => Fecha e Abre o navegador
+F7 => Fullscreen
 */
 
 /* Utils Keys
-   F2 = 113
-   F4 = 115
-   F7 = 118
-   F8 = 119
-   F9 = 120
-   F10 = 121
-   F12 = 123
+F2 = 113
+F4 = 115
+F7 = 118
+F8 = 119
+F9 = 120
+F10 = 121
+F12 = 123
 */
 
 // window.addEventListener('keydown', (event) => {
@@ -52,7 +52,7 @@ const closeFormDay = () => {
 const server = 'http://localhost:3001'
 
 export const Closing = ({ close, userInfos }: ActionsType) => {
-   const {valuesSalesToday, setValuesSalesToday} = useContext(ValeusSalesContext)
+   const { valuesSalesToday, setValuesSalesToday } = useContext(ValeusSalesContext)
    const navigate = useNavigate()
 
    useEffect(() => {
@@ -65,7 +65,7 @@ export const Closing = ({ close, userInfos }: ActionsType) => {
       })
    }, [])
 
-   const closeSystem = async() => {
+   const closeSystem = async () => {
       const OpenCashValueLC = localStorage.getItem('openCashValue')
       const openHour = localStorage.getItem('openHour')
 
@@ -80,26 +80,26 @@ export const Closing = ({ close, userInfos }: ActionsType) => {
       const today: string = `${day}/${(mouth + 1) < 10 ? 0 + (mouth + 1) : (mouth + 1)}/${year}`
       const closeHours: string = `${hour}:${minutes}:${seconds}`
 
-      await axios.post(`${server}/closeSystem`, { 
-         sellerSale: userInfos?.userName, 
-         openCash: OpenCashValueLC, 
-         totalSale: valuesSalesToday.totalSale, 
+      await axios.post(`${server}/closeSystem`, {
+         sellerSale: userInfos?.userName,
+         openCash: OpenCashValueLC,
+         totalSale: valuesSalesToday.totalSale,
          openSystemHour: openHour,
-         closeSystemHour: closeHours, 
-         moneySale: valuesSalesToday.moneyTotal, 
-         pixSale: valuesSalesToday.pixSale, 
-         debitSale: valuesSalesToday.debitCredit, 
-         creditSale: valuesSalesToday.creditSale, 
-         cardsSale: valuesSalesToday.debitCredit, 
+         closeSystemHour: closeHours,
+         moneySale: valuesSalesToday.moneyTotal,
+         pixSale: valuesSalesToday.pixSale,
+         debitSale: valuesSalesToday.debitCredit,
+         creditSale: valuesSalesToday.creditSale,
+         cardsSale: valuesSalesToday.debitCredit,
          bankSale: valuesSalesToday.valuesBankSale
       })
          .then(response => {
             console.log(response)
-            if(response.status === 200) {
+            if (response.status === 200) {
 
                axios.delete(`${server}/deleteSalesDay`)
                   .then(res => {
-                     if(res.status === 200) {
+                     if (res.status === 200) {
                         alert(
                            `${response.data.msg} 😎`
                         )
@@ -129,7 +129,7 @@ export const Closing = ({ close, userInfos }: ActionsType) => {
                   <div id='closeElementFormDay'>
                      <XMark w='24' h='24'
                         className=''
-                        onClick={ close }
+                        onClick={close}
                      />
                   </div>
                </h4>
@@ -140,7 +140,7 @@ export const Closing = ({ close, userInfos }: ActionsType) => {
                   <div className="openingValue borderForm flex inputValue">
                      <CashRegister w='24' h='24' fill='var(--bs-primary)' className='mr-1' />
                      <p className='inputTF text-primary'>
-                        { parseFloat(valuesSalesToday.openCash as string).toFixed(2) }
+                        {parseFloat(valuesSalesToday.openCash as string).toFixed(2)}
                      </p>
                   </div>
                </div>
@@ -151,7 +151,7 @@ export const Closing = ({ close, userInfos }: ActionsType) => {
                   <div className="moneyOfTheDay inputValue borderForm flex">
                      <MoneyBillWave w='24' h='24' fill='var(--bs-success)' className='mr-1' />
                      <p className='inputTF text-success'>
-                        { (valuesSalesToday.moneyTotal)?.toFixed(2) }
+                        {(valuesSalesToday.moneyTotal)?.toFixed(2)}
                      </p>
                   </div>
                </div>
@@ -169,7 +169,7 @@ export const Closing = ({ close, userInfos }: ActionsType) => {
                      </span>
 
                      <p className='inputTF text-violet-nk'>
-                        { (valuesSalesToday.moneySale)?.toFixed(2) }
+                        {(valuesSalesToday.moneySale)?.toFixed(2)}
                      </p>
                   </div>
                </div>
@@ -180,7 +180,7 @@ export const Closing = ({ close, userInfos }: ActionsType) => {
                   <div className="valueOfTheDay borderForm flex">
                      <Pix w='24' h='24' fill='var(--pix)' className='mr-1' />
                      <p className='inputTF text-pix'>
-                        { (valuesSalesToday.pixSale)?.toFixed(2) }
+                        {(valuesSalesToday.pixSale)?.toFixed(2)}
                      </p>
                   </div>
                </div>
@@ -200,7 +200,7 @@ export const Closing = ({ close, userInfos }: ActionsType) => {
                         <CreditCard w='24' h='24' fill='var(--yellow-ml)' className='mr-1' />
                      </span>
                      <p className='inputTF text-blue-mp'>
-                        { (valuesSalesToday.debitCredit?.toFixed(2)) }
+                        {(valuesSalesToday.debitCredit?.toFixed(2))}
                      </p>
                   </div>
                </div>
@@ -219,7 +219,7 @@ export const Closing = ({ close, userInfos }: ActionsType) => {
                         <CreditCard w='24' h='24' fill='var(--yellow-ml)' className='mr-1' />
                      </span>
                      <p className='inputTF text-orange-in'>
-                        { (valuesSalesToday.valuesBankSale)?.toFixed(2) }  
+                        {(valuesSalesToday.valuesBankSale)?.toFixed(2)}
                      </p>
                   </div>
                </div>
@@ -236,18 +236,18 @@ export const Closing = ({ close, userInfos }: ActionsType) => {
                         <PiggyBank w='24' h='24' fill='var(--orange-in)' className='mr-1' />
                      </span>
                      <p className='inputTF text-dark-green'>
-                        { (valuesSalesToday.totalSale)?.toFixed(2) }
+                        {(valuesSalesToday.totalSale)?.toFixed(2)}
                      </p>
                   </div>
                </div>
 
                <span className="flex sbt mt-1">
-                  <button className="btn btn-warning mr-1 w-50"  onClick={ close } >
+                  <button className="btn btn-warning mr-1 w-50" onClick={close} >
                      Voltar(F7)
                      <ArrowLeftLong w='24' h='24' fill='var(--bs-dark)' className='ml-1' />
                   </button>
 
-                  <button className="btn btn-success ml-1 w-50" onClick={ closeSystem } >
+                  <button className="btn btn-success ml-1 w-50" onClick={closeSystem} >
                      Fechar(F8)
                      <CircleCheck w='24' h='24' fill='var(--text)' className='ml-1' />
                   </button>

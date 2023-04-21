@@ -31,10 +31,9 @@ export default function RoutesApp() {
                   <BrowserRouter>
                      <Routes>
                         {/*  */}
-                        <Route path='/' element={ <AboutMe /> } /> 
                         <Route path='/findProducts' element={ <FindProducts /> } /> 
 
-                        {/* <Route path='/' element={ <Login /> } />  */}
+                        <Route path='/' element={ <Login /> } /> 
 
                         {/* <Route path='/login' element={  <Login /> } />  */}
 

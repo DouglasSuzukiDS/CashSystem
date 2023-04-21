@@ -1150,6 +1150,19 @@ h4 {
   color: var(--bs-info);
 }
 
+.aboutContact p {
+  font-weight: bold;
+  letter-spacing: 2px;
+}
+
+.border-gradient-blue {
+  border: 2px solid transparent;
+  border-radius: 4px;
+  -o-border-image: linear-gradient(157.01deg, #081C65 14.89%, #13ADDF 112.37%);
+     border-image: linear-gradient(157.01deg, #081C65 14.89%, #13ADDF 112.37%);
+  border-image-slice: 1;
+}
+
 .containerAboutMe {
   height: 100vh;
 }
@@ -1183,6 +1196,20 @@ h4 {
 
 .aboutSocial a {
   outline: none;
+}
+
+.text-gradient-blue {
+  color: transparent;
+  background-image: linear-gradient(157.01deg, #081C65 14.89%, #13ADDF 112.37%);
+  background-clip: text;
+  -webkit-background-clip: text;
+}
+
+.text-gradient-red {
+  color: transparent;
+  background-image: linear-gradient(157.72deg, #202225 49.58%, #BB2D3B 92.59%);
+  background-clip: text;
+  -webkit-background-clip: text;
 }
 
 .invoicingOfTheDayForm > h4 > #closeElement:hover {

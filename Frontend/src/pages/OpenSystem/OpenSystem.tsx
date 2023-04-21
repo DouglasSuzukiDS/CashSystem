@@ -30,6 +30,7 @@ import { UserDataSectionType } from "../../types/UserDataSectionType";
 import { ArrowLeftLong } from "../../assets/Icons/ArrowLeftLong";
 import { allProducts } from "../../services/product.service";
 import { LogoBlue } from "../../assets/Icons/Logo Blue";
+import { AboutMe } from "../../components/AboutMe/AboutMe";
 
 export const OpenSystem = ({ close }: ActionsType) => {
    const server = 'http://localhost:3001'
@@ -66,7 +67,9 @@ export const OpenSystem = ({ close }: ActionsType) => {
 
    // Modals
 
-   const [contentSystemStartModal, setContentSystemStartModal] = useState(true) // Mdal responsavel por exibir a abertura do caixa
+   const [contentSystemStartModal, setContentSystemStartModal] = useState(true) // Modal responsavel por exibir a abertura do caixa
+
+   const [aboutMeModal, setAboutMeModal] = useState(false) // Modal responsável por exibir as minhas informações
 
    const [optionsSystem, setOptionsSystem] = useState(false) // Modal para Funções Administrativas
 
@@ -275,6 +278,11 @@ export const OpenSystem = ({ close }: ActionsType) => {
       await localStorage.removeItem('AuthToken')
       await localStorage.removeItem('UserDatas')
       window.location.href = 'http://localhost:3000'
+   }
+
+   // Função resposavel por exibir ou não o Modal com as minhas informações
+   const handleAboutMeModal = () => {
+      setAboutMeModal(!aboutMeModal)
    }
 
    // Função Responsável por mostrar o Modal de Produtos
@@ -516,7 +524,7 @@ export const OpenSystem = ({ close }: ActionsType) => {
 
          <section className="sectionSystem">
             <header className="headerSystem flex sbt">
-               <div className="logoSystem text-primary pg3 bold">
+               <div className="logoSystem text-primary pg3 bold" onClick={ handleAboutMeModal }>
                   <LogoBlue w="130" h="60" className="pointer" />
                </div>
 
@@ -634,6 +642,10 @@ export const OpenSystem = ({ close }: ActionsType) => {
                            </ul>
                         </section> : ''
                      } */}
+
+                     { aboutMeModal ?
+                        <AboutMe close={ handleAboutMeModal } /> : ''
+                     }
 
                      { optionsSystem ?
                         <ManagerSystem 
