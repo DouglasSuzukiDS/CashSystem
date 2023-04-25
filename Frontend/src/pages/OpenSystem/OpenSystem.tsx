@@ -65,7 +65,7 @@ export const OpenSystem = ({ close }: ActionsType) => {
    const {valuesSalesToday, setValuesSalesToday} = useContext(ValeusSalesContext)
    // console.log(valuesSalesToday)
 
-   // Modals
+   // Modals 
 
    const [contentSystemStartModal, setContentSystemStartModal] = useState(true) // Modal responsavel por exibir a abertura do caixa
 
@@ -75,7 +75,7 @@ export const OpenSystem = ({ close }: ActionsType) => {
 
    const [modalSelected, setModalSelected] = useState(false)
 
-   const [invoicingModal, setInvoicingModal] = useState(false)
+   const [invoicingModal, setInvoicingModal] = useState(false) // Modal das vendas do dia
 
    const [findProductsModal, setFindProductsModal] = useState(false) // Modal para Produrar um Produto
 
@@ -83,7 +83,7 @@ export const OpenSystem = ({ close }: ActionsType) => {
 
    const [managerUsersModal, setManagerUsersModal] = useState(false) // Modal responsavel por Listar/Editar os Usuários
 
-   const [NewProductModal, setNewProductModal] = useState(false) // Modal responsavel por exibir o omponente de criação de um novo produto
+   const [newProductModal, setNewProductModal] = useState(false) // Modal responsavel por exibir o omponente de criação de um novo produto
 
    const [managerProductsModal, setManagerProductsModal] = useState(false) // Modal responsável por Listar/Editar os Produtos
 
@@ -95,19 +95,15 @@ export const OpenSystem = ({ close }: ActionsType) => {
 
    const [closeSystem, setCloseSystem] = useState(false) // Modal responsavel por mostrar o Fechamento de Caixa
 
+   // Historico de Vendas
+   //let historicSales: HistoricSale[] = []
+   const [historicSale, setHistoricSale] = useState<SalesType[]>([]) // Lista das vendas do dia
+   const [historicSaleModal, setHistoricSaleModal] = useState(false) // Modal responsável por mostrar as vendas do dia
+
    // LocalStorage Datas
    const AuthTokenLC = localStorage.getItem('AuthToken')
    const OpenCashValueLC = localStorage.getItem('openCashValue')
    const userDatasSection = localStorage.getItem('UserDatas')
-
-   // Texugo
-   const hiddenTexugo = document.querySelector('#Texugo')
-
-   // Historico de Vendas
-   //let historicSales: HistoricSale[] = []
-   const [historicSale, setHistoricSale] = useState<SalesType[]>([])
-   const [historicSaleModal, setHistoricSaleModal] = useState(false)
-
 
    useEffect(() => { // checkStatus() / Buscar os Usuários
       checkStatus() // Verifica se existe um Token, se existir verifica se o caixa já foi aberto, e verifica quem está logado e se é Admin, e seta os Values nos modais com o valor de abertura (localStorage) e o restante 0
@@ -187,22 +183,6 @@ export const OpenSystem = ({ close }: ActionsType) => {
             statusSystemH4.classList.add('text-success')
             statusSystemH4.innerHTML = 'Caixa Aberto'
 
-            // Button Status Cash
-            /*let btn_openCash = document.querySelector('#btn_openCash') as HTMLButtonElement
-            let btn_closeCash = document.querySelector('#btn_closeCash') as HTMLButtonElement
-            btn_openCash.style.display = 'none'
-            btn_closeCash.style.display = 'flex'*/
-
-            /*if (userDatasSection) {
-               console.log(`Valor de userData LC: ${JSON.parse(userDatasSection).userName}`)
-               console.log(`Valor de userAdmin LC: ${JSON.parse(userDatasSection).userAdmin}`)
-
-               setUserInfos({
-                  userName: JSON.parse(userDatasSection).userName,
-                  userAdmin: JSON.parse(userDatasSection).userAdmin,
-               })
-            }*/
-
             checkUserInfos()
          }
       } else {
@@ -211,7 +191,7 @@ export const OpenSystem = ({ close }: ActionsType) => {
       }
    }
 
-   const checkUserInfos = () => {
+   const checkUserInfos = () => { // Verifica as informações de usuário logado
       if (userDatasSection) {
          console.log(`Valor de userData LC: ${JSON.parse(userDatasSection).userName}`)
          console.log(`Valor de userAdmin LC: ${JSON.parse(userDatasSection).userAdmin}`)
@@ -223,7 +203,7 @@ export const OpenSystem = ({ close }: ActionsType) => {
       }
    }
  
-   const verifyOpenCashValue = () => {
+   const verifyOpenCashValue = () => { // Verifica se foi informado o valor da abertura do caixa
       //console.log(contentSystemModal)
       const openCashValueLC = localStorage.getItem('openCashValue')
       if (openCashValueLC === '' ||
@@ -246,33 +226,37 @@ export const OpenSystem = ({ close }: ActionsType) => {
 
    // -- Fechamento do Caixa/Sistema
    const handleCloseCash = async() => {
-      // localStorage.getItem('openCashValue')
-
-      // if (!findProductsModal || !invoicingModal) {
-      //    setFindProductsModal(false)
-      //    setInvoicingModal(false)
-      // }
-
-      if(historicSaleModal) {
-         setHistoricSaleModal(false)
-      }
-
-      if(confirmPaymentModal) {
+      if(
+         aboutMeModal ||
+         optionsSystem ||
+         invoicingModal ||
+         findProductsModal || 
+         newUserModal ||
+         managerUsersModal ||
+         newProductModal ||
+         managerProductsModal ||
+         confirmPaymentModal || 
+         addProduct || 
+         historicSaleModal
+      ) {
+         setAboutMeModal(false)
+         setOptionsSystem(false)
+         setInvoicingModal(false)
+         setFindProductsModal(false)
+         setNewUserModal(false) 
+         setManagerUsersModal(false) 
+         setNewProductModal(false)
+         setManagerProductsModal(false)
          setConfirmPaymentModal(false)
-      }
-
-      if(addProduct) {
+         setHistoricSaleModal(false)
          setAddProduct(false)
       }
-
-      setCloseSystem(!closeSystem)
       
-      setOptionsSystem(false)
-      setConfirmPaymentModal(false)
-      setAddProduct(false)
-      //console.log(closeSystem)
+      setCloseSystem(!closeSystem)
+
    }
 
+   // -- Sair do sistema sem ter aberto o Caixa
    const handleCloseSystem = async() => {
       await localStorage.removeItem('openCashValue')
       await localStorage.removeItem('AuthToken')
@@ -280,71 +264,139 @@ export const OpenSystem = ({ close }: ActionsType) => {
       window.location.href = 'http://localhost:3000'
    }
 
-   // Função resposavel por exibir ou não o Modal com as minhas informações
+   // -- Função resposavel por exibir ou não o Modal com as minhas informações
    const handleAboutMeModal = () => {
+      if(
+         optionsSystem ||
+         invoicingModal ||
+         findProductsModal || 
+         newUserModal ||
+         managerUsersModal ||
+         newProductModal ||
+         managerProductsModal ||
+         confirmPaymentModal || 
+         addProduct || 
+         historicSaleModal || 
+         closeSystem
+      ) {
+         setOptionsSystem(false)
+         setInvoicingModal(false)
+         setFindProductsModal(false)
+         setNewUserModal(false) 
+         setManagerUsersModal(false) 
+         setNewProductModal(false)
+         setManagerProductsModal(false)
+         setConfirmPaymentModal(false)
+         setAddProduct(false)
+         setHistoricSaleModal(false)
+         setCloseSystem(false)
+      }
+
       setAboutMeModal(!aboutMeModal)
    }
 
-   // Função Responsável por mostrar o Modal de Produtos
-   const handleToogleFindProductModal = () => {
+   // -- Função responsável por mostrar o Modal de Produtos
+   const handleFindProductModal = () => {
       if (open === false) {
          alert('Por obséquio abra o caixa')
       } else {
-         if (invoicingModal) {
+         if(
+            aboutMeModal || // Infos about me
+            optionsSystem || // Modal para Funções Administrativas
+            invoicingModal || // Modal das vendas do dia
+            findProductsModal || // Modal para Produrar um Produto
+            newUserModal || // Modal Responsavel por exibir o componente de criação de usuário
+            managerUsersModal || // Modal responsavel por Listar/Editar os Usuários
+            newProductModal || // Modal responsavel por exibir o componente de criação de um novo produto
+            confirmPaymentModal ||  // Modal responsável por exibir o componente de Confirmação de Pagamento
+            addProduct ||  // Modal responsavel por mostrar os produtos e seleciona-los para adicionar no carrinho
+            historicSaleModal || // Modal responsável por mostrar as vendas do dia
+            closeSystem // Modal responsavel por mostrar o Fechamento de Caixa
+         ) {
+            setAboutMeModal(false)
+            setOptionsSystem(false)
             setInvoicingModal(false)
+            setFindProductsModal(false)
+            setNewUserModal(false) 
+            setManagerUsersModal(false) 
+            setNewProductModal(false)
+            setConfirmPaymentModal(false)
+            setAddProduct(false)
+            setHistoricSaleModal(false)
+            setCloseSystem(false)
          }
 
          setManagerProductsModal(!managerProductsModal)
       }
    }
 
-   // Função Responsável por mostrar o Modal de Adicionar Produto no Carrinho
+   // -- Função responsável por mostrar o Modal de Adicionar Produto no Carrinho
    const handleAddProductModal = () => {
       //open ? setAddProduct(!addProduct) : alert('Abra o caixa camarada.')
 
-      if (open) {
-         if(historicSaleModal) {
+      if(open) {
+         if(
+            aboutMeModal || // Infos about me
+            optionsSystem || // Modal para Funções Administrativas
+            invoicingModal || // Modal das vendas do dia
+            findProductsModal || // Modal para Produrar um Produto
+            newUserModal || // Modal Responsavel por exibir o componente de criação de usuário
+            managerUsersModal || // Modal responsavel por Listar/Editar os Usuários
+            newProductModal || // Modal responsavel por exibir o omponente de criação de um novo produto
+            managerProductsModal || // Modal responsável por Listar/Editar os Produtos
+            confirmPaymentModal ||  // Modal responsável por exibir o componente de Confirmação de Pagamento
+            historicSaleModal || // Modal responsável por mostrar as vendas do dia
+            closeSystem // Modal responsavel por mostrar o Fechamento de Caixa
+         ) {
+            setAboutMeModal(false)
+            setOptionsSystem(false)
+            setInvoicingModal(false)
+            setFindProductsModal(false)
+            setNewUserModal(false) 
+            setManagerUsersModal(false) 
+            setNewProductModal(false)
+            setManagerProductsModal(false)
+            setConfirmPaymentModal(false)
             setHistoricSaleModal(false)
+            setCloseSystem(false)
          }
 
-         setAddProduct(!addProduct)
-         setConfirmPaymentModal(false)
-         setOptionsSystem(false)
-         setCloseSystem(false)
-
+         setAddProduct(!addProduct) // Modal responsavel por mostrar os produtos e seleciona-los para adicionar no carrinho
       } else {
          alert('Abra o caixa camarada.')
       }
 
    }
 
+   // --  Função reponsável para mostrar o Modal com funções Administrativas
    const handleOptionSystem = () => {
-      if(newUserModal || managerUsersModal) {
-         setNewUserModal(false)
-         setManagerUsersModal(false)
-      }
-
-      if(NewProductModal || managerProductsModal) {
+      if(
+         aboutMeModal || // Infos about me
+         invoicingModal || // Modal das vendas do dia
+         findProductsModal || // Modal para Produrar um Produto
+         newUserModal || // Modal Responsavel por exibir o componente de criação de usuário
+         managerUsersModal || // Modal responsavel por Listar/Editar os Usuários
+         newProductModal || // Modal responsavel por exibir o omponente de criação de um novo produto
+         managerProductsModal || // Modal responsável por Listar/Editar os Produtos
+         confirmPaymentModal ||  // Modal responsável por exibir o componente de Confirmação de Pagamento
+         addProduct ||  // Modal responsavel por mostrar os produtos e seleciona-los para adicionar no carrinho
+         historicSaleModal || // Modal responsável por mostrar as vendas do dia
+         closeSystem // Modal responsavel por mostrar o Fechamento de Caixa
+      ) {
+         setAboutMeModal(false)
+         setInvoicingModal(false)
+         setFindProductsModal(false)
+         setNewUserModal(false) 
+         setManagerUsersModal(false) 
          setNewProductModal(false)
          setManagerProductsModal(false)
-      }
-
-      if(historicSaleModal) {
-         setHistoricSaleModal(false)
-      }
-
-      if(confirmPaymentModal) {
          setConfirmPaymentModal(false)
-      }
-
-      if(addProduct) {
          setAddProduct(false)
+         setHistoricSaleModal(false)
+         setCloseSystem(false)
       }
 
-
-      setOptionsSystem(!optionsSystem)
-      
-      // console.log(optionsSystem)
+      setOptionsSystem(!optionsSystem) // Modal para Funções Administrativas
    }
 
    const handleKeyDown = () => {
@@ -373,7 +425,7 @@ export const OpenSystem = ({ close }: ActionsType) => {
             alert('F4')
          } else if (event.keyCode === 120) { // F9 Pesquisar
             // alert('F9')
-            handleToogleFindProductModal()
+            handleFindProductModal()
          } else if (event.keyCode === 121) { // F10 Cancelar
             alert('F10')
          } else if (event.keyCode === 123) { // F12 Pagamento
@@ -382,30 +434,131 @@ export const OpenSystem = ({ close }: ActionsType) => {
       })
    }
 
+   // -- Função responsável por exibir o componente de criação de usuário
    const handleNewUser = () => {
-      setOptionsSystem(false)
-      setNewUserModal(true)
+      if(
+         aboutMeModal || // Infos about me
+         optionsSystem || // Modal para Funções Administrativas
+         invoicingModal || // Modal das vendas do dia
+         findProductsModal || // Modal para Produrar um Produto
+         managerUsersModal || // Modal responsavel por Listar/Editar os Usuários
+         newProductModal || // Modal responsavel por exibir o omponente de criação de um novo produto
+         managerProductsModal || // Modal responsável por Listar/Editar os Produtos
+         confirmPaymentModal ||  // Modal responsável por exibir o componente de Confirmação de Pagamento
+         addProduct ||  // Modal responsavel por mostrar os produtos e seleciona-los para adicionar no carrinho
+         historicSaleModal || // Modal responsável por mostrar as vendas do dia
+         closeSystem // Modal responsavel por mostrar o Fechamento de Caixa
+      ) {
+         setAboutMeModal(false)
+         setOptionsSystem(false)
+         setInvoicingModal(false)
+         setFindProductsModal(false)
+         setManagerUsersModal(false) 
+         setNewProductModal(false)
+         setManagerProductsModal(false)
+         setConfirmPaymentModal(false)
+         setAddProduct(false)
+         setHistoricSaleModal(false)
+         setCloseSystem(false)
+      }
+
+      setNewUserModal(!newUserModal) // Modal Responsavel por exibir o componente de criação de usuário
    }
 
+   // -- Função responsável por exibir o componente de edição de usuário
    const handleManagerUser = () => {
-      // setManagerOption(true)
-      // return managerOption 
-      setOptionsSystem(false)
-      setManagerUsersModal(true)
+      if(
+         aboutMeModal || // Infos about me
+         optionsSystem || // Modal para Funções Administrativas
+         invoicingModal || // Modal das vendas do dia
+         findProductsModal || // Modal para Produrar um Produto
+         newUserModal || // Modal Responsavel por exibir o componente de criação de usuário
+         newProductModal || // Modal responsavel por exibir o omponente de criação de um novo produto
+         managerProductsModal || // Modal responsável por Listar/Editar os Produtos
+         confirmPaymentModal ||  // Modal responsável por exibir o componente de Confirmação de Pagamento
+         addProduct ||  // Modal responsavel por mostrar os produtos e seleciona-los para adicionar no carrinho
+         historicSaleModal || // Modal responsável por mostrar as vendas do dia
+         closeSystem // Modal responsavel por mostrar o Fechamento de Caixa
+      ) {
+         setAboutMeModal(false)
+         setOptionsSystem(false)
+         setInvoicingModal(false)
+         setFindProductsModal(false)
+         setNewUserModal(false) 
+         setNewProductModal(false)
+         setManagerProductsModal(false)
+         setConfirmPaymentModal(false)
+         setAddProduct(false)
+         setHistoricSaleModal(false)
+         setCloseSystem(false)
+      }
+
+      setManagerUsersModal(!managerUsersModal) // Modal responsavel por Listar/Editar os Usuários
    }
 
+   // -- Função responsável por exibir o componente de criação de produto
    const handleNewProduct = () => {
-      setOptionsSystem(false)
-      setNewProductModal(true)
+      if(
+         aboutMeModal || // Infos about me
+         optionsSystem || // Modal para Funções Administrativas
+         invoicingModal || // Modal das vendas do dia
+         findProductsModal || // Modal para Produrar um Produto
+         newUserModal || // Modal Responsavel por exibir o componente de criação de usuário
+         managerUsersModal || // Modal responsavel por Listar/Editar os Usuários
+         managerProductsModal || // Modal responsável por Listar/Editar os Produtos
+         confirmPaymentModal ||  // Modal responsável por exibir o componente de Confirmação de Pagamento
+         addProduct ||  // Modal responsavel por mostrar os produtos e seleciona-los para adicionar no carrinho
+         historicSaleModal || // Modal responsável por mostrar as vendas do dia
+         closeSystem // Modal responsavel por mostrar o Fechamento de Caixa
+      ) {
+         setAboutMeModal(false)
+         setOptionsSystem(false)
+         setInvoicingModal(false)
+         setFindProductsModal(false)
+         setNewUserModal(false) 
+         setManagerUsersModal(false) 
+         setManagerProductsModal(false)
+         setConfirmPaymentModal(false)
+         setAddProduct(false)
+         setHistoricSaleModal(false)
+         setCloseSystem(false)
+      }
+
+      setNewProductModal(!newProductModal) // Modal responsavel por exibir o omponente de criação de um novo produto
    }
 
+   // -- Função responsável por exibir o componente de edição de produto
    const handleManagerProduct = () => {
-      // setManagerOption(true)
-      // return managerOption 
-      setOptionsSystem(false)
-      setManagerProductsModal(true)
+      if(
+         aboutMeModal || // Infos about me
+         optionsSystem || // Modal para Funções Administrativas
+         invoicingModal || // Modal das vendas do dia
+         findProductsModal || // Modal para Produrar um Produto
+         newUserModal || // Modal Responsavel por exibir o componente de criação de usuário
+         managerUsersModal || // Modal responsavel por Listar/Editar os Usuários
+         newProductModal || // Modal responsavel por exibir o omponente de criação de um novo produto
+         confirmPaymentModal ||  // Modal responsável por exibir o componente de Confirmação de Pagamento
+         addProduct ||  // Modal responsavel por mostrar os produtos e seleciona-los para adicionar no carrinho
+         historicSaleModal || // Modal responsável por mostrar as vendas do dia
+         closeSystem // Modal responsavel por mostrar o Fechamento de Caixa
+      ) {
+         setAboutMeModal(false)
+         setOptionsSystem(false)
+         setInvoicingModal(false)
+         setFindProductsModal(false)
+         setNewUserModal(false) 
+         setManagerUsersModal(false) 
+         setNewProductModal(false)
+         setConfirmPaymentModal(false)
+         setAddProduct(false)
+         setHistoricSaleModal(false)
+         setCloseSystem(false)
+      }
+
+      setManagerProductsModal(!managerProductsModal) // Modal responsável por Listar/Editar os Produtos
    }
 
+   // -- Função responsável por armazenar os itens no array do carrinho de compras e exibir o modal os itens no carrinho
    const addItemOnCart = (data: ProductType) => {
       // Original
       /*setCartItems([...cartItems, data])
@@ -421,6 +574,8 @@ export const OpenSystem = ({ close }: ActionsType) => {
       if (cartList.length > 0) {
          setCartProductsModal(true)
       }
+
+      console.log(cartList)
    }
 
    const handleReturnItems = (data: ProductType) => {
@@ -437,6 +592,7 @@ export const OpenSystem = ({ close }: ActionsType) => {
 
    // Footer Functions
 
+   // -- Função responsável por mostrar o Modal do Historico de vendas
    const handleHistoricModal = async() => { // F2
       if(open) {
          await axios.get(`${server}/SaleDayList`)
@@ -446,28 +602,39 @@ export const OpenSystem = ({ close }: ActionsType) => {
             })
             .catch(err => console.log(err))
    
-         if(optionsSystem) {
-            setOptionsSystem(false)
-         }
-
-         if(closeSystem) {
-            setCloseSystem(false)
-         }
-
-         if(confirmPaymentModal) {
-            setConfirmPaymentModal(false)
-         }
-
-         if(addProduct) {
-            setAddProduct(false)
-         }
+            if(
+               aboutMeModal || // Infos about me
+               optionsSystem || // Modal para Funções Administrativas
+               invoicingModal || // Modal das vendas do dia
+               findProductsModal || // Modal para Produrar um Produto
+               newUserModal || // Modal Responsavel por exibir o componente de criação de usuário
+               managerUsersModal || // Modal responsavel por Listar/Editar os Usuários
+               newProductModal || // Modal responsavel por exibir o omponente de criação de um novo produto
+               managerProductsModal || // Modal responsável por Listar/Editar os Produtos
+               confirmPaymentModal ||  // Modal responsável por exibir o componente de Confirmação de Pagamento
+               addProduct ||  // Modal responsavel por mostrar os produtos e seleciona-los para adicionar no carrinho
+               closeSystem // Modal responsavel por mostrar o Fechamento de Caixa
+            ) {
+               setAboutMeModal(false)
+               setOptionsSystem(false)
+               setInvoicingModal(false)
+               setFindProductsModal(false)
+               setNewUserModal(false) 
+               setManagerUsersModal(false) 
+               setNewProductModal(false)
+               setManagerProductsModal(false)
+               setConfirmPaymentModal(false)
+               setAddProduct(false)
+               setCloseSystem(false)
+            }
       
-         setHistoricSaleModal(!historicSaleModal)
+         setHistoricSaleModal(!historicSaleModal) // Modal responsável por mostrar as vendas do dia
       } else {
          alert('Abra o caixa camarada.')
       }
    }
 
+   // -- Função responsável por mostrar o Modal da confirmação de vendas
    const handleConfirmPayment = () => { // F4
       if (open) {
          let total = cartList.reduce(
@@ -479,15 +646,33 @@ export const OpenSystem = ({ close }: ActionsType) => {
             setConfirmPaymentModal(false)
          } else {
 
-            if(historicSaleModal) {
+            if(
+               aboutMeModal || // Infos about me
+               optionsSystem || // Modal para Funções Administrativas
+               invoicingModal || // Modal das vendas do dia
+               findProductsModal || // Modal para Produrar um Produto
+               newUserModal || // Modal Responsavel por exibir o componente de criação de usuário
+               managerUsersModal || // Modal responsavel por Listar/Editar os Usuários
+               newProductModal || // Modal responsavel por exibir o omponente de criação de um novo produto
+               managerProductsModal || // Modal responsável por Listar/Editar os Produtos
+               addProduct ||  // Modal responsavel por mostrar os produtos e seleciona-los para adicionar no carrinho
+               historicSaleModal || // Modal responsável por mostrar as vendas do dia
+               closeSystem // Modal responsavel por mostrar o Fechamento de Caixa
+            ) {
+               setAboutMeModal(false)
+               setOptionsSystem(false)
+               setInvoicingModal(false)
+               setFindProductsModal(false)
+               setNewUserModal(false) 
+               setManagerUsersModal(false) 
+               setNewProductModal(false)
+               setManagerProductsModal(false)
+               setAddProduct(false)
                setHistoricSaleModal(false)
+               setCloseSystem(false)
             }
-           
-            setConfirmPaymentModal(!confirmPaymentModal)
-            setAddProduct(false)
-            setOptionsSystem(false)
-            setCloseSystem(false)
 
+            setConfirmPaymentModal(!confirmPaymentModal) // Modal responsável por exibir o componente de Confirmação de Pagamento
 
             if(cartList.length <= 0) {
                setModalSelected(!modalSelected)
@@ -498,6 +683,7 @@ export const OpenSystem = ({ close }: ActionsType) => {
       }
    }
 
+   // -- Função responsável por limpar o carrinho de compras
    const handleClearCartList = () => { // F10
       if (open) {
          if (cartList.length > 0) {
@@ -643,65 +829,66 @@ export const OpenSystem = ({ close }: ActionsType) => {
                         </section> : ''
                      } */}
 
-                     { aboutMeModal ?
-                        <AboutMe close={ handleAboutMeModal } /> : ''
+                     { aboutMeModal &&
+                        <AboutMe close={ handleAboutMeModal } />
                      }
 
-                     { optionsSystem ?
+                     { optionsSystem &&
                         <ManagerSystem 
                            handleOptionSystem = { handleOptionSystem } 
                            handleNewUser = { handleNewUser } 
                            handleManagerUser = { handleManagerUser }
                            handleNewProduct = { handleNewProduct }
                            handleManagerProduct = { handleManagerProduct }
-                        /> : ''
+                        />
                      }
 
                      {
-                        newUserModal ?
-                           <RegisterUser close={() => setNewUserModal(false)} /> : ''
+                        newUserModal &&
+                           <RegisterUser close={() => setNewUserModal(false)} /> 
                      }
 
                      {
-                        managerUsersModal ?
-                           <FindUsers listUsers={users} close={() => setManagerUsersModal(false)} /> : ''
+                        managerUsersModal &&
+                           <FindUsers listUsers={users} close={() => setManagerUsersModal(false)} /> 
                      }
 
                      {
-                        NewProductModal ?
-                           <RegisterProduct close={() => setNewProductModal(false)} /> : ''
+                        newProductModal &&
+                           <RegisterProduct close={() => setNewProductModal(false)} />
                      }
 
                      {
-                        managerProductsModal ?
-                           <FindProducts listProducts={products} close={() => setManagerProductsModal(false)} /> : ''
+                        managerProductsModal &&
+                           <FindProducts listProducts={products} close={() => setManagerProductsModal(false)} />
                      }
 
                      {
-                        historicSaleModal ?
-                           <Sales listSales={ historicSale } valuesSales={ valuesSalesToday } close={ () =>  setHistoricSaleModal(!historicSaleModal) } /> : ''
+                        historicSaleModal &&
+                           <Sales listSales={ historicSale } valuesSales={ valuesSalesToday } close={ () =>  setHistoricSaleModal(!historicSaleModal) } />
                            // listSales => Recebe a lista de vendas do historicSale via component
                            // valuesSales => Pega os valores de sales e injeta em valuesSalesDay via component
                      }
 
                      {
-                        confirmPaymentModal ?
-                           <ConfirmPayment close={handleConfirmPayment} /> : ''
+                        confirmPaymentModal &&
+                           <ConfirmPayment close={handleConfirmPayment} /> 
                      }
 
                      {
-                        addProduct ? <AddProducts listProducts={products} close={handleAddProductModal} cartAddItem={addItemOnCart} /> : ''
+                        addProduct && 
+                           <AddProducts listProducts={ products } close={ handleAddProductModal } cartAddItem={ addItemOnCart } />
                      }
 
                      {
-                        cartProductsModal ? <CartList listProducts={cartItems} returnItems={handleReturnItems} /> :
+                        cartProductsModal ? <CartList listProducts={ cartItems } /> :
                         <span id="Texugo">
                            <MessageTexugo msg="Carrinho vazio, meu Chapa." tw="100" th="100" className="mb-2 flex text-warning" />
                         </span>
                      }
 
                      {
-                        closeSystem ? <Closing close={ handleCloseCash } userInfos = { userInfos } /> : ''
+                        closeSystem && <Closing close={ handleCloseCash } userInfos = { userInfos } /> 
                      }
 
                   </>

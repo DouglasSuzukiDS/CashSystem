@@ -131,7 +131,7 @@ export const AddProducts = ({ close, id, listProducts, cartAddItem }: ActionsTyp
    }
 
    return (
-      <article className="container flex pr-3  w-100 h-100" id='FindProductModal'>
+      <article className="container flex pr-3  w-100 h-100 z-index-50" id='FindProductModal'>
 
          <div className="forms">
 

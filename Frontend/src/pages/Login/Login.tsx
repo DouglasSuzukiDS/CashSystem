@@ -9,10 +9,12 @@ export const Login = () => {
    useEffect(() => {
       const authToken = localStorage.getItem('authToken')
 
-      if(authToken !== undefined){
-         // navigate('/OpenSystem') 
-      } 
-   })
+      if(authToken !== undefined || authToken !== null || authToken !== ''){
+         navigate('/OpenSystem') 
+      } else {
+         navigate('/') 
+      }
+   }, [])
 
    const auth = useContext(AuthContext)
    

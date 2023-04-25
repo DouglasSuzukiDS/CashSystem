@@ -171,7 +171,7 @@ export const ConfirmPayment = ({ close }: ActionsType) => {
 
 
    return (
-      <main className="container flex pr-3" id='paymentFormContainer'>
+      <main className="container flex pr-3 z-index-50" id='paymentFormContainer'>
          <div className="forms flex sbt column">
 
             <form action='/' className="paymentForm w-100 h-100 f sbt column">

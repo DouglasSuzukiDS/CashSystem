@@ -26,22 +26,22 @@ export const FooterSystem = ({
          </div>
 
          <div className="actionsFooterSystem flex mr-3">
-            <button className="btn btn-secondary" onClick={handleHistoricModal} >
+            <button className="btn btn-secondary" onClick={ handleHistoricModal } >
                F2 Historico
                <ListCheck w='20' h='20' fill='var(--text)' className='ml-1' />
             </button>
 
-            <button className="btn btn-success ml-1" onClick={handleConfirmPayment}>
+            <button className="btn btn-success ml-1" onClick={ handleConfirmPayment }>
                F4 Finalizar
                <SackDollar w='20' h='20' fill='var(--text)' className='ml-1' />
             </button>
 
-            <button className="btn btn-warning ml-1" onClick={handleAddProductModal} onKeyDown={onKeyDown}>
+            <button className="btn btn-warning ml-1" onClick={ handleAddProductModal } onKeyDown={ onKeyDown }>
                F9 Pesquisar
                <MagnifyingGlass w='20' h='20' fill='var(--text-dark)' className='ml-1' />
             </button>
 
-            <button className="btn btn-danger ml-1" onClick={handleClearCartList}>
+            <button className="btn btn-danger ml-1" onClick={ handleClearCartList }>
                F10 Cancelar
                <TrashCan w='20' h='20' fill='var(--text)' className='ml-1' />
             </button>

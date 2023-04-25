@@ -35,6 +35,8 @@ export default function RoutesApp() {
 
                         <Route path='/' element={ <Login /> } /> 
 
+                        <Route path='/test' element={ <AboutMe /> } /> 
+
                         {/* <Route path='/login' element={  <Login /> } />  */}
 
                         <Route path="/registerNewUser" element={ 
