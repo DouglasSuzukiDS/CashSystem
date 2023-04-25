@@ -1,7 +1,7 @@
 {
     "client": "Thunder Client",
     "collectionName": "CashSystem",
-    "dateExported": "2023-04-12T02:20:56.336Z",
+    "dateExported": "2023-04-25T02:32:55.631Z",
     "version": "1.1",
     "folders": [
         {
@@ -338,12 +338,12 @@
             "method": "POST",
             "sortNum": 120000,
             "created": "2023-03-31T03:09:30.777Z",
-            "modified": "2023-04-12T00:47:08.928Z",
+            "modified": "2023-04-25T01:49:50.618Z",
             "headers": [],
             "params": [],
             "body": {
                 "type": "json",
-                "raw": "{\n\n  \"sellerSale\": \"Tonhao Moto Moto\", \n  \"openCash\": \"12.00\", \n  \"totalSale\":\"150.00\", \n  \"openSystemHour\": \"12:50:00\",\n  \"closeSystemHour\": \"18:00:00\", \n  \"moneySale\": \"30.00\", \n  \"pixSale\": \"80.00\" , \n  \"debitSale\": \"20.00\", \n  \"creditSale\": \"20.00\", \n  \"cardsSale\": \"40.00\", \n  \"bankSale\": \"120.00\"\n}",
+                "raw": "{\n\n  \"sellerSale\": \"Tonhao Moto Moto\", \n  \"openCash\": \"10.00\", \n  \"totalSale\":\"150.00\", \n  \"openSystemHour\": \"12:50:00\",\n  \"closeSystemHour\": \"18:00:00\", \n  \"moneySale\": \"30.00\", \n  \"pixSale\": \"80.00\" , \n  \"debitSale\": \"20.00\", \n  \"creditSale\": \"20.00\", \n  \"cardsSale\": \"40.00\", \n  \"bankSale\": \"120.00\"\n}",
                 "form": []
             },
             "tests": []
@@ -372,6 +372,20 @@
             "sortNum": 140000,
             "created": "2023-04-11T02:35:48.932Z",
             "modified": "2023-04-11T02:35:57.520Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "d7307c9a-a458-43f4-9c41-abb42d5a0130",
+            "colId": "291ddf43-fc8d-4b88-b442-e7f4f0658eb9",
+            "containerId": "269900a1-92d4-4dca-825a-80ad9b852ca7",
+            "name": "Backup All Sales",
+            "url": "localhost:3001/allSales",
+            "method": "GET",
+            "sortNum": 150000,
+            "created": "2023-04-25T01:53:34.314Z",
+            "modified": "2023-04-25T02:15:42.800Z",
             "headers": [],
             "params": [],
             "tests": []

@@ -188,3 +188,4 @@ CREATE TABLE products (
 -- ALTER TABLE saleday RENAME SalesDay;
 -- ALTER TABLE Sales RENAME COLUMN openSystem TO openSystemHour;
 -- ALTER TABLE Sales RENAME COLUMN closeSystem TO closeSystemHour;
+-- DELETE FROM sales;

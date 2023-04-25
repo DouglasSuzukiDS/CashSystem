@@ -15,27 +15,32 @@ export const ManagerSystem = ({ handleOptionSystem, handleNewUser, handleManager
    const handleBackups = async () => {
       await axios.get(`${server}/backupUsers`)
          .then(response => {
-            if(response.status === 200) { 
+            if (response.status === 200) {
                // alert(`${response.data.msg} 😎`)
 
                axios.get(`${server}/backupProducts`)
-               .then(response => {
-                  if(response.status === 200) { 
-                     // alert(`${response.data.msg} 😎`)
-                     // alert('Backup de Usuários e Produtos realizado com sucesso 😎')
+                  .then(response => {
+                     if (response.status === 200) {
+                        // alert(`${response.data.msg} 😎`)
+                        // alert('Backup de Usuários e Produtos realizado com sucesso 😎')
 
-                     axios.get(`${server}/backupSalesDay`)
-                        .then(response => {
-                           if(response.status === 200) {
-                              alert('Backup de Usuários, Produtos & Vendas, realizado com sucesso 😎')
-                           }
-                        })
-                  } else {
-                     alert(`${response.data.msg}`)
-                  }
-                  // alert(response)
-               })
-               .catch(err => alert(err))
+                        axios.get(`${server}/backupSalesDay`)
+                           .then(response => {
+                              if (response.status === 200) {
+                                 axios.get(`${server}/allSales`)
+                                    .then(response => {
+                                       if (response.status === 200) {
+                                          alert('Backup de Usuários, Produtos & Vendas, realizado com sucesso 😎')
+                                       }
+                                    })
+                              }
+                           })
+                     } else {
+                        alert(`${response.data.msg}`)
+                     }
+                     // alert(response)
+                  })
+                  .catch(err => alert(err))
 
             } else {
                alert(`${response.data.msg}`)
@@ -44,24 +49,24 @@ export const ManagerSystem = ({ handleOptionSystem, handleNewUser, handleManager
          })
          .catch(err => console.log(err))
 
-      
+
    }
-   
+
    const handleBackupSales = async () => {
       await axios.get(`${server}/backupSalesDay`)
          .then(response => {
-            if(response.status === 200) {
+            if (response.status === 200) {
                alert('Backup das vendas realizadas, realizado com sucesso 😎')
             } else {
                alert(`${response.data.msg}`)
             }
          })
    }
-   
+
    const handleBackupUsers = async () => {
       await axios.get(`${server}/backupUsers`)
          .then(response => {
-            if(response.status === 200) { 
+            if (response.status === 200) {
                alert(`${response.data.msg} 😎`)
 
             } else {
@@ -71,11 +76,11 @@ export const ManagerSystem = ({ handleOptionSystem, handleNewUser, handleManager
          })
          .catch(err => console.log(err))
    }
-   
+
    const handleBackupProducts = async () => {
       await axios.get(`${server}/backupProducts`)
          .then(response => {
-            if(response.status === 200) { 
+            if (response.status === 200) {
                alert(`${response.data.msg} 😎`)
 
             } else {
@@ -90,7 +95,7 @@ export const ManagerSystem = ({ handleOptionSystem, handleNewUser, handleManager
       <section className="managerSystem flex mr-3" onMouseLeave={handleOptionSystem}>
          <ul className="flex column text-dark bold">
             <li className="flex"
-               onClick={ handleNewUser }>
+               onClick={handleNewUser}>
                Novo Usuário
                <UserPlus w="20" h="20" fill="var(--bs-info)" className="ml-1" />
             </li>
@@ -114,13 +119,13 @@ export const ManagerSystem = ({ handleOptionSystem, handleNewUser, handleManager
             </li>
 
             <li className="flex"
-               onClick={ handleBackups }>
+               onClick={handleBackups}>
                Backup Geral
                <Download w="20" h="20" fill="var(--btn)" className="ml-1" />
             </li>
 
             <li className="flex"
-               onClick={ handleBackupSales }>
+               onClick={handleBackupSales}>
                BKP de Vendas
                <Download w="20" h="20" fill="var(--btn)" className="ml-1" />
             </li>
