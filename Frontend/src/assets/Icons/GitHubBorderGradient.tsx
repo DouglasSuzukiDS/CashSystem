@@ -1,6 +1,6 @@
 import { IconsProps } from "../../types/IconsProps"
 
-export const GitHub = ({ w, h, className, fill, onClick }: IconsProps) => {
+export const GitHubBorderGradient = ({ w, h, className, fill, onClick }: IconsProps) => {
    return (
       <svg viewBox="0 0 45 42" xmlns="http://www.w3.org/2000/svg"
          width={w} height={h} className={className} fill={fill} onClick={onClick}>

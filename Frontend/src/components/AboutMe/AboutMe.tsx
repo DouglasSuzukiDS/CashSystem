@@ -1,8 +1,8 @@
 import { useState } from "react"
 import { CircleCheck } from "../../assets/Icons/CircleCheck"
 import { Envelope } from "../../assets/Icons/Envelope"
-import { GitHub } from "../../assets/Icons/GitHub"
-import { Linkedin } from "../../assets/Icons/Linkedin"
+import { GitHubBorderGradient } from "../../assets/Icons/GitHubBorderGradient"
+import { LinkedinBorderGradient } from "../../assets/Icons/LinkedinBorderGradient"
 import { Texugo } from "../../assets/Icons/Texugo"
 import { WhatsApp } from "../../assets/Icons/WhatsApp"
 import { XMark } from "../../assets/Icons/XMark"
@@ -70,13 +70,13 @@ export const AboutMe = ({ close }: ActionsType) => {
 
                <div className="aboutSocial my-2 flex sar">
                   <a href='https://www.linkedin.com/in/douglas-suzuki/' target="_blank" rel="noreferrer">
-                     <Linkedin w="40" h="40" className="pointer opacity" />
+                     <LinkedinBorderGradient w="40" h="40" className="pointer opacity" />
                   </a>
 
                   <WhatsApp w="40" h="40" className="pointer opacity" fill="none" onClick={handleShowWhatsApp} />
 
                   <a href='https://github.com/DouglasSuzukiDS' target="_blank" rel="noreferrer">
-                     <GitHub w="40" h="40" className="pointer opacity" />
+                     <GitHubBorderGradient w="40" h="40" className="pointer opacity" />
                   </a>
 
                   <Envelope w="40" h="40" className="pointer opacity" fill="none" onClick={handleShowEmail} />

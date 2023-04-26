@@ -6,6 +6,8 @@ import { IdCard } from "../../assets/Icons/IdCard";
 import { AuthContext } from '../../context/Auth/AuthContext';
 
 export const Login = () => {
+   const navigate = useNavigate()
+   
    useEffect(() => {
       const authToken = localStorage.getItem('authToken')
 
@@ -18,7 +20,6 @@ export const Login = () => {
 
    const auth = useContext(AuthContext)
    
-   const navigate = useNavigate()
 
    const [userLogin, setUserLogin] = useState('')
    const [userPassword, setUserPassword] = useState('')

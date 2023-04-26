@@ -14,10 +14,8 @@ import { RegisterUser } from "../pages/RegisterUser/RegisterUser";
 import { Error } from "../pages/Error/Error";
 import { ProductProvider } from "../context/Products/ProductProvider";
 import { CartListProviver } from "../context/CartList/CartListProvider";
-import { ConfirmPayment } from "../components/ConfirmPayment/ConfirmPaymanet";
-import { UserProvider } from "../context/User/UserProvider";
 import { ValuesSalesProvider } from "../context/ValuesSales/ValuesSalesProvider";
-import { AboutMe } from "../components/AboutMe/AboutMe";
+import { References } from "../components/References/References";
 
 // import Login from "../pages/Login/Login";
 
@@ -35,7 +33,7 @@ export default function RoutesApp() {
 
                         <Route path='/' element={ <Login /> } /> 
 
-                        <Route path='/test' element={ <AboutMe /> } /> 
+                        <Route path='/test' element={ <References /> } /> 
 
                         {/* <Route path='/login' element={  <Login /> } />  */}
 

@@ -1,0 +1,13 @@
+.containerReferences {
+   z-index: 50;
+   max-width: 500px;
+   // height: 280px;
+   padding: 24px;
+   border: 2px solid var(--fb1);
+   border-radius: 8px;
+   background-color: var(--bs-dark);
+}
+
+.russianGradient {
+   background: linear-gradient(102.68deg, #FEFEFE 4.59%, #0038A5 47.75%, #D52B1E 97.7%);
+}
