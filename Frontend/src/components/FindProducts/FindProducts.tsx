@@ -6,12 +6,10 @@ import { MagnifyingGlass  }from "../../assets/Icons/MagnifyingGlass"
 import { XMark } from "../../assets/Icons/XMark"
 import { PenToSquare } from "../../assets/Icons/PenToSquare"
 import { TrashCanXMark } from "../../assets/Icons/TrashCanXMark"
-import { Link } from "react-router-dom"
 import { ActionsType } from "../../types/ActionsType"
 import { EditProduct } from "../EditProduct/EditProduct"
 import { ProductType } from "../../types/ProductType"
 import { allProducts } from "../../services/product.service"
-import { UserType } from "../../types/UserType"
 
 export const FindProducts = ({ close, id, listProducts }: ActionsType) => {
    const server = 'http://localhost:3001'

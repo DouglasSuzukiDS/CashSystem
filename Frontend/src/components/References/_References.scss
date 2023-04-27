@@ -6,6 +6,30 @@
    border: 2px solid var(--fb1);
    border-radius: 8px;
    background-color: var(--bs-dark);
+   height: 480px;
+   // overflow: hidden;
+
+   .references {
+      // width: 100%;
+      // height: 380px;
+      height: 100%;
+      overflow-y: auto;
+
+      .referenceItem {
+         transition: all .75s;
+         &:hover {
+            border: 1px solid var(--fb1);
+         }
+      }
+   }
+}
+
+.text-russin-gradient {
+   background: linear-gradient(102.68deg, #FEFEFE 4.59%, #0038A5 47.75%, #D52B1E 97.7%);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+background-clip: text;
+text-fill-color: transparent;
 }
 
 .russianGradient {
