@@ -7,10 +7,11 @@ import { Signature } from "../../assets/Icons/Signature"
 import { TrashCan } from "../../assets/Icons/TrashCan"
 import { AuthContext } from "../../context/Auth/AuthContext"
 import { ActionsType } from "../../types/ActionsType"
+import { HandshakeRussian } from "../../assets/Icons/HandshakeRussian"
 
 export const FooterSystem = ({
    userInfos, handleHistoricModal, handleConfirmPayment, handleAddProductModal,
-   handleClearCartList, onKeyDown }: ActionsType) => {
+   handleClearCartList, handleReferencesModal, onKeyDown }: ActionsType) => {
 
    const { userData, setUserData } = useContext(AuthContext)
 
@@ -46,9 +47,9 @@ export const FooterSystem = ({
                <TrashCan w='20' h='20' fill='var(--text)' className='ml-1' />
             </button>
 
-            <button className="btn btn-primary ml-1">
-               F12 Pagamento
-               <HandHoldingDollar w='20' h='20' fill='var(--text)' className='ml-1' />
+            <button className="btn btn-primary ml-1" onClick={ handleReferencesModal }>
+               Referências
+               <HandshakeRussian w='20' h='20' fill='var(--text)' className='ml-1' />
             </button>
 
          </div>

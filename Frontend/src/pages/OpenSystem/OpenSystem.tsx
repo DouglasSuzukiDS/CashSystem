@@ -1,4 +1,5 @@
 import { useState, useEffect, useContext } from "react";
+import axios from "axios";
 
 import { CashRegister } from "../../assets/Icons/CashRegister";
 import { Gears } from "../../assets/Icons/Gears";
@@ -20,7 +21,6 @@ import { CartList } from "../../components/CartList/CartList";
 import { ProductsContext } from "../../context/Products/ProductsContext";
 import { CartListContext } from "../../context/CartList/CartListContext";
 import { ConfirmPayment } from "../../components/ConfirmPayment/ConfirmPaymanet";
-import axios from "axios";
 import { SalesType } from "../../types/SalesType";
 import { Sales } from "../../components/Sales/Sales";
 import { ValeusSalesContext } from "../../context/ValuesSales/ValuesSalesContext";
@@ -31,6 +31,7 @@ import { ArrowLeftLong } from "../../assets/Icons/ArrowLeftLong";
 import { allProducts } from "../../services/product.service";
 import { LogoBlue } from "../../assets/Icons/Logo Blue";
 import { AboutMe } from "../../components/AboutMe/AboutMe";
+import { References } from "../../components/References/References";
 
 export const OpenSystem = ({ close }: ActionsType) => {
    const server = 'http://localhost:3001'
@@ -92,6 +93,8 @@ export const OpenSystem = ({ close }: ActionsType) => {
    const [addProduct, setAddProduct] = useState(false) // Modal responsavel por mostrar os produtos e seleciona-los para adicionar no carrinho
 
    const [cartProductsModal, setCartProductsModal] = useState(false) // Modal responsável por exibir os produtos no carrinho
+
+   const [referencesModal, setReferencesModal] = useState(false) // // Modal responsável por exibir o Modal com as Reerências
 
    const [closeSystem, setCloseSystem] = useState(false) // Modal responsavel por mostrar o Fechamento de Caixa
 
@@ -237,6 +240,7 @@ export const OpenSystem = ({ close }: ActionsType) => {
          managerProductsModal ||
          confirmPaymentModal || 
          addProduct || 
+         referencesModal || // Modal responsável por exibir o Modal com as Referências
          historicSaleModal
       ) {
          setAboutMeModal(false)
@@ -249,6 +253,7 @@ export const OpenSystem = ({ close }: ActionsType) => {
          setManagerProductsModal(false)
          setConfirmPaymentModal(false)
          setHistoricSaleModal(false)
+         setReferencesModal(false)
          setAddProduct(false)
       }
       
@@ -277,6 +282,7 @@ export const OpenSystem = ({ close }: ActionsType) => {
          confirmPaymentModal || 
          addProduct || 
          historicSaleModal || 
+         referencesModal || // Modal responsável por exibir o Modal com as Referências
          closeSystem
       ) {
          setOptionsSystem(false)
@@ -289,6 +295,7 @@ export const OpenSystem = ({ close }: ActionsType) => {
          setConfirmPaymentModal(false)
          setAddProduct(false)
          setHistoricSaleModal(false)
+         setReferencesModal(false)
          setCloseSystem(false)
       }
 
@@ -311,6 +318,7 @@ export const OpenSystem = ({ close }: ActionsType) => {
             confirmPaymentModal ||  // Modal responsável por exibir o componente de Confirmação de Pagamento
             addProduct ||  // Modal responsavel por mostrar os produtos e seleciona-los para adicionar no carrinho
             historicSaleModal || // Modal responsável por mostrar as vendas do dia
+            referencesModal || // Modal responsável por exibir o Modal com as Referências
             closeSystem // Modal responsavel por mostrar o Fechamento de Caixa
          ) {
             setAboutMeModal(false)
@@ -323,6 +331,7 @@ export const OpenSystem = ({ close }: ActionsType) => {
             setConfirmPaymentModal(false)
             setAddProduct(false)
             setHistoricSaleModal(false)
+            setReferencesModal(false)
             setCloseSystem(false)
          }
 
@@ -346,6 +355,7 @@ export const OpenSystem = ({ close }: ActionsType) => {
             managerProductsModal || // Modal responsável por Listar/Editar os Produtos
             confirmPaymentModal ||  // Modal responsável por exibir o componente de Confirmação de Pagamento
             historicSaleModal || // Modal responsável por mostrar as vendas do dia
+            referencesModal || // Modal responsável por exibir o Modal com as Referências
             closeSystem // Modal responsavel por mostrar o Fechamento de Caixa
          ) {
             setAboutMeModal(false)
@@ -358,6 +368,7 @@ export const OpenSystem = ({ close }: ActionsType) => {
             setManagerProductsModal(false)
             setConfirmPaymentModal(false)
             setHistoricSaleModal(false)
+            setReferencesModal(false)
             setCloseSystem(false)
          }
 
@@ -381,6 +392,7 @@ export const OpenSystem = ({ close }: ActionsType) => {
          confirmPaymentModal ||  // Modal responsável por exibir o componente de Confirmação de Pagamento
          addProduct ||  // Modal responsavel por mostrar os produtos e seleciona-los para adicionar no carrinho
          historicSaleModal || // Modal responsável por mostrar as vendas do dia
+         referencesModal || // Modal responsável por exibir o Modal com as Referências
          closeSystem // Modal responsavel por mostrar o Fechamento de Caixa
       ) {
          setAboutMeModal(false)
@@ -393,6 +405,7 @@ export const OpenSystem = ({ close }: ActionsType) => {
          setConfirmPaymentModal(false)
          setAddProduct(false)
          setHistoricSaleModal(false)
+         setReferencesModal(false)
          setCloseSystem(false)
       }
 
@@ -447,6 +460,7 @@ export const OpenSystem = ({ close }: ActionsType) => {
          confirmPaymentModal ||  // Modal responsável por exibir o componente de Confirmação de Pagamento
          addProduct ||  // Modal responsavel por mostrar os produtos e seleciona-los para adicionar no carrinho
          historicSaleModal || // Modal responsável por mostrar as vendas do dia
+         referencesModal || // Modal responsável por exibir o Modal com as Referências
          closeSystem // Modal responsavel por mostrar o Fechamento de Caixa
       ) {
          setAboutMeModal(false)
@@ -459,6 +473,7 @@ export const OpenSystem = ({ close }: ActionsType) => {
          setConfirmPaymentModal(false)
          setAddProduct(false)
          setHistoricSaleModal(false)
+         setReferencesModal(false)
          setCloseSystem(false)
       }
 
@@ -478,6 +493,7 @@ export const OpenSystem = ({ close }: ActionsType) => {
          confirmPaymentModal ||  // Modal responsável por exibir o componente de Confirmação de Pagamento
          addProduct ||  // Modal responsavel por mostrar os produtos e seleciona-los para adicionar no carrinho
          historicSaleModal || // Modal responsável por mostrar as vendas do dia
+         referencesModal || // Modal responsável por exibir o Modal com as Referências
          closeSystem // Modal responsavel por mostrar o Fechamento de Caixa
       ) {
          setAboutMeModal(false)
@@ -490,6 +506,7 @@ export const OpenSystem = ({ close }: ActionsType) => {
          setConfirmPaymentModal(false)
          setAddProduct(false)
          setHistoricSaleModal(false)
+         setReferencesModal(false)
          setCloseSystem(false)
       }
 
@@ -509,6 +526,7 @@ export const OpenSystem = ({ close }: ActionsType) => {
          confirmPaymentModal ||  // Modal responsável por exibir o componente de Confirmação de Pagamento
          addProduct ||  // Modal responsavel por mostrar os produtos e seleciona-los para adicionar no carrinho
          historicSaleModal || // Modal responsável por mostrar as vendas do dia
+         referencesModal || // Modal responsável por exibir o Modal com as Referências
          closeSystem // Modal responsavel por mostrar o Fechamento de Caixa
       ) {
          setAboutMeModal(false)
@@ -521,6 +539,7 @@ export const OpenSystem = ({ close }: ActionsType) => {
          setConfirmPaymentModal(false)
          setAddProduct(false)
          setHistoricSaleModal(false)
+         setReferencesModal(false)
          setCloseSystem(false)
       }
 
@@ -540,6 +559,7 @@ export const OpenSystem = ({ close }: ActionsType) => {
          confirmPaymentModal ||  // Modal responsável por exibir o componente de Confirmação de Pagamento
          addProduct ||  // Modal responsavel por mostrar os produtos e seleciona-los para adicionar no carrinho
          historicSaleModal || // Modal responsável por mostrar as vendas do dia
+         referencesModal || // Modal responsável por exibir o Modal com as Referências
          closeSystem // Modal responsavel por mostrar o Fechamento de Caixa
       ) {
          setAboutMeModal(false)
@@ -552,6 +572,7 @@ export const OpenSystem = ({ close }: ActionsType) => {
          setConfirmPaymentModal(false)
          setAddProduct(false)
          setHistoricSaleModal(false)
+         setReferencesModal(false)
          setCloseSystem(false)
       }
 
@@ -613,6 +634,7 @@ export const OpenSystem = ({ close }: ActionsType) => {
                managerProductsModal || // Modal responsável por Listar/Editar os Produtos
                confirmPaymentModal ||  // Modal responsável por exibir o componente de Confirmação de Pagamento
                addProduct ||  // Modal responsavel por mostrar os produtos e seleciona-los para adicionar no carrinho
+               referencesModal || // Modal responsável por exibir o Modal com as Referências
                closeSystem // Modal responsavel por mostrar o Fechamento de Caixa
             ) {
                setAboutMeModal(false)
@@ -625,6 +647,7 @@ export const OpenSystem = ({ close }: ActionsType) => {
                setManagerProductsModal(false)
                setConfirmPaymentModal(false)
                setAddProduct(false)
+               setReferencesModal(false)
                setCloseSystem(false)
             }
       
@@ -657,6 +680,7 @@ export const OpenSystem = ({ close }: ActionsType) => {
                managerProductsModal || // Modal responsável por Listar/Editar os Produtos
                addProduct ||  // Modal responsavel por mostrar os produtos e seleciona-los para adicionar no carrinho
                historicSaleModal || // Modal responsável por mostrar as vendas do dia
+               referencesModal || // Modal responsável por exibir o Modal com as Referências
                closeSystem // Modal responsavel por mostrar o Fechamento de Caixa
             ) {
                setAboutMeModal(false)
@@ -669,6 +693,7 @@ export const OpenSystem = ({ close }: ActionsType) => {
                setManagerProductsModal(false)
                setAddProduct(false)
                setHistoricSaleModal(false)
+               setReferencesModal(false)
                setCloseSystem(false)
             }
 
@@ -698,6 +723,39 @@ export const OpenSystem = ({ close }: ActionsType) => {
          alert('Abra o caixa camarada.')
       }
 
+   }
+
+   // -- Função responsável por mostrar o Modal de Referências 
+   const handleReferencesModal = () => {
+      if(
+         aboutMeModal || // Infos about me
+         optionsSystem || // Modal para Funções Administrativas
+         invoicingModal || // Modal das vendas do dia
+         findProductsModal || // Modal para Produrar um Produto
+         newUserModal || // Modal Responsavel por exibir o componente de criação de usuário
+         managerUsersModal || // Modal responsavel por Listar/Editar os Usuários
+         newProductModal || // Modal responsavel por exibir o omponente de criação de um novo produto
+         managerProductsModal || // Modal responsável por Listar/Editar os Produtos
+         confirmPaymentModal || // Modal responsável por exibir o componente de Confirmação de Pagamento
+         addProduct ||  // Modal responsavel por mostrar os produtos e seleciona-los para adicionar no carrinho
+         historicSaleModal || // Modal responsável por mostrar as vendas do dia
+         closeSystem // Modal responsavel por mostrar o Fechamento de Caixa
+      ) {
+         setAboutMeModal(false)
+         setOptionsSystem(false)
+         setInvoicingModal(false)
+         setFindProductsModal(false)
+         setNewUserModal(false) 
+         setManagerUsersModal(false) 
+         setNewProductModal(false)
+         setManagerProductsModal(false)
+         setConfirmPaymentModal(false)
+         setAddProduct(false)
+         setHistoricSaleModal(false)
+         setCloseSystem(false)
+      }
+
+      setReferencesModal(!referencesModal) // Modal responsável por exibir o Modal com as Reerências
    }
 
    return (
@@ -773,74 +831,20 @@ export const OpenSystem = ({ close }: ActionsType) => {
                   </> :
                   // Caso o caixa estiver aberto
                   <>
-                     {/* // Create new User/Product or Find User/Product */}
-                     {/* {optionsSystem ?
-                        // <section className="managerSystem flex mr-3" onMouseLeave={() => setOptionsSystem(false)}>
-                        <section className="managerSystem flex mr-3" onMouseLeave={handleOptionSystem}>
-                           <ul className="flex column text-dark bold">
-                              <li className="flex"
-                                 onClick={handleNewUser}>
-                                 Novo Usuário
-                                 <UserPlus w="20" h="20" fill="var(--bs-info)" className="ml-1" />
-                              </li>
-
-                              <li className="flex"
-                                 onClick={handleManagerUser}>
-                                 Editar Usuário
-                                 <UserPen w="20" h="20" fill="var(--bs-warning)" className="ml-1" />
-                              </li>
-
-                              <li className="flex"
-                                 onClick={handleNewProduct}>
-                                 Novo Produto
-                                 <Registered w="20" h="20" fill="var(--bs-info)" className="ml-1" />
-                              </li>
-
-                              <li className="flex"
-                                 onClick={ handleManagerProduct }>
-                                 Editar Produto
-                                 <PenToSquare w="20" h="20" fill="var(--bs-warning)" className="ml-1" />
-                              </li>
-
-                              <li className="flex"
-                                 onClick= { handleBackup }>
-                                 Backup Geral
-                                 <Download w="20" h="20" fill="var(--btn)" className="ml-1" />
-                              </li>
-
-                              <li className="flex"
-                                 onClick={ handleBackupSales }>
-                                 Backup de Vendas
-                                 <Download w="20" h="20" fill="var(--btn)" className="ml-1" />
-                              </li>
-
-                              <li className="flex"
-                                 onClick={ handleBackupUsers }>
-                                 Backup de Usuários
-                                 <Download w="20" h="20" fill="var(--btn)" className="ml-1" />
-                              </li>
-
-                              <li className="flex"
-                                 onClick={ handleBackupProducts }>
-                                 Backup Produtos
-                                 <Download w="20" h="20" fill="var(--btn)" className="ml-1" />
-                              </li>
-                           </ul>
-                        </section> : ''
-                     } */}
-
-                     { aboutMeModal &&
-                        <AboutMe close={ handleAboutMeModal } />
+                     { 
+                        aboutMeModal &&
+                           <AboutMe close={ handleAboutMeModal } />
                      }
 
-                     { optionsSystem &&
-                        <ManagerSystem 
-                           handleOptionSystem = { handleOptionSystem } 
-                           handleNewUser = { handleNewUser } 
-                           handleManagerUser = { handleManagerUser }
-                           handleNewProduct = { handleNewProduct }
-                           handleManagerProduct = { handleManagerProduct }
-                        />
+                     { 
+                        optionsSystem &&
+                           <ManagerSystem 
+                              handleOptionSystem = { handleOptionSystem } 
+                              handleNewUser = { handleNewUser } 
+                              handleManagerUser = { handleManagerUser }
+                              handleNewProduct = { handleNewProduct }
+                              handleManagerProduct = { handleManagerProduct }
+                           />
                      }
 
                      {
@@ -879,7 +883,8 @@ export const OpenSystem = ({ close }: ActionsType) => {
                         addProduct && 
                            <AddProducts listProducts={ products } close={ handleAddProductModal } cartAddItem={ addItemOnCart } />
                      }
-
+                     
+                     {/* Modais depois do cartProductsModal serão exibidos na direita dele */}
                      {
                         cartProductsModal ? <CartList listProducts={ cartItems } /> :
                         <span id="Texugo">
@@ -888,59 +893,26 @@ export const OpenSystem = ({ close }: ActionsType) => {
                      }
 
                      {
-                        closeSystem && <Closing close={ handleCloseCash } userInfos = { userInfos } /> 
+                        referencesModal &&
+                           <References close={ handleReferencesModal } />
+                     }
+
+                     {
+                        closeSystem 
+                           && <Closing close={ handleCloseCash } userInfos = { userInfos } /> 
                      }
 
                   </>
                }
             </div>
 
-            {/* <footer className="footerSystem flex sbt">
-               <div className="employeerFooterSystem flex column px-2 py-1 mr-3">
-                  <p className="pg5 bold text-color">Colaborador</p>
-
-                  <p className="pg4 bold italic text-center text-dark-blue flex column" id="employeerName">
-                     {userInfos?.userName === undefined ? userData.userName : userInfos?.userName}
-                     <Signature w='24' h='24' fill='var(--dark-blue)' />
-                  </p>
-               </div>
-
-               <div className="actionsFooterSystem flex mr-3">
-                  <button className="btn btn-secondary" onClick={ handleHistoricModal } >
-                     F2 Historico
-                     <ListCheck w='20' h='20' fill='var(--text)' className='ml-1' />
-                  </button>
-
-                  <button className="btn btn-success ml-1" onClick={ handleConfirmPayment }>
-                     F4 Finalizar
-                     <SackDollar w='20' h='20' fill='var(--text)' className='ml-1' />
-                  </button>
-
-                  <button className="btn btn-warning ml-1" onClick={ handleAddProductModal } onKeyDown={ handleKeyDown }>
-                     F9 Pesquisar
-                     <MagnifyingGlass w='20' h='20' fill='var(--text-dark)' className='ml-1' />
-                  </button>
-
-                  <button className="btn btn-danger ml-1" onClick={ handleClearCartList }>
-                     F10 Cancelar
-                     <TrashCan w='20' h='20' fill='var(--text)' className='ml-1' />
-                  </button>
-
-                  <button className="btn btn-primary ml-1">
-                     F12 Pagamento
-                     <HandHoldingDollar w='20' h='20' fill='var(--text)' className='ml-1' />
-                  </button>
-
-               </div>
-            </footer> */}
-
             <FooterSystem 
-               // userInfos = { userInfos }
                userInfos = { userInfos }
                handleHistoricModal = { handleHistoricModal }
                handleConfirmPayment = { handleConfirmPayment }
                handleAddProductModal = {  handleAddProductModal }
                handleClearCartList = { handleClearCartList }
+               handleReferencesModal={ handleReferencesModal }
                onKeyDown = { handleKeyDown }
             />
          </section>

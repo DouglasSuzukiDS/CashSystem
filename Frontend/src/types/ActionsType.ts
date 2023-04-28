@@ -23,6 +23,7 @@ export type ActionsType = {
    handleConfirmPayment?: () => void
    handleAddProductModal?: () => void
    handleClearCartList?: () => void
+   handleReferencesModal?: () => void
    className?: string
    id?: string
    listProducts?: ProductType[]
@@ -32,20 +33,4 @@ export type ActionsType = {
    text?: string
    color?: string
    icon?: IconsProps
-
-   helpReferenceName?: string
-
-   HelpReferenceSiteLabel?: string
-   HelpReferenceSite?: string
-
-   HelpReferenceYouTubeLabel?: string
-   HelpReferenceYouTube?: string
-
-   HelpReferenceLinkedinLabel?: string
-   HelpReferenceLinkedin?: string
-
-   HelpReferenceInstagramLabel?: string
-   HelpReferenceInstagram?: string
-   
-   helpReferenceDesc?: string
 }

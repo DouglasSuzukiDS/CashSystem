@@ -9,18 +9,18 @@ export const Login = () => {
    const navigate = useNavigate()
    
    useEffect(() => {
-      const authToken = localStorage.getItem('authToken')
+      const authToken = localStorage.getItem('AuthToken')
+      // console.log(authToken)
 
-      if(authToken !== undefined || authToken !== null || authToken !== ''){
-         navigate('/OpenSystem') 
-      } else {
+      if(authToken === null || authToken === undefined || authToken === '') {
          navigate('/') 
+      } else {
+         navigate('/OpenSystem') 
       }
    }, [])
 
    const auth = useContext(AuthContext)
    
-
    const [userLogin, setUserLogin] = useState('')
    const [userPassword, setUserPassword] = useState('')
    const [loading, setLoading] = useState(false)
