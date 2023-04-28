@@ -8,6 +8,7 @@ import { TrashCan } from "../../assets/Icons/TrashCan"
 import { AuthContext } from "../../context/Auth/AuthContext"
 import { ActionsType } from "../../types/ActionsType"
 import { HandshakeRussian } from "../../assets/Icons/HandshakeRussian"
+import { RussianFlag } from "../../assets/Icons/RussianFlag"
 
 export const FooterSystem = ({
    userInfos, handleHistoricModal, handleConfirmPayment, handleAddProductModal,
@@ -16,13 +17,13 @@ export const FooterSystem = ({
    const { userData, setUserData } = useContext(AuthContext)
 
    return (
-      <footer className="footerSystem flex sbt">
-         <div className="employeerFooterSystem flex column px-2 py-1 mr-3" >
-            <p className="pg5 bold text-color">Colaborador</p>
+      <footer className="footerSystem flex sbt russianGradient">
+         <div className="employeerFooterSystem flex column px-2 py-1 mr-3 russianGradient">
+            <p className="pg5 bold text-red-russian">Colaborador</p>
 
-            <p className="pg4 bold italic text-center text-dark-blue flex column" id="employeerName">
+            <p className="pg4 bold italic text-center text-pix flex column" id="employeerName">
                {userInfos?.userName === undefined ? userData.userName : userInfos?.userName}
-               <Signature w='24' h='24' fill='var(--dark-blue)' />
+               <Signature w='24' h='24' fill='var(--white-russian)' />
             </p>
          </div>
 
@@ -49,7 +50,8 @@ export const FooterSystem = ({
 
             <button className="btn btn-primary ml-1" onClick={ handleReferencesModal }>
                Referências
-               <HandshakeRussian w='20' h='20' fill='var(--text)' className='ml-1' />
+               <HandshakeRussian w='30' h='24' fill='var(--text)' className='mx-1' />
+               <RussianFlag w='30' h='24' />
             </button>
 
          </div>

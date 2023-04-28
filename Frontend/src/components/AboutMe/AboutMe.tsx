@@ -8,6 +8,8 @@ import { WhatsApp } from "../../assets/Icons/WhatsApp"
 import { XMark } from "../../assets/Icons/XMark"
 import { ActionsType } from "../../types/ActionsType"
 import { AboutContactInfo } from "../AboutContact/AboutContact"
+import { CircleRed } from "../../assets/Icons/CircleRed"
+import { CircleBlue } from "../../assets/Icons/CircleBlue"
 
 export const AboutMe = ({ close }: ActionsType) => {
 
@@ -98,11 +100,12 @@ export const AboutMe = ({ close }: ActionsType) => {
                }
 
                <button
-                  className="btn btn-info mt-2 w-100"
+                  className="btn russianGradient mt-2 w-100 opacity"
                   onClick={close}
                >
+                  <CircleRed w="24" h="24" className="mr-1" />
                   Ok
-                  <CircleCheck w='23' h='23' fill='var(--bs-dark)' className='ml-1' />
+                  <CircleBlue w="24" h="24" className="ml-1" />
                </button>
             </div>
 

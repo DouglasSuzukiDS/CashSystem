@@ -391,6 +391,9 @@ h4 {
   --orange-in: #FF7A01;
   --dark-blue: #081C65;
   --dark-green: #0E5E6F;
+  --white-russian: #FEFEFE;
+  --blue-russian: #0038A5;
+  --red-russian: #D52B1E;
 }
 
 .text-primary {
@@ -487,6 +490,18 @@ h4 {
 
 .text-dark-green {
   color: var(--dark-green);
+}
+
+.text-white-russian {
+  color: var(--white-russian);
+}
+
+.text-blue-russian {
+  color: var(--blue-russian);
+}
+
+.text-red-russian {
+  color: var(--red-russian);
 }
 
 .s-0 {
@@ -1749,6 +1764,15 @@ h4 {
   background: linear-gradient(102.68deg, #FEFEFE 4.59%, #0038A5 47.75%, #D52B1E 97.7%);
 }
 
+.headerSystem {
+  background-color: var(--bs-info);
+  padding: 24px;
+  width: 100%;
+  height: 80px;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
 .helpReferenceInfos div > a:nth-last-child(1) {
   margin-right: 0px;
 }
@@ -1761,7 +1785,6 @@ h4 {
   height: 80px;
 }
 .footerSystem .employeerFooterSystem {
-  background-color: var(--bs-secondary);
   border-top-right-radius: 8px;
   border-bottom-right-radius: 8px;
   border-bottom-left-radius: 8px;
@@ -1899,16 +1922,6 @@ select:hover {
   border: 2px solid var(--fb1);
   border-radius: 8px;
   background-color: var(--bs-dark);
-}
-.containerSystem .sectionSystem .headerSystem {
-  background-color: var(--bs-info);
-  padding: 24px;
-  width: 100%;
-  height: 80px;
-}
-.containerSystem .sectionSystem .headerSystem {
-  border-top-left-radius: 8px;
-  border-top-right-radius: 8px;
 }
 .containerSystem .sectionSystem .contentSystem {
   background-color: rgba(8, 28, 101, 0.4);

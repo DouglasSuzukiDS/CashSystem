@@ -88,16 +88,16 @@ export const HelpReference = (
          setHelpReferenceLink05(false)
       }
       
-      if(referencePhase01) {
-         setHelpReferencePhase01(true)
+      if(referencePhrase01) {
+         setHelpReferencePhrase01(true)
       } else {
-         setHelpReferencePhase01(false)
+         setHelpReferencePhrase01(false)
       }
 
-      if(referencePhase02) {
-         setHelpReferencePhase02(true)
+      if(referencePhrase02) {
+         setHelpReferencePhrase02(true)
       } else {
-         setHelpReferencePhase02(false)
+         setHelpReferencePhrase02(false)
       }
 
    }, [ referenceInstagram, referenceLink01, referenceLink02, referenceLink03, referenceLink04, referenceLink05, referenceLinkedin, referencePhrase01, referencePhrase02, referenceSite, referenceYouTube])

@@ -6,13 +6,18 @@ import { IconsProps } from './IconsProps';
 import { UserDataSectionType } from './UserDataSectionType';
 
 export type ActionsType = {
+   // Functions for Header Component
+   startJob?: () => void
+   handleOptionSystem?: () => void
+   handleCloseCash?: () => void
+   open?: boolean
+
    close?: () => void
    onKeyDown?: () => void
    handleManager?: () => boolean
    onClick?: () => void
    cartAddItem?: (prod: ProductType) => void
    returnItems?: (prod: ProductType) => void
-   handleOptionSystem?: () => void
    handleNewUser?: () => void
    handleManagerUser?: () => void
    handleNewProduct?: () => void
@@ -24,6 +29,9 @@ export type ActionsType = {
    handleAddProductModal?: () => void
    handleClearCartList?: () => void
    handleReferencesModal?: () => void
+   handleAboutMeModal?: () => void
+   handleCloseSystem?: () => void
+   
    className?: string
    id?: string
    listProducts?: ProductType[]

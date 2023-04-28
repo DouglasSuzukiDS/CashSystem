@@ -32,6 +32,7 @@ import { allProducts } from "../../services/product.service";
 import { LogoBlue } from "../../assets/Icons/Logo Blue";
 import { AboutMe } from "../../components/AboutMe/AboutMe";
 import { References } from "../../components/References/References";
+import { Header } from "../../components/Header/Header";
 
 export const OpenSystem = ({ close }: ActionsType) => {
    const server = 'http://localhost:3001'
@@ -767,57 +768,13 @@ export const OpenSystem = ({ close }: ActionsType) => {
          )}
 
          <section className="sectionSystem">
-            <header className="headerSystem flex sbt">
-               <div className="logoSystem text-primary pg3 bold" onClick={ handleAboutMeModal }>
-                  <LogoBlue w="130" h="60" className="pointer" />
-               </div>
-
-               <div className="statusSystem flex column" id="statusSystem">
-                  <p className="text-secondary bold">Caixa 01</p>
-                  <h4 className="text-danger mt-1" id="statusSystemH4">Caixa Fechado</h4>
-               </div>
-
-               <div className="openSystem flex">
-                  {   // Gears and Buttons
-                     !open ?
-                        <>
-                           <ArrowLeftLong w='24' h='24' fill='var(--bs-danger)' className='pointer mr-1' onClick={ handleCloseSystem }/>
-
-                           <Gears w='24' h='24' fill='var(--bs-secondary)' className='notAllowed' />
-
-                           <button className="btn btn-primary ml-2 border" id="btn_openCash" onClick={startJob} onChange={() => setOpen(true)}>
-                              {/* <button className="btn btn-primary ml-2 border" id="btn_openCash" onClick={startJob} > */}
-                              Abrir Caixa
-                              <CashRegister w='24' h='24' fill='var(--text)' className='ml-1 text-color' />
-                           </button>
-
-                        </> :
-                        <>
-                           {/* { user?.userAdmin ? */}
-                           {userInfos?.userAdmin ?
-                              <>
-                                 <Gears w='24' h='24' fill='var(--bs-secondary)' className='pointer opacity' onClick={handleOptionSystem} />
-
-                                 <button className="btn btn-danger ml-2 border" id="btn_closeCash" onClick={handleCloseCash} >
-                                    Fechar Caixa
-                                    <CashRegister w='24' h='24' fill='var(--text)' className='ml-1 text-color' />
-                                 </button>
-                              </> :
-                              <>
-                                 <Gears w='24' h='24' fill='var(--bs-secondary)' className='notAllowed' />
-
-                                 <button className="btn btn-danger ml-2 border" id="btn_closeCash" onClick={handleCloseCash} >
-                                    Fechar Caixa
-                                    <CashRegister w='24' h='24' fill='var(--text)' className='ml-1 text-color' />
-                                 </button>
-                              </>
-
-                           }
-                        </>
-                  }
-
-               </div>
-            </header>
+            <Header 
+               handleAboutMeModal={ handleAboutMeModal } 
+               startJob={ startJob } 
+               handleOptionSystem={ handleOptionSystem } 
+               handleCloseCash={ handleCloseCash }  
+               open={ open } 
+               userInfos={ userInfos } />
 
             <div className="contentSystem flex" id="contentSystem">
                {!open ? // Verifica se o Caixa foi Aberto

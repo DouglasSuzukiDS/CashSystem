@@ -54,6 +54,9 @@
    --orange-in: #FF7A01;
    --dark-blue: #081C65;
    --dark-green: #0E5E6F;
+   --white-russian: #FEFEFE;
+   --blue-russian: #0038A5;
+   --red-russian: #D52B1E;
 }
 
 .text-primary {
@@ -144,3 +147,6 @@
 .text-orange-in { color: var(--orange-in); }
 .text-dark-blue { color: var(--dark-blue); }
 .text-dark-green { color: var(--dark-green); }
+.text-white-russian { color: var(--white-russian); }
+.text-blue-russian { color: var(--blue-russian); }
+.text-red-russian { color: var(--red-russian); }
