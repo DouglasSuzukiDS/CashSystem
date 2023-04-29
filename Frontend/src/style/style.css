@@ -66,6 +66,10 @@ a {
   opacity: 0.8;
 }
 
+.transition {
+  transition: all 0.75s;
+}
+
 .invertedX {
   transform: scaleX(-1);
 }
@@ -88,6 +92,40 @@ a {
 
 .z-index-50 {
   z-index: 50;
+}
+
+.text-gradient-blue {
+  color: transparent;
+  background-image: linear-gradient(157.01deg, #081C65 14.89%, #13ADDF 112.37%);
+  background-clip: text;
+  -webkit-background-clip: text;
+}
+
+.text-gradient-red {
+  color: transparent;
+  background-image: linear-gradient(157.72deg, #202225 49.58%, #BB2D3B 92.59%);
+  background-clip: text;
+  -webkit-background-clip: text;
+}
+
+.text-russin-gradient {
+  background: linear-gradient(102.68deg, #FEFEFE 4.59%, #0038A5 47.75%, #D52B1E 97.7%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+}
+
+.russianGradient {
+  background: linear-gradient(102.68deg, #FEFEFE 4.59%, #0038A5 47.75%, #D52B1E 97.7%);
+}
+
+.border-gradient-blue {
+  border: 2px solid transparent;
+  border-radius: 4px;
+  -o-border-image: linear-gradient(157.01deg, #081C65 14.89%, #13ADDF 112.37%);
+     border-image: linear-gradient(157.01deg, #081C65 14.89%, #13ADDF 112.37%);
+  border-image-slice: 1;
 }
 
 .border {
@@ -1170,14 +1208,6 @@ h4 {
   letter-spacing: 2px;
 }
 
-.border-gradient-blue {
-  border: 2px solid transparent;
-  border-radius: 4px;
-  -o-border-image: linear-gradient(157.01deg, #081C65 14.89%, #13ADDF 112.37%);
-     border-image: linear-gradient(157.01deg, #081C65 14.89%, #13ADDF 112.37%);
-  border-image-slice: 1;
-}
-
 .containerAboutMe {
   height: 100vh;
 }
@@ -1216,20 +1246,6 @@ h4 {
 
 .aboutSocial a {
   outline: none;
-}
-
-.text-gradient-blue {
-  color: transparent;
-  background-image: linear-gradient(157.01deg, #081C65 14.89%, #13ADDF 112.37%);
-  background-clip: text;
-  -webkit-background-clip: text;
-}
-
-.text-gradient-red {
-  color: transparent;
-  background-image: linear-gradient(157.72deg, #202225 49.58%, #BB2D3B 92.59%);
-  background-clip: text;
-  -webkit-background-clip: text;
 }
 
 .invoicingOfTheDayForm > h4 > #closeElement:hover {
@@ -1750,18 +1766,6 @@ h4 {
 }
 .containerReferences .references .referenceItem:hover {
   border: 1px solid var(--fb1);
-}
-
-.text-russin-gradient {
-  background: linear-gradient(102.68deg, #FEFEFE 4.59%, #0038A5 47.75%, #D52B1E 97.7%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  text-fill-color: transparent;
-}
-
-.russianGradient {
-  background: linear-gradient(102.68deg, #FEFEFE 4.59%, #0038A5 47.75%, #D52B1E 97.7%);
 }
 
 .headerSystem {

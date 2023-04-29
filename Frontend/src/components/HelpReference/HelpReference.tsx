@@ -5,6 +5,7 @@ import { GlobeWWW } from "../../assets/Icons/GlobeWWW"
 import { Instagram } from "../../assets/Icons/Instagram"
 import { Youtube } from "../../assets/Icons/Youtube"
 import { ReferencesType } from "../../types/ReferencesType"
+import { InstagramGradient } from "../../assets/Icons/InstagramGradient"
 
 export const HelpReference = (
    { 
@@ -106,37 +107,37 @@ export const HelpReference = (
       <div className="helpReferenceInfosContainer flex column p-1">
 
          <div className="helpReferenceInfos flex border">
-            <p className="inputTF mr-1 border3">{ referenceName }</p>
+            <p className="inputTF mr-1 border3 text-russin-gradient">{ referenceName }</p>
 
             <div className="flex border4">
                { helpReferenceSite &&
-                  <a href={`${ referenceSite }`} className='flex mr-1' target='_blank' rel="noreferrer">
-                     <GlobeWWW w="24" h="24" />
+                  <a href={`${ referenceSite }`} className='flex mr-1 opacity' target='_blank' rel="noreferrer">
+                     <GlobeWWW w="24" h="24" fill="var(--dark-blue)" />
                   </a>
                }
 
                { helpReferenceInstagram &&
                   <a href={`${ referenceInstagram }`} className='flex mr-1' target='_blank' rel="noreferrer">
-                     <Instagram w="24" h="24" />
+                     <InstagramGradient w="24" h="24" className="opacity"/>
                   </a>
                }
 
                { helpReferenceYouTube &&
-                  <a href={`${ referenceYouTube }`} className='flex mr-1' target='_blank' rel="noreferrer">
-                     <Youtube w="34" h="24" />
+                  <a href={`${ referenceYouTube }`} className='flex mr-1 opacity' target='_blank' rel="noreferrer">
+                     <Youtube w="34" h="24" fill="var(--red-russian)" />
                   </a>
                }
 
                { helpReferenceLinkedin &&
-                  <a href={`${ referenceLinkedin }`} className='flex mr-1' target='_blank' rel="noreferrer">
-                     <LKD w="24" h="24" />
+                  <a href={`${ referenceLinkedin }`} className='flex mr-1 opacity' target='_blank' rel="noreferrer">
+                     <LKD w="24" h="24" fill="var(--blue-russian)" />
                   </a>
                }
             </div>
 
          </div>
 
-         <p className="border3 mt-1 px-1 text-center pg4">
+         <p className="border3 mt-1 px-1 text-center pg4 text-russin-gradient">
             { referenceDesc }
 
             { 
