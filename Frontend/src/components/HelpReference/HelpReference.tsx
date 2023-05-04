@@ -106,10 +106,10 @@ export const HelpReference = (
    return (
       <div className="helpReferenceInfosContainer flex column p-1">
 
-         <div className="helpReferenceInfos flex border">
-            <p className="inputTF mr-1 border3 text-russin-gradient">{ referenceName }</p>
+         <div className="helpReferenceInfos flex">
+            <p className="inputTF mr-1 text-russian-gradient pg2 bold">{ referenceName }</p>
 
-            <div className="flex border4">
+            <div className="flex">
                { helpReferenceSite &&
                   <a href={`${ referenceSite }`} className='flex mr-1 opacity' target='_blank' rel="noreferrer">
                      <GlobeWWW w="24" h="24" fill="var(--blue-russian)" />
@@ -137,14 +137,16 @@ export const HelpReference = (
 
          </div>
 
-         <p className="border3 mt-1 px-1 text-center pg4 text-russin-gradient">
+         <p className="mt-1 px-1 text-center pg4 text-color">
             { referenceDesc }
 
             { 
                helpReferenceLink01 &&
                   <>
                      <br />
-                     <a href={`${ referenceLink01 }`} target="_blank" rel="noreferrer"> { referenceLabelLink01 } </a>
+                     <a href={`${ referenceLink01 }`} target="_blank" rel="noreferrer"> 
+                        <span className="bold italic flex mt-1 text-russian-gradient"> { referenceLabelLink01 } </span>
+                     </a>
                   </>
             }
 
@@ -152,7 +154,9 @@ export const HelpReference = (
                helpReferenceLink02 &&
                   <>
                      <br />
-                     <a href={`${ referenceLink02 }`} target="_blank" rel="noreferrer"> { referenceLabelLink02 } </a>
+                     <a href={`${ referenceLink02 }`} target="_blank" rel="noreferrer"> 
+                        <span className="bold italic flex text-russian-gradient"> { referenceLabelLink02 } </span>
+                     </a>
                   </>
             }
 
@@ -160,7 +164,9 @@ export const HelpReference = (
                helpReferenceLink03 &&
                   <>
                      <br />
-                     <a href={`${ referenceLink03 }`} target="_blank" rel="noreferrer"> { referenceLabelLink03 } </a>
+                     <a href={`${ referenceLink03 }`} target="_blank" rel="noreferrer"> 
+                        <span className="bold italic flex text-russian-gradient"> { referenceLabelLink03 } </span>
+                     </a>
                   </>
             }
 
@@ -168,7 +174,9 @@ export const HelpReference = (
                helpReferenceLink04 &&
                   <>
                      <br />
-                     <a href={`${ referenceLink04 }`} target="_blank" rel="noreferrer"> { referenceLabelLink04 } </a>
+                     <a href={`${ referenceLink04 }`} target="_blank" rel="noreferrer"> 
+                        <span className="bold italic flex text-russian-gradient"> { referenceLabelLink04 } </span>
+                     </a>
                   </>
             }
 
@@ -176,18 +184,20 @@ export const HelpReference = (
                helpReferenceLink05 &&
                   <>
                      <br />
-                     <a href={`${ referenceLink05 }`} target="_blank" rel="noreferrer"> { referenceLabelLink05 } </a>
+                     <a href={`${ referenceLink05 }`} target="_blank" rel="noreferrer"> 
+                        <span className="bold italic flex mt-1"> { referenceLabelLink05 } </span>
+                     </a>
                   </>
             }
 
             {
                helpReferencePhrase01 &&
-                  <h3> { helpReferencePhrase01 } </h3>
+                  <p className="bold italic flex mt-1 text-russian-gradient"> { referencePhrase01 } </p>
             }
 
             {
                helpReferencePhrase02 &&
-                  <h3> { helpReferencePhrase02 } </h3>
+                  <p className="bold italic flex mt-1 text-russian-gradient"> { referencePhrase02 } </p>
             }
          </p>
       </div>
