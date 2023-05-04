@@ -112,7 +112,7 @@ export const HelpReference = (
             <div className="flex border4">
                { helpReferenceSite &&
                   <a href={`${ referenceSite }`} className='flex mr-1 opacity' target='_blank' rel="noreferrer">
-                     <GlobeWWW w="24" h="24" fill="var(--dark-blue)" />
+                     <GlobeWWW w="24" h="24" fill="var(--blue-russian)" />
                   </a>
                }
 

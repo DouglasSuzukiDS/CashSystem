@@ -773,6 +773,7 @@ export const OpenSystem = ({ close }: ActionsType) => {
                startJob={ startJob } 
                handleOptionSystem={ handleOptionSystem } 
                handleCloseCash={ handleCloseCash }  
+               handleCloseSystem={ handleCloseSystem }
                open={ open } 
                userInfos={ userInfos } />
 
