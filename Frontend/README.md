@@ -10,6 +10,18 @@ Documentação do ***Frontend*** do Projeto ***Controle de Caixa***.
  - [**FontAwesome**](https://fontawesome.com)
  - [**Página de Identificação**](https://awesomeopensource.com/project/elangosundar/awesome-README-templates) *- Desenvolvido por Md Irshad Ansari (Todos direitos reservados ao criador da UI)*
  - [**Canal de Md Irshad Ansari no YouTube**](https://www.youtube.com/c/OnlineTutorials4Designers)
+ - [**CFB Cursos**](https://www.youtube.com/@cfbcursos)
+ - [**Bonieky Lacerda (B7WEB)**](https://b7web.com.br/fullstack/)
+ - [**Vitor Cunha**](https://www.youtube.com/@VitorCunhaCode)
+ - [**Huriel**](https://www.youtube.com/@huriel)
+ - [**Mathues Battisti**](https://www.youtube.com/@matheusbattisti)
+ - [**Joao Ribeiro**](https://www.youtube.com/@JLDRPT)
+ - [**Jovem Programador**](https://www.youtube.com/@JovemProgramadorOficial)
+ - [**Prof. Daniel**](https://www.linkedin.com/in/daniel-ferreira-2922aa48/)
+ - [**Prof. Marcos**](https://www.linkedin.com/in/marcos-vin%C3%ADcius-mota-a907911a)
+ - [**Prof. Jocastra**](https://br.linkedin.com/in/jocastra-queiroz-6178a133)
+ - [**Prof. Viviane**](https://br.linkedin.com/in/vivianelf)
+ - [**Prof. Alex**](https://www.linkedin.com/in/alexsander-reis-11933415b/)
 
  ## Instalação e iniciando o Projeto
 

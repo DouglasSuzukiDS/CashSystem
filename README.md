@@ -41,7 +41,8 @@ Qualificação | Expecificação
  - [**Prof. Marcos**](https://www.linkedin.com/in/marcos-vin%C3%ADcius-mota-a907911a)
  - [**Prof. Jocastra**](https://br.linkedin.com/in/jocastra-queiroz-6178a133)
  - [**Prof. Viviane**](https://br.linkedin.com/in/vivianelf)
- - [**Prof. Alex**]('https://www.linkedin.com/in/alexsander-reis-11933415b/)
+ - [**Prof. Alex**](https://www.linkedin.com/in/alexsander-reis-11933415b/)
+ 
 ## Instalação e iniciando o Projeto
 
 Clone o projeto
