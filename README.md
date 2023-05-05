@@ -21,17 +21,27 @@ Qualificação | Expecificação
 
 ## Stacks que serão utilizadas no Projeto
 
-***Front-end:*** React, Node, Icones do FontAwesome, Axios, cores do Bootstrap, cores da UI Dark do Facebook. *(Em desenvolvimento)*
+***Front-end:*** React, Node, Icones do FontAwesome, Axios, cores do Bootstrap, cores da UI Dark do Facebook.
 
 ***Back-end:*** Node, Express, Axios, JWT.
 
-
 ## Referências
-
  - [**Cores e algumas formatações do Bootstrap**](https://getbootstrap.com)
  - [**FontAwesome**](https://fontawesome.com)
  - [**Página de Identificação**](https://awesomeopensource.com/project/elangosundar/awesome-README-templates) *- Desenvolvido por Md Irshad Ansari (Todos direitos reservados ao criador da UI)*
  - [**Canal de Md Irshad Ansari no YouTube**](https://www.youtube.com/c/OnlineTutorials4Designers)
+ - [**CFB Cursos**](https://www.youtube.com/@cfbcursos)
+ - [**Bonieky Lacerda (B7WEB)**](https://b7web.com.br/fullstack/)
+ - [**Vitor Cunha**](https://www.youtube.com/@VitorCunhaCode)
+ - [**Huriel**](https://www.youtube.com/@huriel)
+ - [**Mathues Battisti**](https://www.youtube.com/@matheusbattisti)
+ - [**Joao Ribeiro**](https://www.youtube.com/@JLDRPT)
+ - [**Jovem Programador**](https://www.youtube.com/@JovemProgramadorOficial)
+ - [**Prof. Daniel**](https://www.linkedin.com/in/daniel-ferreira-2922aa48/)
+ - [**Prof. Marcos**](https://www.linkedin.com/in/marcos-vin%C3%ADcius-mota-a907911a)
+ - [**Prof. Jocastra**](https://br.linkedin.com/in/jocastra-queiroz-6178a133)
+ - [**Prof. Viviane**](https://br.linkedin.com/in/vivianelf)
+ - [**Prof. Alex**]('https://www.linkedin.com/in/alexsander-reis-11933415b/)
 ## Instalação e iniciando o Projeto
 
 Clone o projeto
@@ -44,12 +54,12 @@ Entre na *pasta do projeto* em **dois *Terminais***
     cd CashSystem
 ```
 
-Em um dos Terminais, entre na pasta ***Frontend*** *(Em desenvolvimento)*
+Em um dos Terminais, entre na pasta ***Frontend***
 ```bash
     cd Frontend
 ```
 
-No outro Terminal, entre na pasta ***Backend*** *(Em desenvolvimento)*
+No outro Terminal, entre na pasta ***Backend***
 ```bash
     cd Backend
 ```
@@ -87,6 +97,34 @@ Instale as dependências nas pastas do projeto, pasta ***Frontend*** e pasta ***
         pdt_price DECIMAL(10, 2) NOT NULL,
         pdt_type VARCHAR(50) NOT NULL,
         pdt_qty INT NOT NULL
+    );
+```
+## Criando a Tabela das Vendas do dia
+```sql
+    CREATE TABLE SaleDay (
+        idSale INT PRIMARY KEY AUTO_INCREMENT,
+        priceSale DECIMAL(10, 2),
+        sellerSale VARCHAR(50),
+        methodSale VARCHAR(20),
+        registrationSale VARCHAR(20)
+    );
+```
+## Criando a Tabela de Todas as Vendas
+```sql
+    CREATE TABLE Sales(
+        idSale INT PRIMARY KEY AUTO_INCREMENT,
+        dateSale VARCHAR(30) NOT NULL,
+        sellerSale VARCHAR(50) NOT NULL,
+        openCash DECIMAL (10, 2) NOT NULL,
+        totalSale DECIMAL (10, 2) NOT NULL,
+        openSystem VARCHAR(50) NOT NULL,
+        closeSystem VARCHAR(50) NOT NULL,
+        moneySale DECIMAL (10, 2) NOT NULL,
+        pixSale DECIMAL (10, 2) NOT NULL,
+        debitSale DECIMAL (10, 2) NOT NULL,
+        creditSale DECIMAL (10, 2) NOT NULL,
+        cardsSale DECIMAL (10, 2) NOT NULL,
+        bankSale DECIMAL (10, 2) NOT NULL
     );
 ```
 
@@ -161,6 +199,21 @@ Metodo | Rota | Função
 **PUT** | **/edit/product/:id** | *Busca o produto pelo ID para fazer a edição dos dados.*
 **DELETE** | **/delete/product/:id** | *Deleta o produto pelo seu ID.*
 
+#### Rotas utilizadas para ações das funcionalidades das Vendas do Dia
+
+Metodo | Rota | Função
+------ | ---- | ------ 
+**GET** | **/saleDayList** | *Lista todos as vendas do dia.*
+**POST** | **/newSale** | *Rota para salvar a venda.*
+**DELETE** | **/deleteSalesDay** | *Deleta as vendas dia.*
+
+#### Rotas utilizadas para ações das funcionalidades das Vendas em Geral
+
+Metodo | Rota | Função
+------ | ---- | ------ 
+**GET** | **/allSales** | *Lista todos as vendas no geral.*
+**GET** | **/backupSalesDay** | *Rota para fazer backup.*
+**POST** | **/closeSystem** | *Rota para salvar o Backup quando fechar o caixa.*
 
 ## Tipografia, Estilizações, Cores & Botões 
 Para agilizar meu processo de estilizações em meus projetos, eu opto sempre em inserir neles algumas formações padrões atraves de classes e/ou variáveis, seguindo a ideia do Bootstrap. 
@@ -211,7 +264,6 @@ Cores auxiliares utilizadas para dar 'apoio' a UI Dark. Essas cores foram retira
 ![FB5](https://i.imgur.com/2IJQ7kZ.png) | ***FB5*** | ***#E6DCD6*** | ***(230, 220, 214)***
 ![FB6](https://i.imgur.com/uUuYEbo.png) | ***FB6*** | ***#B8BBBF*** | ***(184, 187, 191)***
 ![FB7](https://i.imgur.com/8tZt7k6.png) | ***FB7*** | ***#E7E9EC*** | ***(231, 233, 236)***
-
 
 ### Cores de Background
 Cores que reservei para o background da aplicação.

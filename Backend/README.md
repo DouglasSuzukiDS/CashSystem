@@ -57,6 +57,34 @@ Instale as dependências nas pastas do projeto, pasta ***Backend***.
         pdt_qty INT NOT NULL
     );
 ```
+## Criando a Tabela das Vendas do dia
+```sql
+    CREATE TABLE SaleDay (
+        idSale INT PRIMARY KEY AUTO_INCREMENT,
+        priceSale DECIMAL(10, 2),
+        sellerSale VARCHAR(50),
+        methodSale VARCHAR(20),
+        registrationSale VARCHAR(20)
+    );
+```
+## Criando a Tabela de Todas as Vendas
+```sql
+    CREATE TABLE Sales(
+        idSale INT PRIMARY KEY AUTO_INCREMENT,
+        dateSale VARCHAR(30) NOT NULL,
+        sellerSale VARCHAR(50) NOT NULL,
+        openCash DECIMAL (10, 2) NOT NULL,
+        totalSale DECIMAL (10, 2) NOT NULL,
+        openSystem VARCHAR(50) NOT NULL,
+        closeSystem VARCHAR(50) NOT NULL,
+        moneySale DECIMAL (10, 2) NOT NULL,
+        pixSale DECIMAL (10, 2) NOT NULL,
+        debitSale DECIMAL (10, 2) NOT NULL,
+        creditSale DECIMAL (10, 2) NOT NULL,
+        cardsSale DECIMAL (10, 2) NOT NULL,
+        bankSale DECIMAL (10, 2) NOT NULL
+    );
+```
 
 ## Variáveis de Ambiente
 Como normas em qualquer lugar onde se contem senhas, a proteção deles devem ser ***protegidas*** pelo menos minimamente. Para isso no projeto usamos variáveis de ambiente. Onde as senhas devem ser mantidas em um arquivo ***.env***. As váriaveis são as seguintes:
@@ -106,3 +134,19 @@ Metodo | Rota | Função
 **POST** | **/registerNewProduct** | *Faz o registro de um novo produto.*
 **PUT** | **/edit/product/:id** | *Busca o produto pelo ID para fazer a edição dos dados.*
 **DELETE** | **/delete/product/:id** | *Deleta o produto pelo seu ID.*
+
+#### Rotas utilizadas para ações das funcionalidades das Vendas do Dia
+
+Metodo | Rota | Função
+------ | ---- | ------ 
+**GET** | **/saleDayList** | *Lista todos as vendas do dia.*
+**POST** | **/newSale** | *Rota para salvar a venda.*
+**DELETE** | **/deleteSalesDay** | *Deleta as vendas dia.*
+
+#### Rotas utilizadas para ações das funcionalidades das Vendas em Geral
+
+Metodo | Rota | Função
+------ | ---- | ------ 
+**GET** | **/allSales** | *Lista todos as vendas no geral.*
+**GET** | **/backupSalesDay** | *Rota para fazer backup.*
+**POST** | **/closeSystem** | *Rota para salvar o Backup quando fechar o caixa.*
