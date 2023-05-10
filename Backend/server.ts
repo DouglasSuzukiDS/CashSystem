@@ -612,7 +612,7 @@ server.get('/allSales', async (req, res) => {
             } else {
                console.log('Backup das vendas salvas com Sucesso no computador!')
 
-               fs.readFile(`C:/Users/${process.env.NAME}/Downloads/OneDrive/backup/backupAllSales/AllSales${dateNow}.json`, (err, data) => {
+               fs.readFile(`C:/Users/${process.env.NAME}/Downloads/OneDrive/backup/backupAllSales/AllSales-${dateNow}.json`, (err, data) => {
                   err ? console.log(err) : console.log('Historico de todas as vendas: ' + data)
                })
             }

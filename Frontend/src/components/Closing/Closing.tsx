@@ -115,7 +115,7 @@ export const Closing = ({ close, userInfos }: ActionsType) => {
    }
 
    return (
-      <main className="container flex pr-3 ml-3" id='closingFormDay'>
+      <main className="container flex" id='closingFormDay'>
          <div className="formsClosingDay">
 
             <form action='/' className="closingDayForm w-100 h-100 f column sbt">

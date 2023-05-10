@@ -64,8 +64,8 @@ export const AboutMe = ({ close }: ActionsType) => {
                </div>
 
                <div className="aboutDesc mt-4 flex column text-color text-center">
-                  <h4 className="text-gradient-blue">Nick Diatlov</h4>
-                  <p className="pg3">Desenvolvedor Frontend</p>
+                  <h4 className="text-russian-gradient">Douglas Suzuki</h4>
+                  <p className="pg3 text-gradient-blue bold">Desenvolvedor Frontend</p>
 
                   <p className="pg5 mt-1">React, Node, Typescript, SASS, <br /> Styled-Components, MySQL</p>
                </div>
@@ -100,7 +100,7 @@ export const AboutMe = ({ close }: ActionsType) => {
                }
 
                <button
-                  className="btn russianGradient mt-2 w-100 opacity"
+                  className="btn russianGradient mt-2 w-100 opacity border"
                   onClick={close}
                >
                   <CircleRed w="24" h="24" className="mr-1" />

@@ -6,9 +6,9 @@ O objetivo do projeto é fazer um sistema de login, criação de usuários para 
 
 *Este projeto que estou desenvolvendo será meu **Projeto Integrador** (projeto de finalização do meu curso Técnico em Informática). Abordando as seguintes qualificações:*
 
-Qualificação | Expecificação
+Qualificação | Especificação
 ------------ | -------------
-**Planejamento de uma estruta para o cliente** | *Criar uma solução que atenta os requisitos estabelicidos pelo cliente, estrutura, equipamentos, orçamento.*
+**Planejamento de uma estruta para o cliente** | *Criar uma solução que atenta os requisitos estabelecido pelo cliente, estrutura, equipamentos, orçamento.*
 **Planejar uma estrutura de Rede** | *Estabelecer conexão adequada para o funcionamento da rede.*
 **Planejar rotinas de Backup** | *Realizar backups dos dados em determinado tempo, os armazenando em local seguro.*
 **Planejar o Sistema** | *Desenvolver a prototipação do sistema, seguindo conceitos de designer e web designer.*
