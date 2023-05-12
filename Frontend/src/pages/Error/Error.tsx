@@ -30,8 +30,8 @@ export const Error = () => {
                   Por favor se identifique fazendo o Login
                </h3>
 
-               <Link to='/login' className="btn btn-primary">
-                  Fazer Login
+               <Link to='/' className="btn btn-primary">
+                  Voltar
                   <RightToBracket w='20' h='20' 
                      fill='#C1C7E0'  
                      className='ml-1' />

@@ -94,11 +94,13 @@ Como normas em qualquer lugar onde se contem senhas, a proteção deles devem se
 
     DB_USER = 'USUÁRIO' (usuário para acesso ao Banco de Dados, no meu caso 'root').
 
-    DB_PASSWORD = 'Sua senha do Bando de Dados'
+    DB_PASSWORD = 'Sua senha do Bando de Dados'.
 
     DB_DATABASE = 'CashSystem' (nome do banco que você criou).
 
-    SECRET = 'Sua chave criptografica'
+    SECRET = 'Sua chave criptografica'.
+
+    NAME = 'Nome do seu computador'.
 ```
 
 ## Iniciando o Projeto
@@ -117,6 +119,7 @@ Na pasta ***Backend***:
 
 Metodo | Rota | Função
 ------ | ---- | ------ 
+**GET** | **/backupUsers** | *Rota resposável por fazer o Backup da lista de Usuários.*
 **GET** | **/users** | *Lista todos os Usuários.*
 **GET** | **/user/:id** | *Busca o usuário pelo seu ID.*
 **POST** | **/login** | *Faz o login no sistema.*
@@ -126,8 +129,9 @@ Metodo | Rota | Função
 
 #### Rotas utilizadas para ações das funcionalidades dos produtos
 
-Metodo | Rota | Função
+Método | Rota | Função
 ------ | ---- | ------ 
+**GET** | **/backupProducts** | *Rota resposável por fazer o Backup da lista de Produtos.*
 **GET** | **/products** | *Lista todos os Produtos.*
 **GET** | **/product/:id** | *Busca o produto pelo seu ID.*
 **GET** | **/products/type** | *Lista os produtos pelo seu tipo.*
@@ -137,7 +141,7 @@ Metodo | Rota | Função
 
 #### Rotas utilizadas para ações das funcionalidades das Vendas do Dia
 
-Metodo | Rota | Função
+Método | Rota | Função
 ------ | ---- | ------ 
 **GET** | **/saleDayList** | *Lista todos as vendas do dia.*
 **POST** | **/newSale** | *Rota para salvar a venda.*
@@ -145,8 +149,8 @@ Metodo | Rota | Função
 
 #### Rotas utilizadas para ações das funcionalidades das Vendas em Geral
 
-Metodo | Rota | Função
+Método | Rota | Função
 ------ | ---- | ------ 
-**GET** | **/allSales** | *Lista todos as vendas no geral.*
 **GET** | **/backupSalesDay** | *Rota para fazer backup.*
+**GET** | **/allSales** | *Lista todos as vendas no geral.*
 **POST** | **/closeSystem** | *Rota para salvar o Backup quando fechar o caixa.*

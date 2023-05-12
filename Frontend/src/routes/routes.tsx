@@ -29,32 +29,32 @@ export default function RoutesApp() {
                   <BrowserRouter>
                      <Routes>
                         {/*  */}
-                        <Route path='/findProducts' element={ <FindProducts /> } /> 
+                        {/* <Route path='/findProducts' element={ <FindProducts /> } />  */}
 
                         <Route path='/' element={ <Login /> } /> 
 
-                        <Route path='/test' element={ <References /> } /> 
+                        {/* <Route path='/test' element={ <References /> } />  */}
 
                         {/* <Route path='/login' element={  <Login /> } />  */}
 
-                        <Route path="/registerNewUser" element={ 
+                        {/* <Route path="/registerNewUser" element={ 
                            <RequireAuth children= { <RegisterUser /> } /> 
-                        } /> 
+                        } />  */}
 
-                        <Route path="/edit/user/:id" element={ 
+                        {/* <Route path="/edit/user/:id" element={ 
                            <RequireAuth children= { <EditUser /> } />
-                        } /> 
+                        } />  */}
 
-                        <Route path='/OpenCash' element={ <OpenCash /> } /> {/* OK */}
+                        {/* <Route path='/OpenCash' element={ <OpenCash /> } /> OK */}
                         <Route path='/OpenSystem' element={ <OpenSystem /> } />
 
-                        <Route path="/registerNewProduct" element={ <RegisterProduct /> } /> {/* OK */}
+                        {/* <Route path="/registerNewProduct" element={ <RegisterProduct /> } /> OK */}
                         {/* <Route path="/edit/product/:id" element={ 
                            <RequireAuth children={< EditProduct /> } />
                         } />  */}
-                        <Route path="/edit/product/:id" element={ < EditProduct /> } /> 
+                        {/* <Route path="/edit/product/:id" element={ < EditProduct /> } />  */}
 
-                        <Route path='/findProduct' element={ <FindProducts /> } />
+                        {/* <Route path='/findProduct' element={ <FindProducts /> } /> */}
 
                         <Route path='*' element={ <Error /> } /> {/* OK  */}
                      </Routes>

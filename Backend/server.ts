@@ -150,44 +150,6 @@ server.post('/login', async (req, res) => { // Error
 
 })
 
-/*server.post('/login', async(req, res) => { // ORIGINAL Error
-
-   const { userLogin, userPassword } = req.body
-   // console.log(`User => ${userLogin}, Senha => ${userPassword}`)
-
-   let findUser: string = `SELECT * FROM users WHERE (userLogin, userPassword) = (?, ?)`
-
-   const password = bcrypt.compareSync(userPassword, findUser)
-
-   db.query(findUser, [userLogin, password], async(err, result) => {
-      // console.log(result) // Return User
-
-      if(err) {
-         console.log({ msg: 'Ocorreu um erro' })
-         res.status(404).json({ msg: 'Erro ao logar' })
-
-      } else if( JSON.parse(JSON.stringify(result)).length > 0 ) {
-         const token = JTW.sign(
-            { userLogin: userLogin, userPassword: userPassword}, // Identificação
-            process.env.SECRET,
-            { expiresIn: '2h' } // Tempo de expiração
-         )
-
-         let user = Object.values(result)
-         console.log(typeof user[0])
-         console.log(user[0])
-         // res.status(200).json({ msg: `Logado como: ${userLogin}`, token: `Token: ${token}`, result: `${user}`})
-         res.status(200).send({ msg: `Logado como: ${userLogin}`, token: `${token}`, user: `${JSON.stringify(user[0])}`})
-
-         // res.json({ status: true, token })
-      } else {
-         //console.log({ msg: 'Dados incorretos ou não localizados' })
-         res.status(404).send({ msg: 'Dados incorretos ou não localizados.' })
-      }
-   })
-
-})*/
-
 server.post('/registerNewUser', async (req, res) => { // Error
    // res.send('Connected')
    const { newUserFullName, newUserLogin, newUserPassword, newUserAdmin } = req.body

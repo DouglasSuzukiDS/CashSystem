@@ -54,22 +54,13 @@ Na pasta ***Frontend***:
 ```
 
 ## Rotas no Frontend 
-*Lembrando que a ideialização das rotas até o momento é para facilitar minha visualização no desenvolvimento. Futuramente irei buscar bloquear acesso direto a elas pela URL, sendo permitido apenas acesso por ações na aplicação principal, obviamente logo após autenticação.*
+*No Frontend após o término do projeto, foi necessário deixar apenas essas três rotas, uma para o login, uma para a aplicação principal e outra para caso o usuário digite uma rota qualquer.*
 
 Rota | Função
 -----|-------
-**/login** | *Página Inicial para o colaborar se identificar, para poder ter acesso ao sistema.*
-**/**   | *Aplicação principal após de logado e autenticado.*
-**/opencash** | *Modal de Abertura de caixa. O caixa deve ser aberto somento após informar o valor/saldo($$) inicial para o dia. Em outras palavras, informar o valor que tem para ser usado como 'troco'.*
-**/registerNewUser** | *Página/Modal (não decidi ainda) para cadastro de novos colaboradores.*
-**/findUsers** | *Modal para verificar usuários do sistema.* *(Falta a implementação)*
-**/edit/user/:id** | *Faz a busca do usuário pelo ID. Será usado para fazer a edição dos dados do colaborador.* *(Falta a implementação)*
-**/registerNewProduct** | *Página/Modal (não decidi ainda) para cadastro de novos produtos.*
-**/findProducts** | *Modal para procurar e/ou adicionar produto a lista de compras.*
-**/edit/product/:id** | *Faz a busca do produto pelo ID. Será usado para fazer a edição do produto.*
-**/invoicing** | *Modal informativo com o valor das vendas por meio de pagamento, entre dinheiro, cartões e pix.*
-**/closing** | *Modal informativo com o valor das vendas do dia, em dinheiro e o valor que foi para a conta bancário.*
-**/*** | *Qualquer outra rota diferente dessas informadas, será mostrado o componente de Erro.*
+**/**   | *Página inicial para o colaborar se identificar, para poder ter acesso ao sistema.*
+**/opensystem** | *Página principal da aplicação, através dela que todas as funcionalidades do sistema serão executados.*
+**/anything*** | *Qualquer outra rota diferente dessas informadas, será mostrado o componente de Erro.*
 
 ## Tipografia, Estilizações, Cores & Botões 
 Para agilizar meu processo de estilizações em meus projetos, eu opto sempre em inserir neles algumas formações padrões atraves de classes e/ou variáveis, seguindo a ideia do Bootstrap. 

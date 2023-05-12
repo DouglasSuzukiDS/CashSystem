@@ -1,22 +1,16 @@
-import { useContext, useEffect } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import axios from 'axios'
+
+import { useContext } from 'react'
 import { ActionsType } from '../../types/ActionsType'
 
-import { SackDollar } from '../../assets/Icons/SackDollar'
-import { CashRegister } from '../../assets/Icons/CashRegister'
 import { MoneyBillWave } from '../../assets/Icons/MoneyBillWave'
-import { MoneyCheckDollar } from '../../assets/Icons/MoneyCheckDollar'
 import { Pix } from '../../assets/Icons/Pix'
-import { PiggyBank } from '../../assets/Icons/PiggyBank'
-import { CreditCard } from '../../assets/Icons/CreditCard'
-import { DollarSign } from '../../assets/Icons/DollarSign'
-import { ArrowLeftLong } from '../../assets/Icons/ArrowLeftLong'
 import { CircleCheck } from '../../assets/Icons/CircleCheck'
 import { XMark } from '../../assets/Icons/XMark'
 import { HandHoldingDollar } from '../../assets/Icons/HandHoldingDollar'
-import { ArrowRightToBracket } from '../../assets/Icons/ArrowRightToBracket'
 import { CartListContext } from '../../context/CartList/CartListContext'
-import axios from 'axios'
+import { CashRegister } from '../../assets/Icons/CashRegister'
+import { CreditCard } from '../../assets/Icons/CreditCard'
 
 /*  Blocked Keys
    F1 => Help
@@ -261,7 +255,7 @@ export const ConfirmPayment = ({ close }: ActionsType) => {
                className="btn btn-success w-100"
                onClick={ handleConfirmPayment } >
                Finalizar Venda
-               <ArrowRightToBracket w='23' h='23' fill='var(--text)' className='ml-1' />
+               <CircleCheck w='23' h='23' fill='var(--text)' className='ml-1' />
             </button>
          </div>
       </main>
