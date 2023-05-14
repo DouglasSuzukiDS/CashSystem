@@ -1,8 +1,6 @@
 import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 
-import { CashRegister } from "../../assets/Icons/CashRegister";
-import { Gears } from "../../assets/Icons/Gears";
 import { Closing } from "../../components/Closing/Closing";
 import { FindProducts } from "../../components/FindProducts/FindProducts";
 import { OpenCash } from "../../components/OpenCash/OpenCash";
@@ -27,12 +25,10 @@ import { ValeusSalesContext } from "../../context/ValuesSales/ValuesSalesContext
 import { ManagerSystem } from "../../components/ManagerSystem/ManagerSystem";
 import { FooterSystem } from "../../components/FooterSystem/FooterSystem";
 import { UserDataSectionType } from "../../types/UserDataSectionType";
-import { ArrowLeftLong } from "../../assets/Icons/ArrowLeftLong";
 import { allProducts } from "../../services/product.service";
-import { LogoBlue } from "../../assets/Icons/Logo Blue";
 import { AboutMe } from "../../components/AboutMe/AboutMe";
-import { References } from "../../components/References/References";
 import { Header } from "../../components/Header/Header";
+import { References } from "../../components/References/References";
 
 export const OpenSystem = ({ close }: ActionsType) => {
    const server = 'http://localhost:3001'
@@ -100,7 +96,6 @@ export const OpenSystem = ({ close }: ActionsType) => {
    const [closeSystem, setCloseSystem] = useState(false) // Modal responsavel por mostrar o Fechamento de Caixa
 
    // Historico de Vendas
-   //let historicSales: HistoricSale[] = []
    const [historicSale, setHistoricSale] = useState<SalesType[]>([]) // Lista das vendas do dia
    const [historicSaleModal, setHistoricSaleModal] = useState(false) // Modal responsável por mostrar as vendas do dia
 
@@ -150,7 +145,6 @@ export const OpenSystem = ({ close }: ActionsType) => {
          .catch(e => console.log(e))
    }, [addProduct])
 
-   
    // KeyPress Event
    useEffect(() => {
       window.addEventListener('keydown', (event) => {

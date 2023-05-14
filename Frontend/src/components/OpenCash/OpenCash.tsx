@@ -1,6 +1,5 @@
 /* eslint-disable no-unused-expressions */
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 import { CashRegister } from "../../assets/Icons/CashRegister";
 import { CircleCheck } from "../../assets/Icons/CircleCheck";
 import { SackDollar } from "../../assets/Icons/SackDollar";
@@ -13,29 +12,11 @@ export const OpenCash = ({ close, onClick }: ActionsType) => {
       localStorage.getItem('openCashValue')
    }, [])
 
-   const navigate = useNavigate()
-
    const handleOpenCashModal = () => {
       // Modal OpenCash
       let modal = document.querySelector('#openCashModal') as HTMLElement
       modal.classList.remove('flex')
       modal.classList.add('none')
-   }
-
-   const cashStatus = () => {
-      // Status Cash System
-      let statusSystemH4 = document.querySelector('#statusSystemH4') as HTMLHeadingElement
-      statusSystemH4.classList.remove('text-danger')
-      statusSystemH4.classList.add('text-success')
-      statusSystemH4.innerHTML = 'Caixa Aberto'
-
-      // Button Status Cash
-      let btn_openCash = document.querySelector('#btn_openCash') as HTMLButtonElement
-      let btn_closeCash = document.querySelector('#btn_closeCash') as HTMLButtonElement
-
-      btn_openCash.style.display = 'none'
-      btn_closeCash.style.display = 'flex'
-
    }
 
    const openCashValue = () => {
@@ -56,12 +37,7 @@ export const OpenCash = ({ close, onClick }: ActionsType) => {
             const seconds: number = new Date().getSeconds()
 
             localStorage.setItem('openHour', `${hour}-${minutes}-${seconds}`)
-   
-            // // Modal OpenCash
-            // let modal = document.querySelector('#openCashModal') as HTMLElement
-            // modal.classList.remove('flex')
-            // modal.classList.add('none')
-            // console.log(modal)
+
             handleOpenCashModal()
    
             // Status Cash System
@@ -69,20 +45,6 @@ export const OpenCash = ({ close, onClick }: ActionsType) => {
             statusSystemH4.classList.remove('text-danger')
             statusSystemH4.classList.add('text-success')
             statusSystemH4.innerHTML = 'Caixa Aberto'
-   
-            // Button Status Cash
-            let btn_openCash = document.querySelector('#btn_openCash') as HTMLButtonElement
-            let btn_closeCash = document.querySelector('#btn_closeCash') as HTMLButtonElement
-            // let btn_statusCash = document.querySelector('#btn_statusCash') as HTMLButtonElement
-            // btn_statusCash.innerHTML = 'Fechar Caixa'
-            // btn_statusCash.onclick = () => onClick
-            // btn_statusCash.classList.remove('btn-primary')
-            // btn_statusCash.classList.add('btn-danger')
-   
-            //   btn_openCash.classList.add('none')
-            //   btn_closeCash.classList.remove('none')
-            // btn_openCash.style.display = 'none'
-            // btn_closeCash.style.display = 'flex'
          }
    
          //eslint-disable-next-line no-restricted-globals
@@ -126,12 +88,10 @@ export const OpenCash = ({ close, onClick }: ActionsType) => {
                         <input type="text"
                            className='text-primary pg3 text-center'
                            id="openingCash" placeholder="0,00" />
-                        {/* {opening.toFixed(2)} */}
                      </p>
                   </div>
                </div>
 
-               {/* <div className="flex btn btn-success mt-3" onClick={ openCashValue }> */}
                <div className="flex btn btn-success mt-3" onClick={ openCashValue }>
                   Confirmar
                   <CircleCheck w='24' h='24' fill='var(--text)' className='ml-1' />

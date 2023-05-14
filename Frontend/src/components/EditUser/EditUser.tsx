@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { Link, useNavigate, useParams } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import axios from 'axios'
 
 import { Square } from "../../assets/Icons/Square"
@@ -15,7 +15,6 @@ import { allUsers, findUserById } from "../../services/user.service"
 
 export const EditUser = ({ close, id, listUsers }: ActionsType) => {
    const server = 'http://localhost:3001'
-   const navigate = useNavigate()
    
    // Get All Users
    const [users, setUsers] = useState<UserType[]>([])
@@ -28,12 +27,7 @@ export const EditUser = ({ close, id, listUsers }: ActionsType) => {
    })
    const [admin, setAdmin] = useState(false)
 
-
    useEffect(() => {  // Lista os Arquivos
-      // axios.get(`${server}/users`)
-      //    .then(response => setUsers(response.data.result))
-      //    .catch(err => console.log(err))
-
       if(listUsers) {
          setUsers(listUsers)
 
@@ -83,15 +77,6 @@ export const EditUser = ({ close, id, listUsers }: ActionsType) => {
    const handleUpdateUser = async(id: string) => {
 
       if ((newUserName.value !== '') && (newUserLogin.value !== '') && (newUserPassword.value !== '')) {
-         // alert(
-         //    `
-         //       Nome Completo: ${newUserName.value}
-         //       Login: ${newUserLogin.value}
-         //       Senha: ${newUserPassword.value}
-         //       Admin: ${newUserAdmin ? 'Sim' : 'Não'}
-         //    `
-         // )
-         //console.log(`${server}/edit/user/${id}`)
 
          await axios.put(`${server}/edit/user/${id}`, {
             newUserName: newUserName.value,
@@ -116,8 +101,6 @@ export const EditUser = ({ close, id, listUsers }: ActionsType) => {
    }
 
    const handleUserAdmin = () => {
-      //newUserAdmin = admin
-      //console.log(!admin)
       return setAdmin(!admin)
    }
 

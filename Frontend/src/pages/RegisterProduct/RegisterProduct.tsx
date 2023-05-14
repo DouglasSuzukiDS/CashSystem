@@ -1,8 +1,6 @@
-import { Link, useNavigate } from "react-router-dom";
 import axios from 'axios'
 
 import { MoneyCheckPen } from "../../assets/Icons/MoneyCheckPen";
-import { ArrowLeftLong } from "../../assets/Icons/ArrowLeftLong";
 import { Registered } from "../../assets/Icons/Registered";
 import { ActionsType } from "../../types/ActionsType";
 import { XMark } from "../../assets/Icons/XMark";
@@ -11,7 +9,6 @@ import { CircleCheck } from "../../assets/Icons/CircleCheck";
 export const RegisterProduct = ({ close }: ActionsType) => {
 
    const server: string = 'http://localhost:3001'
-   const navigate = useNavigate()
 
    const registerNewProduct = async () => {
 
@@ -23,11 +20,9 @@ export const RegisterProduct = ({ close }: ActionsType) => {
       if (
          ((newProductName.value && newProductPrice.value && newProductType.value && newProductQty.value) !== '') &&
          ((newProductName.value && newProductPrice.value && newProductType.value && newProductQty.value) !== '0')
-         // ( (newProductName.value && newProductPrice.value && newProductType.value && newProductQty.value)  !== 0) 
       ) {
 
          await axios.post(`${server}/registerNewProduct`, {
-            // pdt_name, pdt_price, pdt_type, pdt_qty
             pdt_name: newProductName.value,
             pdt_price: newProductPrice.value,
             pdt_type: newProductType.value,

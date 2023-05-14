@@ -1,12 +1,10 @@
 import axios from "axios";
-import { response } from "express";
 import { Download } from "../../assets/Icons/Download";
 import { PenToSquare } from "../../assets/Icons/PenToSquare";
 import { Registered } from "../../assets/Icons/Registered";
 import { UserPen } from "../../assets/Icons/UserPen";
 import { UserPlus } from "../../assets/Icons/UserPlus";
 import { ActionsType } from "../../types/ActionsType";
-import { IconsProps } from "../../types/IconsProps";
 
 export const ManagerSystem = ({ handleOptionSystem, handleNewUser, handleManagerUser, handleNewProduct, handleManagerProduct }: ActionsType) => {
    const server = 'http://localhost:3001'
@@ -16,13 +14,11 @@ export const ManagerSystem = ({ handleOptionSystem, handleNewUser, handleManager
       await axios.get(`${server}/backupUsers`)
          .then(response => {
             if (response.status === 200) {
-               // alert(`${response.data.msg} 😎`)
 
                axios.get(`${server}/backupProducts`)
                   .then(response => {
                      if (response.status === 200) {
                         // alert(`${response.data.msg} 😎`)
-                        // alert('Backup de Usuários e Produtos realizado com sucesso 😎')
 
                         axios.get(`${server}/backupSalesDay`)
                            .then(response => {

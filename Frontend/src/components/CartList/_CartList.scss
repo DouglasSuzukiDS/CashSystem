@@ -18,11 +18,8 @@
       border: 2px solid var(--dark-blue);
       border-radius: 8px;
       padding: 8px;
-
-      // background-color: aquamarine;
    }
 }
-
 
 .cartList {
    ::-webkit-scrollbar {
@@ -76,8 +73,7 @@
       }
 
       tbody {
-         // overflow: scroll;
-         // height: 180px;
+
       }
 
       tbody tr {

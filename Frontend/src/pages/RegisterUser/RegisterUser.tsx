@@ -1,23 +1,16 @@
 import { useState } from "react"
-import { Link, useNavigate, useParams } from "react-router-dom"
 import axios from 'axios'
 
 import { Square } from "../../assets/Icons/Square"
 import { SquareXMark } from "../../assets/Icons/SquareXMark"
 import { UserPen } from "../../assets/Icons/UserPen"
 import { UserPlus } from "../../assets/Icons/UserPlus"
-import { ArrowLeftLong } from "../../assets/Icons/ArrowLeftLong"
 import { ActionsType } from "../../types/ActionsType"
 import { XMark } from "../../assets/Icons/XMark"
 import { CircleCheck } from "../../assets/Icons/CircleCheck"
 
-type Timer = NodeJS.Timeout
-
-
 export const RegisterUser = ({ close }: ActionsType) => {
    const server: string = 'http://localhost:3001'
-   
-   const navigate = useNavigate()
 
    let [admin, setAdmin] = useState(false)
 
@@ -28,14 +21,6 @@ export const RegisterUser = ({ close }: ActionsType) => {
       let newUserAdmin = admin
 
       if ((newUserFullName.value !== '') && (newUserLogin.value !== '') && (newUserPassword.value !== '')) {
-         // alert(
-         //    `
-         //       Nome Completo: ${newUserFullName}
-         //       Login: ${newUserLogin}
-         //       Senha: ${newUserPassword}
-         //       Admin: ${newUserAdmin ? 'Sim' : 'Não'}
-         //    `
-         // )
 
          await axios.post(`${server}/registerNewUser`, {
             newUserFullName: newUserFullName.value,
@@ -55,7 +40,6 @@ export const RegisterUser = ({ close }: ActionsType) => {
       newUserLogin.value = ''
       newUserPassword.value = ''
       newUserAdmin = false
-
    }
 
    return (

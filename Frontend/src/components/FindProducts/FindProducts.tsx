@@ -46,10 +46,7 @@ export const FindProducts = ({ close, id, listProducts }: ActionsType) => {
          setProducts(cloneProducts)
       } else {
          let search = term.replace(term[0], term[0].toLocaleUpperCase())
-         // setProducts(find.filter(prod => prod.pdt_name.includes(search)))
-         // setProducts(find.filter(prod => prod.pdt_type.includes(search)))
-         //console.log(search)
-         
+
          let findByName = findProducts.filter(prod => prod.pdt_name.includes(search))
          //console.log(findByName)
 
@@ -110,7 +107,6 @@ export const FindProducts = ({ close, id, listProducts }: ActionsType) => {
                         <MagnifyingGlass w='24' h='24' fill='var(--bs-info)' className='ml-1' />
                      </div>
 
-                     {/* <div id='closeFindProducts' onClick={props.close}> */}
                      <div id='closeFindProducts' className="flex">
                         <XMark w='24' h='24'
                            className=''
@@ -153,18 +149,12 @@ export const FindProducts = ({ close, id, listProducts }: ActionsType) => {
                                        <td>{prod.pdt_qty}</td>
                                        <td>
                                           <div className="flex">
-                                             {/* <Link to={`/edit/product/${prod.id}`} > */}
                                              <span className="flex" onClick={ () => handleEditProduct(prod.id) }>
                                                 <PenToSquare w='16' h='16' fill='var(--bs-warning)' className='warning-hover' />
                                              </span>
-                                             {/* </Link> */}
 
                                              <span className="flex" onClick={ () => handleDeleteProduct(prod.id) }>   
                                                 <TrashCanXMark w='16' h='16' fill='var(--bs-danger)' className='danger-hover' />
-
-                                                {/* <Link to='/findproducts' onClick={() => handleDeleteProduct(prod.id)}>
-                                                   <TrashCanXMark w='16' h='16' fill='var(--bs-danger)' className='danger-hover' />
-                                                </Link> */}
                                              </span>
                                           </div>
                                        </td>

@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react"
 import { LKD } from "../../assets/Icons/LKD"
-import { ActionsType } from "../../types/ActionsType"
 import { GlobeWWW } from "../../assets/Icons/GlobeWWW"
-import { Instagram } from "../../assets/Icons/Instagram"
 import { Youtube } from "../../assets/Icons/Youtube"
 import { ReferencesType } from "../../types/ReferencesType"
 import { InstagramGradient } from "../../assets/Icons/InstagramGradient"

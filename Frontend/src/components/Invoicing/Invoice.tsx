@@ -5,8 +5,8 @@ import { CreditCard } from '../../assets/Icons/CreditCard'
 
 import { ScrewdriverWrench } from '../../assets/Icons/ScrewdriverWrench'
 import { CircleCheck } from '../../assets/Icons/CircleCheck'
-import { Link, useNavigate } from 'react-router-dom'
-import { ChangeEvent, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { useEffect } from 'react'
 import { XMark } from '../../assets/Icons/XMark'
 import { ActionsType } from '../../types/ActionsType'
 
@@ -19,25 +19,19 @@ let creditCard = 13.30
 // Tax Card
 let taxDebit = ((debitCard * 1.99) / 100).toFixed(2) 
 let taxCredit = ((creditCard * 4.74) / 100).toFixed(2)
-// console.log(`Taxa Débito: ${taxDebit}`)
-// console.log(`Taxa Crédito: ${taxCredit}`)
 
-let debitCardFinal = debitCard - parseFloat(taxDebit) // 33,81
-let creditCardFinal = creditCard - parseFloat(taxCredit) // 12,67
-// console.log(`Débito sem a Taxa: ${debitCardFinal}`)
-// console.log(`Crédito sem a Taxa: ${creditCardFinal}`)
+let debitCardFinal = debitCard - parseFloat(taxDebit) 
+let creditCardFinal = creditCard - parseFloat(taxCredit) 
 
 // Values Final
-let moneyPix = money + pix // 285
+let moneyPix = money + pix 
 // console.log(`Din + Pix: ${moneyPix}`)
 
-let amountCards = (debitCardFinal + creditCardFinal) //  46,48
+let amountCards = (debitCardFinal + creditCardFinal)
 // console.log(`Valor Total em Cartões: ${amountCards}`)
 
-let amount = (moneyPix + amountCards) // 331,48
+let amount = (moneyPix + amountCards) 
 // console.log(`Total: ${amount}`)
-
-// console.log(document.querySelector('#closeInvoicing'))
 
 export const Invoicing = ({ close }: ActionsType) => {
    const navigate = useNavigate()
@@ -86,7 +80,6 @@ export const Invoicing = ({ close }: ActionsType) => {
                   <div className="valueOfTheDay borderForm flex">
                      <MoneyBillWave w='24' h='24' fill='var(--bs-success)' className='mr-1' />
                      <p className='inputTF text-success'>
-                        {/* 0,00 */}
                         { money.toFixed(2) }
                      </p>
                   </div>
@@ -98,7 +91,6 @@ export const Invoicing = ({ close }: ActionsType) => {
                   <div className="valueOfTheDay borderForm flex">
                      <Pix w='24' h='24' fill='var(--pix)' className='mr-1' />
                      <p className='inputTF text-pix'>
-                        {/* 0,00 */}
                         { pix.toFixed(2) }
                      </p>
                   </div>
@@ -116,7 +108,6 @@ export const Invoicing = ({ close }: ActionsType) => {
                   <div className="valueOfTheDay borderForm flex">
                      <CreditCard w='24' h='24' fill='var(--blue-mp)' className='mr-1' />
                      <p className='inputTF text-blue-mp'>
-                        {/* 0,00 */}
                         { debitCardFinal.toFixed(2) }
                      </p>
                   </div>
@@ -135,7 +126,6 @@ export const Invoicing = ({ close }: ActionsType) => {
                   <div className="valueOfTheDay borderForm flex">
                      <CreditCard w='24' h='24' fill='var(--yellow-ml)' className='mr-1' />
                      <p className='inputTF text-yellow-ml'>
-                        {/* 0,00 */}
                         { creditCardFinal.toFixed(2) }
                      </p>
                   </div>
@@ -151,7 +141,6 @@ export const Invoicing = ({ close }: ActionsType) => {
                         <Pix w='24' h='24' fill='var(--pix)' className='mr-1' />
                      </span>
                      <p className='inputTF text-success'>
-                        {/* 0,00 */}
                         { moneyPix.toFixed(2) }
                      </p>
                   </div>
@@ -167,7 +156,6 @@ export const Invoicing = ({ close }: ActionsType) => {
                         <CreditCard w='24' h='24' fill='var(--yellow-ml)' className='mr-1' />
                      </span>
                      <p className='inputTF text-blue-mp'>
-                        {/* 0,00 */}
                         { amountCards.toFixed(2) }
                      </p>
                   </div>

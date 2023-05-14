@@ -24,6 +24,9 @@ server.use(cors())
 server.use(express.json())
 server.use(express.urlencoded({ extended: true }))
 
+// Essa linha abaixo deve SEMPRE ficar na ULTIMA LINHA. Está aqui para fins ilutrativo mas está comentada*
+// server.listen('3001', () => console.log('Backend Running in port 3001'))
+
 // Users
 server.get('/backupUsers', async (req, res) => {
    let SQL: string = `SELECT * FROM users`
@@ -455,8 +458,6 @@ server.delete('/delete/product/:id', async (req, res) => {
          })
       }
    })
-
-
 })
 
 // Add Product
@@ -500,25 +501,6 @@ server.post('/newSale', (req, res) => {
          res.status(201).send({ msg: 'Produto adicionado com sucesso' })
       }
    })
-
-   /*let checkIfProductExistInList: string = `SELECT * FROM cartlist WHERE pdt_name = (?)`
-
-   db.query(checkIfProductExistInList, [pdt_name], async(err, result) => {
-      if(err) {
-         res.status(400).send({ msg: 'Produto já se encontra na lista' })
-      } else {
-         let SQL: string = `INSERT INTO cartlist (pdt_name, pdt_price, pdt_type, pdt_qty, pdt_value) VALUES (?,?,?,?,?)`
-
-         db.query(SQL, [pdt_name, pdt_price, pdt_type, pdt_qty, pdt_value], async(err, result) => {
-            if(err) {
-               console.log(err)
-               res.status(400).send({ msg: 'Erro ao adicionar o produto na lista' })
-            } else {
-               res.status(201).send({ msg: 'Produto adicionado na lista' })
-            }
-         })
-      }
-   })*/
 })
 
 server.delete('/deleteSalesDay', async (req, res) => {

@@ -4,30 +4,12 @@ import { CashRegister } from "../../assets/Icons/CashRegister"
 import { Minus } from "../../assets/Icons/Minus"
 import { Plus } from "../../assets/Icons/Plus"
 import { CartListContext } from "../../context/CartList/CartListContext"
-import { ProductsContext } from "../../context/Products/ProductsContext"
 import { ActionsType } from "../../types/ActionsType"
-import { ProductType } from "../../types/ProductType"
 import { MessageTexugo } from "../MessageTexugo/MessageTexugo"
 
 export const CartList = ({ listProducts, returnItems }: ActionsType) => {
 
-   const { products, setProducts } = useContext(ProductsContext)
    const { cartList, setCartList } = useContext(CartListContext)
-
-   const [items, setItems] = useState<ProductType[]>([])
-   const [qty, setQty] = useState(1)
-
-   let itemId = (id: number) => {
-      document.querySelector(`#qty-${id}`)
-   }
-
-   // Original
-   /*useEffect(() => {
-      if (listProducts) {
-         setItems(listProducts)
-         console.log(listProducts)
-      }
-   }, [listProducts])*/
 
    useEffect(() => {
       setCartList(cartList)
@@ -36,27 +18,7 @@ export const CartList = ({ listProducts, returnItems }: ActionsType) => {
    //console.log(`List Product in Context${products}`)
 
    const handleRemoveProductOnList = (id: string) => {
-      // console.log(items.filter(prod => prod.id !== id))
-      // console.log(items.filter(prod => prod.id !== id))
-      // items.filter(prod => prod.id !== id)
-
-      // setItems(items.filter(prod => prod.id !== id))
-      // console.log(items.filter(prod => prod.id !== id))
-      // console.log(id)
-
-      //setItems(items.filter(prod => prod.id !== id))
-
-      // Original
-      /*setItems(items.filter(prod => prod.id !== id))
-      listProducts = items
-      console.log(`Items: ${items.length}`)
-      console.log(`ListProducts: ${listProducts?.length}`)*/
-
       setCartList(cartList.filter(item => item.id !== id))
-   }
-
-   const handleReturnItems = () => {
-
    }
 
    const handleAddQty = (id?: string) => {
@@ -81,8 +43,7 @@ export const CartList = ({ listProducts, returnItems }: ActionsType) => {
 
    return (
       <>
-         {/* { items ? */}
-         {cartList ?
+         { cartList ?
             <article className="containerCartList flex sbt column h-100 p-3">
 
                <div className="flex sbt w-100 mb-2">
@@ -96,7 +57,6 @@ export const CartList = ({ listProducts, returnItems }: ActionsType) => {
                      </p>
                   </div>
                </div>
-               
 
                <div className="cartList flex sbt column w-10 h-100">
                   <section className="cartListSection w-100 h-100">
@@ -113,7 +73,6 @@ export const CartList = ({ listProducts, returnItems }: ActionsType) => {
                         </thead>
 
                         <tbody className="text-center w-100 column">
-                           {/* { items.map((prod) => ( */}
                            {cartList.map((prod, index) => (
                               <tr key={index}>
                                  <td className="itemName">
@@ -133,10 +92,7 @@ export const CartList = ({ listProducts, returnItems }: ActionsType) => {
                                        className="pointer ml-1" onClick={() => handleAddQty(`${prod.id}`)} />
                                  </td>
                                  <td>{prod.pdt_price}</td>
-                                 {/* <td>{ (parseFloat(prod.pdt_price) * qty).toFixed(2) }</td> */}
                                  <td>{parseFloat(prod.pdt_price).toFixed(2)}</td>
-                                 {/* <td>{ parseFloat(prod.pdt_price) * parseFloat((document.querySelector(`#qty-${prod.id}`) as HTMLInputElement).value) }</td> */}
-                                 {/* <td>{ (document.querySelector(`#qty-${prod.id}`) as HTMLInputElement).innerText }</td> */}
                               </tr>
 
                            ))}
@@ -145,10 +101,7 @@ export const CartList = ({ listProducts, returnItems }: ActionsType) => {
                         <tfoot className="cartListFooter flex sbt p-1 ">
                            <p>Total</p>
                            <span className="cartListValue text-danger">
-                              {/* { cartList.reduce(
-                                 (sum, item) => sum + parseFloat(item.pdt_price), 0
-                              ).toFixed(2) } */}
-                              {total}
+                              { total }
                            </span>
                         </tfoot>
 
@@ -160,4 +113,3 @@ export const CartList = ({ listProducts, returnItems }: ActionsType) => {
       </>
    )
 }
-

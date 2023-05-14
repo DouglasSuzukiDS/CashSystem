@@ -1,4 +1,3 @@
-import { useEffect } from "react"
 import { ArrowLeftLong } from "../../assets/Icons/ArrowLeftLong"
 import { CashRegister } from "../../assets/Icons/CashRegister"
 import { Gears } from "../../assets/Icons/Gears"
@@ -6,7 +5,6 @@ import { LogoBlue } from "../../assets/Icons/Logo Blue"
 import { ActionsType } from "../../types/ActionsType"
 
 export const Header = ({ open, handleAboutMeModal, handleCloseSystem, startJob, userInfos, handleOptionSystem, handleCloseCash, onClick }: ActionsType) => {
-   // LocalStorage Datas
 
    return(
       <header className="headerSystem flex sbt russianGradient">
@@ -28,15 +26,13 @@ export const Header = ({ open, handleAboutMeModal, handleCloseSystem, startJob, 
                            <Gears w='24' h='24' fill='var(--bs-secondary)' className='notAllowed' />
 
                            <button className="btn btn-primary ml-2 border" id="btn_openCash" onClick={ startJob } onChange={() => open}>
-                              {/* <button className="btn btn-primary ml-2 border" id="btn_openCash" onClick={startJob} > */}
                               Abrir Caixa
                               <CashRegister w='24' h='24' fill='var(--text)' className='ml-1 text-color' />
                            </button>
 
                         </> :
                         <>
-                           {/* { user?.userAdmin ? */}
-                           {userInfos?.userAdmin ?
+                           { userInfos?.userAdmin ?
                               <>
                                  <Gears w='24' h='24' fill='var(--bs-secondary)' className='pointer opacity' onClick={ handleOptionSystem } />
 

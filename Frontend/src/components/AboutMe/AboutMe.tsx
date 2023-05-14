@@ -1,5 +1,4 @@
 import { useState } from "react"
-import { CircleCheck } from "../../assets/Icons/CircleCheck"
 import { Envelope } from "../../assets/Icons/Envelope"
 import { GitHubBorderGradient } from "../../assets/Icons/GitHubBorderGradient"
 import { LinkedinBorderGradient } from "../../assets/Icons/LinkedinBorderGradient"
@@ -16,8 +15,6 @@ export const AboutMe = ({ close }: ActionsType) => {
    const [aboutContact, setAboutContact] = useState(false)
    const [aboutWhatsApp, setAboutWhatsApp] = useState(false)
    const [aboutEmail, setAboutEmail] = useState(false)
-
-   const contact = document.querySelector('#contact') as HTMLParagraphElement
 
    const handleShowWhatsApp = () => {
       // console.log('whats')
@@ -108,7 +105,6 @@ export const AboutMe = ({ close }: ActionsType) => {
                   <CircleBlue w="24" h="24" className="ml-1" />
                </button>
             </div>
-
 
          </div>
       </main>

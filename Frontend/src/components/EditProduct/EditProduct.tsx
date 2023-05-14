@@ -1,25 +1,18 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 
 import { MoneyCheckPen } from "../../assets/Icons/MoneyCheckPen";
 import { ArrowLeftLong } from "../../assets/Icons/ArrowLeftLong";
 import { Registered } from "../../assets/Icons/Registered";
-import { TrashCanXMark } from "../../assets/Icons/TrashCanXMark";
 import { ActionsType } from "../../types/ActionsType";
 import { XMark } from "../../assets/Icons/XMark";
-import { IconsProps } from "../../types/IconsProps";
 import { ProductType } from "../../types/ProductType";
 import { allProducts, findProductById }  from '../../services/product.service'
 
 export const EditProduct = ({ close, id, listProducts }: ActionsType) => {
    const server: string = 'http://localhost:3001'
-
-   // const { id } = useParams()
-   //console.log(id)
-
-   const navigate = useNavigate()
-
+   
    const [products, setProducts] = useState<ProductType[]>([])
    const [product, setProduct] = useState<ProductType>({
       id:  '',
@@ -83,7 +76,6 @@ export const EditProduct = ({ close, id, listProducts }: ActionsType) => {
             if (
                ((newProductName.value && newProductPrice.value && newProductType.value && newProductQty.value) !== '') &&
                ((newProductName.value && newProductPrice.value && newProductType.value && newProductQty.value) !== '0')
-               // ((newProductName.value && newProductPrice.value && newProductType.value && newProductQty.value) !== 0)
             ) {
 
                if (response.status === 200) {

@@ -1,50 +1,12 @@
 import axios from 'axios'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { ArrowRightToBracket  } from "../../assets/Icons/ArrowRightToBracket";
 import { IdCard } from "../../assets/Icons/IdCard";
 
 export const Login = () => {
 
-   const loginUsers = async() => {
-      const db = 'http://localhost:3001'
-      // const navigate = useNavigate()
-
-      let userLogin = document.querySelector('#userLogin') as HTMLInputElement
-      let userPassword = document.querySelector('#userPassword') as HTMLInputElement
-
-      if (userLogin.value && userPassword.value !== '') {
-         // alert(`
-         //    Login: ${userLogin}
-         //    Senha: ${userPassword}
-         // `)
-         // const Navigation = useNavigate()
-
-         const login = userLogin.value
-         const password = userPassword.value
-
-         const response = await axios.post(`${db}/login`, {
-            userLogin: userLogin.value,
-            userPassword: userPassword.value
-         })
-         //.then(alert(`User: ${userLogin.value}, ${userPassword.value}`))
-         // .then(response => {
-         //    alert(response.data.msg)
-         // })
-
-         if (response.status !== 200) {
-            alert(`Colaborador não encontrado`)
-         } else {
-            alert(`Login no Front`)
-            // alert(`Logado como ${login}`)
-         }
-
-      } else {
-         alert('Colaborador, por obséquio logue com vossa matricula e senha. Caso contrário, sujeito a pancada. 🤜😵🤛')
-      }
-   }
-
    const loginUser = async() => {
-      const db = "http://localhost:3001";
+      const server = "http://localhost:3001";
 
       let userLogin = document.querySelector("#userLogin") as HTMLInputElement
       let userPassword = document.querySelector("#userPassword") as HTMLInputElement
@@ -53,7 +15,7 @@ export const Login = () => {
          const login = userLogin.value;
          const password = userPassword.value;
 
-         const response = await axios.post(`${db}/login`, {
+         const response = await axios.post(`${server}/login`, {
             userLogin: login,
             userPassword: password,
          });
@@ -111,7 +73,7 @@ export const Login = () => {
                <button
                   id="LogonUser"
                   className="LogonUser btn btn-info"
-                  onClick={loginUser} >
+                  onClick={ loginUser } >
                   Logar no Sistema
                   <ArrowRightToBracket w='23' h='23' fill='var(--text-color)' className='ml-1' />
                </button>

@@ -1,5 +1,4 @@
 import { useContext } from "react"
-import { HandHoldingDollar } from "../../assets/Icons/HandHoldingDollar"
 import { ListCheck } from "../../assets/Icons/ListCheck"
 import { MagnifyingGlass } from "../../assets/Icons/MagnifyingGlass"
 import { SackDollar } from "../../assets/Icons/SackDollar"

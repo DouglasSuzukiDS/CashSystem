@@ -30,12 +30,6 @@ import { CreditCard } from '../../assets/Icons/CreditCard'
    F12 = 123
 */
 
-// window.addEventListener('keydown', (event) => {
-//    console.log(event.keyCode)
-// })
-
-// const navigate = useNavigate()
-
 export const ConfirmPayment = ({ close }: ActionsType) => {
    const { cartList, setCartList } = useContext(CartListContext)
 
@@ -114,9 +108,6 @@ export const ConfirmPayment = ({ close }: ActionsType) => {
    const handleConfirmPayment = async() => {
       const paymentMethod = document.querySelector('input[type=radio]:checked') as HTMLInputElement
       //console.log(paymentMethod)
-      /*let total = cartList.reduce(
-         (sum, item) => sum + parseFloat(item.pdt_price), 0
-      ).toFixed(2)*/
 
       if(total > '0.25') {
          if( paymentMethod.value === 'Pix' || 
@@ -163,7 +154,6 @@ export const ConfirmPayment = ({ close }: ActionsType) => {
 
    }
 
-
    return (
       <main className="container flex pr-3 z-index-50" id='paymentFormContainer'>
          <div className="forms flex sbt column">
@@ -194,8 +184,6 @@ export const ConfirmPayment = ({ close }: ActionsType) => {
                                  (sum, item) => sum + parseFloat(item.pdt_price), 0
                            ).toFixed(2) 
                         }
-                        {/* {opening.toFixed(2)} */}
-                        {/* { openCashValue } */}
                      </p>
                   </div>
                </div>
@@ -257,6 +245,7 @@ export const ConfirmPayment = ({ close }: ActionsType) => {
                Finalizar Venda
                <CircleCheck w='23' h='23' fill='var(--text)' className='ml-1' />
             </button>
+            
          </div>
       </main>
    )

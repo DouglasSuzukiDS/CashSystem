@@ -1,6 +1,5 @@
 import { ChangeEvent, useContext, useEffect, useState } from "react"
 import { ProductType } from "../../types/ProductType"
-import { allProducts } from "../../services/product.service"
 
 import { CircleCheck } from "../../assets/Icons/CircleCheck"
 import { MagnifyingGlass  }from "../../assets/Icons/MagnifyingGlass"
@@ -10,51 +9,16 @@ import { ActionsType } from "../../types/ActionsType"
 import { ProductsContext } from "../../context/Products/ProductsContext"
 import { CartListContext } from "../../context/CartList/CartListContext"
 
-
 export const AddProducts = ({ close, id, listProducts, cartAddItem }: ActionsType) => {
 
    const { products, setProducts } = useContext(ProductsContext)
    const { cartList, setCartList } = useContext(CartListContext)
-
-   const server = 'http://localhost:3001'
 
    // Get All Products
    //const [products, setProducts] = useState<ProductType[]>([]) // First Search on List
    const [cloneProducts, setCloneProducts] = useState<ProductType[]>(products) // List if Search is empty
    const [findProducts, setFindProducts] = useState<ProductType[]>(products) // List if Search is empty
    const [addProductModel, setAddProductModal] = useState(false)
-   const [idItem, setIdItem] = useState('')
-   const [addItem, setAddItem] = useState<ProductType>()
-
-   /*useEffect(() => {
-      allProducts()
-         .then(setProducts)
-         .catch(e => console.log(e))
-
-      allProducts()
-         .then(setCloneProducts)
-         .catch(e => console.log(e))
-      
-      allProducts()
-         .then(setFindProducts)
-         .catch(e => console.log(e))
-   }, [addProductModel])*/
-
-   useEffect(() => {
-      /*if(listProducts) {
-         setProducts(listProducts)
-         setCloneProducts(listProducts)
-         setFindProducts(listProducts)
-      }*/
-
-   }, [])
-
-   // const { products } = useContext(ProductsContext)
-   
-   // const [productsList, setProductsList]: ProductType[] = products
-   // const [cloneProducts, setCloneProducts]: ProductType[] = products
-   // const [findProducts, setFindProducts]: ProductType[] = products
-   //console.log(users)
 
    // Return Product in Search
    const returnProduct = async (e: ChangeEvent<HTMLInputElement>) => {
@@ -89,35 +53,6 @@ export const AddProducts = ({ close, id, listProducts, cartAddItem }: ActionsTyp
    // Edit Product by ID
    const handleAddProduct = async (id: string) => {
       // Função responsável por passar o ID via prop para o EditProduct, consequentemente buscando o dado no Backend para Editar e mostrar o modal
-      /*console.log(`Add Product By ID: ${id}`)
-      setIdItem(id)
-      const item = findProducts.find(el => el.id === id)
-      console.log(item)
-
-      //item ?? setAddItem(item) 
-      if(item) {
-         setAddItem(item)
-      }
-      
-      if(listProducts) {
-         let filterProductById = listProducts.filter(el => el.id === id)
-         console.log(`Filtrad: ${JSON.stringify(filterProductById[0])}`)
-         if(filterProductById.length > 0) {
-            // return cartAddItem = () => filterProductById
-            return cartAddItem?.(filterProductById)
-         }
-      } 
-      //cartAddItem(item)
-      //cartAddItem(addItem)*/
-      /*if(listProducts) {
-         console.log(listProducts.filter(el => el.id === id))
-         return cartAddItem?.(products.filter(el => el.id === id)[0])
-      }*/
-
-      // Original 
-      // console.log(products.filter(el => el.id === id)[0])
-      // cartAddItem?.(products.filter(el => el.id === id)[0])
-      //return products.filter(el => el.id === id)[0]
 
       console.log(products.filter(el => el.id === id)[0])
       const addProd = products.filter(el => el.id === id)
@@ -125,17 +60,12 @@ export const AddProducts = ({ close, id, listProducts, cartAddItem }: ActionsTyp
       cartAddItem?.(addProd[0])
    }
 
-   // Show Add Product Modal
-   const handleCloseAddProductModal = () => {
-      setAddProductModal(!addProductModel)
-   }
-
    return (
       <article className="container flex pr-3  w-100 h-100 z-index-50" id='FindProductModal'>
 
          <div className="forms">
 
-            {!addProductModel ?
+            {!addProductModel &&
                <form action='/' className="findProductsForm w-100 h-100 f column sbt" id='findProductsForm'>
                   <h4 className="flex sbt">
 
@@ -144,7 +74,6 @@ export const AddProducts = ({ close, id, listProducts, cartAddItem }: ActionsTyp
                         <MagnifyingGlass w='24' h='24' fill='var(--bs-info)' className='ml-1' />
                      </div>
 
-                     {/* <div id='closeFindProducts' onClick={props.close}> */}
                      <div id='closeFindProducts' className="flex">
                         <XMark w='24' h='24'
                            className=''
@@ -187,9 +116,7 @@ export const AddProducts = ({ close, id, listProducts, cartAddItem }: ActionsTyp
                                        <td>{prod.pdt_qty}</td>
                                        <td>
                                           <div className="flex">
-                                             {/* <Link to={`/edit/product/${prod.id}`} > */}
                                              <span className="flex" onClick={ () => handleAddProduct(prod.id) }>
-                                             {/* <span className="flex" onClick={ () => cartAddItem?.(products.filter(prod => prod.id === id)) }> */}
                                                 <CartCirclePlus w='16' h='16' fill='var(--bs-success)' className='success-hover pointer' />
                                              </span>
                                              {/* </Link> */}
@@ -203,14 +130,12 @@ export const AddProducts = ({ close, id, listProducts, cartAddItem }: ActionsTyp
                      </table>
                   </div>
 
-                  {/* <div className="flex btn btn-success mt-3" onClick={props.close}> */}
                   <div className="flex btn btn-success mt-3" onClick={ close }>
                      Ok
                      <CircleCheck w='24' h='24' fill='var(--text)' className='ml-1' />
                   </div>
 
-               </form> : ''
-               // <EditProduct id={idItem} listProducts={ products } close={ handleCloseEditProductModal } />
+               </form>
             }
          </div>
 

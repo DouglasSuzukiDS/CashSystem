@@ -1,4 +1,3 @@
-import axios from 'axios'
 import { ChangeEvent, useContext, useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom'
 import { ArrowRightToBracket  } from "../../assets/Icons/ArrowRightToBracket";
@@ -32,26 +31,6 @@ export const Login = () => {
    const handleUserPassword = (e: ChangeEvent<HTMLInputElement>) => {
       setUserPassword(e.target.value)
    }
-
-   /*const handleLogin = async() => {
-      if(userLogin && userPassword) {
-         console.log(`userLogin: ${userLogin}, userPassword: ${userPassword}`)
-         
-         setLoading(true)
-
-         const logged = await auth.loginSystem(userLogin, userPassword)
-        //  alert('Login Logged' + logged)
-
-         if(logged) {
-            navigate('/OpenSystem')
-         } else {
-            alert('Falha ao logar. MSG do Component Login')
-            setLoading(false)
-         }
-      }
-
-      setLoading(false)
-   }*/
 
    const handleLogin = async() => {
       if(userLogin && userPassword) {
@@ -111,14 +90,6 @@ export const Login = () => {
                      Registrar Colaborador
                   </Link>
                </div>
-
-               {/* <button
-                  id="LogonUser"
-                  className="LogonUser btn btn-info"
-                  onClick={ handleLogin } >
-                  Logar no Sistema
-                  <ArrowRightToBracket w='23' h='23' fill='var(--text-color)' className='ml-1' />
-               </button> */}
 
                 {
                   loading ? 

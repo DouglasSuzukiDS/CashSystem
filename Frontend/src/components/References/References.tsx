@@ -1,15 +1,8 @@
-import { GlobeWWW } from "../../assets/Icons/GlobeWWW";
-import { HandShake } from "../../assets/Icons/HandShake";
 import { HandshakeRussian } from "../../assets/Icons/HandshakeRussian";
-import { Instagram } from "../../assets/Icons/Instagram";
-import { LKD } from "../../assets/Icons/LKD";
 import { RussianFlag } from "../../assets/Icons/RussianFlag";
-import { Udemy } from "../../assets/Icons/Udemy";
 import { XMark } from "../../assets/Icons/XMark";
-import { Youtube } from "../../assets/Icons/Youtube";
 import { ActionsType } from "../../types/ActionsType";
 import { HelpReference } from "../HelpReference/HelpReference";
-// import { HelpReference} from "../reference/reference";
 
 export const References = ({ close }: ActionsType) => {
    return (
@@ -212,32 +205,6 @@ export const References = ({ close }: ActionsType) => {
                      referenceName='Prof. Mariana'
                      referenceLinkedin='https://br.linkedin.com/in/mariana-badu-896627198'
                      referenceDesc=''
-                  />
-               </article>
-
-               <article className="referenceItem flex column m-2 border">
-                  <HelpReference
-                     referenceName='Bruno Campos (CFB Cursos)'
-                     referenceSite='http://cfbcursos.com.br'
-                     referenceInstagram='https://www.instagram.com/cfbcursos/'
-                     referenceYouTube='https://www.youtube.com/@cfbcursos'
-                     referenceLinkedin='https://linkedin.com/in/bruno-campos-191a1a41'
-                     referenceDesc='Responsável por ministrar videos aulas/cursos de excelente qualidade de forma gratuí­ta via YouTube. Me ensinando inúmeras linguagens de programação (C++, C#, HTML, CSS, Javascript, Python, Node, React, React Native, Bootstrap. Sem dúvidas, umas das melhores didáticas que possa existir.
-
-                  Também responsável por formar toda minha base de conhecimento em programação e sempre continuar ensiando coisas novas para nossa constante evoluíndo. Canal fundamental para qualquer estudante de desenvolvimento. '
-                  />
-               </article>
-
-               <article className="referenceItem flex column m-2 border">
-                  <HelpReference
-                     referenceName='Bruno Campos (CFB Cursos)'
-                     referenceSite='http://cfbcursos.com.br'
-                     referenceInstagram='https://www.instagram.com/cfbcursos/'
-                     referenceYouTube='https://www.youtube.com/@cfbcursos'
-                     referenceLinkedin='https://linkedin.com/in/bruno-campos-191a1a41'
-                     referenceDesc='Responsável por ministrar videos aulas/cursos de excelente qualidade de forma gratuí­ta via YouTube. Me ensinando inúmeras linguagens de programação (C++, C#, HTML, CSS, Javascript, Python, Node, React, React Native, Bootstrap. Sem dúvidas, umas das melhores didáticas que possa existir.
-
-                  Também responsável por formar toda minha base de conhecimento em programação e sempre continuar ensiando coisas novas para nossa constante evoluíndo. Canal fundamental para qualquer estudante de desenvolvimento. '
                   />
                </article>
 

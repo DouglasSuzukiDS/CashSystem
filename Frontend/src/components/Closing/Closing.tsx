@@ -34,21 +34,6 @@ F10 = 121
 F12 = 123
 */
 
-// window.addEventListener('keydown', (event) => {
-//    console.log(event.keyCode)
-// })
-
-// const navigate = useNavigate()
-
-const closeFormDay = () => {
-   const close = document.querySelector('#closingFormDay') as HTMLDivElement
-   // console.log(close)
-   // close.style.display = 'none'
-   // close.classList.toggle('none')
-
-   close.style.display = 'flex' ? close.style.display = 'none' : close.style.display = 'flex'
-}
-
 const server = 'http://localhost:3001'
 
 export const Closing = ({ close, userInfos }: ActionsType) => {
@@ -111,7 +96,6 @@ export const Closing = ({ close, userInfos }: ActionsType) => {
                window.location.href = 'http://localhost:3000'
             }
          }).catch(err => console.log(err))
-
    }
 
    return (
@@ -252,7 +236,9 @@ export const Closing = ({ close, userInfos }: ActionsType) => {
                      <CircleCheck w='24' h='24' fill='var(--text)' className='ml-1' />
                   </button>
                </span>
+
             </form>
+            
          </div>
       </main>
    )

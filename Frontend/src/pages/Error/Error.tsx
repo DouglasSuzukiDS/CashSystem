@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import { ShieldExclamation } from "../../assets/Icons/ShieldExclamation";
-import { RightToBracket } from "../../assets/Icons/RightToBracket";
+import { House } from '../../assets/Icons/House';
 
 export const Error = () => {
    return(
@@ -16,7 +16,7 @@ export const Error = () => {
                   </div>
 
                   <h1 className="text-danger flex text-center">
-                     Funcionário não indentificado.
+                     Página não encontrada.
                   </h1>
 
                   <div>
@@ -27,12 +27,12 @@ export const Error = () => {
                </div>
 
                <h3 className="flex my-2 text-center text-color">
-                  Por favor se identifique fazendo o Login
+                  Por obséquio, volte para a aplicação.
                </h3>
 
                <Link to='/' className="btn btn-primary">
                   Voltar
-                  <RightToBracket w='20' h='20' 
+                  <House w='20' h='20' 
                      fill='#C1C7E0'  
                      className='ml-1' />
                </Link>
