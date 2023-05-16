@@ -191,8 +191,8 @@ export const OpenSystem = ({ close }: ActionsType) => {
 
    const checkUserInfos = () => { // Verifica as informações de usuário logado
       if (userDatasSection) {
-         console.log(`Valor de userData LC: ${JSON.parse(userDatasSection).userName}`)
-         console.log(`Valor de userAdmin LC: ${JSON.parse(userDatasSection).userAdmin}`)
+         // console.log(`Valor de userData LC: ${JSON.parse(userDatasSection).userName}`)
+         // console.log(`Valor de userAdmin LC: ${JSON.parse(userDatasSection).userAdmin}`)
 
          setUserInfos({
             userName: JSON.parse(userDatasSection).userName,

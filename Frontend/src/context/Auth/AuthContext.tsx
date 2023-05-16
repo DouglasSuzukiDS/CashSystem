@@ -10,5 +10,4 @@ export type AuthContextType = {
    setUserData: Dispatch<SetStateAction<UserType>>
 }
 
-
 export const AuthContext = createContext<AuthContextType>(null!)

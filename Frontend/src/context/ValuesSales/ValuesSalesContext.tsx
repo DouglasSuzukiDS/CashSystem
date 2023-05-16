@@ -1,4 +1,4 @@
-import { createContext, SetStateAction, Dispatch } from "react"
+import { createContext } from "react"
 import { ValuesSalesType } from "../../types/ValuesSalesType"
 
 type ValuesSales = {
@@ -17,7 +17,6 @@ const initialValues = {
       debitCredit: 0
    },
    setValuesSalesToday: () => {}
-   // setValuesSalesToday: Dispatch<SetStateAction<ValuesSalesType>>
 }
 
 export const ValeusSalesContext = createContext<ValuesSales>(initialValues)

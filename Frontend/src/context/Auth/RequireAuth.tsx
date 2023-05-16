@@ -1,5 +1,4 @@
 import { useContext } from "react"
-import { Error } from "../../pages/Error/Error"
 import { Login } from "../../pages/Login/Login"
 import { AuthContext } from "./AuthContext"
 

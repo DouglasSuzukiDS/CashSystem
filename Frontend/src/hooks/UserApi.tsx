@@ -35,19 +35,6 @@ export const useApi = () => ({
             return err
          })
 
-         /*const response = await fetch(`${server}/login` ,{
-            method: 'POST',
-            headers: {
-               "Content-Type": "application/json",
-             },
-            body: JSON.stringify({
-               userLogin, userPassword
-            })
-         })
-         //.then(res => res.json())
-         .then(res => res.text())
-         .catch(err => console.log(err))*/
-
       return response
    },
 

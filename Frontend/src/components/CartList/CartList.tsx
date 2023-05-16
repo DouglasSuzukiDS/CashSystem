@@ -86,10 +86,10 @@ export const CartList = ({ listProducts, returnItems }: ActionsType) => {
 
                                  <td className="flex">
                                     <Minus w='16' h='16' fill='var(--bs-danger)'
-                                       className="pointer mr-1" onClick={() => handleMinusQty(`${prod.id}`)} />
+                                       className="pointer mr-1" onClick={() => {}} />
                                     <span id={`qty-${prod.id}`}>1</span>
                                     <Plus w='16' h='16' fill='var(--bs-success)'
-                                       className="pointer ml-1" onClick={() => handleAddQty(`${prod.id}`)} />
+                                       className="pointer ml-1" onClick={() => {}} />
                                  </td>
                                  <td>{prod.pdt_price}</td>
                                  <td>{parseFloat(prod.pdt_price).toFixed(2)}</td>
@@ -98,11 +98,20 @@ export const CartList = ({ listProducts, returnItems }: ActionsType) => {
                            ))}
                         </tbody>
 
-                        <tfoot className="cartListFooter flex sbt p-1 ">
-                           <p>Total</p>
-                           <span className="cartListValue text-danger">
-                              { total }
-                           </span>
+                        <tfoot className="cartListFooter">
+                           <tr className="f" >
+                              <td>
+                                 <p>
+                                    Total
+                                 </p>
+                              </td>
+
+                              <td className="cartListValue">
+                                 <span>
+                                    { total }
+                                 </span>
+                              </td>
+                           </tr>
                         </tfoot>
 
                      </table>

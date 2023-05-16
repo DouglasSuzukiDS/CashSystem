@@ -113,7 +113,6 @@ a {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  text-fill-color: transparent;
 }
 
 .russianGradient {
@@ -1653,14 +1652,16 @@ h4 {
   border-bottom-left-radius: 8px;
   border-bottom-right-radius: 8px;
 }
-.cartList .tableCartList tfoot p {
+.cartList .tableCartList tfoot td {
+  width: 50%;
+}
+.cartList .tableCartList tfoot td p, .cartList .tableCartList tfoot td span {
   color: var(--dark-blue);
   font-size: 24px;
   font-weight: bold;
 }
-.cartList .tableCartList tfoot .cartListValue {
-  font-size: 24px;
-  font-weight: bold;
+.cartList .tableCartList tfoot td span {
+  color: var(--bs-danger);
 }
 
 ::-webkit-scrollbar {

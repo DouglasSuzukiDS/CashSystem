@@ -103,18 +103,19 @@
          border-bottom-left-radius: 8px;
          border-bottom-right-radius: 8px;
 
-      
-         p {
-            color: var(--dark-blue);
-            font-size: 24px;
-            font-weight: bold
-         }
-   
-         .cartListValue {
-            font-size: 24px;
-            font-weight: bold;
-         }
+         td {
+            width: 50%;
          
+            p, span{
+               color: var(--dark-blue);
+               font-size: 24px;
+               font-weight: bold
+            }
+
+            span {
+               color: var(--bs-danger);
+            }
+         }
       }
    }
    

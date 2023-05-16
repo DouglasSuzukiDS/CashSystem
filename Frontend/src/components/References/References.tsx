@@ -93,10 +93,10 @@ export const References = ({ close }: ActionsType) => {
                   />
                </article>
 
-               {/* Mathues Battisti */}
+               {/* Matheus Battisti */}
                <article className="referenceItem flex column m-2 border">
                   <HelpReference
-                     referenceName='Mathues Battisti (Hora de Codar)'
+                     referenceName='Matheus Battisti (Hora de Codar)'
                      referenceSite='https://horadecodar.com.br'
                      referenceInstagram='https://www.instagram.com/HoraDeCodar'
                      referenceYouTube='https://www.youtube.com/@matheusbattisti'
@@ -125,7 +125,7 @@ export const References = ({ close }: ActionsType) => {
                {/* Jovem Programador */}
                <article className="referenceItem flex column m-2 border">
                   <HelpReference
-                     referenceName='Rodrido (Jovem Progamador)'
+                     referenceName='Rodrigo (Jovem Progamador)'
                      referenceInstagram='https://www.instagram.com/rodrigolucas322'
                      referenceYouTube='https://www.youtube.com/@JovemProgramadorOficial'
                      referenceDesc='Descobri o canal dele a pouco tempo buscando entender, aprender como desenvolver um Carrinho de Compras, utilizando React Hooks e desenvolver o sistema de Login.'
@@ -200,15 +200,16 @@ export const References = ({ close }: ActionsType) => {
                </article>
                
                {/* Prof. Mariana */}
-               {/* <article className="referenceItem flex column m-2 border">
+               <article className="referenceItem flex column m-2 border">
                   <HelpReference
                      referenceName='Prof. Mariana'
                      referenceLinkedin='https://br.linkedin.com/in/mariana-badu-896627198'
-                     referenceDesc=''
+                     referenceDesc='Sempre se propondo ajuda, orientando, motivando e cobrando quando necessário.'
+                     referencePhrase01="#SaiaDaProcrastinação"
                   />
                </article>
 
-               <article className="referenceItem flex column m-2 border">
+               {/* <article className="referenceItem flex column m-2 border">
                   <HelpReference
                      referenceName='Bruno Campos (CFB Cursos)'
                      referenceSite='http://cfbcursos.com.br'

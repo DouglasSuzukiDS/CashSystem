@@ -41,67 +41,69 @@ export const ConfirmPayment = ({ close }: ActionsType) => {
    ).toFixed(2)
 
    const handleConfirmMethod = () => {
-      const paymentMethod = document.querySelector('input[type=radio]:checked') as HTMLInputElement
       //console.log(paymentMethod)
-      console.log(paymentMethod.value)
-   
+      
       let paymentMoney = document.querySelector('#paymentMoney') as HTMLInputElement
       let paymentPix = document.querySelector('#paymentPix') as HTMLInputElement
       let paymentDebit = document.querySelector('#paymentDebit') as HTMLInputElement
       let paymentCredit = document.querySelector('#paymentCredit') as HTMLInputElement
-   
-      if(paymentMethod.value === 'Dinheiro') {
-         paymentMoney.classList.remove('borderFormFix')
-         paymentMoney.classList.add('borderFormFixSuccess')
-   
-         paymentPix.classList.remove('borderFormFixPix')
-         paymentPix.classList.add('borderFormFix')
-   
-         paymentDebit.classList.remove('borderFormFixBlueMP')
-         paymentDebit.classList.add('borderFormFix')
-   
-         paymentCredit.classList.remove('borderFormFixYellowML')
-         paymentCredit.classList.add('borderFormFix')
-   
-      } else if(paymentMethod.value === 'Pix') {
-         paymentPix.classList.remove('borderFormFix')
-         paymentPix.classList.add('borderFormFixPix')
-   
-         paymentMoney.classList.remove('borderFormFixSuccess')
-         paymentMoney.classList.add('borderFormFix')
-   
-         paymentDebit.classList.remove('borderFormFixBlueMP')
-         paymentDebit.classList.add('borderFormFix')
-   
-         paymentCredit.classList.remove('borderFormFixYellowML')
-         paymentCredit.classList.add('borderFormFix')
-   
-      } else if(paymentMethod.value === 'Cartão de Débito') {
-         paymentDebit.classList.remove('borderFormFix')
-         paymentDebit.classList.add('borderFormFixBlueMP')
-   
-         paymentMoney.classList.remove('borderFormFixSuccess')
-         paymentMoney.classList.add('borderFormFix')
-   
-         paymentPix.classList.remove('borderFormFixPix')
-         paymentPix.classList.add('borderFormFix')
-   
-         paymentCredit.classList.remove('borderFormFixYellowML')
-         paymentCredit.classList.add('borderFormFix')
-   
-      } else if(paymentMethod.value === 'Cartão de Crédito') {
-         paymentCredit.classList.remove('borderFormFix')
-         paymentCredit.classList.add('borderFormFixYellowML')
-   
-         paymentMoney.classList.remove('borderFormFixSuccess')
-         paymentMoney.classList.add('borderFormFix')
-   
-         paymentPix.classList.remove('borderFormFixPix')
-         paymentPix.classList.add('borderFormFix')
-   
-         paymentDebit.classList.remove('borderFormFixBlueMP')
-         paymentDebit.classList.add('borderFormFix')
-   
+
+      const paymentMethod = document.querySelector('input[type=radio]:checked') as HTMLInputElement
+      
+      if(paymentMethod) {
+         if(paymentMethod.value === 'Dinheiro') {
+            paymentMoney.classList.remove('borderFormFix')
+            paymentMoney.classList.add('borderFormFixSuccess')
+      
+            paymentPix.classList.remove('borderFormFixPix')
+            paymentPix.classList.add('borderFormFix')
+      
+            paymentDebit.classList.remove('borderFormFixBlueMP')
+            paymentDebit.classList.add('borderFormFix')
+      
+            paymentCredit.classList.remove('borderFormFixYellowML')
+            paymentCredit.classList.add('borderFormFix')
+      
+         } else if(paymentMethod.value === 'Pix') {
+            paymentPix.classList.remove('borderFormFix')
+            paymentPix.classList.add('borderFormFixPix')
+      
+            paymentMoney.classList.remove('borderFormFixSuccess')
+            paymentMoney.classList.add('borderFormFix')
+      
+            paymentDebit.classList.remove('borderFormFixBlueMP')
+            paymentDebit.classList.add('borderFormFix')
+      
+            paymentCredit.classList.remove('borderFormFixYellowML')
+            paymentCredit.classList.add('borderFormFix')
+      
+         } else if(paymentMethod.value === 'Cartão de Débito') {
+            paymentDebit.classList.remove('borderFormFix')
+            paymentDebit.classList.add('borderFormFixBlueMP')
+      
+            paymentMoney.classList.remove('borderFormFixSuccess')
+            paymentMoney.classList.add('borderFormFix')
+      
+            paymentPix.classList.remove('borderFormFixPix')
+            paymentPix.classList.add('borderFormFix')
+      
+            paymentCredit.classList.remove('borderFormFixYellowML')
+            paymentCredit.classList.add('borderFormFix')
+      
+         } else if(paymentMethod.value === 'Cartão de Crédito') {
+            paymentCredit.classList.remove('borderFormFix')
+            paymentCredit.classList.add('borderFormFixYellowML')
+      
+            paymentMoney.classList.remove('borderFormFixSuccess')
+            paymentMoney.classList.add('borderFormFix')
+      
+            paymentPix.classList.remove('borderFormFixPix')
+            paymentPix.classList.add('borderFormFix')
+      
+            paymentDebit.classList.remove('borderFormFixBlueMP')
+            paymentDebit.classList.add('borderFormFix')
+      
+         }
       }
    }
    
