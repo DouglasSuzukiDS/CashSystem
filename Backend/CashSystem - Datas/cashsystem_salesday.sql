@@ -29,7 +29,7 @@ CREATE TABLE `salesday` (
   `methodSale` varchar(20) DEFAULT NULL,
   `registrationSale` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`idSale`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -38,6 +38,7 @@ CREATE TABLE `salesday` (
 
 LOCK TABLES `salesday` WRITE;
 /*!40000 ALTER TABLE `salesday` DISABLE KEYS */;
+INSERT INTO `salesday` VALUES (1,5.00,'Nick','Pix','3-8-2023 21:48:25'),(2,5.00,'Chico Palha','Pix','3-8-2023 21:56:48');
 /*!40000 ALTER TABLE `salesday` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -50,4 +51,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-04-24 23:32:25
+-- Dump completed on 2023-08-03 22:02:47

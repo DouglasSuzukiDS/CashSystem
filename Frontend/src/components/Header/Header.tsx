@@ -32,7 +32,7 @@ export const Header = ({ open, handleAboutMeModal, handleCloseSystem, startJob, 
 
                         </> :
                         <>
-                           { userInfos?.userAdmin ?
+                           { userInfos?.userAdmin === true ?
                               <>
                                  <Gears w='24' h='24' fill='var(--bs-secondary)' className='pointer opacity' onClick={ handleOptionSystem } />
 
@@ -40,6 +40,7 @@ export const Header = ({ open, handleAboutMeModal, handleCloseSystem, startJob, 
                                     Fechar Caixa
                                     <CashRegister w='24' h='24' fill='var(--text)' className='ml-1 text-color' />
                                  </button>
+                                 <span>ADMIN</span>
                               </> :
                               <>
                                  <Gears w='24' h='24' fill='var(--bs-secondary)' className='notAllowed' />
@@ -48,6 +49,7 @@ export const Header = ({ open, handleAboutMeModal, handleCloseSystem, startJob, 
                                     Fechar Caixa
                                     <CashRegister w='24' h='24' fill='var(--text)' className='ml-1 text-color' />
                                  </button>
+                                 <span>NO ADMIN</span>
                               </>
 
                            }

@@ -30,7 +30,7 @@ CREATE TABLE `products` (
   `pdt_qty` int NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `pdt_name` (`pdt_name`)
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -39,7 +39,7 @@ CREATE TABLE `products` (
 
 LOCK TABLES `products` WRITE;
 /*!40000 ALTER TABLE `products` DISABLE KEYS */;
-INSERT INTO `products` VALUES (1,'Skol',5.00,'Bebidas',24),(2,'Brahma Duplo Malte',5.00,'Bebidas',24),(3,'Brizadeiro',5.00,'Comidas',10),(4,'Brownieconha',5.00,'Comidas',10),(5,'Kit Noia',10.00,'Diversos',10),(6,'Chanceller c/ Gelo e Vibe',12.00,'Bebidas',30),(7,'Seda Solta',0.50,'Diversos',30),(8,'Seda Pacote',5.00,'Diversos',24),(9,'Coca 200ML',2.50,'Bebidas',32),(10,'Coca 350ML',5.00,'Bebidas',24),(11,'Skol 269ML',4.00,'Bebidas',24),(12,'Heineken 269ML',4.00,'Bebidas',24),(13,'Budweiser',4.00,'Bebidas',24),(14,'Original 269ML',4.00,'Bebidas',24),(15,'Pão de Queijo',2.00,'Comidas',12),(16,'Toddynho',2.50,'Bebidas',24),(17,'Fandangos 33G',2.00,'Comidas',24),(18,'Cheetos 33G',2.00,'Comidas',24),(19,'Doritos 33G',2.50,'Comidas',24),(20,'White Horse c/ Gelo & Red Bull',30.00,'Bebidas',18),(21,'Jack Daniels c/ Gelo & Red Bull',35.00,'Bebidas',17),(22,'Jack Daniels c/ Coca 269ML',30.00,'Bebidas',16),(23,'Eight',6.00,'Cigarros',30),(24,'Corona 330ML',5.00,'Bebidas',24),(25,'Isqueiro Bic Grande',5.00,'Diversos',12),(26,'Isqueiro Bic Pequeno',4.00,'Diversos',9),(27,'Isqueiro Barato',3.00,'Diversos',24),(28,'Caixa de  Fósforo',0.50,'Diversos',26),(29,'Eight Solto',0.50,'Cigarros',17),(30,'Gudang Garang Solto',2.00,'Cigarros',14);
+INSERT INTO `products` VALUES (1,'Skol',5.00,'Bebidas',24),(2,'Brahma Duplo Malte',5.00,'Bebidas',24),(3,'Brigadeiro c/ Licor',5.00,'Comidas',10),(4,'Brownie c/ Licor',5.00,'Comidas',10),(5,'Kit Kebradeira',9.50,'Diversos',8),(6,'Chanceller c/ Gelo e Vibe',12.00,'Bebidas',30),(7,'Seda Solta',0.50,'Diversos',30),(8,'Seda Pacote',5.00,'Diversos',24),(9,'Coca 200ML',2.50,'Bebidas',32),(10,'Coca 350ML',5.00,'Bebidas',24),(11,'Skol 269ML',4.00,'Bebidas',24),(12,'Heineken 269ML',4.00,'Bebidas',24),(13,'Budweiser',4.00,'Bebidas',24),(14,'Original 269ML',4.00,'Bebidas',24),(15,'Pão de Queijo',2.00,'Comidas',12),(16,'Toddynho',2.50,'Bebidas',24),(17,'Fandangos 33G',2.00,'Comidas',24),(18,'Cheetos 33G',2.00,'Comidas',24),(19,'Doritos 33G',2.50,'Comidas',20),(20,'White Horse c/ Gelo & Red Bull',30.00,'Bebidas',18),(21,'Jack Daniels c/ Gelo & Red Bull',35.00,'Bebidas',17),(22,'Jack Daniels c/ Coca 269ML',30.00,'Bebidas',16),(23,'Eight',6.00,'Cigarros',30),(24,'Corona 330ML',5.00,'Bebidas',24),(25,'Isqueiro Bic Grande',5.00,'Diversos',12),(26,'Isqueiro Bic Pequeno',4.00,'Diversos',9),(27,'Isqueiro Barato',3.00,'Diversos',24),(28,'Caixa de  Fósforo',0.50,'Diversos',26),(29,'Eight Solto',0.50,'Cigarros',17),(30,'Gudang Garang Solto',2.00,'Cigarros',14),(31,'Schweppes 350ML',5.00,'Bebibas',12);
 /*!40000 ALTER TABLE `products` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -52,4 +52,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-04-24 23:32:25
+-- Dump completed on 2023-08-03 22:02:47

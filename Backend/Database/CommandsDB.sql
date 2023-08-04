@@ -66,7 +66,7 @@
     INSERT INTO products VALUES (30, 'Gudang Garang Solto', 2, 'Cigarros', 14);
 */
 
-/* // SaleDay
+/* // SalesDay
     SELECT * FROM SalesDay;
     
     INSERT INTO SalesDay (priceSale, sellerSale, methodSale, registrationSale) VALUES (
@@ -108,6 +108,7 @@
 
     ALTER TABLE Sales AUTO_INCREMENT = 1;
 */
+
 
 -- SELECT * FROM Products;
 -- SELECT * FROM Users;

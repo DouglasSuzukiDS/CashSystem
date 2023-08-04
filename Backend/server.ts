@@ -542,17 +542,18 @@ server.get('/allSales', async (req, res) => {
          const seconds: number = new Date().getSeconds()
 
          const today: string = `${(day < 10) ? 0 + day : day}-${(mouth + 1) < 10 ? 0 + (mouth + 1) : mouth + 1}-${year}`
-         const hours: string = `${(hour < 10) ? 0 + hour : hour}-${minutes < 10 ? 0 + minutes : minutes}-${seconds < 10 ? 0 + seconds : seconds}-`
+         const hours: string = `${(hour < 10) ? 0 + hour : hour}-${minutes < 10 ? 0 + minutes : minutes}-${seconds < 10 ? 0 + seconds : seconds}`
          const dateNow: string = `${today}-${hours}`
 
 
          // writeFile('PATH', CONTEUDO, CALLBACK) =>
 
          // Salvamento na pasta do computador para ser upada no drive automática em formato SQL
-         fs.writeFile(`C:/Users/${process.env.NAME}/Downloads/OneDrive/backup/backupAllSales/AllSales${dateNow}.json`, JSON.stringify(result), (err) => {
+         fs.writeFile(`C:/Users/${process.env.NAME}/Downloads/OneDrive/backup/backupAllSales/AllSales-${dateNow}.json`, JSON.stringify(result), (err) => {
             if (err) {
                console.log(err)
                res.status(404).send({ msg: 'Erro' })
+
             } else {
                console.log('Backup das vendas salvas com Sucesso no computador!')
 
@@ -562,7 +563,7 @@ server.get('/allSales', async (req, res) => {
             }
          })
 
-         res.status(200).send({ msg: 'Backup das vendas realizado com sucesso!' })
+         res.status(200).send({ msg: 'Backup das vendas realizado com sucesso!', result })
       }
    })
 
@@ -654,18 +655,69 @@ server.post('/closeSystem', async (req, res) => {
          console.log(err)
          res.status(404).send({ msg: 'Erro ao salvar faturamento do dia' })
       } else {
-         fs.writeFile(`C:/Users/${process.env.NAME}/Downloads/OneDrive/backup/backupAllSales/${dateNow}sales.json`, JSON.stringify(result), (err) => {
-            if (err) {
-               console.log(err)
-            } else {
-               console.log('Backup das vendas salvo com Sucesso!')
 
-               fs.readFile(`C:/Users/${process.env.NAME}/Downloads/OneDrive/backup/backupAllSales/${dateNow}sales.json`, (err, data) => {
-                  err ? console.log(err) : console.log('Vendas: ' + data)
+         /*const query = `SELECT * FROM SalesDay`
+
+         db.query(query, (err, result) => {
+            if(err) {
+               console.log(err)
+               res.status(404).send({ msg: 'Erro ao tentar salvar as vendas do dia', result })
+            } else {
+               fs.writeFile(`C:/Users/${process.env.NAME}/Downloads/OneDrive/backup/backupAllSales/${dateNow}-salesToday.json`, JSON.stringify(result), (err) => {
+                  if (err) {
+                     console.log(err)
+                     res.status(404).send({ msg: 'Erro' })
+      
+                  } else {
+                     console.log('Backup fechamento de Sistema!')
+                     console.log('Backup das vendas salvo com Sucesso!')
+      
+                     fs.readFile(`C:/Users/${process.env.NAME}/Downloads/OneDrive/backup/backupAllSales/${dateNow}-salesToday.json`, (err, data) => {
+                        console.log('Fechamento')
+                        console.log(data)
+                        err ? console.log(err) : console.log('Vendas: ' + data)
+                     })
+      
+                  }
                })
+      
             }
-         })
-         res.status(200).send({ msg: 'Faturamento do dia salvo com sucesso! Bye Bye' })
+         })*/
+
+         if(err) {
+            console.log(err)
+            res.status(404).send({ msg: 'Erro ao tentar salvar as vendas do dia', result })
+         } else {
+
+            const query = `SELECT * FROM Sales` 
+
+            db.query(query, (err, result) => {
+               if(err) {
+                  console.log(err)
+                  res.status(404).send({ msg: 'Erro ao tentar salvar as vendas.' })
+               } else {
+                  fs.writeFile(`C:/Users/${process.env.NAME}/Downloads/OneDrive/backup/backupAllSales/${dateNow}-salesToday.json`, JSON.stringify(result), (err) => {
+                     if (err) {
+                        console.log(err)
+                        res.status(404).send({ msg: 'Erro' })
+         
+                     } else {
+                        console.log('Backup fechamento de Sistema!')
+                        console.log('Backup das vendas salvo com Sucesso!')
+         
+                        fs.readFile(`C:/Users/${process.env.NAME}/Downloads/OneDrive/backup/backupAllSales/${dateNow}-salesToday.json`, (err, data) => {
+                           err ? console.log(err) : console.log('Vendas: ' + data)
+                        })
+         
+                     }
+                  })
+                  
+                  res.status(200).send({ msg: 'Faturamento do dia salvo com sucesso! Bye Bye', result })
+               }
+            })
+   
+         }
+
       }
    })
 
