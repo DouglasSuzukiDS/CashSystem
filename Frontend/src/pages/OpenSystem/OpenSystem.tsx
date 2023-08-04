@@ -155,9 +155,6 @@ export const OpenSystem = ({ close }: ActionsType) => {
       })
    }, [findProductsModal])
 
-   useEffect(() => {
-      checkUserInfos()
-   })
 
    /*useEffect(() => { // Keys event
       window.addEventListener('keydown', (event) => {
