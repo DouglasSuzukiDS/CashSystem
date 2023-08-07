@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-expressions */
-import { useEffect } from "react";
+import { KeyboardEvent, useEffect } from "react";
 import { CashRegister } from "../../assets/Icons/CashRegister";
 import { CircleCheck } from "../../assets/Icons/CircleCheck";
 import { SackDollar } from "../../assets/Icons/SackDollar";
@@ -59,6 +59,17 @@ export const OpenCash = ({ close, onClick }: ActionsType) => {
 
    }
 
+   const handleOpenCashWithEnter = (e: KeyboardEvent<HTMLInputElement>) => {
+      let openingCashInput = document.querySelector('#openingCash') as HTMLInputElement
+
+      if(openingCashInput.value !== '') {
+         setTimeout(() => openCashValue(), 1500)
+         
+      } else {
+         alert('Por obséquio, informe um valor para abertura do caixa.')
+      } 
+   }
+
    return (
       <article className="flex" id='openCashModal'>
          <div className="formsOpen">
@@ -87,7 +98,8 @@ export const OpenCash = ({ close, onClick }: ActionsType) => {
                      <p className='inputTF text-primary'>
                         <input type="text"
                            className='text-primary pg3 text-center'
-                           id="openingCash" placeholder="0,00" />
+                           id="openingCash" placeholder="0,00" 
+                            />
                      </p>
                   </div>
                </div>

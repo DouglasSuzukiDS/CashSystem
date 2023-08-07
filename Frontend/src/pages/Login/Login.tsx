@@ -1,4 +1,4 @@
-import { ChangeEvent, useContext, useEffect, useState } from 'react';
+import { ChangeEvent, KeyboardEvent, useContext, useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom'
 import { ArrowRightToBracket  } from "../../assets/Icons/ArrowRightToBracket";
 import { IdCard } from "../../assets/Icons/IdCard";
@@ -24,7 +24,7 @@ export const Login = () => {
    const [userPassword, setUserPassword] = useState('')
    const [loading, setLoading] = useState(false)
 
-   const handleuserLogin = (e: ChangeEvent<HTMLInputElement>) => {
+   const handleUserLogin = (e: ChangeEvent<HTMLInputElement>) => {
       setUserLogin(e.target.value)
    }
 
@@ -52,6 +52,16 @@ export const Login = () => {
 
       setLoading(false)
    }
+
+   const handleLoginWithEnterButton = (e: KeyboardEvent<HTMLInputElement>) => {
+      if(e.code.toLocaleLowerCase() === 'enter') {
+         if(userLogin !== '' && userPassword !== '') {
+            handleLogin()
+         } else {
+            alert('Por obséquio, preencha os campos')
+         }
+      }
+   }
    
    return (
       <main className="container flex z-index-50">
@@ -67,7 +77,7 @@ export const Login = () => {
                   <input type="text" name="userLogin" id="userLogin"
                      placeholder="Login / Matrícula"
                      required
-                     onChange={ handleuserLogin }
+                     onChange={ handleUserLogin }
                      onInvalid={e => (e.target as HTMLInputElement).setCustomValidity('Digite seu Login/Matrícula')}
                      onInput={e => (e.target as HTMLInputElement).setCustomValidity('')} />
                </div>
@@ -78,7 +88,8 @@ export const Login = () => {
                      onChange={ handleUserPassword }
                      placeholder="Senha"
                      onInvalid={e => (e.target as HTMLInputElement).setCustomValidity('Digite a sua senha')}
-                     onInput={e => (e.target as HTMLInputElement).setCustomValidity('') } />
+                     onInput={e => (e.target as HTMLInputElement).setCustomValidity('') } 
+                     onKeyUp={ handleLoginWithEnterButton } />
                </div>
 
                <div className="actionsLogin f sbt " >
@@ -100,11 +111,11 @@ export const Login = () => {
                      </button> :
 
                      <button
-                     id="LogonUser"
-                     className="LogonUser btn btn-info"
-                     onClick={ handleLogin } >
-                     Logar no Sistema
-                     <ArrowRightToBracket w='23' h='23' fill='var(--text-color)' className='ml-1' />
+                        id="LogonUser"
+                        className="LogonUser btn btn-info"
+                        onClick={ handleLogin } >
+                        Logar no Sistema
+                        <ArrowRightToBracket w='23' h='23' fill='var(--text-color)' className='ml-1' />
                   </button>
                }
                

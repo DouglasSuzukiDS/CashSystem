@@ -24,6 +24,7 @@ export type ActionsType = {
    handleManagerProduct?: () => void
 
    userInfos?: UserDataSectionType
+   userIsAdmin?: boolean
    handleHistoricModal?: () => void
    handleConfirmPayment?: () => void
    handleAddProductModal?: () => void

@@ -44,6 +44,9 @@ export const OpenSystem = ({ close }: ActionsType) => {
    // Recebe o nome do usuario logado e se ele e Admin
    const [userInfos, setUserInfos] = useState<UserDataSectionType>()
 
+   // Verifica se o User é admin
+   const [userIsAdmin, setUserIsAdmin] = useState(false)
+
    // Get All Users
    const [users, setUsers] = useState<UserType[]>([])
 
@@ -199,6 +202,8 @@ export const OpenSystem = ({ close }: ActionsType) => {
             userName: JSON.parse(userDatasSection).userName,
             userAdmin: JSON.parse(userDatasSection).userAdmin,
          })
+         
+        JSON.parse(userDatasSection).userAdmin === '1' ? setUserIsAdmin(true) : setUserIsAdmin(false)
       }
    }
  
@@ -770,7 +775,8 @@ export const OpenSystem = ({ close }: ActionsType) => {
                handleCloseCash={ handleCloseCash }  
                handleCloseSystem={ handleCloseSystem }
                open={ open } 
-               userInfos={ userInfos } />
+               userInfos={ userInfos } 
+               userIsAdmin={ userIsAdmin } />
 
             <div className="contentSystem flex" id="contentSystem">
                {!open ? // Verifica se o Caixa foi Aberto

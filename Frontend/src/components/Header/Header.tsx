@@ -4,8 +4,11 @@ import { Gears } from "../../assets/Icons/Gears"
 import { LogoBlue } from "../../assets/Icons/Logo Blue"
 import { ActionsType } from "../../types/ActionsType"
 
-export const Header = ({ open, handleAboutMeModal, handleCloseSystem, startJob, userInfos, handleOptionSystem, handleCloseCash, onClick }: ActionsType) => {
+export const Header = ({ open, handleAboutMeModal, handleCloseSystem, startJob, userInfos, userIsAdmin, handleOptionSystem, handleCloseCash, onClick }: ActionsType) => {
    const admin = userInfos?.userName
+   // alert(userIsAdmin)
+   const userDatasSection = localStorage.getItem('UserDatas')
+
 
    return (
       <header className="headerSystem flex sbt russianGradient">
@@ -33,16 +36,16 @@ export const Header = ({ open, handleAboutMeModal, handleCloseSystem, startJob, 
 
                   </> :
                   <>
-                     {/* { userInfos?.userAdmin ? 
+                     { userIsAdmin ? 
                         <Gears w='24' h='24' fill='var(--bs-secondary)' className='pointer opacity' onClick={handleOptionSystem} /> : 
                         <Gears w='24' h='24' fill='var(--bs-secondary)' className='notAllowed' /> 
-                     } */}
-
-                     { admin &&
-                        <Gears w='24' h='24' fill='var(--bs-secondary)' className='pointer opacity' onClick={handleOptionSystem} /> 
                      }
+
+                     {/* { userIsAdmin &&
+                        <Gears w='24' h='24' fill='var(--bs-secondary)' className='pointer opacity' onClick={handleOptionSystem} /> 
+                     } */}
             
-                        { admin }
+                        {/* { userIsAdmin === true ? 'Sim' : 'Não' } */}
                       <button className="btn btn-danger ml-2 border" id="btn_closeCash" onClick={handleCloseCash} >
                         Fechar Caixa
                         <CashRegister w='24' h='24' fill='var(--text)' className='ml-1 text-color' />
