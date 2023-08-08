@@ -135,7 +135,7 @@ export const HelpReference = (
 
          </div>
 
-         <p className="mt-1 px-1 text-center pg4 text-color">
+         <div className="mt-1 px-1 text-center pg4 text-color">
             { referenceDesc }
 
             { 
@@ -197,7 +197,7 @@ export const HelpReference = (
                helpReferencePhrase02 &&
                   <p className="bold italic flex mt-1 text-russian-gradient"> { referencePhrase02 } </p>
             }
-         </p>
+         </div>
       </div>
    )
 }

@@ -51,7 +51,7 @@ export const EditUser = ({ close, id, listUsers }: ActionsType) => {
    let newUserAdmin = document.querySelector('#isAdmin') as HTMLSpanElement | Boolean
    
    const getUser = async() => {
-      await axios.get(`${server}/user/${id}`)
+      /*await axios.get(`${server}/user/${id}`)
          .then(response => {
             let userName = response.data.result[0].userName 
             let userLogin = response.data.result[0].userLogin 
@@ -69,7 +69,13 @@ export const EditUser = ({ close, id, listUsers }: ActionsType) => {
             // console.log('bc ' + newUserAdmin)
             // console.log(response)
          })
-         .catch(err => alert(err.response.data))
+         .catch(err => alert(err.response.data))*/
+      // console.log(`O user para edit é ${user}`)
+
+      newUserName.value = user.userName
+      newUserLogin.value = user.userLogin
+      newUserPassword.value = user.userPassword!
+      newUserAdmin = user.userAdmin
    }
 
    //getUser()
