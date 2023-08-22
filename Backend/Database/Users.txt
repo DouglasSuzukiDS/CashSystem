@@ -19,7 +19,7 @@ SELECT * FROM users;
 
    SELECT * FROM users WHERE userLogin = 'persio.valente';
     
-   INSERT INTO users VALUES ('Admin', 'admin', '$10$lbe01cY1gaQhJvQR9mrA9OS/SMsPfMKXZc4ZvT9jM8l5JC3/Pr9TC', true);
+   INSERT INTO users VALUES ('Admin', 'admin', 'admin', true);
 
 	INSERT INTO users VALUES ('Percio Valente', 'percio.valente', 123, 1);
    INSERT INTO users VALUES ('Tonhao Motomoto', 'tonhao.motomoto', 123, 0);

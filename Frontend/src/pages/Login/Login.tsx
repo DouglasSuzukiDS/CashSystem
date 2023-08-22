@@ -40,6 +40,7 @@ export const Login = () => {
 
          const logged = await auth.signIn(userLogin, userPassword)
         //  alert('Login Logged' + logged)
+        // alert(logged)
 
          if(logged) {
             navigate('/OpenSystem')

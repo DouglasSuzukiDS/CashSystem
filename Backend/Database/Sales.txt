@@ -16,7 +16,7 @@ CREATE TABLE Sales(
 
 SELECT * FROM Sales;
 
-   INSERT INTO Sales (dateSale, sellerSale, openCash, totalSale, openSystem, closeSystem, moneySale, pixSale, debitSale, creditSale, cardsSale, bankSale) VALUES (
+   INSERT INTO Sales (dateSale, sellerSale, openCash, totalSale, openSystemHour, closeSystemHour, moneySale, pixSale, debitSale, creditSale, cardsSale, bankSale) VALUES (
       "30/03/2023",
       "Nick",
       "12.00",
