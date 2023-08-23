@@ -91,7 +91,7 @@ server.get('/users', async (req, res) => {
    })
 })
 
-server.get('/user/:id', async (req, res) => { // Error
+server.get('/user/:id', async (req, res) => {
    const { id } = req.params
 
    let SQL: string = 'SELECT * FROM users WHERE id = ?'
@@ -109,7 +109,7 @@ server.get('/user/:id', async (req, res) => { // Error
    })
 })
 
-server.post('/login', async (req, res) => { // Error
+server.post('/login', async (req, res) => { 
 
    const { userLogin, userPassword } = req.body
    // console.log(`User => ${userLogin}, Senha => ${userPassword}`)
@@ -153,7 +153,7 @@ server.post('/login', async (req, res) => { // Error
 
 })
 
-server.post('/registerNewUser', async (req, res) => { // Error
+server.post('/registerNewUser', async (req, res) => { 
    // res.send('Connected')
    const { newUserFullName, newUserLogin, newUserPassword, newUserAdmin } = req.body
 
@@ -328,7 +328,7 @@ server.get('/products', async (req, res) => {
    })
 })
 
-server.get('/product/:id', async (req, res) => { // Error
+server.get('/product/:id', async (req, res) => { 
    const { id } = req.params
 
    let SQL: string = 'SELECT * FROM products WHERE id = ?'
@@ -345,7 +345,7 @@ server.get('/product/:id', async (req, res) => { // Error
    })
 })
 
-server.get('/products/type/', async (req, res) => { // Error
+server.get('/products/type/', async (req, res) => {
    const { pdt_type } = req.body
 
    let SQLType: string = 'SELECT * FROM products WHERE pdt_type = ?'
@@ -496,9 +496,9 @@ server.post('/newSale', (req, res) => {
    db.query(SQL, [priceSale, sellerSale, methodSale, `${dateNow}`], async (err, result) => {
       if (err) {
          console.log(err)
-         res.status(404).send({ msg: 'Erro ao adicionar o produto na lista de vendas' })
+         res.status(404).send({ msg: 'Erro ao adicionar o produto na lista de vendas.' })
       } else {
-         res.status(201).send({ msg: 'Produto adicionado com sucesso' })
+         res.status(201).send({ msg: 'Venda salva com sucesso.' })
       }
    })
 })
@@ -656,7 +656,7 @@ server.post('/closeSystem', async (req, res) => {
          res.status(404).send({ msg: 'Erro ao salvar faturamento do dia' })
       } else {
 
-         /*const query = `SELECT * FROM SalesDay`
+         const query = `SELECT * FROM SalesDay`
 
          db.query(query, (err, result) => {
             if(err) {
@@ -682,7 +682,7 @@ server.post('/closeSystem', async (req, res) => {
                })
       
             }
-         })*/
+         })
 
          if(err) {
             console.log(err)

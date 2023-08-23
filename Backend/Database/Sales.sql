@@ -16,21 +16,21 @@ CREATE TABLE Sales(
 
 SELECT * FROM Sales;
 
-   INSERT INTO Sales (dateSale, sellerSale, openCash, totalSale, openSystemHour, closeSystemHour, moneySale, pixSale, debitSale, creditSale, cardsSale, bankSale) VALUES (
-      "30/03/2023",
-      "Nick",
-      "12.00",
-      "150.00",
-      "12:50:00",
-      "18:00:00",
-      "30.00",
-      "80.00",
-      "20.00",
-      "20.00",
-      "40.00",
-      "120.00"
-   );
+INSERT INTO Sales (dateSale, sellerSale, openCash, totalSale, openSystemHour, closeSystemHour, moneySale, pixSale, debitSale, creditSale, cardsSale, bankSale) VALUES (
+   "30/03/2023",
+   "Nick",
+   "12.00",
+   "150.00",
+   "12:50:00",
+   "18:00:00",
+   "30.00",
+   "80.00",
+   "20.00",
+   "20.00",
+   "40.00",
+   "120.00"
+);
 
-   DELETE FROM Sales;
+DELETE FROM Sales;
 
-   ALTER TABLE Sales AUTO_INCREMENT = 1;
+ALTER TABLE Sales AUTO_INCREMENT = 1;
