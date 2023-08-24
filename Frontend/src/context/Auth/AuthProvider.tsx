@@ -30,7 +30,7 @@ export const AuthProvider = ({ children }: { children: JSX.Element }) => {
          //console.log((response.data.result.userName))
          deleteToken()
          createToken(response.data.token)
-         createUserDataToken(response.data.userInfos[0], response.data.userInfos[1])
+         createUserDataToken(response.data.userInfos[0], response.data.userInfos[1], response.data.userInfos[2])
 
          return true
       } else {
@@ -49,8 +49,8 @@ export const AuthProvider = ({ children }: { children: JSX.Element }) => {
       localStorage.setItem('AuthToken', token)
    }
 
-   const createUserDataToken = (name: string, admin: boolean) => {
-      let userDatas = { userName: name, userAdmin: admin }
+   const createUserDataToken = (name: string, admin: boolean, id: number) => {
+      let userDatas = { userName: name, userAdmin: admin, id }
       localStorage.setItem('UserDatas', JSON.stringify(userDatas))
    }
 

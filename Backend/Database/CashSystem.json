@@ -1,7 +1,7 @@
 {
     "client": "Thunder Client",
     "collectionName": "CashSystem",
-    "dateExported": "2023-08-04T01:01:18.398Z",
+    "dateExported": "2023-08-24T23:44:03.599Z",
     "version": "1.1",
     "folders": [
         {
@@ -205,11 +205,11 @@
             "colId": "291ddf43-fc8d-4b88-b442-e7f4f0658eb9",
             "containerId": "55c88afd-e618-412a-9242-63b628f57d87",
             "name": "User By Id",
-            "url": "localhost:3001/user/3",
+            "url": "localhost:3001/user/2",
             "method": "GET",
             "sortNum": 60000,
             "created": "2023-03-24T23:01:37.312Z",
-            "modified": "2023-03-24T23:01:37.312Z",
+            "modified": "2023-08-23T21:09:53.598Z",
             "headers": [],
             "params": [],
             "tests": []
@@ -237,7 +237,7 @@
             "method": "POST",
             "sortNum": 65000,
             "created": "2023-03-24T23:01:37.313Z",
-            "modified": "2023-08-04T00:41:43.175Z",
+            "modified": "2023-08-23T21:11:25.402Z",
             "headers": [
                 {
                     "name": "Accept",
@@ -253,7 +253,7 @@
             "params": [],
             "body": {
                 "type": "json",
-                "raw": "{\n  \"userLogin\": \"chico.palha\",\n  \"userPassword\": \"123\"\n}",
+                "raw": "{\n  \"userLogin\": \"nick\",\n  \"userPassword\": \"123\"\n}",
                 "form": []
             },
             "tests": []
@@ -267,12 +267,12 @@
             "method": "POST",
             "sortNum": 67500,
             "created": "2023-03-24T23:01:37.314Z",
-            "modified": "2023-08-04T00:42:03.223Z",
+            "modified": "2023-08-23T21:12:51.107Z",
             "headers": [],
             "params": [],
             "body": {
                 "type": "json",
-                "raw": "{\n    \"newUserFullName\": \"Tonhao Moto Moto\",\n    \"newUserLogin\": \"tonhao.motomoto2\",\n    \"newUserPassword\": \"123\",\n    \"newUserAdmin\": 0\n}\n",
+                "raw": "{\n    \"newUserFullName\": \"Chico Palha\",\n    \"newUserLogin\": \"chico.palha\",\n    \"newUserPassword\": \"123\",\n    \"newUserAdmin\": 0\n}\n",
                 "form": []
             },
             "tests": []
@@ -282,16 +282,16 @@
             "colId": "291ddf43-fc8d-4b88-b442-e7f4f0658eb9",
             "containerId": "55c88afd-e618-412a-9242-63b628f57d87",
             "name": "Edit User",
-            "url": "localhost:3001/edit/user/9",
+            "url": "localhost:3001/edit/user/2",
             "method": "PUT",
             "sortNum": 70000,
             "created": "2023-03-24T23:01:37.315Z",
-            "modified": "2023-08-04T00:42:53.542Z",
+            "modified": "2023-08-23T21:10:59.528Z",
             "headers": [],
             "params": [],
             "body": {
                 "type": "json",
-                "raw": "{\n  \"newUserName\": \"test\",\n  \"newUserLogin\": \"test\",\n  \"newUserPassword\": \"123\",\n  \"newUserAdmin\": false\n}\n",
+                "raw": "{\n  \"newUserName\": \"Nick\",\n  \"newUserLogin\": \"nick\",\n  \"newUserPassword\": \"123\",\n  \"newUserAdmin\": true\n}\n",
                 "form": []
             },
             "tests": []
@@ -319,12 +319,12 @@
             "method": "POST",
             "sortNum": 90000,
             "created": "2023-03-24T23:01:37.317Z",
-            "modified": "2023-08-04T00:56:47.548Z",
+            "modified": "2023-08-24T21:10:43.821Z",
             "headers": [],
             "params": [],
             "body": {
                 "type": "json",
-                "raw": "{\n  \"priceSale\": \"5.00\", \n  \"sellerSale\": \"Chico Palha\", \n  \"methodSale\": \"Pix\"\n}\n",
+                "raw": "{\n  \"sellerId\": \"03\", \n  \"sellerSale\": \"Chico Palha\", \n  \"priceSale\": \"5.00\", \n  \"methodSale\": \"Pix\"\n}\n",
                 "form": []
             },
             "tests": []
@@ -380,12 +380,12 @@
             "method": "POST",
             "sortNum": 120000,
             "created": "2023-03-31T03:09:30.777Z",
-            "modified": "2023-08-04T00:49:11.320Z",
+            "modified": "2023-08-24T21:10:26.865Z",
             "headers": [],
             "params": [],
             "body": {
                 "type": "json",
-                "raw": "{\n\n  \"sellerSale\": \"Chico Palha\", \n  \"openCash\": \"10.00\", \n  \"totalSale\":\"150.00\", \n  \"openSystemHour\": \"12:50:00\",\n  \"closeSystemHour\": \"18:00:00\", \n  \"moneySale\": \"30.00\", \n  \"pixSale\": \"80.00\" , \n  \"debitSale\": \"20.00\", \n  \"creditSale\": \"20.00\", \n  \"cardsSale\": \"40.00\", \n  \"bankSale\": \"120.00\"\n}",
+                "raw": "{\n\n  \"sellerId\": \"03\",   \n  \"sellerSale\": \"Chico Palha\", \n  \"openCash\": \"10.00\", \n  \"totalSale\":\"150.00\", \n  \"openSystemHour\": \"12:50:00\",\n  \"closeSystemHour\": \"18:00:00\", \n  \"moneySale\": \"30.00\", \n  \"pixSale\": \"80.00\" , \n  \"debitSale\": \"20.00\", \n  \"creditSale\": \"20.00\", \n  \"cardsSale\": \"40.00\", \n  \"bankSale\": \"120.00\"\n}",
                 "form": []
             },
             "tests": []
