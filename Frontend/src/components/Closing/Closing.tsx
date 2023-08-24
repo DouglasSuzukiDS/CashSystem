@@ -1,6 +1,9 @@
 import { useContext, useEffect } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
+import axios from 'axios'
+
 import { ActionsType } from '../../types/ActionsType'
+import { ValeusSalesContext } from '../../context/ValuesSales/ValuesSalesContext'
 
 import { SackDollar } from '../../assets/Icons/SackDollar'
 import { CashRegister } from '../../assets/Icons/CashRegister'
@@ -13,8 +16,6 @@ import { DollarSign } from '../../assets/Icons/DollarSign'
 import { ArrowLeftLong } from '../../assets/Icons/ArrowLeftLong'
 import { CircleCheck } from '../../assets/Icons/CircleCheck'
 import { XMark } from '../../assets/Icons/XMark'
-import { ValeusSalesContext } from '../../context/ValuesSales/ValuesSalesContext'
-import axios from 'axios'
 
 /*  Blocked Keys
 F1 => Help
@@ -66,6 +67,7 @@ export const Closing = ({ close, userInfos }: ActionsType) => {
       const closeHours: string = `${hour}:${minutes}:${seconds}`
 
       await axios.post(`${server}/closeSystem`, {
+         sellerId: userInfos?.id,
          sellerSale: userInfos?.userName,
          openCash: OpenCashValueLC,
          totalSale: valuesSalesToday.totalSale,

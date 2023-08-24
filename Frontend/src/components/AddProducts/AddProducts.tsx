@@ -1,13 +1,15 @@
 import { ChangeEvent, useContext, useEffect, useState } from "react"
+
 import { ProductType } from "../../types/ProductType"
+import { ActionsType } from "../../types/ActionsType"
+
+import { ProductsContext } from "../../context/Products/ProductsContext"
+import { CartListContext } from "../../context/CartList/CartListContext"
 
 import { CircleCheck } from "../../assets/Icons/CircleCheck"
 import { MagnifyingGlass  }from "../../assets/Icons/MagnifyingGlass"
 import { XMark } from "../../assets/Icons/XMark"
 import { CartCirclePlus } from "../../assets/Icons/CartCirclePlus"
-import { ActionsType } from "../../types/ActionsType"
-import { ProductsContext } from "../../context/Products/ProductsContext"
-import { CartListContext } from "../../context/CartList/CartListContext"
 
 export const AddProducts = ({ close, id, listProducts, cartAddItem }: ActionsType) => {
 

@@ -1,8 +1,10 @@
+import { HelpReference } from "../HelpReference/HelpReference";
+
+import { ActionsType } from "../../types/ActionsType";
+
 import { HandshakeRussian } from "../../assets/Icons/HandshakeRussian";
 import { RussianFlag } from "../../assets/Icons/RussianFlag";
 import { XMark } from "../../assets/Icons/XMark";
-import { ActionsType } from "../../types/ActionsType";
-import { HelpReference } from "../HelpReference/HelpReference";
 
 export const References = ({ close }: ActionsType) => {
    return (

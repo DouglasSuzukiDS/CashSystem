@@ -1,12 +1,13 @@
 import { useState } from "react"
+import { ActionsType } from "../../types/ActionsType"
+import { AboutContactInfo } from "../AboutContact/AboutContact"
+
 import { Envelope } from "../../assets/Icons/Envelope"
 import { GitHubBorderGradient } from "../../assets/Icons/GitHubBorderGradient"
 import { LinkedinBorderGradient } from "../../assets/Icons/LinkedinBorderGradient"
 import { Texugo } from "../../assets/Icons/Texugo"
 import { WhatsApp } from "../../assets/Icons/WhatsApp"
 import { XMark } from "../../assets/Icons/XMark"
-import { ActionsType } from "../../types/ActionsType"
-import { AboutContactInfo } from "../AboutContact/AboutContact"
 import { CircleRed } from "../../assets/Icons/CircleRed"
 import { CircleBlue } from "../../assets/Icons/CircleBlue"
 

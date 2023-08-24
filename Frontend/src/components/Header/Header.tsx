@@ -1,8 +1,9 @@
+import { ActionsType } from "../../types/ActionsType"
+
 import { ArrowLeftLong } from "../../assets/Icons/ArrowLeftLong"
 import { CashRegister } from "../../assets/Icons/CashRegister"
 import { Gears } from "../../assets/Icons/Gears"
 import { LogoBlue } from "../../assets/Icons/Logo Blue"
-import { ActionsType } from "../../types/ActionsType"
 
 export const Header = ({ open, handleAboutMeModal, handleCloseSystem, startJob, userInfos, userIsAdmin, handleOptionSystem, handleCloseCash, onClick }: ActionsType) => {
    const admin = userInfos?.userName

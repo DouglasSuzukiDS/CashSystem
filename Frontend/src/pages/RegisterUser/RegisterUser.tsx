@@ -1,11 +1,12 @@
 import { useState } from "react"
 import axios from 'axios'
 
+import { ActionsType } from "../../types/ActionsType"
+
 import { Square } from "../../assets/Icons/Square"
 import { SquareXMark } from "../../assets/Icons/SquareXMark"
 import { UserPen } from "../../assets/Icons/UserPen"
 import { UserPlus } from "../../assets/Icons/UserPlus"
-import { ActionsType } from "../../types/ActionsType"
 import { XMark } from "../../assets/Icons/XMark"
 import { CircleCheck } from "../../assets/Icons/CircleCheck"
 

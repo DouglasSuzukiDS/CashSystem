@@ -139,7 +139,7 @@ server.post('/login', async (req, res) => {
             )
             console.log(user[0])
             // res.status(200).send({ msg: `Logado como: ${userLogin}`, token: `Token: ${token}`, result: `${JSON.stringify(user)}`})
-            res.status(200).send({ msg: `Logado como: ${userLogin}`, token: `${token}`, userInfos: [`${user[0].userName}`, `${user[0].userAdmin}`], result: `${JSON.stringify(user)}` })
+            res.status(200).send({ msg: `Logado como: ${userLogin}`, token: `${token}`, userInfos: [`${user[0].userName}`, `${user[0].userAdmin}`, `${user[0].id}`], result: `${JSON.stringify(user)}` })
             //res.json()
          } else {
             console.log('Senha errada')
@@ -474,7 +474,7 @@ server.get('/saleDayList', (req, res) => {
 })
 
 server.post('/newSale', (req, res) => {
-   const { priceSale, sellerSale, methodSale } = req.body
+   const { sellerId, sellerSale, priceSale, methodSale } = req.body
    console.log(priceSale, sellerSale, methodSale)
 
    const day: number = new Date().getDate()
@@ -490,10 +490,10 @@ server.post('/newSale', (req, res) => {
    const hours: string = `${hour}:${minutes}:${seconds}`
    const dateNow: string = `${today} ${hours}`
 
-   let SQL: string = `INSERT INTO SalesDay (priceSale, sellerSale, methodSale, registrationSale) VALUES (?, ?, ?, ?)`
+   let SQL: string = `INSERT INTO SalesDay (sellerId, sellerSale, priceSale, methodSale, registrationSale) VALUES (?, ?, ?, ?, ?)`
 
 
-   db.query(SQL, [priceSale, sellerSale, methodSale, `${dateNow}`], async (err, result) => {
+   db.query(SQL, [sellerId, sellerSale, priceSale, methodSale, `${dateNow}`], async (err, result) => {
       if (err) {
          console.log(err)
          res.status(404).send({ msg: 'Erro ao adicionar o produto na lista de vendas.' })
@@ -633,7 +633,7 @@ server.get('/sales', async (req, res) => {
 
 server.post('/closeSystem', async (req, res) => {
    // const { dateSale, sellerSale, openCash, totalSale, openSystem, closeSystem, moneySale, pixSale, debitSale, creditSale, cardsSale, bankSale } = req.body
-   const { sellerSale, openCash, totalSale, openSystemHour, closeSystemHour, moneySale, pixSale, debitSale, creditSale, cardsSale, bankSale } = req.body
+   const { sellerId, sellerSale, openCash, totalSale, openSystemHour, closeSystemHour, moneySale, pixSale, debitSale, creditSale, cardsSale, bankSale } = req.body
 
    const day: number = new Date().getDate()
    const mouth: number = new Date().getMonth()
@@ -648,9 +648,9 @@ server.post('/closeSystem', async (req, res) => {
    const hours: string = `${hour}-${minutes < 10 ? 0 + minutes : minutes}-${seconds < 10 ? 0 + seconds : seconds}`
    const dateNow: string = `${today} ${hours}`
 
-   const SQL = `INSERT INTO Sales (dateSale, sellerSale, openCash, totalSale, openSystemHour, closeSystemHour, moneySale, pixSale, debitSale, creditSale, cardsSale, bankSale) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`
+   const SQL = `INSERT INTO Sales (dateSale, sellerId, sellerSale, openCash, totalSale, openSystemHour, closeSystemHour, moneySale, pixSale, debitSale, creditSale, cardsSale, bankSale) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`
 
-   db.query(SQL, [today, sellerSale, openCash, totalSale, openSystemHour, closeSystemHour, moneySale, pixSale, debitSale, creditSale, cardsSale, bankSale], async (err, result) => {
+   db.query(SQL, [today, sellerId, sellerSale, openCash, totalSale, openSystemHour, closeSystemHour, moneySale, pixSale, debitSale, creditSale, cardsSale, bankSale], async (err, result) => {
       if (err) {
          console.log(err)
          res.status(404).send({ msg: 'Erro ao salvar faturamento do dia' })

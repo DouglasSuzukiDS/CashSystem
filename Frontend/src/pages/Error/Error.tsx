@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
-import { ShieldExclamation } from "../../assets/Icons/ShieldExclamation";
-import { House } from '../../assets/Icons/House';
+
+import { ShieldExclamation } from "../../assets/Icons/ShieldExclamation"
+import { House } from '../../assets/Icons/House'
 
 export const Error = () => {
    return(

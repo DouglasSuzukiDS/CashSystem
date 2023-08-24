@@ -1,17 +1,16 @@
-import { useState } from "react"
-import { useNavigate } from "react-router-dom"
+import { useState, useEffect } from "react"
 import axios from 'axios'
+import { ActionsType } from "../../types/ActionsType"
+import { UserType } from "../../types/UserType"
+
+import { allUsers, findUserById } from "../../services/user.service"
 
 import { Square } from "../../assets/Icons/Square"
 import { SquareXMark } from "../../assets/Icons/SquareXMark"
 import { UserPen } from "../../assets/Icons/UserPen"
 import { UserPlus } from "../../assets/Icons/UserPlus"
 import { ArrowLeftLong } from "../../assets/Icons/ArrowLeftLong"
-import { useEffect } from "react"
 import { XMark } from "../../assets/Icons/XMark"
-import { ActionsType } from "../../types/ActionsType"
-import { UserType } from "../../types/UserType"
-import { allUsers, findUserById } from "../../services/user.service"
 
 export const EditUser = ({ close, id, listUsers }: ActionsType) => {
    const server = 'http://localhost:3001'

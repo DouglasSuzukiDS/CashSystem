@@ -1,14 +1,15 @@
+import { useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
+
+import { ActionsType } from '../../types/ActionsType'
+
 import { SackDollar } from '../../assets/Icons/SackDollar'
 import { MoneyBillWave } from '../../assets/Icons/MoneyBillWave'
 import { Pix } from '../../assets/Icons/Pix'
 import { CreditCard } from '../../assets/Icons/CreditCard'
-
 import { ScrewdriverWrench } from '../../assets/Icons/ScrewdriverWrench'
 import { CircleCheck } from '../../assets/Icons/CircleCheck'
-import { useNavigate } from 'react-router-dom'
-import { useEffect } from 'react'
 import { XMark } from '../../assets/Icons/XMark'
-import { ActionsType } from '../../types/ActionsType'
 
 // Values Brute
 let money = 258

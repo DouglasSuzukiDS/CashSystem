@@ -1,31 +1,34 @@
 import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 
+import { useNavigate } from "react-router-dom";
+import { UserType } from "../../types/UserType";
+import { ProductType } from "../../types/ProductType";
+import { ActionsType } from "../../types/ActionsType";
+import { SalesType } from "../../types/SalesType";
+import { UserDataSectionType } from "../../types/UserDataSectionType";
+
+import { allProducts } from "../../services/product.service";
+import { allUsers } from "../../services/user.service";
+
+import { ProductsContext } from "../../context/Products/ProductsContext";
+import { CartListContext } from "../../context/CartList/CartListContext";
+
 import { Closing } from "../../components/Closing/Closing";
 import { FindProducts } from "../../components/FindProducts/FindProducts";
 import { OpenCash } from "../../components/OpenCash/OpenCash";
-import { ActionsType } from "../../types/ActionsType";
-import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/Auth/AuthContext";
-import { UserType } from "../../types/UserType";
-import { allUsers } from "../../services/user.service";
-import { ProductType } from "../../types/ProductType";
 import { MessageTexugo } from "../../components/MessageTexugo/MessageTexugo";
 import { FindUsers } from "../../components/FindUsers/FindUsers";
 import { RegisterUser } from "../RegisterUser/RegisterUser";
 import { RegisterProduct } from "../RegisterProduct/RegisterProduct";
 import { AddProducts } from "../../components/AddProducts/AddProducts";
 import { CartList } from "../../components/CartList/CartList";
-import { ProductsContext } from "../../context/Products/ProductsContext";
-import { CartListContext } from "../../context/CartList/CartListContext";
 import { ConfirmPayment } from "../../components/ConfirmPayment/ConfirmPaymanet";
-import { SalesType } from "../../types/SalesType";
 import { Sales } from "../../components/Sales/Sales";
 import { ValeusSalesContext } from "../../context/ValuesSales/ValuesSalesContext";
 import { ManagerSystem } from "../../components/ManagerSystem/ManagerSystem";
 import { FooterSystem } from "../../components/FooterSystem/FooterSystem";
-import { UserDataSectionType } from "../../types/UserDataSectionType";
-import { allProducts } from "../../services/product.service";
 import { AboutMe } from "../../components/AboutMe/AboutMe";
 import { Header } from "../../components/Header/Header";
 import { References } from "../../components/References/References";
@@ -201,6 +204,7 @@ export const OpenSystem = ({ close }: ActionsType) => {
          setUserInfos({
             userName: JSON.parse(userDatasSection).userName,
             userAdmin: JSON.parse(userDatasSection).userAdmin,
+            id: JSON.parse(userDatasSection).id
          })
          
         JSON.parse(userDatasSection).userAdmin === '1' ? setUserIsAdmin(true) : setUserIsAdmin(false)

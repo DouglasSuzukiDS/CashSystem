@@ -1,5 +1,6 @@
-import { CashRegister } from "../../assets/Icons/CashRegister";
-import { ActionsType } from "../../types/ActionsType";
+import { ActionsType } from "../../types/ActionsType"
+
+import { CashRegister } from "../../assets/Icons/CashRegister"
 
 export const SystemSatusButton = ({ close, id, text, color, className, onClick, icon }: ActionsType) => {
    return(

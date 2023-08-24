@@ -1,10 +1,11 @@
 import axios from 'axios'
 
-import { MoneyCheckPen } from "../../assets/Icons/MoneyCheckPen";
-import { Registered } from "../../assets/Icons/Registered";
-import { ActionsType } from "../../types/ActionsType";
-import { XMark } from "../../assets/Icons/XMark";
-import { CircleCheck } from "../../assets/Icons/CircleCheck";
+import { ActionsType } from "../../types/ActionsType"
+
+import { MoneyCheckPen } from "../../assets/Icons/MoneyCheckPen"
+import { Registered } from "../../assets/Icons/Registered"
+import { XMark } from "../../assets/Icons/XMark"
+import { CircleCheck } from "../../assets/Icons/CircleCheck"
 
 export const RegisterProduct = ({ close }: ActionsType) => {
 

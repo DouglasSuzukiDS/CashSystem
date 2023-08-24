@@ -1,10 +1,12 @@
 import axios from "axios";
+
+import { ActionsType } from "../../types/ActionsType";
+
 import { Download } from "../../assets/Icons/Download";
 import { PenToSquare } from "../../assets/Icons/PenToSquare";
 import { Registered } from "../../assets/Icons/Registered";
 import { UserPen } from "../../assets/Icons/UserPen";
 import { UserPlus } from "../../assets/Icons/UserPlus";
-import { ActionsType } from "../../types/ActionsType";
 
 export const ManagerSystem = ({ handleOptionSystem, handleNewUser, handleManagerUser, handleNewProduct, handleManagerProduct }: ActionsType) => {
    const server = 'http://localhost:3001'

@@ -1,15 +1,18 @@
 import { ChangeEvent, useEffect, useState } from "react"
 import axios from "axios"
 
+import { ActionsType } from "../../types/ActionsType"
+import { ProductType } from "../../types/ProductType"
+
+import { allProducts } from "../../services/product.service"
+
+import { EditProduct } from "../EditProduct/EditProduct"
+
 import { CircleCheck } from "../../assets/Icons/CircleCheck"
 import { MagnifyingGlass  }from "../../assets/Icons/MagnifyingGlass"
 import { XMark } from "../../assets/Icons/XMark"
 import { PenToSquare } from "../../assets/Icons/PenToSquare"
 import { TrashCanXMark } from "../../assets/Icons/TrashCanXMark"
-import { ActionsType } from "../../types/ActionsType"
-import { EditProduct } from "../EditProduct/EditProduct"
-import { ProductType } from "../../types/ProductType"
-import { allProducts } from "../../services/product.service"
 
 export const FindProducts = ({ close, id, listProducts }: ActionsType) => {
    const server = 'http://localhost:3001'

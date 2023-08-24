@@ -1,12 +1,15 @@
 import { useContext, useEffect, useState } from "react"
+
+import { ValeusSalesContext } from "../../context/ValuesSales/ValuesSalesContext"
+
+import { ActionsType } from "../../types/ActionsType"
+import { SalesType } from "../../types/SalesType"
+
 import { CreditCard } from "../../assets/Icons/CreditCard"
 import { ListCheck } from "../../assets/Icons/ListCheck"
 import { MoneyBillWave } from "../../assets/Icons/MoneyBillWave"
 import { Pix } from "../../assets/Icons/Pix"
 import { XMark } from "../../assets/Icons/XMark"
-import { ValeusSalesContext } from "../../context/ValuesSales/ValuesSalesContext"
-import { ActionsType } from "../../types/ActionsType"
-import { SalesType } from "../../types/SalesType"
 
 export const Sales = ({ listSales, valuesSales, close }: ActionsType) => {
    const [sales, setSales] = useState<SalesType[]>([]) // Recebe a lista de vendas do historicSale

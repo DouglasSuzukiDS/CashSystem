@@ -1,9 +1,9 @@
 CREATE TABLE products (
-   id INT PRIMARY KEY AUTO_INCREMENT,
-   pdt_name VARCHAR(50) UNIQUE NOT NULL ,
-   pdt_price DECIMAL(10, 2) NOT NULL,
-   pdt_type VARCHAR(50) NOT NULL,
-   pdt_qty INT NOT NULL
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  pdt_name VARCHAR(50) UNIQUE NOT NULL,
+  pdt_price DECIMAL(10, 2) NOT NULL,
+  pdt_type VARCHAR(50) NOT NULL,
+  pdt_qty INT NOT NULL
 );
 
 SELECT * FROM products;

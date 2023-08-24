@@ -1,8 +1,11 @@
-import { ChangeEvent, KeyboardEvent, useContext, useEffect, useState } from 'react';
+import { ChangeEvent, KeyboardEvent, useContext, useEffect, useState } from 'react'
+
 import { Link, useNavigate } from 'react-router-dom'
-import { ArrowRightToBracket  } from "../../assets/Icons/ArrowRightToBracket";
-import { IdCard } from "../../assets/Icons/IdCard";
-import { AuthContext } from '../../context/Auth/AuthContext';
+
+import { AuthContext } from '../../context/Auth/AuthContext'
+
+import { ArrowRightToBracket  } from "../../assets/Icons/ArrowRightToBracket"
+import { IdCard } from "../../assets/Icons/IdCard"
 
 export const Login = () => {
    const navigate = useNavigate()

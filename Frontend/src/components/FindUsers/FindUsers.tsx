@@ -1,15 +1,18 @@
 import { ChangeEvent, useEffect, useState } from "react"
 import axios from "axios"
 
+import { ActionsType } from "../../types/ActionsType"
+import { UserType } from "../../types/UserType"
+
+import { allUsers } from "../../services/user.service"
+
+import { EditUser } from "../EditUser/EditUser"
+
 import { CircleCheck } from "../../assets/Icons/CircleCheck"
 import { MagnifyingGlass } from "../../assets/Icons/MagnifyingGlass"
 import { XMark } from "../../assets/Icons/XMark"
 import { PenToSquare } from "../../assets/Icons/PenToSquare"
 import { TrashCanXMark } from "../../assets/Icons/TrashCanXMark"
-import { ActionsType } from "../../types/ActionsType"
-import { UserType } from "../../types/UserType"
-import { allUsers } from "../../services/user.service"
-import { EditUser } from "../EditUser/EditUser"
 
 export const FindUsers = ({ close }: ActionsType) => {
    const server: string = 'http://localhost:3001'

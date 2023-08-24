@@ -1,10 +1,12 @@
 /* eslint-disable no-unused-expressions */
 import { KeyboardEvent, useEffect } from "react";
+
+import { ActionsType } from "../../types/ActionsType";
+
 import { CashRegister } from "../../assets/Icons/CashRegister";
 import { CircleCheck } from "../../assets/Icons/CircleCheck";
 import { SackDollar } from "../../assets/Icons/SackDollar";
 import { XMark } from "../../assets/Icons/XMark";
-import { ActionsType } from "../../types/ActionsType";
 
 export const OpenCash = ({ close, onClick }: ActionsType) => {
    useEffect(() => {

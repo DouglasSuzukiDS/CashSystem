@@ -1,5 +1,6 @@
-import { Texugo } from "../../assets/Icons/Texugo";
 import { MessageTexugoType } from "../../types/MessageTexugoType";
+
+import { Texugo } from "../../assets/Icons/Texugo";
 
 export const MessageTexugo = ({ msg, tw, th, className, textColor, invertedX }: MessageTexugoType) => {
    return (

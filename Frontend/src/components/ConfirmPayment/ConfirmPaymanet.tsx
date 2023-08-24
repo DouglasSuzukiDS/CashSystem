@@ -120,8 +120,9 @@ export const ConfirmPayment = ({ close }: ActionsType) => {
 
             if(confirmValue) {
                await axios.post(`${server}/newSale`, {
-                  priceSale: total, 
+                  sellerId: userDatasSection && JSON.parse(userDatasSection).id,
                   sellerSale: userDatasSection ? JSON.parse(userDatasSection).userName : 'None',
+                  priceSale: total, 
                   methodSale: paymentMethod.value
                })
                   .then(res => {
@@ -139,8 +140,9 @@ export const ConfirmPayment = ({ close }: ActionsType) => {
 
             if(confirmValue) {
                await axios.post(`${server}/newSale`, {
-                  priceSale: total, 
+                  sellerId: userDatasSection && JSON.parse(userDatasSection).id,
                   sellerSale: userDatasSection ? JSON.parse(userDatasSection).userName : 'None',
+                  priceSale: total, 
                   methodSale: "Dinheiro"
                })
                   .then(res => {

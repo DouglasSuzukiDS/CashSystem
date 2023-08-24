@@ -1,11 +1,14 @@
 import { useContext, useEffect, useState } from "react"
+
+import { ActionsType } from "../../types/ActionsType"
+
+import { CartListContext } from "../../context/CartList/CartListContext"
+import { MessageTexugo } from "../MessageTexugo/MessageTexugo"
+
 import { CartCircleXMark } from "../../assets/Icons/CartCircleXMark"
 import { CashRegister } from "../../assets/Icons/CashRegister"
 import { Minus } from "../../assets/Icons/Minus"
 import { Plus } from "../../assets/Icons/Plus"
-import { CartListContext } from "../../context/CartList/CartListContext"
-import { ActionsType } from "../../types/ActionsType"
-import { MessageTexugo } from "../MessageTexugo/MessageTexugo"
 
 export const CartList = ({ listProducts, returnItems }: ActionsType) => {
 

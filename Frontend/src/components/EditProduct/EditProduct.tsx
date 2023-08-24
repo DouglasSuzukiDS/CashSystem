@@ -1,14 +1,15 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
-import {  useNavigate } from "react-router-dom";
+
+import { ActionsType } from "../../types/ActionsType";
+import { ProductType } from "../../types/ProductType";
+
+import { allProducts, findProductById }  from '../../services/product.service'
 
 import { MoneyCheckPen } from "../../assets/Icons/MoneyCheckPen";
 import { ArrowLeftLong } from "../../assets/Icons/ArrowLeftLong";
 import { Registered } from "../../assets/Icons/Registered";
-import { ActionsType } from "../../types/ActionsType";
 import { XMark } from "../../assets/Icons/XMark";
-import { ProductType } from "../../types/ProductType";
-import { allProducts, findProductById }  from '../../services/product.service'
 
 export const EditProduct = ({ close, id, listProducts }: ActionsType) => {
    const server: string = 'http://localhost:3001'

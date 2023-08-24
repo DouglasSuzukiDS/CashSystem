@@ -1,12 +1,15 @@
 import { useContext } from "react"
+
+import { ActionsType } from "../../types/ActionsType"
+
+import { AuthContext } from "../../context/Auth/AuthContext"
+
+import { HandshakeRussian } from "../../assets/Icons/HandshakeRussian"
 import { ListCheck } from "../../assets/Icons/ListCheck"
 import { MagnifyingGlass } from "../../assets/Icons/MagnifyingGlass"
 import { SackDollar } from "../../assets/Icons/SackDollar"
 import { Signature } from "../../assets/Icons/Signature"
 import { TrashCan } from "../../assets/Icons/TrashCan"
-import { AuthContext } from "../../context/Auth/AuthContext"
-import { ActionsType } from "../../types/ActionsType"
-import { HandshakeRussian } from "../../assets/Icons/HandshakeRussian"
 import { RussianFlag } from "../../assets/Icons/RussianFlag"
 
 export const FooterSystem = ({
