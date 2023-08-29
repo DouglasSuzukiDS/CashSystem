@@ -2,25 +2,25 @@ import axios from 'axios'
 import { Link } from 'react-router-dom'
 import { ArrowRightToBracket  } from "../../assets/Icons/ArrowRightToBracket";
 import { IdCard } from "../../assets/Icons/IdCard";
+import { useState } from 'react';
 
 export const Login = () => {
+   const [userLogin, setUserLogin] = useState('')
+   const [userPassword, setUserPassword] = useState('')
 
    const loginUser = async() => {
-      const server = "http://localhost:3001";
+      const server = "http://localhost:3001"
 
-      let userLogin = document.querySelector("#userLogin") as HTMLInputElement
-      let userPassword = document.querySelector("#userPassword") as HTMLInputElement
-
-      if (userLogin.value && userPassword.value !== "") {
-         const login = userLogin.value;
-         const password = userPassword.value;
+      if (userLogin && userPassword !== "") {
+         const login = userLogin;
+         const password = userPassword;
 
          const response = await axios.post(`${server}/login`, {
             userLogin: login,
             userPassword: password,
          });
 
-         alert(`User: ${userLogin.value}, ${userPassword.value}`);
+         alert(`User: ${userLogin}, ${userPassword}`);
 
          if (response.status !== 200) {
             alert(`Colaborador não encontrado`);
@@ -47,6 +47,8 @@ export const Login = () => {
                <div className="inputForm">
                   <input type="text" name="userLogin" id="userLogin"
                      placeholder="Login / Matrícula"
+                     value={ userLogin }
+                     onChange={ e => setUserLogin(e.target.value) }
                      required
                      onInvalid={e => (e.target as HTMLInputElement).setCustomValidity('Digite seu Login/Matrícula')}
                      onInput={e => (e.target as HTMLInputElement).setCustomValidity('')} />
@@ -54,8 +56,10 @@ export const Login = () => {
 
                <div className="inputForm">
                   <input type="password" name="userPassword" id="userPassword"
-                     required
                      placeholder="Senha"
+                     value={ userPassword }
+                     onChange={ e => setUserPassword(e.target.value) }
+                     required
                      onInvalid={e => (e.target as HTMLInputElement).setCustomValidity('Digite a sua senha')}
                      onInput={e => (e.target as HTMLInputElement).setCustomValidity('')} />
                </div>

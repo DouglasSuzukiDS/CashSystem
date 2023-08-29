@@ -7,50 +7,49 @@ import { Registered } from "../../assets/Icons/Registered"
 import { XMark } from "../../assets/Icons/XMark"
 import { CircleCheck } from "../../assets/Icons/CircleCheck"
 import { allProducts } from '../../services/product.service'
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import { ProductsContext } from '../../context/Products/ProductsContext'
 
 export const RegisterProduct = ({ close }: ActionsType) => {
 
    const server: string = 'http://localhost:3001'
 
+   const [newProductName, setNewProductName] = useState('')
+   const [newProductPrice, setNewProductPrice] = useState('')
+   const [newProductType, setNewProductType] = useState('')
+   const [newProductQty, setNewProductQty] = useState('')
+
    const { products, setProducts } = useContext(ProductsContext)
 
    const registerNewProduct = async () => {
-
-      let newProductName = document.querySelector('#newProductName') as HTMLInputElement
-      let newProductPrice = document.querySelector('#newProductPrice') as HTMLInputElement
-      let newProductType = document.querySelector('#newProductType') as HTMLInputElement
-      let newProductQty = document.querySelector('#newProductQty') as HTMLInputElement
-
       if (
-         ((newProductName.value && newProductPrice.value && newProductType.value && newProductQty.value) !== '') &&
-         ((newProductName.value && newProductPrice.value && newProductType.value && newProductQty.value) !== '0')
+         ((newProductName && newProductPrice && newProductType && newProductQty) !== '') &&
+         ((newProductName && newProductPrice && newProductType && newProductQty) !== '0')
       ) {
 
          await axios.post(`${server}/registerNewProduct`, {
-            pdt_name: newProductName.value,
-            pdt_price: newProductPrice.value,
-            pdt_type: newProductType.value,
-            pdt_qty: newProductQty.value
+            pdt_name: newProductName,
+            pdt_price: newProductPrice,
+            pdt_type: newProductType,
+            pdt_qty: newProductQty
          })
             .then(response => {
                if (response.status === 201) {
                   alert(`
                      ${response.data.msg} 😎
-                     Nome do produto: ${newProductName.value}
-                     Preço do Produto: ${newProductPrice.value}
-                     Tipo do Produto: ${newProductType.value}
-                     Quatidade do Produto: ${newProductQty.value}
+                     Nome do produto: ${newProductName}
+                     Preço do Produto: ${newProductPrice}
+                     Tipo do Produto: ${newProductType}
+                     Quatidade do Produto: ${newProductQty}
                   `)
 
                   allProducts()
                      .then(setProducts)
 
-                  newProductName.value = ''
-                  newProductPrice.value = ''
-                  newProductType.value = ''
-                  newProductQty.value = ''
+                  setNewProductName('')
+                  setNewProductPrice('')
+                  setNewProductType('')
+                  setNewProductQty('')
                } else {
                   alert('Erro ao cadastrar')
                }
@@ -62,7 +61,6 @@ export const RegisterProduct = ({ close }: ActionsType) => {
          alert('Por obséquio, preencha todos os campos corretamente')
       }
    }
-
 
    return (
       <main className="container flex z-index-50">
@@ -86,6 +84,8 @@ export const RegisterProduct = ({ close }: ActionsType) => {
                <div className="inputForm">
                   <input type="text" name="newProductName" id="newProductName"
                      placeholder="Nome do produto"
+                     value={ newProductName }
+                     onChange={ e => setNewProductName(e.target.value) }
                      required
                      onInvalid={e => (e.target as HTMLInputElement).setCustomValidity('Digite o nome do Produto')}
                      onInput={e => (e.target as HTMLInputElement).setCustomValidity('')} />
@@ -94,6 +94,8 @@ export const RegisterProduct = ({ close }: ActionsType) => {
                <div className="inputForm">
                   <input type="number" name="newProductPrice" id="newProductPrice"
                      placeholder="Preço"
+                     value={ newProductPrice }
+                     onChange={ e => setNewProductPrice(e.target.value) }
                      required
                      onInvalid={e => (e.target as HTMLInputElement).setCustomValidity('Digite o preço do Produto')}
                      onInput={e => (e.target as HTMLInputElement).setCustomValidity('')}
@@ -101,7 +103,10 @@ export const RegisterProduct = ({ close }: ActionsType) => {
                </div>
 
                <div className="inputForm">
-                  <select name="newProductType" id="newProductType" className="" required>
+                  <select name="newProductType" id="newProductType"
+                     value={ newProductType }
+                     onChange={ e => setNewProductType(e.target.value) }
+                     required>
                      <option value="" className="withoutBg">Escolha o tipo</option>
                      <option value="Comidas" className="withoutBg">Comidas</option>
                      <option value="Bebibas" className="withoutBg">Bebidas</option>
@@ -113,6 +118,8 @@ export const RegisterProduct = ({ close }: ActionsType) => {
                <div className="inputForm">
                   <input type="number" name="newProductQty" id="newProductQty"
                      placeholder="Quantidade"
+                     value={ newProductQty }
+                     onChange={ e => setNewProductQty(e.target.value) }
                      required
                      onInvalid={e => (e.target as HTMLInputElement).setCustomValidity('Informe a quantidade do Produto')}
                      onInput={e => (e.target as HTMLInputElement).setCustomValidity('')} />

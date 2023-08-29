@@ -15,21 +15,21 @@ import { UsersContext } from "../../context/Users/UsersContext"
 export const RegisterUser = ({ close }: ActionsType) => {
    const server: string = 'http://localhost:3001'
 
-   let [admin, setAdmin] = useState(false)
    const { users, setUsers } = useContext(UsersContext)
 
-   const newUserRegister = async() => {
-      let newUserFullName = document.querySelector('#newUserName') as HTMLInputElement
-      let newUserLogin = document.querySelector('#newUserLogin') as HTMLInputElement
-      let newUserPassword = document.querySelector('#newUserPassword') as HTMLInputElement
-      let newUserAdmin = admin
+   const [newUserFullName, setNewUserFullName] = useState('')
+   const [newUserLogin, setNewUserLogin] = useState('')
+   const [newUserPassword, setNewUserPassword] = useState('')
+   const [newUserAdmin, setNewUserAdmin] = useState(false)
 
-      if ((newUserFullName.value !== '') && (newUserLogin.value !== '') && (newUserPassword.value !== '')) {
+   const newUserRegister = async() => {
+
+      if ((newUserFullName !== '') && (newUserLogin !== '') && (newUserPassword !== '')) {
 
          await axios.post(`${server}/registerNewUser`, {
-            newUserFullName: newUserFullName.value,
-            newUserLogin: newUserLogin.value,
-            newUserPassword: newUserPassword.value,
+            newUserFullName: newUserFullName,
+            newUserLogin: newUserLogin,
+            newUserPassword: newUserPassword,
             newUserAdmin: newUserAdmin
          })
             .then(response => {
@@ -43,10 +43,10 @@ export const RegisterUser = ({ close }: ActionsType) => {
          alert('Preencha os campos')
       }
 
-      newUserFullName.value = ''
-      newUserLogin.value = ''
-      newUserPassword.value = ''
-      newUserAdmin = false
+      setNewUserFullName('')
+      setNewUserLogin('')
+      setNewUserPassword('')
+      setNewUserAdmin(false)
    }
 
    return (
@@ -72,27 +72,37 @@ export const RegisterUser = ({ close }: ActionsType) => {
                   <div className="inputForm">
                      <input type="text" name="newUserName" id="newUserName"
                         placeholder="Nome Completo"
+                        value={ newUserFullName }
+                        onChange={ e => setNewUserFullName(e.target.value) }
                         required
                         onInvalid={e => (e.target as HTMLInputElement).setCustomValidity('Digite o nome do novo colaborador')}
                         onInput={e => (e.target as HTMLInputElement).setCustomValidity('')} />
                   </div>
 
                   <div className="inputForm">
-                     <input type="text" name="newUserLogin" id="newUserLogin" required placeholder="Login"
+                     <input type="text" name="newUserLogin" id="newUserLogin" 
+                        placeholder="Login"
+                        value={ newUserLogin }
+                        onChange={ e => setNewUserLogin(e.target.value) }
+                        required 
                         onInvalid={e => (e.target as HTMLInputElement).setCustomValidity('Digite o login do novo colaborador')}
                         onInput={e => (e.target as HTMLInputElement).setCustomValidity('')} />
                   </div>
 
                   <div className="inputForm">
-                     <input type="password" name="newUserPassword" id="newUserPassword" required placeholder="Senha"
+                     <input type="password" name="newUserPassword" id="newUserPassword"
+                        placeholder="Senha"
+                        value={ newUserPassword }
+                        onChange={ e => setNewUserPassword(e.target.value) }
+                        required 
                         onInvalid={e => (e.target as HTMLInputElement).setCustomValidity('Digite uma senha para o novo colaborador')}
                         onInput={e => (e.target as HTMLInputElement).setCustomValidity('')} />
                   </div>
 
-                  <div className="isAdminDiv pointer flex" onClick={() => setAdmin(!admin)}>
+                  <div className="isAdminDiv pointer flex" onClick={() => setNewUserAdmin(!newUserAdmin)}>
                      <span className="flex" id="isAdmin" >
                         {
-                           admin ?
+                           newUserAdmin?
                               <SquareXMark w='24' h='24' fill='#0DCAF0' className='mr-2' /> /* TRUE */ :
                               <Square w='24' h='24' fill='#0DCAF0' className='mr-2' /> /* FALSE */
                         }

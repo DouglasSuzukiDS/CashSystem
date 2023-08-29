@@ -15,7 +15,6 @@ import { ProductsContext } from "../../context/Products/ProductsContext";
 export const EditProduct = ({ close, id, listProducts }: ActionsType) => {
    const server: string = 'http://localhost:3001'
    
-   // const [products, setProducts] = useState<ProductType[]>([])
    const { products, setProducts } = useContext(ProductsContext)
    const [product, setProduct] = useState<ProductType>({
       id:  '',
@@ -79,9 +78,6 @@ export const EditProduct = ({ close, id, listProducts }: ActionsType) => {
                      close()
                   }
 
-                  // setTimeout(() => navigate('/openSystem'), 1000)
-                  // getProducts()
-                  
                } else if (response.status === 400) {
                   alert('Erro ao cadastrar')
                }

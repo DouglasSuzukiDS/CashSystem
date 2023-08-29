@@ -27,7 +27,6 @@ export const EditUser = ({ close, id, listUsers }: ActionsType) => {
       userPassword: '',
       userAdmin: false
    })
-   const [admin, setAdmin] = useState(false)
 
    useEffect(() => {  // Lista os Arquivos
       setUser(users.filter(userById => userById.id === id)[0])
@@ -122,7 +121,7 @@ export const EditUser = ({ close, id, listUsers }: ActionsType) => {
                   <input type="password" name="newUserPassword" id="newUserPassword" 
                      placeholder="Senha"
                      value={ newUserPassword }
-                     onChange={ e => e.target.value }
+                     onChange={ e => setNewUserPassword(e.target.value) }
                      required 
                      onInvalid={e => (e.target  as HTMLInputElement).setCustomValidity('Digite uma senha para o novo colaborador')}
                      onInput={e => (e.target  as HTMLInputElement).setCustomValidity('')} />
