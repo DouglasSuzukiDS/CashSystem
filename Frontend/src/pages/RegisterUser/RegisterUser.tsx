@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useContext, useState } from "react"
 import axios from 'axios'
 
 import { ActionsType } from "../../types/ActionsType"
@@ -9,11 +9,14 @@ import { UserPen } from "../../assets/Icons/UserPen"
 import { UserPlus } from "../../assets/Icons/UserPlus"
 import { XMark } from "../../assets/Icons/XMark"
 import { CircleCheck } from "../../assets/Icons/CircleCheck"
+import { allUsers } from "../../services/user.service"
+import { UsersContext } from "../../context/Users/UsersContext"
 
 export const RegisterUser = ({ close }: ActionsType) => {
    const server: string = 'http://localhost:3001'
 
    let [admin, setAdmin] = useState(false)
+   const { users, setUsers } = useContext(UsersContext)
 
    const newUserRegister = async() => {
       let newUserFullName = document.querySelector('#newUserName') as HTMLInputElement
@@ -31,7 +34,10 @@ export const RegisterUser = ({ close }: ActionsType) => {
          })
             .then(response => {
                alert(response.data.msg) // Aqui recebe a resposta do Backend 
-               })
+
+               allUsers()
+                  .then(setUsers)
+            })
             .catch(err => console.log(err))
       } else {
          alert('Preencha os campos')

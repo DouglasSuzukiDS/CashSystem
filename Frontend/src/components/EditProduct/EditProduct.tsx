@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 
 import { ActionsType } from "../../types/ActionsType";
 import { ProductType } from "../../types/ProductType";
@@ -10,11 +10,13 @@ import { MoneyCheckPen } from "../../assets/Icons/MoneyCheckPen";
 import { ArrowLeftLong } from "../../assets/Icons/ArrowLeftLong";
 import { Registered } from "../../assets/Icons/Registered";
 import { XMark } from "../../assets/Icons/XMark";
+import { ProductsContext } from "../../context/Products/ProductsContext";
 
 export const EditProduct = ({ close, id, listProducts }: ActionsType) => {
    const server: string = 'http://localhost:3001'
    
-   const [products, setProducts] = useState<ProductType[]>([])
+   // const [products, setProducts] = useState<ProductType[]>([])
+   const { products, setProducts } = useContext(ProductsContext)
    const [product, setProduct] = useState<ProductType>({
       id:  '',
       pdt_name: '',
@@ -24,69 +26,54 @@ export const EditProduct = ({ close, id, listProducts }: ActionsType) => {
    })
       
    useEffect(() => {
-      if(listProducts) {
-         setProducts(listProducts)
-   
-         findProductById(id!)
-            .then(setProduct)
-            .catch(e => console.log(e))
-
-         allProducts()
-            .then(setProducts)
-            .catch(e => console.log(e))
-      }
-
+      setProduct(products.filter(prodById => prodById.id === id)[0])
    }, [])
 
    useEffect(() => {
       getProduct()
-   })
+      // console.log(product)
+   }, [product])
 
-   const newProductName = document.querySelector('#newProductName') as HTMLInputElement
-   const newProductPrice = document.querySelector('#newProductPrice') as HTMLInputElement
-   const newProductType = document.querySelector('#newProductType') as HTMLInputElement
-   const newProductQty = document.querySelector('#newProductQty') as HTMLInputElement
+   const [newProductName, setNewProductName] = useState('')
+   const [newProductPrice, setNewProductPrice] = useState('')
+   const [newProductType, setNewProductType] = useState('')
+   const [newProductQty, setNewProductQty] = useState('')
 
    const getProduct = async() => { // Seta os campos com o dado do produto
+      // console.log(product)
 
-      //console.log(product)
-
-      let pdt_name = product.pdt_name
-      let pdt_price = product.pdt_price
-      let pdt_type = product.pdt_type
-      let pdt_qty = product.pdt_qty
-
-      newProductName.value = pdt_name
-      newProductPrice.value = pdt_price
-      newProductType.value = pdt_type
-      newProductQty.value = pdt_qty
+      setNewProductName(product.pdt_name)
+      setNewProductPrice(product.pdt_price)
+      setNewProductType(product.pdt_type)
+      setNewProductQty(product.pdt_qty)
    }
-
-   //getProduct()
 
    const updateProduct = async(id: string) => { // Atualiza o produto
 
       await axios.put(`${server}/edit/product/${id}`, {
          // pdt_name, pdt_price, pdt_type, pdt_qty
-         pdt_name: newProductName.value,
-         pdt_price: newProductPrice.value,
-         pdt_type: newProductType.value,
-         pdt_qty: newProductQty.value
+         pdt_name: newProductName,
+         pdt_price: newProductPrice,
+         pdt_type: newProductType,
+         pdt_qty: newProductQty
       })
          .then(response => {
             if (
-               ((newProductName.value && newProductPrice.value && newProductType.value && newProductQty.value) !== '') &&
-               ((newProductName.value && newProductPrice.value && newProductType.value && newProductQty.value) !== '0')
+               ((newProductName && newProductPrice && newProductType && newProductQty) !== '') &&
+               ((newProductName && newProductPrice && newProductType && newProductQty) !== '0')
             ) {
 
                if (response.status === 200) {
                   alert(`
                      ${response.data.msg} 😎
-                     Nome do produto: ${newProductName.value}
-                     Preço do Produto: ${newProductPrice.value}
-                     Tipo do Produto: ${newProductType.value}
-                     Quatidade do Produto: ${newProductQty.value}
+                     Nome do produto: ${newProductName}
+                     Preço do Produto: ${newProductPrice}
+                     Tipo do Produto: ${newProductType}
+                     Quatidade do Produto: ${newProductQty}
                   `)
+
+                  allProducts()
+                     .then(setProducts)
 
                   if(close) {
                      close()
@@ -126,6 +113,8 @@ export const EditProduct = ({ close, id, listProducts }: ActionsType) => {
          <div className="inputForm">
             <input type="text" name="newProductName" id="newProductName"
                placeholder="Nome do produto"
+               value={ newProductName }
+               onChange={ e => setNewProductName(e.target.value) }
                required
                onInvalid={e => (e.target as HTMLInputElement).setCustomValidity('Digite o nome do Produto')}
                onInput={e => (e.target as HTMLInputElement).setCustomValidity('')} />
@@ -134,6 +123,8 @@ export const EditProduct = ({ close, id, listProducts }: ActionsType) => {
          <div className="inputForm">
             <input type="number" name="newProductPrice" id="newProductPrice"
                placeholder="Preço"
+               value={ newProductPrice }
+               onChange={ e => setNewProductPrice(e.target.value) }
                required
                onInvalid={e => (e.target as HTMLInputElement).setCustomValidity('Digite o preço do Produto')}
                onInput={e => (e.target as HTMLInputElement).setCustomValidity('')}
@@ -141,7 +132,10 @@ export const EditProduct = ({ close, id, listProducts }: ActionsType) => {
          </div>
 
          <div className="inputForm">
-            <select name="newProductType" id="newProductType" className="" required>
+            <select name="newProductType" id="newProductType"
+               value={ newProductType }
+               onChange={ e => setNewProductType(e.target.value) }
+               required>
                <option value="" className="withoutBg">Escolha o tipo</option>
                <option value="Comidas" className="withoutBg">Comidas</option>
                <option value="Bebibas" className="withoutBg">Bebidas</option>
@@ -153,6 +147,8 @@ export const EditProduct = ({ close, id, listProducts }: ActionsType) => {
          <div className="inputForm">
             <input type="number" name="newProductQty" id="newProductQty"
                placeholder="Quantidade"
+               value={ newProductQty }
+               onChange={ e => setNewProductQty(e.target.value) }
                required
                onInvalid={e => (e.target as HTMLInputElement).setCustomValidity('Informe a quantidade do Produto')}
                onInput={e => (e.target as HTMLInputElement).setCustomValidity('')} />

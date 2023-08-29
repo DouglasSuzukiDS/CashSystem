@@ -1,4 +1,4 @@
-import { ChangeEvent, useEffect, useState } from "react"
+import { ChangeEvent, useContext, useEffect, useState } from "react"
 import axios from "axios"
 
 import { ActionsType } from "../../types/ActionsType"
@@ -13,30 +13,19 @@ import { MagnifyingGlass  }from "../../assets/Icons/MagnifyingGlass"
 import { XMark } from "../../assets/Icons/XMark"
 import { PenToSquare } from "../../assets/Icons/PenToSquare"
 import { TrashCanXMark } from "../../assets/Icons/TrashCanXMark"
+import { ProductsContext } from "../../context/Products/ProductsContext"
 
 export const FindProducts = ({ close, id, listProducts }: ActionsType) => {
    const server = 'http://localhost:3001'
 
    // Get All Products
-   const [products, setProducts] = useState<ProductType[]>([]) // First Search on List
+   //const [products, setProducts] = useState<ProductType[]>([]) // First Search on List
+   const { products, setProducts } = useContext(ProductsContext)
    const [cloneProducts, setCloneProducts] = useState<ProductType[]>([]) // List if Search is empty
    const [findProducts, setFindProducts] = useState<ProductType[]>([]) // List if Search is empty
    const [editProductModel, setEditProductModal] = useState(false)
    const [idItem, setIdItem] = useState('')
 
-   useEffect(() => {
-      allProducts()
-         .then(setProducts)
-         .catch(e => console.log(e))
-
-      allProducts()
-         .then(setCloneProducts)
-         .catch(e => console.log(e))
-      
-      allProducts()
-         .then(setFindProducts)
-         .catch(e => console.log(e))
-   }, [editProductModel])
    //console.log(users)
 
    // Return Product in Search
@@ -78,6 +67,9 @@ export const FindProducts = ({ close, id, listProducts }: ActionsType) => {
          .then(response => {
             if (response.status === 200) {
                //alert(response.data.msg)
+
+               allProducts()
+                  .then(setProducts)
             } else if (response.status !== 200) {
                console.log(response.data.status, response.data.msg)
             }

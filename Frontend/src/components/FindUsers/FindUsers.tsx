@@ -1,4 +1,4 @@
-import { ChangeEvent, useEffect, useState } from "react"
+import { ChangeEvent, useContext, useEffect, useState } from "react"
 import axios from "axios"
 
 import { ActionsType } from "../../types/ActionsType"
@@ -13,24 +13,17 @@ import { MagnifyingGlass } from "../../assets/Icons/MagnifyingGlass"
 import { XMark } from "../../assets/Icons/XMark"
 import { PenToSquare } from "../../assets/Icons/PenToSquare"
 import { TrashCanXMark } from "../../assets/Icons/TrashCanXMark"
+import { UsersContext } from "../../context/Users/UsersContext"
 
-export const FindUsers = ({ close }: ActionsType) => {
+export const FindUsers = ({ close, listUsers }: ActionsType) => {
    const server: string = 'http://localhost:3001'
 
-   const [users, setUsers] = useState<UserType[]>([]) // Users Backup
+
+   // const [users, setUsers] = useState<UserType[]>([]) // Users Backup
+   const { users, setUsers } = useContext(UsersContext)
    const [cloneUsers, setCloneUsers] = useState<UserType[]>([]) // List of Users what will be return search
    const [editUserModal, setEditUserModal] = useState(false)
    const [idUser, setIdUser] = useState('')
-
-   useEffect(() => {
-      allUsers()
-         .then(setUsers)
-         .catch(e => console.log(e))
-
-      allUsers()
-         .then(setCloneUsers)
-         .catch(e => console.log(e))
-   }, [editUserModal])
 
    // Return Userin Search
    const returnUser = async (e: ChangeEvent<HTMLInputElement>) => {
@@ -75,6 +68,9 @@ export const FindUsers = ({ close }: ActionsType) => {
          .then(response => {
             if (response.status === 200) {
                //alert(response.data.msg)
+
+               allUsers()
+                  .then(setUsers)
             } else if (response.status !== 200) {
                console.log(response.data.status, response.data.msg)
             }

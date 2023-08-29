@@ -6,10 +6,15 @@ import { MoneyCheckPen } from "../../assets/Icons/MoneyCheckPen"
 import { Registered } from "../../assets/Icons/Registered"
 import { XMark } from "../../assets/Icons/XMark"
 import { CircleCheck } from "../../assets/Icons/CircleCheck"
+import { allProducts } from '../../services/product.service'
+import { useContext } from 'react'
+import { ProductsContext } from '../../context/Products/ProductsContext'
 
 export const RegisterProduct = ({ close }: ActionsType) => {
 
    const server: string = 'http://localhost:3001'
+
+   const { products, setProducts } = useContext(ProductsContext)
 
    const registerNewProduct = async () => {
 
@@ -38,6 +43,9 @@ export const RegisterProduct = ({ close }: ActionsType) => {
                      Tipo do Produto: ${newProductType.value}
                      Quatidade do Produto: ${newProductQty.value}
                   `)
+
+                  allProducts()
+                     .then(setProducts)
 
                   newProductName.value = ''
                   newProductPrice.value = ''

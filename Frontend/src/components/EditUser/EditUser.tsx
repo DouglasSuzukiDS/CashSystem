@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, useContext } from "react"
 import axios from 'axios'
 import { ActionsType } from "../../types/ActionsType"
 import { UserType } from "../../types/UserType"
@@ -11,12 +11,15 @@ import { UserPen } from "../../assets/Icons/UserPen"
 import { UserPlus } from "../../assets/Icons/UserPlus"
 import { ArrowLeftLong } from "../../assets/Icons/ArrowLeftLong"
 import { XMark } from "../../assets/Icons/XMark"
+import { UserContext } from "../../context/User/UserContext"
+import { UsersContext } from "../../context/Users/UsersContext"
 
 export const EditUser = ({ close, id, listUsers }: ActionsType) => {
    const server = 'http://localhost:3001'
    
    // Get All Users
-   const [users, setUsers] = useState<UserType[]>([])
+   // const [users, setUsers] = useState<UserType[]>([])
+   const { users, setUsers } = useContext(UsersContext)
    const [user, setUser] = useState<UserType>({
       id: '',
       userName: '',
@@ -27,78 +30,48 @@ export const EditUser = ({ close, id, listUsers }: ActionsType) => {
    const [admin, setAdmin] = useState(false)
 
    useEffect(() => {  // Lista os Arquivos
-      if(listUsers) {
-         setUsers(listUsers)
-
-         findUserById(id!)
-            .then(setUser)
-            .catch(e => console.log(e))
-
-         allUsers()
-            .then(setUsers)
-            .catch(e => console.log(e))
-         }
-      }, [])
+      setUser(users.filter(userById => userById.id === id)[0])
+   }, [])
       
    useEffect(() => {
       getUser()
-   }, [users])
+   }, [user])
 
-   let newUserName = document.querySelector('#newUserName') as HTMLInputElement
-   let newUserLogin = document.querySelector('#newUserLogin') as HTMLInputElement
-   let newUserPassword = document.querySelector('#newUserPassword') as HTMLInputElement
-   let newUserAdmin = document.querySelector('#isAdmin') as HTMLSpanElement | Boolean
+   const [newUserName, setNewUserName] = useState('')
+   const [newUserLogin, setNewUserLogin] = useState('')
+   const [newUserPassword, setNewUserPassword] = useState('')
+   const [newUserAdmin, setNewUserAdmin] = useState(false)
    
    const getUser = async() => {
-      /*await axios.get(`${server}/user/${id}`)
-         .then(response => {
-            let userName = response.data.result[0].userName 
-            let userLogin = response.data.result[0].userLogin 
-            let userPassword = response.data.result[0].userPassword 
-            let userAdmin = response.data.result[0].userAdmin 
-            // console.log(`User admin?: ${userAdmin}`)
-            userAdmin ? setAdmin(true) : setAdmin(false)
+      console.log(user)
 
-            newUserName.value = userName
-            newUserLogin.value = userLogin
-            newUserPassword.value = userPassword
-            newUserAdmin = userAdmin
-
-            // console.log('Valor do admin é: ' + newUserAdmin)
-            // console.log('bc ' + newUserAdmin)
-            // console.log(response)
-         })
-         .catch(err => alert(err.response.data))*/
-      // console.log(`O user para edit é ${user}`)
-
-      newUserName.value = user.userName
-      newUserLogin.value = user.userLogin
-      newUserPassword.value = user.userPassword!
-      newUserAdmin = user.userAdmin
+      setNewUserName(user.userName)
+      setNewUserLogin(user.userLogin)
+      setNewUserPassword(user.userPassword!)
+      setNewUserAdmin(user.userAdmin)
    }
-
-   //getUser()
 
    const handleUpdateUser = async(id: string) => {
 
-      if ((newUserName.value !== '') && (newUserLogin.value !== '') && (newUserPassword.value !== '')) {
+      if ((newUserName !== '') && (newUserLogin !== '') && (newUserPassword !== '')) {
 
          await axios.put(`${server}/edit/user/${id}`, {
-            newUserName: newUserName.value,
-            newUserLogin: newUserLogin.value,
-            newUserPassword: newUserPassword.value,
-            newUserAdmin: admin
+            newUserName: newUserName,
+            newUserLogin: newUserLogin,
+            newUserPassword: newUserPassword,
+            newUserAdmin: newUserAdmin
          })
             .then(response => {
                alert(response.data.msg)
+
+               allUsers()
+                  .then(setUsers)
 
                if(close) {
                   close()
                }
 
             })
-            //.then(setTimeout(() => { navigate('/') }, 5000))
-            //.then( alert('Usuario cadastrado no sistema com sucesso') )
             .catch(err => alert(err.response.data.msg))
       } else {
          alert('Preencha os campos')
@@ -106,7 +79,7 @@ export const EditUser = ({ close, id, listUsers }: ActionsType) => {
    }
 
    const handleUserAdmin = () => {
-      return setAdmin(!admin)
+      return setNewUserAdmin(!newUserAdmin)
    }
 
    return (
@@ -128,19 +101,29 @@ export const EditUser = ({ close, id, listUsers }: ActionsType) => {
                <div className="inputForm">
                   <input type="text" name="newUserName" id="newUserName"
                      placeholder="Nome Completo"
+                     value={ newUserName }
+                     onChange={ e => setNewUserName(e.target.value) }
                      required
                      onInvalid={e => (e.target  as HTMLInputElement).setCustomValidity('Digite o nome do novo colaborador')}
                      onInput={e => (e.target  as HTMLInputElement).setCustomValidity('')} />
                </div>
 
                <div className="inputForm">
-                  <input type="text" name="newUserLogin" id="newUserLogin" required placeholder="Login"
+                  <input type="text" name="newUserLogin" id="newUserLogin" 
+                     placeholder="Login"
+                     value={ newUserLogin }
+                     onChange={ e => setNewUserLogin(e.target.value) }
+                     required 
                      onInvalid={e => (e.target  as HTMLInputElement).setCustomValidity('Digite o login do novo colaborador')}
                      onInput={e => (e.target  as HTMLInputElement).setCustomValidity('')} />
                </div>
 
                <div className="inputForm">
-                  <input type="password" name="newUserPassword" id="newUserPassword" required placeholder="Senha"
+                  <input type="password" name="newUserPassword" id="newUserPassword" 
+                     placeholder="Senha"
+                     value={ newUserPassword }
+                     onChange={ e => e.target.value }
+                     required 
                      onInvalid={e => (e.target  as HTMLInputElement).setCustomValidity('Digite uma senha para o novo colaborador')}
                      onInput={e => (e.target  as HTMLInputElement).setCustomValidity('')} />
                </div>
@@ -148,7 +131,7 @@ export const EditUser = ({ close, id, listUsers }: ActionsType) => {
                <div className="isAdminDiv pointer flex" onClick={ handleUserAdmin } >
                   <span className="flex" id="isAdmin">
                      {
-                        admin ?
+                        newUserAdmin ?
                            <SquareXMark w='24' h='24' fill='#0DCAF0' /> /* TRUE */ :
                            <Square w='24' h='24' fill='#0DCAF0' /> /* FALSE */
                      }
