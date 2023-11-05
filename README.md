@@ -5,7 +5,7 @@ Projeto de Controle de Caixa inspirado em um Sistema de Caixa real no qual tive 
 
 O objetivo do projeto é fazer um sistema de login, criação de usuários para o sistema, cadastros de produtos, podendo fazer a edição dos mesmos, pesquisar sobre determinado produto podendo adiciona-lo na lista de compras. Contará com abertura e fechamento de caixa, informando os valores das vendas no dia.
 
-*Este projeto que estou desenvolvendo será meu **Projeto Integrador** (projeto de finalização do meu curso Técnico em Informática). Abordando as seguintes qualificações:*
+*Este projeto foi meu **Projeto Integrador** (projeto de finalização do meu curso Técnico em Informática). Abordando as seguintes qualificações:*
 
 Qualificação | Especificação
 ------------ | -------------
@@ -17,8 +17,6 @@ Qualificação | Especificação
 **Escolha da Stack** | *Javascript: Linguagem de alta velocidade e versátil. Com o uso de frameworks e/ou bibliotecas, possibilita o desenvolvimento da aplicação Web com React, o Mobile com React Native, o Desktop com Electron. Mesma linguagem base (JS) com algumas modificações na estrutura para atender o dispositivo que ira 'rodar o sistema'.*
 **Banco de Dados** | *Utilizando Javascript podemos unir o Frontend da aplicação com o Backend utilizando Node. Escolhi usar a linguagem SQL para trabalhar em conjunto do Node.*
 **Documentação do Sistema** | *Desenvolver o manual para utilização do sistema de forma correta.*
-
-**Atualizações do Projeto:** *Login (gerando um token de acesso), cadastro, listagens de usuários e produtos, edição dos usuários e produtos, já estão funcionando junto do backend. A abertura de caixa funciona porém será modificada. Rotas de Backup definidas e funcionando, já se pode fazer o Backup dos dados.* 
 
 ## Stacks que serão utilizadas no Projeto
 
