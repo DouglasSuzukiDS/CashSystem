@@ -1,4 +1,6 @@
 # Frontend do Projeto Controle de Caixa
+<img src="https://i.imgur.com/0N0VoAU.png" alt="ProAllCool Logo" style="display: block; margin: 0 auto;" width=300>
+
 Documentação do ***Frontend*** do Projeto ***Controle de Caixa***.
 
 ## Stacks que serão utilizadas no Frontend Projeto

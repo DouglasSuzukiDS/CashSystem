@@ -1,4 +1,5 @@
 # Controle de Caixa
+<img src="https://i.imgur.com/0N0VoAU.png" alt="ProAllCool Logo" style="display: block; margin: 0 auto;" width=300>
 
 Projeto de Controle de Caixa inspirado em um Sistema de Caixa real no qual tive contato, onde deverá estar logado no sistema para utiliza-lo. 
 

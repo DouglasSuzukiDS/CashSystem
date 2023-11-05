@@ -29,7 +29,7 @@ export const AddProducts = ({ close, id, listProducts, cartAddItem }: ActionsTyp
       if (term === '') {
          // console.log('O term é: ' + term)
          //console.log(cloneProducts)
-         setProducts(cloneProducts)
+         setCloneProducts(products)
         
       } else {
          let search = term.replace(term[0], term[0].toLocaleUpperCase())
@@ -37,10 +37,10 @@ export const AddProducts = ({ close, id, listProducts, cartAddItem }: ActionsTyp
          // setProducts(find.filter(prod => prod.pdt_type.includes(search)))
          //console.log(search)
          
-         let findByName = findProducts.filter(prod => prod.pdt_name.includes(search))
+         let findByName = cloneProducts.filter(prod => prod.pdt_name.includes(search))
          //console.log(findByName)
 
-         let findByType = findProducts.filter(prod => prod.pdt_type.includes(search))
+         let findByType = cloneProducts.filter(prod => prod.pdt_type.includes(search))
 
          if (findByName.length !== 0) {
             setProducts(findByName)
@@ -56,8 +56,8 @@ export const AddProducts = ({ close, id, listProducts, cartAddItem }: ActionsTyp
    const handleAddProduct = async (id: string) => {
       // Função responsável por passar o ID via prop para o EditProduct, consequentemente buscando o dado no Backend para Editar e mostrar o modal
 
-      console.log(products.filter(el => el.id === id)[0])
-      const addProd = products.filter(el => el.id === id)
+      console.log(cloneProducts.filter(el => el.id === id)[0])
+      const addProd = cloneProducts.filter(el => el.id === id)
       setCartList(addProd)
       cartAddItem?.(addProd[0])
    }
@@ -109,7 +109,7 @@ export const AddProducts = ({ close, id, listProducts, cartAddItem }: ActionsTyp
 
                         <tbody>
                            {
-                              products.map((prod) => {
+                              cloneProducts.map((prod) => {
                                  return (
                                     <tr key={prod.id}>
                                        <td>{prod.pdt_name}</td>
